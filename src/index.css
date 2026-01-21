@@ -1,0 +1,238 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Color System */
+  --color-primary: oklch(0.58 0.19 290);
+  --color-primary-muted: oklch(0.48 0.15 290);
+  --color-primary-highlighted: oklch(0.68 0.21 290);
+  --color-primary-disabled: oklch(0.38 0.12 290);
+  --color-secondary: oklch(0.80 0.15 78);
+  --color-secondary-highlighted: oklch(0.85 0.18 78);
+
+  /* Surface Colors */
+  --color-surface-body: oklch(0.12 0.02 290);
+  --color-surface: oklch(0.16 0.03 290);
+  --color-surface-raised: oklch(0.20 0.04 290);
+  --color-surface-overlay: oklch(0.24 0.05 290);
+
+  /* Text Colors */
+  --color-text-highlighted: oklch(0.95 0.01 290);
+  --color-text-main: oklch(0.88 0.02 290);
+  --color-text-muted: oklch(0.65 0.03 290);
+  --color-text-on-primary: oklch(0.98 0.01 290);
+  --color-text-on-secondary: oklch(0.12 0.02 78);
+
+  /* Border Colors */
+  --color-border: oklch(0.30 0.05 290);
+  --color-border-highlighted: oklch(0.40 0.08 290);
+
+  /* Font Family */
+  --font-family-sans: 'Satoshi', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-surface-body);
+  color: var(--color-text-main);
+  font-family: var(--font-family-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus ring system */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  ring: 2px solid var(--color-secondary);
+  ring-offset: 2px;
+  ring-offset-color: var(--color-surface-body);
+}
+
+/* Interactive states */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(157, 78, 221, 0.4);
+}
+
+/* Glassmorphism effect */
+.glass {
+  background-color: color-mix(in oklch, var(--color-surface-overlay), transparent 20%);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in oklch, var(--color-border), transparent 50%);
+}
+
+/* Gradient text */
+.gradient-text {
+  background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-highlighted), var(--color-secondary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Button styles */
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-on-primary);
+  background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-highlighted));
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.btn-primary:hover {
+  background-image: linear-gradient(to right, var(--color-primary-highlighted), var(--color-primary));
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  transform: scale(1.05);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-highlighted);
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-surface-overlay);
+  border-color: var(--color-border-highlighted);
+}
+
+/* Card styles */
+.card {
+  background-color: var(--color-surface-raised);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--color-border-highlighted);
+}
+
+.card-premium {
+  background-color: var(--color-surface-raised);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium:hover {
+  border-color: var(--color-border-highlighted);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1), 0 0 30px rgba(157, 78, 221, 0.4);
+}
+
+/* Animated gradient background */
+.animated-gradient {
+  background: linear-gradient(-45deg,
+      oklch(0.12 0.02 290),
+      oklch(0.16 0.08 290),
+      oklch(0.14 0.05 270),
+      oklch(0.13 0.04 310));
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating animation for particles */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Pulse glow animation */
+.pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Gradient mesh overlay */
+.gradient-mesh {
+  background-image:
+    radial-gradient(at 0% 0%, oklch(0.58 0.19 290 / 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, oklch(0.80 0.15 78 / 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, oklch(0.58 0.19 290 / 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, oklch(0.80 0.15 78 / 0.1) 0px, transparent 50%);
+  animation: meshMove 20s ease-in-out infinite;
+}
+
+@keyframes meshMove {
+
+  0%,
+  100% {
+    background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%;
+  }
+
+  50% {
+    background-position: 100% 100%, 0% 100%, 0% 0%, 100% 0%;
+  }
+}
