@@ -71,8 +71,8 @@ const Footer = () => {
                         © {currentYear} Recordio. All rights reserved.
                     </div>
                     <div className="flex space-x-6 text-sm">
-                        <a href="#" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</a>
-                        <a href="#" className="text-text-muted hover:text-primary transition-colors">Terms of Service</a>
+                        <a href="/privacy" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="/terms" className="text-text-muted hover:text-primary transition-colors">Terms of Service</a>
                         <a href="#" className="text-text-muted hover:text-primary transition-colors">Cookie Policy</a>
                     </div>
                 </div>
