@@ -1,3 +1,5 @@
+import { trackInstallExtension } from '../utils/analytics';
+
 const Features = () => {
     const features = [
         {
@@ -112,6 +114,7 @@ const Features = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary inline-block"
+                        onClick={() => trackInstallExtension('features')}
                     >
                         Get Started for Free
                     </a>

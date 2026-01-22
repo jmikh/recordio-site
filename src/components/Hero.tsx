@@ -1,3 +1,5 @@
+import { trackInstallExtension } from '../utils/analytics';
+
 const Hero = () => {
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -43,6 +45,7 @@ const Hero = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-primary text-lg px-8 py-4"
+                            onClick={() => trackInstallExtension('hero')}
                         >
                             <span className="flex items-center space-x-2">
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

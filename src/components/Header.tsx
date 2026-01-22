@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { trackInstallExtension } from '../utils/analytics';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -66,6 +67,7 @@ const Header = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary inline-flex items-center space-x-2"
+                        onClick={() => trackInstallExtension('header')}
                     >
                         <svg
                             className="w-5 h-5"
