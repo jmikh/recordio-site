@@ -19,15 +19,17 @@ const Header = () => {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass shadow-lg' : 'bg-transparent'
-                }`}
+            className="fixed top-4 left-0 right-0 z-50 px-4"
         >
-            <nav className="max-w-7xl mx-auto px-6 py-4">
+            <nav
+                className={`max-w-5xl mx-auto px-6 py-4 rounded-2xl transition-all duration-300 ${isScrolled ? 'glass shadow-lg/20 backdrop-blur-xl' : 'bg-transparent'
+                    }`}
+            >
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <a href="/" className="flex items-center">
                         <img
-                            src="/assets/logo-full.png"
+                            src="/assets/fulllogo-dark.png"
                             alt="Recordio"
                             className="h-8 w-auto transition-opacity hover:opacity-80"
                         />
@@ -47,18 +49,6 @@ const Header = () => {
                         >
                             Pricing
                         </button>
-                        <button
-                            onClick={() => scrollToSection('testimonials')}
-                            className="text-text-main hover:text-text-highlighted transition-colors duration-200"
-                        >
-                            Testimonials
-                        </button>
-                        <a
-                            href="#"
-                            className="text-text-main hover:text-text-highlighted transition-colors duration-200"
-                        >
-                            Help
-                        </a>
                     </div>
 
                     {/* CTA Button */}

@@ -1,11 +1,15 @@
 import { trackInstallExtension } from '../utils/analytics';
+import SplineBackground from './SplineBackground';
 
 const Hero = () => {
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-            {/* Animated Background */}
-            <div className="absolute inset-0 animated-gradient" />
-            <div className="absolute inset-0 gradient-mesh opacity-60" />
+            {/* Spline Background */}
+            <SplineBackground />
+
+            {/* Animated Background (Optional overlay) */}
+            <div className="absolute inset-0 animated-gradient opacity-30 mix-blend-overlay pointer-events-none" />
+            <div className="absolute inset-0 gradient-mesh opacity-40 pointer-events-none" />
 
             {/* Floating particles */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -21,21 +25,20 @@ const Hero = () => {
                     <div className="inline-flex items-center px-4 py-2 rounded-full glass">
                         <span className="w-2 h-2 bg-secondary rounded-full mr-2 pulse-glow" />
                         <span className="text-sm text-text-highlighted font-medium">
-                            Smart Screen Recording for Chrome
+                            Now Available on Chrome Web Store
                         </span>
                     </div>
 
                     {/* Heading */}
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-                        <span className="gradient-text">Record. Edit. Share.</span>
+                        <span className="gradient-text">Professional Screen Recordings.</span>
                         <br />
-                        <span className="text-text-highlighted">Effortlessly.</span>
+                        <span className="text-text-highlighted">Zero Editing.</span>
                     </h1>
 
                     {/* Description */}
                     <p className="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto leading-relaxed">
-                        Transform your screen recordings into professional videos with Recordio.
-                        Capture, edit, and share stunning content in seconds—right from your browser.
+                        Record your screen, get auto-zoom, spotlight, and captions — polished and ready to share.
                     </p>
 
                     {/* CTA Buttons */}
@@ -51,34 +54,21 @@ const Hero = () => {
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2z" />
                                 </svg>
-                                <span>Add to Chrome - It's Free</span>
+                                <span>Start Recording — Free</span>
                             </span>
                         </a>
                         <button
-                            onClick={() => document.getElementById('examples')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
                             className="btn-secondary text-lg px-8 py-4"
                         >
-                            Watch Demo
+                            See It in Action ↓
                         </button>
                     </div>
 
-                    {/* Stats */}
-                    <div className="flex flex-wrap items-center justify-center gap-8 pt-12">
-                        <div className="text-center">
-                            <div className="text-3xl font-bold gradient-text">50K+</div>
-                            <div className="text-text-muted text-sm">Active Users</div>
-                        </div>
-                        <div className="w-px h-12 bg-border hidden sm:block" />
-                        <div className="text-center">
-                            <div className="text-3xl font-bold gradient-text">500K+</div>
-                            <div className="text-text-muted text-sm">Videos Recorded</div>
-                        </div>
-                        <div className="w-px h-12 bg-border hidden sm:block" />
-                        <div className="text-center">
-                            <div className="text-3xl font-bold gradient-text">4.8★</div>
-                            <div className="text-text-muted text-sm">Chrome Store Rating</div>
-                        </div>
-                    </div>
+                    {/* Trust line */}
+                    <p className="text-text-muted text-sm pt-2">
+                        ✦ Your first 4K export is free — no watermark, no catch.
+                    </p>
                 </div>
             </div>
 
