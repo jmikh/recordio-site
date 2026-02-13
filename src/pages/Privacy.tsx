@@ -29,7 +29,7 @@ const Privacy = () => {
                     {/* Introduction */}
                     <section>
                         <p className="text-text-main text-lg leading-relaxed">
-                            At <span className="text-primary-highlighted font-semibold">Recordio</span>, we take your privacy seriously. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our Chrome extension and related services.
+                            At <span className="text-primary-highlighted font-semibold">Recordio</span>, we take your privacy seriously. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our Chrome extension, web application, and related services.
                         </p>
                     </section>
 
@@ -232,8 +232,8 @@ const Privacy = () => {
                             <div className="mt-6 p-4 bg-primary/10 rounded-xl border border-primary/30">
                                 <p className="text-text-main">
                                     To exercise any of these rights, please contact us at{' '}
-                                    <a href="mailto:privacy@recordio.site" className="text-primary-highlighted hover:text-secondary underline font-semibold">
-                                        privacy@recordio.site
+                                    <a href="mailto:support@recordio.cc" className="text-primary-highlighted hover:text-secondary underline font-semibold">
+                                        support@recordio.cc
                                     </a>
                                 </p>
                             </div>
@@ -270,7 +270,44 @@ const Privacy = () => {
                                     <span className="text-secondary mr-2">•</span>
                                     <span><strong className="text-text-highlighted">Google:</strong> OAuth authentication</span>
                                 </li>
+                                <li className="flex items-start">
+                                    <span className="text-secondary mr-2">•</span>
+                                    <span><strong className="text-text-highlighted">Google Analytics:</strong> Anonymous usage analytics to help us understand how users interact with our site and improve the product</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <span className="text-secondary mr-2">•</span>
+                                    <span><strong className="text-text-highlighted">Hugging Face:</strong> AI model hosting for captions. Models are downloaded to your browser and run locally — your audio is never sent to external servers</span>
+                                </li>
                             </ul>
+                        </div>
+                    </section>
+
+                    {/* Cookies & Tracking */}
+                    <section className="space-y-4">
+                        <h2 className="text-3xl font-bold text-text-highlighted flex items-center">
+                            <svg className="w-8 h-8 text-secondary mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Cookies & Tracking Technologies
+                        </h2>
+
+                        <div className="bg-surface-raised rounded-2xl p-6 space-y-4">
+                            <p className="text-text-main">
+                                We use a limited number of cookies and similar technologies to operate and improve the Service:
+                            </p>
+                            <ul className="space-y-2 text-text-main ml-6">
+                                <li className="flex items-start">
+                                    <span className="text-secondary mr-2">•</span>
+                                    <span><strong className="text-text-highlighted">Google Analytics cookies</strong> (<code className="text-text-muted">_ga</code>, <code className="text-text-muted">_ga_*</code>): Used to collect anonymous usage statistics such as page views, session duration, and general traffic patterns. This data helps us understand how users interact with our site and improve the product. No personally identifiable information is collected through these cookies.</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <span className="text-secondary mr-2">•</span>
+                                    <span><strong className="text-text-highlighted">Authentication tokens:</strong> Stored in your browser's local storage to keep you securely signed in to your account.</span>
+                                </li>
+                            </ul>
+                            <p className="text-text-main">
+                                We do not use advertising cookies or third-party tracking cookies. You can manage or disable cookies through your browser settings, though this may affect the functionality of some features.
+                            </p>
                         </div>
                     </section>
 
@@ -288,11 +325,11 @@ const Privacy = () => {
                                 If you have any questions or concerns about this Privacy Policy or how we handle your data, please reach out:
                             </p>
                             <div className="flex flex-col space-y-3">
-                                <a href="mailto:privacy@recordio.site" className="text-primary-highlighted hover:text-secondary underline text-lg font-semibold flex items-center">
+                                <a href="mailto:support@recordio.cc" className="text-primary-highlighted hover:text-secondary underline text-lg font-semibold flex items-center">
                                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
-                                    privacy@recordio.site
+                                    support@recordio.cc
                                 </a>
                                 <a href="https://recordio.site" className="text-text-main hover:text-primary-highlighted flex items-center">
                                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

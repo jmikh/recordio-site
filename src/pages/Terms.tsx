@@ -100,15 +100,31 @@ const Terms = () => {
                         <ul className="space-y-2 text-text-main ml-6">
                             <li className="flex items-start">
                                 <span className="text-secondary mr-2">•</span>
-                                <span>Reverse engineer, decompile, or attempt to extract the source code</span>
+                                <span>Reverse engineer, decompile, disassemble, or attempt to derive the source code or underlying algorithms of the Service</span>
                             </li>
                             <li className="flex items-start">
                                 <span className="text-secondary mr-2">•</span>
-                                <span>Use automated systems to access the service without permission</span>
+                                <span>Copy, reproduce, or create derivative works based on the Service's source code, user interface designs, or visual elements</span>
                             </li>
                             <li className="flex items-start">
                                 <span className="text-secondary mr-2">•</span>
-                                <span>Use the service to record content without proper authorization</span>
+                                <span>Use browser developer tools, network inspection, or automated tools to systematically extract, scrape, or copy the Service's code, algorithms, or design patterns for the purpose of replication</span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-secondary mr-2">•</span>
+                                <span>Redistribute, sublicense, or make the Service's source code or any portion thereof available to any third party</span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-secondary mr-2">•</span>
+                                <span>Remove, alter, or obscure any copyright notices, proprietary markings, or branding from the Service</span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-secondary mr-2">•</span>
+                                <span>Use automated systems to access the Service without permission</span>
+                            </li>
+                            <li className="flex items-start">
+                                <span className="text-secondary mr-2">•</span>
+                                <span>Use the Service to record content without proper authorization</span>
                             </li>
                             <li className="flex items-start">
                                 <span className="text-secondary mr-2">•</span>
@@ -116,7 +132,7 @@ const Terms = () => {
                             </li>
                             <li className="flex items-start">
                                 <span className="text-secondary mr-2">•</span>
-                                <span>Resell or redistribute the service without authorization</span>
+                                <span>Resell or redistribute the Service without authorization</span>
                             </li>
                         </ul>
                     </section>
@@ -124,8 +140,14 @@ const Terms = () => {
                     {/* Intellectual Property */}
                     <section className="space-y-3">
                         <h2 className="text-2xl font-bold text-text-highlighted">6. Intellectual Property</h2>
+                        <p className="text-text-main mb-3">
+                            All source code (including client-side JavaScript, HTML, CSS, and related assets), algorithms, user interface designs, visual elements, documentation, and other content, features, and functionality of Recordio are the exclusive property of Recordio and are protected by United States and international copyright, trade secret, trademark, and other intellectual property laws.
+                        </p>
+                        <p className="text-text-main mb-3">
+                            The Service is licensed, not sold. No ownership rights in the software are transferred to you. All rights not expressly granted under these Terms are reserved by Recordio.
+                        </p>
                         <p className="text-text-main">
-                            All content, features, and functionality of Recordio are owned by us and protected by copyright, trademark, and other intellectual property laws. You retain ownership of content you create using the service.
+                            You retain full ownership of any content (such as recordings and exported videos) that you create using the Service.
                         </p>
                     </section>
 
@@ -137,7 +159,7 @@ const Terms = () => {
                             <a href="/privacy" className="text-primary-highlighted hover:text-secondary underline">
                                 Privacy Policy
                             </a>
-                            . Video recordings are stored locally in your browser and are not uploaded to our servers unless you choose to export them.
+                            . Video recordings and projects are stored locally in your browser's storage and are not uploaded to or stored on Recordio's servers.
                         </p>
                     </section>
 
@@ -145,7 +167,7 @@ const Terms = () => {
                     <section className="space-y-3">
                         <h2 className="text-2xl font-bold text-text-highlighted">8. Service Availability</h2>
                         <p className="text-text-main">
-                            We strive for 99.9% uptime but do not guarantee uninterrupted service. We may modify, suspend, or discontinue features at any time with reasonable notice.
+                            We strive to provide reliable and consistent access to the Service but do not guarantee uninterrupted availability. We may modify, suspend, or discontinue features at any time with reasonable notice.
                         </p>
                     </section>
 
@@ -182,7 +204,7 @@ const Terms = () => {
                     <section className="space-y-3">
                         <h2 className="text-2xl font-bold text-text-highlighted">12. Governing Law</h2>
                         <p className="text-text-main">
-                            These terms are governed by the laws of the United States. Any disputes shall be resolved in the courts of the applicable jurisdiction.
+                            These terms are governed by and construed in accordance with the laws of the State of New York, United States, without regard to its conflict of law provisions. Any disputes arising under these terms shall be resolved exclusively in the state or federal courts located in New York, New York.
                         </p>
                     </section>
 
@@ -199,8 +221,8 @@ const Terms = () => {
                         <h2 className="text-2xl font-bold text-text-highlighted">14. Contact</h2>
                         <p className="text-text-main">
                             For questions about these terms, contact us at{' '}
-                            <a href="mailto:legal@recordio.site" className="text-primary-highlighted hover:text-secondary underline">
-                                legal@recordio.site
+                            <a href="mailto:support@recordio.cc" className="text-primary-highlighted hover:text-secondary underline">
+                                support@recordio.cc
                             </a>
                         </p>
                     </section>
