@@ -36,12 +36,12 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
                         <span className="gradient-text">Professional Screen Recordings.</span>
                         <br />
-                        <span className="text-text-highlighted">Zero Editing.</span>
+                        <span className="text-text-highlighted">Auto-Polished.</span>
                     </h1>
 
                     {/* Description */}
                     <p className="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto leading-relaxed">
-                        Record your screen, get auto-zoom, spotlight, and captions — polished and ready to share.
+                        Other recorders just follow your cursor. Recordio understands the page itself. Precise zoom, automatic spotlight, and studio-quality video in seconds.
                     </p>
 
                     {/* CTA Buttons */}
