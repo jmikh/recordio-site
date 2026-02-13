@@ -1,4 +1,8 @@
-const Footer = () => {
+interface FooterProps {
+    onJoinWaitlist: () => void;
+}
+
+const Footer = ({ onJoinWaitlist }: FooterProps) => {
     const currentYear = new Date().getFullYear();
 
     return (
@@ -20,14 +24,12 @@ const Footer = () => {
                     </div>
 
                     {/* CTA */}
-                    <a
-                        href="https://chrome.google.com/webstore"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <button
+                        onClick={onJoinWaitlist}
                         className="btn-primary flex-shrink-0"
                     >
-                        Start Recording — Free
-                    </a>
+                        Join Waitlist
+                    </button>
                 </div>
 
                 {/* Bottom */}

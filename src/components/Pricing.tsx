@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-const Pricing = () => {
+interface PricingProps {
+    onJoinWaitlist: () => void;
+}
+
+const Pricing = ({ onJoinWaitlist }: PricingProps) => {
     const [isAnnual, setIsAnnual] = useState(true);
 
     const plans = [
@@ -34,7 +38,6 @@ const Pricing = () => {
                 'Priority support',
             ],
             cta: 'Get Pro',
-            ctaLink: '#',
             popular: true,
             style: 'primary' as const,
         },
@@ -56,9 +59,11 @@ const Pricing = () => {
 
     return (
         <section id="pricing" className="py-24 bg-surface-body relative overflow-hidden">
-            {/* Animated background */}
-            <div className="absolute inset-0 animated-gradient opacity-50" />
-            <div className="absolute inset-0 gradient-mesh opacity-30" />
+            {/* Background — matches features section */}
+            <div className="absolute inset-0 opacity-30 pointer-events-none">
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
+            </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-6">
                 {/* Section Header */}
@@ -182,36 +187,28 @@ const Pricing = () => {
                             </ul>
 
                             {/* CTA Button */}
-                            <a
-                                href={plan.ctaLink}
-                                target={plan.ctaLink.startsWith('http') ? '_blank' : undefined}
-                                rel={plan.ctaLink.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                className={`block text-center ${plan.style === 'primary'
-                                    ? 'btn-primary w-full'
-                                    : 'btn-secondary w-full'
-                                    }`}
-                            >
-                                {plan.cta}
-                            </a>
+                            {plan.ctaLink?.startsWith('mailto') ? (
+                                <a
+                                    href={plan.ctaLink}
+                                    className="btn-secondary w-full block text-center"
+                                >
+                                    {plan.cta}
+                                </a>
+                            ) : (
+                                <button
+                                    onClick={onJoinWaitlist}
+                                    className={`w-full ${plan.style === 'primary'
+                                        ? 'btn-primary'
+                                        : 'btn-secondary'
+                                        }`}
+                                >
+                                    {plan.cta}
+                                </button>
+                            )}
                         </div>
                     ))}
                 </div>
 
-                {/* Bottom trust line */}
-                <div className="mt-10 text-center">
-                    <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-text-muted text-sm">
-                        <span className="flex items-center gap-1">
-                            <svg className="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
-                            No credit card required
-                        </span>
-                        <span className="text-border">•</span>
-                        <span>Cancel anytime</span>
-                        <span className="text-border">•</span>
-                        <span>All features on every plan</span>
-                    </div>
-                </div>
             </div>
         </section>
     );

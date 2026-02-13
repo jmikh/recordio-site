@@ -1,7 +1,10 @@
-import { trackInstallExtension } from '../utils/analytics';
 import SplineBackground from './SplineBackground';
 
-const Hero = () => {
+interface HeroProps {
+    onJoinWaitlist: () => void;
+}
+
+const Hero = ({ onJoinWaitlist }: HeroProps) => {
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
             {/* Spline Background */}
@@ -21,13 +24,13 @@ const Hero = () => {
             {/* Content */}
             <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 text-center">
                 <div className="space-y-8">
-                    {/* Badge */}
-                    <div className="inline-flex items-center px-4 py-2 rounded-full glass">
+                    {/* Badge — hidden for waitlist phase */}
+                    {/* <div className="inline-flex items-center px-4 py-2 rounded-full glass">
                         <span className="w-2 h-2 bg-secondary rounded-full mr-2 pulse-glow" />
                         <span className="text-sm text-text-highlighted font-medium">
                             Now Available on Chrome Web Store
                         </span>
-                    </div>
+                    </div> */}
 
                     {/* Heading */}
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
@@ -43,20 +46,14 @@ const Hero = () => {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                        <a
-                            href="https://chrome.google.com/webstore"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <button
+                            onClick={onJoinWaitlist}
                             className="btn-primary text-lg px-8 py-4"
-                            onClick={() => trackInstallExtension('hero')}
                         >
                             <span className="flex items-center space-x-2">
-                                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2z" />
-                                </svg>
-                                <span>Start Recording — Free</span>
+                                <span>Join the Waitlist</span>
                             </span>
-                        </a>
+                        </button>
                         <button
                             onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
                             className="btn-secondary text-lg px-8 py-4"

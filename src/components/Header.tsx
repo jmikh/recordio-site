@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
-import { trackInstallExtension } from '../utils/analytics';
 
-const Header = () => {
+interface HeaderProps {
+    onJoinWaitlist: () => void;
+}
+
+const Header = ({ onJoinWaitlist }: HeaderProps) => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -49,26 +52,21 @@ const Header = () => {
                         >
                             Pricing
                         </button>
+                        <button
+                            onClick={() => scrollToSection('faq')}
+                            className="text-text-main hover:text-text-highlighted transition-colors duration-200"
+                        >
+                            FAQ
+                        </button>
                     </div>
 
                     {/* CTA Button */}
-                    <a
-                        href="https://chrome.google.com/webstore"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <button
+                        onClick={onJoinWaitlist}
                         className="btn-primary inline-flex items-center space-x-2"
-                        onClick={() => trackInstallExtension('header')}
                     >
-                        <svg
-                            className="w-5 h-5"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2z" />
-                            <path d="M12 6a6 6 0 100 12 6 6 0 000-12zm0 2a4 4 0 110 8 4 4 0 010-8z" />
-                        </svg>
-                        <span>Install Extension</span>
-                    </a>
+                        <span>Join Waitlist</span>
+                    </button>
                 </div>
             </nav>
         </header >
