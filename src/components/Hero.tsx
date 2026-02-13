@@ -6,7 +6,7 @@ interface HeroProps {
 
 const Hero = ({ onJoinWaitlist }: HeroProps) => {
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section aria-label="Hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
             {/* Spline Background */}
             <SplineBackground />
 

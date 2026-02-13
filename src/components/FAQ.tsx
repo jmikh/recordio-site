@@ -31,7 +31,7 @@ const FAQ = () => {
     };
 
     return (
-        <section id="faq" className="py-24 bg-surface-body relative overflow-hidden">
+        <section id="faq" aria-label="Frequently Asked Questions" className="py-24 bg-surface-body relative overflow-hidden">
             <div className="absolute inset-0 gradient-mesh opacity-20" />
 
             <div className="relative z-10 max-w-3xl mx-auto px-6">
@@ -46,7 +46,7 @@ const FAQ = () => {
                 </div>
 
                 {/* Accordion */}
-                <div className="space-y-3">
+                <dl className="space-y-3">
                     {faqs.map((faq, index) => {
                         const isOpen = openIndex === index;
                         return (
@@ -54,43 +54,48 @@ const FAQ = () => {
                                 key={index}
                                 className="rounded-xl border border-border bg-surface-raised/50 transition-colors duration-300 hover:border-border-highlighted"
                             >
-                                <button
-                                    onClick={() => toggle(index)}
-                                    className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer"
-                                >
-                                    <span className="text-lg font-semibold text-text-highlighted">
-                                        {faq.question}
-                                    </span>
-                                    <svg
-                                        className={`w-5 h-5 flex-shrink-0 text-text-muted transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
+                                <dt>
+                                    <button
+                                        onClick={() => toggle(index)}
+                                        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer"
+                                        aria-expanded={isOpen}
                                     >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M19 9l-7 7-7-7"
-                                        />
-                                    </svg>
-                                </button>
-                                <div
-                                    className="grid transition-[grid-template-rows] duration-300 ease-in-out"
-                                    style={{
-                                        gridTemplateRows: isOpen ? '1fr' : '0fr',
-                                    }}
-                                >
-                                    <div className="overflow-hidden">
-                                        <p className="px-6 pb-5 text-text-muted leading-relaxed">
-                                            {faq.answer}
-                                        </p>
+                                        <span className="text-lg font-semibold text-text-highlighted">
+                                            {faq.question}
+                                        </span>
+                                        <svg
+                                            className={`w-5 h-5 flex-shrink-0 text-text-muted transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M19 9l-7 7-7-7"
+                                            />
+                                        </svg>
+                                    </button>
+                                </dt>
+                                <dd>
+                                    <div
+                                        className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                                        style={{
+                                            gridTemplateRows: isOpen ? '1fr' : '0fr',
+                                        }}
+                                    >
+                                        <div className="overflow-hidden">
+                                            <p className="px-6 pb-5 text-text-muted leading-relaxed">
+                                                {faq.answer}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                </dd>
                             </div>
                         );
                     })}
-                </div>
+                </dl>
             </div>
         </section>
     );
