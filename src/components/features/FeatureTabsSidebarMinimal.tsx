@@ -1,9 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { features } from './features.data';
 
 const FeatureTabsSidebarMinimal = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const active = features[activeIndex];
+
+    // Prefetch all demo videos in the background after mount
+    useEffect(() => {
+        const videoUrls = features
+            .map((f) => f.video)
+            .filter((url): url is string => !!url);
+
+        const links: HTMLLinkElement[] = [];
+
+        videoUrls.forEach((url) => {
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.as = 'video';
+            link.href = url;
+            document.head.appendChild(link);
+            links.push(link);
+        });
+
+        return () => {
+            links.forEach((link) => document.head.removeChild(link));
+        };
+    }, []);
 
     return (
         <>
