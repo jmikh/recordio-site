@@ -1,14 +1,17 @@
+import { useScrollReveal } from '../hooks/useScrollReveal';
+
 interface FooterProps {
     onJoinWaitlist: () => void;
 }
 
 const Footer = ({ onJoinWaitlist }: FooterProps) => {
     const currentYear = new Date().getFullYear();
+    const contentRef = useScrollReveal();
 
     return (
         <footer className="bg-surface-body border-t border-border">
             <div className="max-w-7xl mx-auto px-6 py-12">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+                <div ref={contentRef} className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8 scroll-reveal">
                     {/* Brand */}
                     <div className="flex flex-col items-center md:items-start gap-3">
                         <a href="/" className="inline-block">

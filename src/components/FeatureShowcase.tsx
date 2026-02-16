@@ -1,6 +1,10 @@
 import FeatureTabsSidebarMinimal from './features/FeatureTabsSidebarMinimal';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const FeatureShowcase = () => {
+    const headerRef = useScrollReveal();
+    const contentRef = useScrollReveal();
+
     return (
         <section id="features" className="py-24 bg-surface-body relative overflow-hidden">
             {/* Background decoration */}
@@ -11,12 +15,12 @@ const FeatureShowcase = () => {
 
             <div className="relative z-10 max-w-7xl mx-auto px-6">
                 {/* Section Header */}
-                <div className="text-center mb-16">
+                <div ref={headerRef} className="text-center mb-16 scroll-reveal">
                     <span className="text-sm font-semibold tracking-widest uppercase text-primary-highlighted mb-4 block">
                         Intelligent Editing
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold text-text-highlighted mb-4">
-                        Features That <span className="gradient-text">Set Us Apart</span>
+                        Features That <span className="text-primary-highlighted">Set Us Apart</span>
                     </h2>
                     <p className="text-xl text-text-muted max-w-2xl mx-auto">
                         Powered by real page understanding — not just cursor tracking
@@ -24,7 +28,7 @@ const FeatureShowcase = () => {
                 </div>
 
                 {/* Content */}
-                <div className="min-h-[600px]">
+                <div ref={contentRef} className="min-h-[600px] scroll-reveal scroll-reveal-delay-2">
                     <FeatureTabsSidebarMinimal />
                 </div>
             </div>

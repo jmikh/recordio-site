@@ -114,7 +114,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
                     /* ── Form state ── */
                     <>
                         <div className="text-center mb-6">
-                            <h3 className="text-2xl font-bold gradient-text mb-2">Join the Waitlist</h3>
+                            <h3 className="text-2xl font-bold text-primary-highlighted mb-2">Join the Waitlist</h3>
                             <p className="text-text-muted text-sm">
                                 Be the first to know when Recordio launches.
                             </p>

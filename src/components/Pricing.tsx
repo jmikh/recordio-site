@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface PricingProps {
     onJoinWaitlist: () => void;
@@ -6,6 +7,8 @@ interface PricingProps {
 
 const Pricing = ({ onJoinWaitlist }: PricingProps) => {
     const [isAnnual, setIsAnnual] = useState(true);
+    const headerRef = useScrollReveal();
+    const cardsRef = useScrollReveal();
 
     const plans = [
         {
@@ -67,9 +70,9 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
 
             <div className="relative z-10 max-w-7xl mx-auto px-6">
                 {/* Section Header */}
-                <div className="text-center mb-12">
+                <div ref={headerRef} className="text-center mb-12 scroll-reveal">
                     <h2 className="text-4xl md:text-5xl font-bold text-text-highlighted mb-4">
-                        Simple, <span className="gradient-text">Transparent Pricing</span>
+                        Simple, <span className="text-primary-highlighted">Transparent Pricing</span>
                     </h2>
                     <p className="text-xl text-text-muted max-w-2xl mx-auto">
                         Every feature on every plan. Pay only for volume.
@@ -77,7 +80,7 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                 </div>
 
                 {/* Pricing Cards */}
-                <div className="flex flex-wrap justify-center gap-8">
+                <div ref={cardsRef} className="flex flex-wrap justify-center gap-8 scroll-reveal scroll-reveal-delay-2">
                     {plans.map((plan, index) => (
                         <div
                             key={index}
@@ -108,7 +111,7 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                                 {'price' in plan && (plan as any).price ? (
                                     <>
                                         <div className="flex items-baseline justify-center">
-                                            <span className="text-5xl font-bold gradient-text">
+                                            <span className="text-5xl font-bold text-primary-highlighted">
                                                 {(plan as any).price}
                                             </span>
                                         </div>

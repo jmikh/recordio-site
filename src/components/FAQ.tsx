@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const faqs = [
     {
@@ -25,6 +26,8 @@ const faqs = [
 
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const headerRef = useScrollReveal();
+    const accordionRef = useScrollReveal<HTMLDListElement>();
 
     const toggle = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);
@@ -36,9 +39,9 @@ const FAQ = () => {
 
             <div className="relative z-10 max-w-3xl mx-auto px-6">
                 {/* Section Header */}
-                <div className="text-center mb-16">
+                <div ref={headerRef} className="text-center mb-16 scroll-reveal">
                     <h2 className="text-4xl md:text-5xl font-bold text-text-highlighted mb-4">
-                        Frequently <span className="gradient-text">Asked Questions</span>
+                        Frequently <span className="text-primary-highlighted">Asked Questions</span>
                     </h2>
                     <p className="text-xl text-text-muted max-w-2xl mx-auto">
                         Everything you need to know about Recordio.
@@ -46,7 +49,7 @@ const FAQ = () => {
                 </div>
 
                 {/* Accordion */}
-                <dl className="space-y-3">
+                <dl ref={accordionRef} className="space-y-3 scroll-reveal scroll-reveal-delay-2">
                     {faqs.map((faq, index) => {
                         const isOpen = openIndex === index;
                         return (

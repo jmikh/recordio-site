@@ -91,6 +91,194 @@ html {
   color: transparent;
 }
 
+/* ===== Hero Entrance Animations ===== */
+
+.hero-entrance {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeIn 0.7s ease-out forwards;
+}
+
+.hero-entrance-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.hero-entrance-delay-2 {
+  animation-delay: 0.9s;
+}
+
+.hero-entrance-delay-3 {
+  animation-delay: 1.6s;
+}
+
+.hero-entrance-delay-4 {
+  animation-delay: 2.0s;
+}
+
+@keyframes heroFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Auto-Polished Text Effects ===== */
+
+
+/* Combined: Typewriter + Sparkle — letters appear with vibrant purple glow */
+.effect-typewriter-sparkle-letter {
+  display: inline-block;
+  opacity: 0;
+  color: oklch(0.75 0.20 290);
+  animation: typewriterSparkleReveal 0.5s ease-out forwards;
+}
+
+.effect-typewriter-sparkle-letter.space {
+  width: 0.3em;
+}
+
+@keyframes typewriterSparkleReveal {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    text-shadow: 0 0 40px oklch(0.80 0.22 290);
+    transform: scale(1.15);
+  }
+
+  40% {
+    opacity: 1;
+    filter: blur(0px);
+    text-shadow: 0 0 25px oklch(0.80 0.22 290), 0 0 50px oklch(0.65 0.20 290 / 0.6);
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    text-shadow: 0 0 16px oklch(0.65 0.20 290 / 0.5);
+    transform: scale(1);
+  }
+}
+
+/* Effect 4: Sparkle — vibrant gradient with animated sparkle particles */
+.effect-sparkle {
+  position: relative;
+  background-image: linear-gradient(to right, oklch(0.75 0.20 290), oklch(0.68 0.22 280), oklch(0.78 0.18 300));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 16px oklch(0.65 0.20 290 / 0.5));
+}
+
+.effect-sparkle-container {
+  position: relative;
+  display: inline-block;
+}
+
+.sparkle-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: oklch(0.95 0.10 290);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 2s ease-in-out infinite;
+  box-shadow: 0 0 8px 3px oklch(0.80 0.18 290 / 0.7);
+}
+
+.sparkle-particle:nth-child(1) {
+  top: 15%;
+  left: 8%;
+  animation-delay: 0s;
+}
+
+.sparkle-particle:nth-child(2) {
+  top: 60%;
+  left: 25%;
+  animation-delay: 0.4s;
+}
+
+.sparkle-particle:nth-child(3) {
+  top: 10%;
+  left: 50%;
+  animation-delay: 0.8s;
+}
+
+.sparkle-particle:nth-child(4) {
+  top: 70%;
+  left: 70%;
+  animation-delay: 1.2s;
+}
+
+.sparkle-particle:nth-child(5) {
+  top: 20%;
+  left: 90%;
+  animation-delay: 1.6s;
+}
+
+.sparkle-particle:nth-child(6) {
+  top: 80%;
+  left: 40%;
+  animation-delay: 0.2s;
+}
+
+.sparkle-particle:nth-child(7) {
+  top: 30%;
+  left: 65%;
+  animation-delay: 1.0s;
+}
+
+.sparkle-particle:nth-child(8) {
+  top: 50%;
+  left: 15%;
+  animation-delay: 1.4s;
+}
+
+@keyframes sparkle {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Scroll Reveal Animations ===== */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for child elements */
+.scroll-reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.scroll-reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.scroll-reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.scroll-reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+
 /* Button styles */
 .btn-primary {
   padding: 0.75rem 1.5rem;

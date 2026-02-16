@@ -1,10 +1,19 @@
+import { useState, useEffect } from 'react';
 import SplineBackground from './SplineBackground';
 
 interface HeroProps {
     onJoinWaitlist: () => void;
 }
 
+const AUTO_POLISHED_TEXT = 'Auto-Polished.';
+
 const Hero = ({ onJoinWaitlist }: HeroProps) => {
+    const [typewriterKey, setTypewriterKey] = useState(0);
+
+    useEffect(() => {
+        setTypewriterKey(k => k + 1);
+    }, []);
+
     return (
         <section aria-label="Hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
             {/* Spline Background */}
@@ -24,28 +33,35 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
             {/* Content */}
             <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 text-center">
                 <div className="space-y-8">
-                    {/* Badge — hidden for waitlist phase */}
-                    {/* <div className="inline-flex items-center px-4 py-2 rounded-full glass">
-                        <span className="w-2 h-2 bg-secondary rounded-full mr-2 pulse-glow" />
-                        <span className="text-sm text-text-highlighted font-medium">
-                            Now Available on Chrome Web Store
-                        </span>
-                    </div> */}
-
                     {/* Heading */}
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-                        <span className="gradient-text">Professional Screen Recordings.</span>
+                        <span className="text-text-highlighted hero-entrance hero-entrance-delay-1">Professional Screen Recordings.</span>
                         <br />
-                        <span className="text-text-highlighted">Auto-Polished.</span>
+                        <span className="effect-sparkle-container" key={typewriterKey}>
+                            <span>
+                                {AUTO_POLISHED_TEXT.split('').map((char, i) => (
+                                    <span
+                                        key={i}
+                                        className={`effect-typewriter-sparkle-letter${char === ' ' ? ' space' : ''}`}
+                                        style={{ animationDelay: `${0.5 + i * 0.06}s` }}
+                                    >
+                                        {char === ' ' ? '\u00A0' : char}
+                                    </span>
+                                ))}
+                            </span>
+                            {Array.from({ length: 8 }).map((_, i) => (
+                                <span key={i} className="sparkle-particle" />
+                            ))}
+                        </span>
                     </h1>
 
                     {/* Description */}
-                    <p className="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto leading-relaxed">
-                        Other recorders just follow your cursor. Recordio understands the page itself. Precise zoom, automatic spotlight, and studio-quality video in seconds.
+                    <p className="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto leading-relaxed hero-entrance hero-entrance-delay-3">
+                        Other recorders just follow your cursor. Recordio understands the page. Precise zoom, automatic spotlight, and studio-quality video in seconds.
                     </p>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 hero-entrance hero-entrance-delay-4">
                         <button
                             onClick={onJoinWaitlist}
                             className="btn-primary text-lg px-8 py-4"
@@ -63,7 +79,7 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
                     </div>
 
                     {/* Trust line */}
-                    <p className="text-text-muted text-sm pt-2">
+                    <p className="text-text-muted text-sm pt-2 hero-entrance hero-entrance-delay-4">
                         ✦ Your first 4K export is free — no watermark, no catch.
                     </p>
                 </div>
