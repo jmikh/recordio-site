@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import SplineBackground from './SplineBackground';
+import { useState, useEffect, lazy, Suspense } from 'react';
+
+const SplineBackground = lazy(() => import('./SplineBackground'));
 
 interface HeroProps {
     onJoinWaitlist: () => void;
@@ -16,8 +17,10 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
 
     return (
         <section aria-label="Hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-            {/* Spline Background */}
-            <SplineBackground />
+            {/* Spline Background — lazy-loaded to avoid blocking initial paint */}
+            <Suspense fallback={null}>
+                <SplineBackground />
+            </Suspense>
 
             {/* Animated Background (Optional overlay) */}
             <div className="absolute inset-0 animated-gradient opacity-30 mix-blend-overlay pointer-events-none" />
