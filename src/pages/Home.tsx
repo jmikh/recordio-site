@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from '../components/Header'
 import Hero from '../components/Hero'
-import FeatureShowcase from '../components/FeatureShowcase'
+
 import InteractiveShowcase from '../components/features/InteractiveShowcase'
 import Pricing from '../components/Pricing'
 import FAQ from '../components/FAQ'

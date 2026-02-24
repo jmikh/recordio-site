@@ -167,7 +167,7 @@ const InteractiveShowcase = () => {
 
 
                 {/* ── Step label — full width ── */}
-                <div className="w-full max-w-[1100px] mx-auto text-center mb-4 flex-shrink-0 h-16 flex flex-col items-center justify-center relative">
+                <div className="w-full max-w-[1100px] mx-auto text-center mb-8 flex-shrink-0 h-16 flex flex-col items-center justify-center relative">
                     {STEPS.map((s, i) => (
                         <div
                             key={i}
@@ -301,11 +301,13 @@ const InteractiveShowcase = () => {
                                     className="absolute pointer-events-none"
                                     style={{
                                         left: '50%',
-                                        top: '50%',
+                                        top: hasNewTb
+                                            ? `${NEW_TB_PCT + ((60 - OLD_TB_PCT) / (100 - OLD_TB_PCT)) * (100 - NEW_TB_PCT)}%`
+                                            : '60%',
                                         width: `${(898 / 2548) * 100}%`,
                                         transform: `translate(-50%, -50%) scale(${hasSpotlight ? 1.15 : 1})`,
                                         opacity: hasScreen ? 1 : 0,
-                                        zIndex: hasSpotlight ? 40 : 15,
+                                        zIndex: 40,
                                         filter: hasSpotlight
                                             ? 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5))'
                                             : 'drop-shadow(0 0 0 transparent)',
@@ -354,49 +356,20 @@ const InteractiveShowcase = () => {
                     </div>
                 </div>
 
-                {/* ── Bottom bar: horizontal stepper + skip button ── */}
-                <div
-                    className="flex-shrink-0 mt-4 flex items-center justify-center gap-4 transition-opacity duration-500"
+                {/* ── Skip button — below video ── */}
+                <button
+                    onClick={skipSection}
+                    className="flex-shrink-0 mt-4 text-sm flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-500 hover:opacity-100"
                     style={{
-                        opacity: inSection ? 1 : 0,
+                        color: 'var(--color-text-muted)',
+                        backgroundColor: 'var(--color-surface-secondary)',
+                        border: '1px solid var(--color-border-muted)',
+                        opacity: inSection ? 0.7 : 0,
                         pointerEvents: inSection ? 'auto' : 'none',
                     }}
                 >
-                    {/* Horizontal stepper — only below xl */}
-                    <div className="flex xl:hidden items-center gap-1.5">
-                        {STEPS.map((_, i) => (
-                            <button
-                                key={i}
-                                onClick={() => scrollToStep(i)}
-                                className="flex items-center justify-center rounded-full text-xs font-medium transition-all duration-300"
-                                aria-label={STEPS[i].label}
-                                style={{
-                                    width: step === i ? 28 : 8,
-                                    height: 8,
-                                    borderRadius: 4,
-                                    backgroundColor: step >= i
-                                        ? 'var(--color-text-highlighted)'
-                                        : 'var(--color-text-muted)',
-                                    opacity: step >= i ? 1 : 0.3,
-                                }}
-                            />
-                        ))}
-                    </div>
-
-                    {/* Skip button */}
-                    <button
-                        onClick={skipSection}
-                        className="text-sm flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-300 hover:opacity-100"
-                        style={{
-                            color: 'var(--color-text-muted)',
-                            backgroundColor: 'var(--color-surface-secondary)',
-                            border: '1px solid var(--color-border-muted)',
-                            opacity: 0.7,
-                        }}
-                    >
-                        Skip demo ↓
-                    </button>
-                </div>
+                    Skip demo ↓
+                </button>
             </div>
         </section>
     );
