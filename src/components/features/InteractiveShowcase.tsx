@@ -35,7 +35,7 @@ const STEPS = [
 ];
 
 const TOTAL_STEPS = STEPS.length;
-const SCROLL_HEIGHT_VH = 200 * TOTAL_STEPS; // 200vh per step = 1400vh
+const SCROLL_HEIGHT_VH = 150 * TOTAL_STEPS; // 150vh per step = 1050vh
 
 // ── Transition duration for gate-triggered animations ──
 const ANIM_DURATION = '0.7s';
@@ -191,7 +191,7 @@ const InteractiveShowcase = () => {
 
                 {/* ── Video wrapper — width constrained by viewport height to preserve aspect ratio ── */}
                 <div className="relative w-full mx-auto flex-1 min-h-0 flex items-center justify-center"
-                    style={{ maxWidth: 'min(1100px, calc((100vh - 160px) * 3131 / 1932))' }}
+                    style={{ maxWidth: 'min(1100px, calc((100vh - 240px) * 3131 / 1932))' }}
                 >
 
                     {/* ── Outer border frame ── */}
@@ -355,6 +355,39 @@ const InteractiveShowcase = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* ── Inline stepper — horizontal, below video, visible < xl ── */}
+                <nav
+                    className="flex xl:hidden items-center justify-center gap-2 flex-shrink-0 mt-3 transition-opacity duration-500"
+                    style={{
+                        opacity: inSection ? 1 : 0,
+                        pointerEvents: inSection ? 'auto' : 'none',
+                    }}
+                >
+                    {STEPS.map((s, i) => (
+                        <button
+                            key={i}
+                            onClick={() => scrollToStep(i)}
+                            aria-label={s.label}
+                            className="flex items-center justify-center rounded-full text-xs font-medium transition-all duration-300"
+                            style={{
+                                width: 28,
+                                height: 28,
+                                backgroundColor: step === i
+                                    ? 'var(--color-text-highlighted)'
+                                    : 'transparent',
+                                color: step === i
+                                    ? '#0a0a0a'
+                                    : step >= i
+                                        ? 'var(--color-text-highlighted)'
+                                        : 'var(--color-text-muted)',
+                                opacity: step >= i ? 1 : 0.4,
+                            }}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+                </nav>
 
                 {/* ── Skip button — below video ── */}
                 <button
