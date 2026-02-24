@@ -12,16 +12,15 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
 
     const plans = [
         {
-            name: 'Free',
-            price: '$0',
-            period: 'forever',
-            description: 'Try the full product, on us',
+            name: 'Basic',
+            price: 'Free',
+            period: 'No credit card',
             features: [
-                'Unlimited 720p exports with watermark',
-                '1 free 4K export',
-                'Auto Zoom, Spotlight & Captions',
-                'Advanced Editor',
+                'Unlimited 720p exports',
                 'Unlimited projects',
+                'Auto Zoom, Spotlight & Captions',
+                '~No HD exports',
+                '~Recordio watermark',
             ],
             cta: 'Start Free',
             ctaLink: 'https://chrome.google.com/webstore',
@@ -30,33 +29,18 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
         },
         {
             name: 'Pro',
-            price: isAnnual ? '$59' : '$12',
-            period: isAnnual ? 'per year' : 'per month',
-            priceNote: isAnnual ? 'That\'s less than $5/mo' : '$59/yr if billed annually',
-            description: 'For creators who ship often',
+            price: isAnnual ? '$6' : '$12',
+            period: 'per month',
+            priceNote: isAnnual ? 'Billed at $72 annually' : '$6/mo if billed annually',
             features: [
                 'Everything in Free, plus:',
                 'Unlimited 4K exports',
-                'Custom branding & watermarks',
+                'No watermarks',
                 'Priority support',
             ],
             cta: 'Get Pro',
             popular: true,
             style: 'primary' as const,
-        },
-        {
-            name: 'Teams',
-            description: 'For teams that create together',
-            features: [
-                'Everything in Pro, plus:',
-                'Unlimited team members',
-                'Team management dashboard',
-                'Shared presets & templates',
-            ],
-            cta: 'Contact Us',
-            ctaLink: 'mailto:support@recordio.cc',
-            popular: false,
-            style: 'secondary' as const,
         },
     ];
 
@@ -74,9 +58,6 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                     <h2 className="text-4xl md:text-5xl font-bold text-text-highlighted mb-4">
                         Simple, <span className="text-primary-highlighted">Transparent Pricing</span>
                     </h2>
-                    <p className="text-xl text-text-muted max-w-2xl mx-auto">
-                        Every feature on every plan. Pay only for volume.
-                    </p>
                 </div>
 
                 {/* Pricing Cards */}
@@ -84,26 +65,19 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                     {plans.map((plan, index) => (
                         <div
                             key={index}
-                            className={`relative w-[320px] ${plan.popular
+                            className={`relative w-[320px] flex flex-col ${plan.popular
                                 ? 'card-premium ring-2 ring-primary scale-100 md:scale-105'
                                 : 'card-premium'
                                 }`}
                         >
-                            {/* Popular Badge */}
-                            {plan.popular && (
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                                    <div className="px-4 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-text-on-primary text-sm font-bold shadow-lg">
-                                        Most Popular
-                                    </div>
-                                </div>
-                            )}
+
+
 
                             {/* Plan Name */}
                             <div className="text-center mb-6">
                                 <h3 className="text-2xl font-bold text-text-highlighted mb-2">
                                     {plan.name}
                                 </h3>
-                                <p className="text-text-muted text-sm">{plan.description}</p>
                             </div>
 
                             {/* Price */}
@@ -150,67 +124,107 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                                                 }`}
                                         >
                                             Annual
-                                            <span className="ml-1 opacity-80">-59%</span>
+                                            <span className="ml-1 opacity-80">-50%</span>
                                         </button>
                                     </div>
                                 </div>
                             )}
+                            {/* Features + CTA pushed to bottom */}
+                            <div className="mt-auto">
+                                {/* Features */}
+                                <ul className="space-y-4 mb-8">
+                                    {plan.features.map((feature: string, featureIndex: number) => {
+                                        const isNegative = feature.startsWith('~');
+                                        const label = isNegative ? feature.slice(1) : feature;
+                                        return (
+                                            <li key={featureIndex} className="flex items-start">
+                                                {isNegative ? (
+                                                    <svg
+                                                        className="w-5 h-5 mr-3 flex-shrink-0 mt-0.5 text-text-muted opacity-40"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M5 12h14"
+                                                        />
+                                                    </svg>
+                                                ) : (
+                                                    <svg
+                                                        className={`w-5 h-5 mr-3 flex-shrink-0 mt-0.5 ${feature.startsWith('Everything')
+                                                            ? 'text-text-muted'
+                                                            : 'text-secondary'
+                                                            }`}
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M5 13l4 4L19 7"
+                                                        />
+                                                    </svg>
+                                                )}
+                                                <span
+                                                    className={
+                                                        isNegative
+                                                            ? 'text-text-muted opacity-60'
+                                                            : feature.startsWith('Everything')
+                                                                ? 'text-text-muted font-semibold'
+                                                                : 'text-text-main'
+                                                    }
+                                                >
+                                                    {label}
+                                                </span>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
 
-                            {/* Features */}
-                            <ul className="space-y-4 mb-8">
-                                {plan.features.map((feature: string, featureIndex: number) => (
-                                    <li key={featureIndex} className="flex items-start">
-                                        <svg
-                                            className={`w-5 h-5 mr-3 flex-shrink-0 mt-0.5 ${feature.startsWith('Everything')
-                                                ? 'text-text-muted'
-                                                : 'text-secondary'
-                                                }`}
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                        <span
-                                            className={
-                                                feature.startsWith('Everything')
-                                                    ? 'text-text-muted font-semibold'
-                                                    : 'text-text-main'
-                                            }
-                                        >
-                                            {feature}
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {/* CTA Button */}
-                            {plan.ctaLink?.startsWith('mailto') ? (
-                                <a
-                                    href={plan.ctaLink}
-                                    className="btn-secondary w-full block text-center"
-                                >
-                                    {plan.cta}
-                                </a>
-                            ) : (
-                                <button
-                                    onClick={onJoinWaitlist}
-                                    className={`w-full ${plan.style === 'primary'
-                                        ? 'btn-primary'
-                                        : 'btn-secondary'
-                                        }`}
-                                >
-                                    {plan.cta}
-                                </button>
-                            )}
+                                {!plan.popular && (
+                                    <p className="text-center text-text-muted text-xs mb-3">
+                                        Includes 7-day Pro trial — limited time
+                                    </p>
+                                )}
+                                {/* CTA Button */}
+                                {plan.ctaLink?.startsWith('mailto') ? (
+                                    <a
+                                        href={plan.ctaLink}
+                                        className="btn-secondary w-full block text-center"
+                                    >
+                                        {plan.cta}
+                                    </a>
+                                ) : (
+                                    <button
+                                        onClick={onJoinWaitlist}
+                                        className={`w-full ${plan.style === 'primary'
+                                            ? 'btn-primary'
+                                            : 'btn-secondary'
+                                            }`}
+                                    >
+                                        {plan.cta}
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
+
+                {/* Team inquiry note */}
+                <p className="text-center text-text-muted text-sm mt-10">
+                    Looking to get Recordio for your team?{' '}
+                    Contact <a
+                        href="mailto:support@recordio.cc"
+                        className="text-text-highlighted hover:underline"
+                    >
+                        support@recordio.cc
+                    </a>
+                </p>
 
             </div>
         </section>

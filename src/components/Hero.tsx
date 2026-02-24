@@ -74,17 +74,28 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
                             </span>
                         </button>
                         <button
-                            onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => document.getElementById('interactive-demo')?.scrollIntoView({ behavior: 'smooth' })}
                             className="btn-secondary text-lg px-8 py-4"
                         >
                             See It in Action ↓
                         </button>
                     </div>
 
-                    {/* Trust line */}
-                    <p className="text-text-muted text-sm pt-2 hero-entrance hero-entrance-delay-4">
-                        ✦ Your first 4K export is free — no watermark, no catch.
-                    </p>
+                    {/* Launch announcement pill */}
+                    <div
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm hero-entrance hero-entrance-delay-4"
+                        style={{
+                            border: '1px solid rgba(139, 92, 246, 0.3)',
+                            background: 'rgba(139, 92, 246, 0.06)',
+                            boxShadow: '0 0 20px rgba(139, 92, 246, 0.08)',
+                        }}
+                    >
+                        <span>🚀</span>
+                        <span>
+                            <span className="text-text-highlighted font-medium">Limited Time</span>
+                            <span className="text-text-muted"> — Free 7 days of Pro. No credit card · No BS.</span>
+                        </span>
+                    </div>
                 </div>
             </div>
 

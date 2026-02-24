@@ -1,19 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface HeaderProps {
     onJoinWaitlist: () => void;
 }
 
 const Header = ({ onJoinWaitlist }: HeaderProps) => {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
@@ -22,11 +13,10 @@ const Header = ({ onJoinWaitlist }: HeaderProps) => {
 
     return (
         <header
-            className="fixed top-4 left-0 right-0 z-50 px-4"
+            className="absolute top-4 left-0 right-0 z-50 px-4"
         >
             <nav
-                className={`max-w-5xl mx-auto px-6 py-4 rounded-2xl transition-all duration-300 ${isScrolled ? 'glass shadow-lg/20 backdrop-blur-xl' : 'bg-transparent'
-                    }`}
+                className="max-w-5xl mx-auto px-6 py-4 rounded-2xl glass shadow-lg/20 backdrop-blur-xl"
             >
                 <div className="flex items-center justify-between">
                     {/* Logo */}
