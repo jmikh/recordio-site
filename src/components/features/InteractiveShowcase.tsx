@@ -37,7 +37,7 @@ const STEPS = [
 ];
 
 const TOTAL_STEPS = STEPS.length;
-const SCROLL_HEIGHT_VH = 150 * TOTAL_STEPS; // 150vh per step = 1050vh
+const SCROLL_HEIGHT_VH = 120 * TOTAL_STEPS; // 120vh per step
 
 // ── Transition duration for gate-triggered animations ──
 const ANIM_DURATION = '0.7s';
