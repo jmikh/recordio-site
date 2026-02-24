@@ -1,4 +1,5 @@
-
+// @ts-expect-error – kept for future use
+import { useEffect } from 'react';
 
 interface HeaderProps {
     onJoinWaitlist: () => void;

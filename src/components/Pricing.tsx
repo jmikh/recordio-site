@@ -16,11 +16,10 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
             price: 'Free',
             period: 'No credit card',
             features: [
-                'Unlimited 720p 30 FPS exports',
+                'Unlimited 720p exports',
                 'Unlimited projects',
                 'Auto Zoom, Spotlight & Captions',
                 '~No HD exports',
-                '~No 60 FPS',
                 '~Recordio watermark',
             ],
             cta: 'Start Free',
@@ -35,7 +34,7 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
             priceNote: isAnnual ? 'Billed at $72 annually' : '$6/mo if billed annually',
             features: [
                 'Everything in Free, plus:',
-                'Unlimited 4K 60 FPS exports',
+                'Unlimited 4K exports',
                 'No watermarks',
                 'Priority support',
             ],

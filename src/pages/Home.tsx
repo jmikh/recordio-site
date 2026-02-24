@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Header from '../components/Header'
 import Hero from '../components/Hero'
-
+// @ts-expect-error – kept for future use
+import FeatureShowcase from '../components/FeatureShowcase'
 import InteractiveShowcase from '../components/features/InteractiveShowcase'
 import Pricing from '../components/Pricing'
 import FAQ from '../components/FAQ'

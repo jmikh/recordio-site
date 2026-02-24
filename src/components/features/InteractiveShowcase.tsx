@@ -20,8 +20,8 @@ const CUTOUT = {
 };
 
 // ── Layout math ──
-const OLD_TB_PCT = ((233 * 2548 / 2908) / 1600) * 100;    // ~12.75%
-const NEW_TB_PCT = ((74 * 2548 / 2908) / 1600) * 100;     // ~4.05%
+const OLD_TB_PCT = (233 / (233 + 1600)) * 100;    // ~11.73%
+const NEW_TB_PCT = (74 / (74 + 1600)) * 100;      // ~4.05%
 
 // ── Step definitions ──
 const STEPS = [
