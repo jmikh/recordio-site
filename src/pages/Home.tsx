@@ -8,6 +8,7 @@ import Pricing from '../components/Pricing'
 import FAQ from '../components/FAQ'
 import Footer from '../components/Footer'
 import WaitlistModal from '../components/WaitlistModal'
+import SEO from '../components/SEO'
 
 const Home = () => {
     const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
@@ -16,6 +17,7 @@ const Home = () => {
 
     return (
         <>
+            <SEO />
             <Header onJoinWaitlist={openWaitlist} />
             <main>
                 <Hero onJoinWaitlist={openWaitlist} />

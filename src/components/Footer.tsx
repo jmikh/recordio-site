@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface FooterProps {
@@ -14,13 +15,13 @@ const Footer = ({ onJoinWaitlist }: FooterProps) => {
                 <div ref={contentRef} className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8 scroll-reveal">
                     {/* Brand */}
                     <div className="flex flex-col items-center md:items-start gap-3">
-                        <a href="/" className="inline-block">
+                        <Link to="/" className="inline-block">
                             <img
                                 src="/assets/fulllogo-dark.png"
-                                alt="Recordio"
+                                alt="Recordio logo"
                                 className="h-8 w-auto transition-opacity hover:opacity-80"
                             />
-                        </a>
+                        </Link>
                         <p className="text-text-muted text-sm max-w-md text-center md:text-left">
                             Professional screen recordings — polished and ready to share.
                         </p>
@@ -41,8 +42,8 @@ const Footer = ({ onJoinWaitlist }: FooterProps) => {
                         © {currentYear} Recordio. All rights reserved.
                     </div>
                     <div className="flex items-center gap-6 text-sm">
-                        <a href="/privacy" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</a>
-                        <a href="/terms" className="text-text-muted hover:text-primary transition-colors">Terms of Service</a>
+                        <Link to="/privacy" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</Link>
+                        <Link to="/terms" className="text-text-muted hover:text-primary transition-colors">Terms of Service</Link>
                         <a href="mailto:support@recordio.cc" className="text-text-muted hover:text-primary transition-colors">Contact</a>
                     </div>
                 </div>

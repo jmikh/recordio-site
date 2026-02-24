@@ -10,6 +10,7 @@ const BACKGROUND = `${ASSETS}/background.avif`;
 const CALENDAR_EVENT = `${ASSETS}/calendar-event.png`;
 const WEBCAM = `${ASSETS}/webcam-overlay.png`;
 const CAPTIONS = `${ASSETS}/captions-bar.png`;
+const EDITOR = `${ASSETS}/editor.png`;
 
 // ── MacBook cutout coordinates (percentage of frame) ──
 const CUTOUT = {
@@ -32,6 +33,7 @@ const STEPS = [
     { label: 'Camera & Captions', subtitle: 'Add your webcam recording and auto generated subtitles — fully styled.' },
     { label: 'Auto Zoom', subtitle: 'Intelligently zooms into your interactions while keeping surrounding context visible.' },
     { label: 'Auto Spotlight', subtitle: 'Automatically detects and highlights important elements and dims the rest.' },
+    { label: 'Powerful Editor', subtitle: 'Change everything. Add music, effects, captions, and more.' },
 ];
 
 const TOTAL_STEPS = STEPS.length;
@@ -83,6 +85,7 @@ const InteractiveShowcase = () => {
     const hasCamCap = reached(4);     // step 4: camera + captions
     const hasZoom = reached(5);       // step 5: zoom
     const hasSpotlight = reached(6);  // step 6: spotlight
+    const hasEditor = reached(7);     // step 7: editor
 
     // Derived
     const zoomScale = hasZoom ? 1.4 : 1;
@@ -108,10 +111,13 @@ const InteractiveShowcase = () => {
     return (
         <section
             id="interactive-demo"
+            aria-label="Interactive Demo"
             ref={containerRef}
             className="relative"
             style={{ height: `${SCROLL_HEIGHT_VH}vh` }}
         >
+            {/* Visually hidden heading for SEO / accessibility */}
+            <h2 className="sr-only">See How It Works</h2>
             {/* Sticky viewport */}
             <div className="sticky top-0 h-screen flex flex-col items-center overflow-hidden px-6 py-6">
 
@@ -194,6 +200,23 @@ const InteractiveShowcase = () => {
                     style={{ maxWidth: 'min(1100px, calc((100vh - 240px) * 3131 / 1932))' }}
                 >
 
+                    {/* ── Editor screenshot — behind the video frame ── */}
+                    <img
+                        src={EDITOR}
+                        alt="Recordio editor interface"
+                        className="absolute pointer-events-none"
+                        loading="lazy"
+                        style={{
+                            inset: 0,
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain',
+                            zIndex: 0,
+                            opacity: hasEditor ? 1 : 0,
+                            transition: TRANSITION,
+                        }}
+                    />
+
                     {/* ── Outer border frame ── */}
                     <div
                         className="relative w-full mx-auto"
@@ -203,6 +226,8 @@ const InteractiveShowcase = () => {
                             border: hasBg ? '2px solid var(--color-border-highlighted)' : '2px solid transparent',
                             overflow: 'hidden',
                             transition: TRANSITION,
+                            transform: hasEditor ? 'scale(0.63) translate(28%, -15%)' : 'none',
+                            zIndex: 1,
                         }}
                     >
                         {/* ── Zoomable content ── */}
@@ -220,14 +245,16 @@ const InteractiveShowcase = () => {
                                 src={BACKGROUND}
                                 alt=""
                                 className="absolute inset-0 w-full h-full object-cover"
+                                loading="lazy"
                                 style={{ opacity: hasBg ? 1 : 0, transition: TRANSITION }}
                             />
 
                             {/* MacBook frame */}
                             <img
                                 src={MACBOOK}
-                                alt="MacBook frame"
+                                alt="Screen recording displayed in a MacBook device frame"
                                 className="absolute inset-0 w-full h-full object-contain z-20"
+                                loading="lazy"
                                 style={{ opacity: hasMacbook ? 1 : 0, transition: TRANSITION }}
                             />
 
@@ -244,8 +271,9 @@ const InteractiveShowcase = () => {
                                 {/* Old toolbar */}
                                 <img
                                     src={OLD_TOOLBAR}
-                                    alt=""
+                                    alt="Browser toolbar before Recordio cleanup"
                                     className="absolute left-0 w-full z-10"
+                                    loading="lazy"
                                     style={{
                                         top: 0,
                                         height: `${OLD_TB_PCT}%`,
@@ -259,8 +287,9 @@ const InteractiveShowcase = () => {
                                 {/* New toolbar */}
                                 <img
                                     src={NEW_TOOLBAR}
-                                    alt=""
+                                    alt="Clean simplified toolbar by Recordio"
                                     className="absolute left-0 w-full z-10"
+                                    loading="lazy"
                                     style={{
                                         top: 0,
                                         height: `${NEW_TB_PCT}%`,
@@ -274,8 +303,9 @@ const InteractiveShowcase = () => {
                                 {/* Screen content */}
                                 <img
                                     src={SCREEN_NO_TOOLBAR}
-                                    alt="Screen recording"
+                                    alt="Screen recording content"
                                     className="absolute left-0 w-full"
+                                    loading="lazy"
                                     style={{
                                         top: `${tbTopPct}%`,
                                         bottom: 0,
@@ -297,8 +327,9 @@ const InteractiveShowcase = () => {
                                 {/* Calendar event */}
                                 <img
                                     src={CALENDAR_EVENT}
-                                    alt="Calendar event"
+                                    alt="Calendar event highlighted by spotlight"
                                     className="absolute pointer-events-none"
+                                    loading="lazy"
                                     style={{
                                         left: '50%',
                                         top: hasNewTb
@@ -322,8 +353,9 @@ const InteractiveShowcase = () => {
                             {/* Webcam */}
                             <img
                                 src={WEBCAM}
-                                alt="Camera"
+                                alt="Webcam overlay showing camera feed"
                                 className="absolute pointer-events-none"
+                                loading="lazy"
                                 style={{
                                     left: '4%',
                                     bottom: '4%',
@@ -341,8 +373,9 @@ const InteractiveShowcase = () => {
                             {/* Captions */}
                             <img
                                 src={CAPTIONS}
-                                alt="Captions"
+                                alt="Auto-generated captions overlay"
                                 className="absolute pointer-events-none rounded-xl"
+                                loading="lazy"
                                 style={{
                                     left: '50%',
                                     bottom: '4%',

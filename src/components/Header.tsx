@@ -1,16 +1,8 @@
-// @ts-expect-error – kept for future use
-import { useEffect } from 'react';
-
 interface HeaderProps {
     onJoinWaitlist: () => void;
 }
 
 const Header = ({ onJoinWaitlist }: HeaderProps) => {
-
-    const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
-        element?.scrollIntoView({ behavior: 'smooth' });
-    };
 
     return (
         <header
@@ -31,24 +23,24 @@ const Header = ({ onJoinWaitlist }: HeaderProps) => {
 
                     {/* Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
-                        <button
-                            onClick={() => scrollToSection('features')}
+                        <a
+                            href="#features"
                             className="text-text-main hover:text-text-highlighted transition-colors duration-200"
                         >
                             Features
-                        </button>
-                        <button
-                            onClick={() => scrollToSection('pricing')}
+                        </a>
+                        <a
+                            href="#pricing"
                             className="text-text-main hover:text-text-highlighted transition-colors duration-200"
                         >
                             Pricing
-                        </button>
-                        <button
-                            onClick={() => scrollToSection('faq')}
+                        </a>
+                        <a
+                            href="#faq"
                             className="text-text-main hover:text-text-highlighted transition-colors duration-200"
                         >
                             FAQ
-                        </button>
+                        </a>
                     </div>
 
                     {/* CTA Button */}
