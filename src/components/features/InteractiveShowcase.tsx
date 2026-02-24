@@ -302,7 +302,7 @@ const InteractiveShowcase = () => {
                                     style={{
                                         left: '50%',
                                         top: hasNewTb
-                                            ? `${NEW_TB_PCT + ((60 - OLD_TB_PCT) / (100 - OLD_TB_PCT)) * (100 - NEW_TB_PCT)}%`
+                                            ? `52%`
                                             : '60%',
                                         width: `${(898 / 2548) * 100}%`,
                                         transform: `translate(-50%, -50%) scale(${hasSpotlight ? 1.15 : 1})`,
@@ -399,6 +399,7 @@ const InteractiveShowcase = () => {
                         border: '1px solid var(--color-border-muted)',
                         opacity: inSection ? 0.7 : 0,
                         pointerEvents: inSection ? 'auto' : 'none',
+                        cursor: 'pointer',
                     }}
                 >
                     Skip demo ↓
