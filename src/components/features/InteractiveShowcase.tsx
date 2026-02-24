@@ -354,20 +354,49 @@ const InteractiveShowcase = () => {
                     </div>
                 </div>
 
-                {/* ── Skip button — below video ── */}
-                <button
-                    onClick={skipSection}
-                    className="flex-shrink-0 mt-4 text-sm flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-500 hover:opacity-100"
+                {/* ── Bottom bar: horizontal stepper + skip button ── */}
+                <div
+                    className="flex-shrink-0 mt-4 flex items-center justify-center gap-4 transition-opacity duration-500"
                     style={{
-                        color: 'var(--color-text-muted)',
-                        backgroundColor: 'var(--color-surface-secondary)',
-                        border: '1px solid var(--color-border-muted)',
-                        opacity: inSection ? 0.7 : 0,
+                        opacity: inSection ? 1 : 0,
                         pointerEvents: inSection ? 'auto' : 'none',
                     }}
                 >
-                    Skip demo ↓
-                </button>
+                    {/* Horizontal stepper — only below xl */}
+                    <div className="flex xl:hidden items-center gap-1.5">
+                        {STEPS.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => scrollToStep(i)}
+                                className="flex items-center justify-center rounded-full text-xs font-medium transition-all duration-300"
+                                aria-label={STEPS[i].label}
+                                style={{
+                                    width: step === i ? 28 : 8,
+                                    height: 8,
+                                    borderRadius: 4,
+                                    backgroundColor: step >= i
+                                        ? 'var(--color-text-highlighted)'
+                                        : 'var(--color-text-muted)',
+                                    opacity: step >= i ? 1 : 0.3,
+                                }}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Skip button */}
+                    <button
+                        onClick={skipSection}
+                        className="text-sm flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-300 hover:opacity-100"
+                        style={{
+                            color: 'var(--color-text-muted)',
+                            backgroundColor: 'var(--color-surface-secondary)',
+                            border: '1px solid var(--color-border-muted)',
+                            opacity: 0.7,
+                        }}
+                    >
+                        Skip demo ↓
+                    </button>
+                </div>
             </div>
         </section>
     );
