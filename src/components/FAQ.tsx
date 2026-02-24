@@ -12,7 +12,7 @@ const faqs = [
     },
     {
         question: 'Do my recordings leave my computer?',
-        answer: 'No. Your recordings, edits, and projects stay on your computer. Captions are also generated on your device — nothing is uploaded or sent to any server, ever.',
+        answer: 'No. Your recordings, edits, and projects stay on your computer. Captions are also generated locally on your device — your content is never uploaded to any server.',
     },
     {
         question: 'How is Recordio different from other screen recorders?',
