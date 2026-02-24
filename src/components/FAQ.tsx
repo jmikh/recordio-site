@@ -4,14 +4,14 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 const faqs = [
     {
         question: 'Is Recordio free?',
-        answer: 'Yes — record, edit, and export as many videos as you want for free. You get unlimited 720p exports with a small watermark. Additionally, every new user also gets 1 free high-quality export (1080p or 4K) without any watermark.',
+        answer: 'Yes — record, edit, and export as many videos as you want for free. You get unlimited 720p exports with a small Recordio watermark. For a limited time, new users also get a free 1-week Pro trial with unlimited 4K exports and no watermark.',
     },
     {
         question: 'Do I need an account?',
-        answer: 'No. You can record, edit, and export without signing up. An account is only needed to claim your free high-quality export or upgrade to Pro.',
+        answer: 'No. You can record, edit, and export without signing up. An account is only needed to claim your free Pro trial or upgrade to Pro.',
     },
     {
-        question: 'Does my data leave my computer?',
+        question: 'Do my recordings leave my computer?',
         answer: 'No. Your recordings, edits, and projects stay on your computer. Captions are also generated on your device — nothing is uploaded or sent to any server, ever.',
     },
     {
