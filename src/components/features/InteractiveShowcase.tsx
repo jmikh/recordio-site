@@ -150,7 +150,7 @@ const InteractiveShowcase = () => {
                             </span>
                             {/* Number */}
                             <span
-                                className="flex items-center justify-center rounded-full text-xs font-medium transition-all duration-300"
+                                className="flex items-center justify-center rounded-full text-xs font-medium transition-all duration-300 cursor-pointer"
                                 style={{
                                     width: 24,
                                     height: 24,
@@ -172,271 +172,273 @@ const InteractiveShowcase = () => {
                 </nav>
 
 
-                {/* ── Step label — full width ── */}
-                <div className="w-full max-w-[1100px] mx-auto text-center mb-8 flex-shrink-0 h-16 flex flex-col items-center justify-center relative">
-                    {STEPS.map((s, i) => (
-                        <div
-                            key={i}
-                            className="absolute"
-                            style={{
-                                opacity: step === i ? 1 : 0,
-                                transform: step === i ? 'translateY(0)' : 'translateY(12px)',
-                                transition: TRANSITION,
-                                pointerEvents: step === i ? 'auto' : 'none',
-                            }}
-                        >
-                            <h3 className="text-2xl md:text-3xl font-bold text-text-highlighted">
-                                {s.label}
-                            </h3>
-                            <p className="text-text-muted text-lg mt-1">
-                                {s.subtitle}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-
-                {/* ── Video wrapper — width constrained by viewport height to preserve aspect ratio ── */}
-                <div className="relative w-full mx-auto flex-1 min-h-0 flex items-center justify-center"
+                {/* ── Video + controls group — title, video, stepper & skip centered together ── */}
+                <div className="flex-1 min-h-0 w-full flex flex-col items-center justify-center"
                     style={{ maxWidth: 'min(1100px, calc((100vh - 240px) * 3131 / 1932))' }}
                 >
-
-                    {/* ── Editor screenshot — behind the video frame ── */}
-                    <img
-                        src={EDITOR}
-                        alt="Recordio editor interface"
-                        className="absolute pointer-events-none"
-                        loading="lazy"
-                        style={{
-                            inset: 0,
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'contain',
-                            zIndex: 0,
-                            opacity: hasEditor ? 1 : 0,
-                            transition: TRANSITION,
-                        }}
-                    />
-
-                    {/* ── Outer border frame ── */}
-                    <div
-                        className="relative w-full mx-auto"
-                        style={{
-                            aspectRatio: '3131 / 1932',
-                            borderRadius: hasBg ? '16px' : '0px',
-                            border: hasBg ? '2px solid var(--color-border-highlighted)' : '2px solid transparent',
-                            overflow: 'hidden',
-                            transition: TRANSITION,
-                            transform: hasEditor ? 'scale(0.63) translate(28%, -15%)' : 'none',
-                            zIndex: 1,
-                        }}
-                    >
-                        {/* ── Zoomable content ── */}
-                        <div
-                            className="relative w-full h-full"
-                            style={{
-                                transform: `scale(${zoomScale})`,
-                                transformOrigin: 'center center',
-                                transition: `transform 1s ${ANIM_EASING}`,
-                            }}
-                        >
-
-                            {/* Background */}
-                            <img
-                                src={BACKGROUND}
-                                alt=""
-                                className="absolute inset-0 w-full h-full object-cover"
-                                loading="lazy"
-                                style={{ opacity: hasBg ? 1 : 0, transition: TRANSITION }}
-                            />
-
-                            {/* MacBook frame */}
-                            <img
-                                src={MACBOOK}
-                                alt="Screen recording displayed in a MacBook device frame"
-                                className="absolute inset-0 w-full h-full object-contain z-20"
-                                loading="lazy"
-                                style={{ opacity: hasMacbook ? 1 : 0, transition: TRANSITION }}
-                            />
-
-                            {/* ── Screen content area ── */}
+                    {/* ── Step label ── */}
+                    <div className="w-full text-center mb-4 flex-shrink-0 h-16 flex flex-col items-center justify-center relative">
+                        {STEPS.map((s, i) => (
                             <div
-                                className="absolute z-10"
+                                key={i}
+                                className="absolute"
                                 style={{
-                                    left: `${CUTOUT.left}%`,
-                                    top: `${CUTOUT.top}%`,
-                                    width: `${CUTOUT.width}%`,
-                                    height: `${CUTOUT.height}%`,
+                                    opacity: step === i ? 1 : 0,
+                                    transform: step === i ? 'translateY(0)' : 'translateY(12px)',
+                                    transition: TRANSITION,
+                                    pointerEvents: step === i ? 'auto' : 'none',
                                 }}
                             >
-                                {/* Old toolbar */}
+                                <h3 className="text-2xl md:text-3xl font-bold text-text-highlighted">
+                                    {s.label}
+                                </h3>
+                                <p className="text-text-muted text-lg mt-1">
+                                    {s.subtitle}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                    {/* ── Video wrapper ── */}
+                    <div className="relative w-full mx-auto">
+
+                        {/* ── Editor screenshot — behind the video frame ── */}
+                        <img
+                            src={EDITOR}
+                            alt="Recordio editor interface"
+                            className="absolute pointer-events-none"
+                            loading="lazy"
+                            style={{
+                                inset: 0,
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'contain',
+                                zIndex: 0,
+                                opacity: hasEditor ? 1 : 0,
+                                transition: TRANSITION,
+                            }}
+                        />
+
+                        {/* ── Outer border frame ── */}
+                        <div
+                            className="relative w-full mx-auto"
+                            style={{
+                                aspectRatio: '3131 / 1932',
+                                borderRadius: hasBg ? '16px' : '0px',
+                                border: hasBg ? '2px solid var(--color-border-highlighted)' : '2px solid transparent',
+                                overflow: 'hidden',
+                                transition: TRANSITION,
+                                transform: hasEditor ? 'scale(0.63) translate(28%, -15%)' : 'none',
+                                zIndex: 1,
+                            }}
+                        >
+                            {/* ── Zoomable content ── */}
+                            <div
+                                className="relative w-full h-full"
+                                style={{
+                                    transform: `scale(${zoomScale})`,
+                                    transformOrigin: 'center center',
+                                    transition: `transform 1s ${ANIM_EASING}`,
+                                }}
+                            >
+
+                                {/* Background */}
                                 <img
-                                    src={OLD_TOOLBAR}
-                                    alt="Browser toolbar before Recordio cleanup"
-                                    className="absolute left-0 w-full z-10"
+                                    src={BACKGROUND}
+                                    alt=""
+                                    className="absolute inset-0 w-full h-full object-cover"
                                     loading="lazy"
-                                    style={{
-                                        top: 0,
-                                        height: `${OLD_TB_PCT}%`,
-                                        objectFit: 'fill',
-                                        opacity: hasScreen && !hasNewTb ? 1 : 0,
-                                        transform: hasNewTb ? 'translateY(-100%)' : 'translateY(0)',
-                                        transition: TRANSITION,
-                                    }}
+                                    style={{ opacity: hasBg ? 1 : 0, transition: TRANSITION }}
                                 />
 
-                                {/* New toolbar */}
+                                {/* MacBook frame */}
                                 <img
-                                    src={NEW_TOOLBAR}
-                                    alt="Clean simplified toolbar by Recordio"
-                                    className="absolute left-0 w-full z-10"
+                                    src={MACBOOK}
+                                    alt="Screen recording displayed in a MacBook device frame"
+                                    className="absolute inset-0 w-full h-full object-contain z-20"
                                     loading="lazy"
-                                    style={{
-                                        top: 0,
-                                        height: `${NEW_TB_PCT}%`,
-                                        objectFit: 'fill',
-                                        opacity: hasNewTb ? 1 : 0,
-                                        transform: hasNewTb ? 'translateY(0)' : 'translateY(-100%)',
-                                        transition: TRANSITION,
-                                    }}
+                                    style={{ opacity: hasMacbook ? 1 : 0, transition: TRANSITION }}
                                 />
 
-                                {/* Screen content */}
-                                <img
-                                    src={SCREEN_NO_TOOLBAR}
-                                    alt="Screen recording content"
-                                    className="absolute left-0 w-full"
-                                    loading="lazy"
-                                    style={{
-                                        top: `${tbTopPct}%`,
-                                        bottom: 0,
-                                        objectFit: 'fill',
-                                        opacity: hasScreen ? 1 : 0,
-                                        transition: TRANSITION,
-                                    }}
-                                />
-
-                                {/* Spotlight dim overlay */}
+                                {/* ── Screen content area ── */}
                                 <div
-                                    className="absolute inset-0 z-30 pointer-events-none"
+                                    className="absolute z-10"
                                     style={{
-                                        backgroundColor: hasSpotlight ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0)',
-                                        transition: TRANSITION,
+                                        left: `${CUTOUT.left}%`,
+                                        top: `${CUTOUT.top}%`,
+                                        width: `${CUTOUT.width}%`,
+                                        height: `${CUTOUT.height}%`,
                                     }}
-                                />
+                                >
+                                    {/* Old toolbar */}
+                                    <img
+                                        src={OLD_TOOLBAR}
+                                        alt="Browser toolbar before Recordio cleanup"
+                                        className="absolute left-0 w-full z-10"
+                                        loading="lazy"
+                                        style={{
+                                            top: 0,
+                                            height: `${OLD_TB_PCT}%`,
+                                            objectFit: 'fill',
+                                            opacity: hasScreen && !hasNewTb ? 1 : 0,
+                                            transform: hasNewTb ? 'translateY(-100%)' : 'translateY(0)',
+                                            transition: TRANSITION,
+                                        }}
+                                    />
 
-                                {/* Calendar event */}
+                                    {/* New toolbar */}
+                                    <img
+                                        src={NEW_TOOLBAR}
+                                        alt="Clean simplified toolbar by Recordio"
+                                        className="absolute left-0 w-full z-10"
+                                        loading="lazy"
+                                        style={{
+                                            top: 0,
+                                            height: `${NEW_TB_PCT}%`,
+                                            objectFit: 'fill',
+                                            opacity: hasNewTb ? 1 : 0,
+                                            transform: hasNewTb ? 'translateY(0)' : 'translateY(-100%)',
+                                            transition: TRANSITION,
+                                        }}
+                                    />
+
+                                    {/* Screen content */}
+                                    <img
+                                        src={SCREEN_NO_TOOLBAR}
+                                        alt="Screen recording content"
+                                        className="absolute left-0 w-full"
+                                        loading="lazy"
+                                        style={{
+                                            top: `${tbTopPct}%`,
+                                            bottom: 0,
+                                            objectFit: 'fill',
+                                            opacity: hasScreen ? 1 : 0,
+                                            transition: TRANSITION,
+                                        }}
+                                    />
+
+                                    {/* Spotlight dim overlay */}
+                                    <div
+                                        className="absolute inset-0 z-30 pointer-events-none"
+                                        style={{
+                                            backgroundColor: hasSpotlight ? 'rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0)',
+                                            transition: TRANSITION,
+                                        }}
+                                    />
+
+                                    {/* Calendar event */}
+                                    <img
+                                        src={CALENDAR_EVENT}
+                                        alt="Calendar event highlighted by spotlight"
+                                        className="absolute pointer-events-none"
+                                        loading="lazy"
+                                        style={{
+                                            left: '50%',
+                                            top: hasNewTb
+                                                ? `52%`
+                                                : '60%',
+                                            width: `${(898 / 2548) * 100}%`,
+                                            transform: `translate(-50%, -50%) scale(${hasSpotlight ? 1.15 : 1})`,
+                                            opacity: hasScreen ? 1 : 0,
+                                            zIndex: 40,
+                                            filter: hasSpotlight
+                                                ? 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5))'
+                                                : 'drop-shadow(0 0 0 transparent)',
+                                            transition: TRANSITION,
+                                        }}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* ── Webcam + Captions — NOT affected by zoom ── */}
+                            <div className="absolute inset-0 z-30 pointer-events-none">
+                                {/* Webcam */}
                                 <img
-                                    src={CALENDAR_EVENT}
-                                    alt="Calendar event highlighted by spotlight"
+                                    src={WEBCAM}
+                                    alt="Webcam overlay showing camera feed"
                                     className="absolute pointer-events-none"
                                     loading="lazy"
                                     style={{
+                                        left: '4%',
+                                        bottom: '4%',
+                                        width: `${(392 / 3131) * 100}%`,
+                                        borderRadius: '50%',
+                                        border: '2px solid var(--color-border-highlighted)',
+                                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+                                        opacity: hasCamCap ? 1 : 0,
+                                        transform: `scale(${hasCamCap ? 1 / zoomScale : 0.8})`,
+                                        transformOrigin: 'bottom left',
+                                        transition: TRANSITION,
+                                    }}
+                                />
+
+                                {/* Captions */}
+                                <img
+                                    src={CAPTIONS}
+                                    alt="Auto-generated captions overlay"
+                                    className="absolute pointer-events-none rounded-xl"
+                                    loading="lazy"
+                                    style={{
                                         left: '50%',
-                                        top: hasNewTb
-                                            ? `52%`
-                                            : '60%',
-                                        width: `${(898 / 2548) * 100}%`,
-                                        transform: `translate(-50%, -50%) scale(${hasSpotlight ? 1.15 : 1})`,
-                                        opacity: hasScreen ? 1 : 0,
-                                        zIndex: 40,
-                                        filter: hasSpotlight
-                                            ? 'drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5))'
-                                            : 'drop-shadow(0 0 0 transparent)',
+                                        bottom: '4%',
+                                        width: `${(1766 / 3131) * 100}%`,
+                                        transform: `translateX(-50%) translateY(${hasCamCap ? 0 : 20}px)`,
+                                        opacity: hasCamCap ? 1 : 0,
                                         transition: TRANSITION,
                                     }}
                                 />
                             </div>
                         </div>
-
-                        {/* ── Webcam + Captions — NOT affected by zoom ── */}
-                        <div className="absolute inset-0 z-30 pointer-events-none">
-                            {/* Webcam */}
-                            <img
-                                src={WEBCAM}
-                                alt="Webcam overlay showing camera feed"
-                                className="absolute pointer-events-none"
-                                loading="lazy"
-                                style={{
-                                    left: '4%',
-                                    bottom: '4%',
-                                    width: `${(392 / 3131) * 100}%`,
-                                    borderRadius: '50%',
-                                    border: '2px solid var(--color-border-highlighted)',
-                                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
-                                    opacity: hasCamCap ? 1 : 0,
-                                    transform: `scale(${hasCamCap ? 1 / zoomScale : 0.8})`,
-                                    transformOrigin: 'bottom left',
-                                    transition: TRANSITION,
-                                }}
-                            />
-
-                            {/* Captions */}
-                            <img
-                                src={CAPTIONS}
-                                alt="Auto-generated captions overlay"
-                                className="absolute pointer-events-none rounded-xl"
-                                loading="lazy"
-                                style={{
-                                    left: '50%',
-                                    bottom: '4%',
-                                    width: `${(1766 / 3131) * 100}%`,
-                                    transform: `translateX(-50%) translateY(${hasCamCap ? 0 : 20}px)`,
-                                    opacity: hasCamCap ? 1 : 0,
-                                    transition: TRANSITION,
-                                }}
-                            />
-                        </div>
                     </div>
-                </div>
 
-                {/* ── Inline stepper — horizontal, below video, visible < xl ── */}
-                <nav
-                    className="flex xl:hidden items-center justify-center gap-2 flex-shrink-0 mt-3 transition-opacity duration-500"
-                    style={{
-                        opacity: inSection ? 1 : 0,
-                        pointerEvents: inSection ? 'auto' : 'none',
-                    }}
-                >
-                    {STEPS.map((s, i) => (
-                        <button
-                            key={i}
-                            onClick={() => scrollToStep(i)}
-                            aria-label={s.label}
-                            className="flex items-center justify-center rounded-full text-xs font-medium transition-all duration-300"
-                            style={{
-                                width: 28,
-                                height: 28,
-                                backgroundColor: step === i
-                                    ? 'var(--color-text-highlighted)'
-                                    : 'transparent',
-                                color: step === i
-                                    ? '#0a0a0a'
-                                    : step >= i
+                    {/* ── Inline stepper — horizontal, below video, visible < xl ── */}
+                    <nav
+                        className="flex xl:hidden items-center justify-center gap-2 flex-shrink-0 mt-3 transition-opacity duration-500"
+                        style={{
+                            opacity: inSection ? 1 : 0,
+                            pointerEvents: inSection ? 'auto' : 'none',
+                        }}
+                    >
+                        {STEPS.map((s, i) => (
+                            <button
+                                key={i}
+                                onClick={() => scrollToStep(i)}
+                                aria-label={s.label}
+                                className="flex items-center justify-center rounded-full text-xs font-medium transition-all duration-300 cursor-pointer"
+                                style={{
+                                    width: 28,
+                                    height: 28,
+                                    backgroundColor: step === i
                                         ? 'var(--color-text-highlighted)'
-                                        : 'var(--color-text-muted)',
-                                opacity: step >= i ? 1 : 0.4,
-                            }}
-                        >
-                            {i + 1}
-                        </button>
-                    ))}
-                </nav>
+                                        : 'transparent',
+                                    color: step === i
+                                        ? '#0a0a0a'
+                                        : step >= i
+                                            ? 'var(--color-text-highlighted)'
+                                            : 'var(--color-text-muted)',
+                                    opacity: step >= i ? 1 : 0.4,
+                                }}
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
+                    </nav>
 
-                {/* ── Skip button — below video ── */}
-                <button
-                    onClick={skipSection}
-                    className="flex-shrink-0 mt-4 text-sm flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-500 hover:opacity-100"
-                    style={{
-                        color: 'var(--color-text-muted)',
-                        backgroundColor: 'var(--color-surface-secondary)',
-                        border: '1px solid var(--color-border-muted)',
-                        opacity: inSection ? 0.7 : 0,
-                        pointerEvents: inSection ? 'auto' : 'none',
-                        cursor: 'pointer',
-                    }}
-                >
-                    Skip demo ↓
-                </button>
+                    {/* ── Skip button — below video ── */}
+                    <button
+                        onClick={skipSection}
+                        className="flex-shrink-0 mt-3 text-sm flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-500 hover:opacity-100"
+                        style={{
+                            color: 'var(--color-text-muted)',
+                            backgroundColor: 'var(--color-surface-secondary)',
+                            border: '1px solid var(--color-border-muted)',
+                            opacity: inSection ? 0.7 : 0,
+                            pointerEvents: inSection ? 'auto' : 'none',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        Skip demo ↓
+                    </button>
+                </div>
             </div>
         </section>
     );
