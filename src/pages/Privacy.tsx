@@ -5,7 +5,7 @@ const Privacy = () => {
         <>
             <SEO
                 title="Privacy Policy — Recordio"
-                description="Learn how Recordio handles your data. Recordings stay on your device. No uploads, no tracking."
+                description="Learn how Recordio handles your data. Recordings stay on your device by default. Shared videos are hosted on Cloudflare Stream."
                 path="/privacy"
             />
             <div className="min-h-screen relative overflow-hidden">
@@ -28,7 +28,7 @@ const Privacy = () => {
                             Privacy <span className="gradient-text">Policy</span>
                         </h1>
                         <p className="text-xl text-text-muted">
-                            Last updated: January 21, 2026
+                            Last updated: February 25, 2026
                         </p>
                     </div>
 
@@ -164,7 +164,7 @@ const Privacy = () => {
                                         </div>
                                         <div>
                                             <h3 className="text-text-highlighted font-semibold">Local Browser Storage</h3>
-                                            <p className="text-text-main">Your video recordings and projects are stored <strong>locally</strong> in your browser's IndexedDB and never leave your device unless you choose to export them.</p>
+                                            <p className="text-text-main">Your video recordings and projects are stored <strong>locally</strong> in your browser's IndexedDB by default. If you use the shareable links feature, your video is uploaded to <strong>Cloudflare Stream</strong> for hosting and delivery. You can delete a shared video at any time, which permanently removes it from Cloudflare's servers.</p>
                                         </div>
                                     </div>
 
@@ -285,6 +285,10 @@ const Privacy = () => {
                                     <li className="flex items-start">
                                         <span className="text-secondary mr-2">•</span>
                                         <span><strong className="text-text-highlighted">Hugging Face:</strong> AI model hosting for captions. Models are downloaded to your browser and run locally — your audio is never sent to external servers</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <span className="text-secondary mr-2">•</span>
+                                        <span><strong className="text-text-highlighted">Cloudflare Stream:</strong> Video hosting and delivery for shared videos. Only videos you explicitly share via shareable links are uploaded. You can delete a shared video at any time to permanently remove it from Cloudflare</span>
                                     </li>
                                 </ul>
                             </div>

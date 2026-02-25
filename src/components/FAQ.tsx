@@ -12,7 +12,7 @@ const faqs = [
     },
     {
         question: 'Do my recordings leave my computer?',
-        answer: 'No. Your recordings, edits, and projects stay on your computer. Captions are also generated locally on your device — your content is never uploaded to any server.',
+        answer: 'By default, no. Your recordings, edits, and projects stay on your computer. Captions are also generated locally on your device — your content is never uploaded to any server. If you use the shareable links feature, your video is uploaded to Cloudflare Stream for hosting. You can delete it at any time and it will be permanently removed.',
     },
     {
         question: 'How is Recordio different from other screen recorders?',

@@ -28,7 +28,7 @@ const Terms = () => {
                             Terms of <span className="gradient-text">Service</span>
                         </h1>
                         <p className="text-xl text-text-muted">
-                            Last updated: January 21, 2026
+                            Last updated: February 25, 2026
                         </p>
                     </div>
 
@@ -167,7 +167,7 @@ const Terms = () => {
                                 <a href="/privacy" className="text-primary-highlighted hover:text-secondary underline">
                                     Privacy Policy
                                 </a>
-                                . Video recordings and projects are stored locally in your browser's storage and are not uploaded to or stored on Recordio's servers.
+                                . Video recordings and projects are stored locally in your browser's storage by default. If you use the shareable links feature, your video is uploaded to Cloudflare Stream for hosting and delivery. You can delete a shared video at any time, which permanently removes it from Cloudflare's servers.
                             </p>
                         </section>
 

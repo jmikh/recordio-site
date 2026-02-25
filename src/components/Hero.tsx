@@ -60,7 +60,7 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
 
                     {/* Description */}
                     <p className="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto leading-relaxed hero-entrance hero-entrance-delay-3">
-                        Other recorders just follow your cursor. Recordio understands the page. Precise zoom, automatic spotlight, and studio-quality video in seconds.
+                        Other recorders just follow your cursor. Recordio understands your page. Precise zoom, automatic spotlight, and studio-quality video in seconds.
                     </p>
 
                     {/* CTA Buttons */}
