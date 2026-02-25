@@ -177,7 +177,7 @@ const InteractiveShowcase = () => {
                     style={{ maxWidth: 'min(1100px, calc((100vh - 240px) * 3131 / 1932))' }}
                 >
                     {/* ── Step label ── */}
-                    <div className="w-full text-center mb-4 flex-shrink-0 h-16 flex flex-col items-center justify-center relative">
+                    <div className="w-full text-center mb-6 flex-shrink-0 h-24 flex flex-col items-center justify-center relative">
                         {STEPS.map((s, i) => (
                             <div
                                 key={i}
