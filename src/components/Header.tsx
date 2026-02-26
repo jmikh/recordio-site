@@ -15,7 +15,7 @@ const Header = ({ onJoinWaitlist }: HeaderProps) => {
                     {/* Logo */}
                     <a href="/" className="flex items-center">
                         <img
-                            src="/assets/fulllogo-dark.png"
+                            src="/assets/fulllogo-dark.webp"
                             alt="Recordio"
                             className="h-8 w-auto transition-opacity hover:opacity-80"
                         />

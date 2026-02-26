@@ -17,7 +17,7 @@ const Footer = ({ onJoinWaitlist }: FooterProps) => {
                     <div className="flex flex-col items-center md:items-start gap-3">
                         <Link to="/" className="inline-block">
                             <img
-                                src="/assets/fulllogo-dark.png"
+                                src="/assets/fulllogo-dark.webp"
                                 alt="Recordio logo"
                                 className="h-8 w-auto transition-opacity hover:opacity-80"
                             />

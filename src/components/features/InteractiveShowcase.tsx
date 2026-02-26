@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 
 // ── Asset paths ──
 const ASSETS = '/assets/interactive-demo';
-const SCREEN_NO_TOOLBAR = `${ASSETS}/screen-without-toolbar.png`;
-const OLD_TOOLBAR = `${ASSETS}/old-toolbar.png`;
-const NEW_TOOLBAR = `${ASSETS}/new-toolbar.png`;
-const MACBOOK = `${ASSETS}/macbook.png`;
+const SCREEN_NO_TOOLBAR = `${ASSETS}/screen-without-toolbar.webp`;
+const OLD_TOOLBAR = `${ASSETS}/old-toolbar.webp`;
+const NEW_TOOLBAR = `${ASSETS}/new-toolbar.webp`;
+const MACBOOK = `${ASSETS}/macbook.webp`;
 const BACKGROUND = `${ASSETS}/background.avif`;
-const CALENDAR_EVENT = `${ASSETS}/calendar-event.png`;
-const WEBCAM = `${ASSETS}/webcam-overlay.png`;
-const CAPTIONS = `${ASSETS}/captions-bar.png`;
-const EDITOR = `${ASSETS}/editor.png`;
+const CALENDAR_EVENT = `${ASSETS}/calendar-event.webp`;
+const WEBCAM = `${ASSETS}/webcam-overlay.webp`;
+const CAPTIONS = `${ASSETS}/captions-bar.webp`;
+const EDITOR = `${ASSETS}/editor.webp`;
 
 // ── MacBook cutout coordinates (percentage of frame) ──
 const CUTOUT = {
