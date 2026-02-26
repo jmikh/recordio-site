@@ -1,3 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color System */
+  --color-primary: oklch(0.58 0.19 290);
+  --color-primary-muted: oklch(0.48 0.15 290);
+  --color-primary-highlighted: oklch(0.68 0.21 290);
+  --color-primary-disabled: oklch(0.38 0.12 290);
+  --color-secondary: oklch(0.80 0.15 78);
+  --color-secondary-highlighted: oklch(0.85 0.18 78);
+
+  /* Surface Colors */
+  --color-surface-body: rgb(9, 1, 20);
+  --color-surface: oklch(0.16 0.03 290);
+  --color-surface-raised: oklch(0.20 0.04 290);
+  --color-surface-overlay: oklch(0.24 0.05 290);
+
+  /* Text Colors */
+  --color-text-highlighted: oklch(0.95 0.01 290);
+  --color-text-main: oklch(0.88 0.02 290);
+  --color-text-muted: oklch(0.65 0.03 290);
+  --color-text-on-primary: oklch(0.98 0.01 290);
+  --color-text-on-secondary: oklch(0.12 0.02 78);
+
+  /* Border Colors */
+  --color-border: oklch(0.30 0.05 290);
+  --color-border-highlighted: oklch(0.40 0.08 290);
+
+  /* Font Family */
+  --font-family-sans: 'Satoshi', system-ui, -apple-system, sans-serif;
+}
+
 /* Satoshi — self-hosted */
 @font-face {
   font-family: 'Satoshi';
@@ -29,38 +61,6 @@
   font-weight: 900;
   font-display: swap;
   font-style: normal;
-}
-
-@import "tailwindcss";
-
-@theme {
-  /* Color System */
-  --color-primary: oklch(0.58 0.19 290);
-  --color-primary-muted: oklch(0.48 0.15 290);
-  --color-primary-highlighted: oklch(0.68 0.21 290);
-  --color-primary-disabled: oklch(0.38 0.12 290);
-  --color-secondary: oklch(0.80 0.15 78);
-  --color-secondary-highlighted: oklch(0.85 0.18 78);
-
-  /* Surface Colors */
-  --color-surface-body: rgb(9, 1, 20);
-  --color-surface: oklch(0.16 0.03 290);
-  --color-surface-raised: oklch(0.20 0.04 290);
-  --color-surface-overlay: oklch(0.24 0.05 290);
-
-  /* Text Colors */
-  --color-text-highlighted: oklch(0.95 0.01 290);
-  --color-text-main: oklch(0.88 0.02 290);
-  --color-text-muted: oklch(0.65 0.03 290);
-  --color-text-on-primary: oklch(0.98 0.01 290);
-  --color-text-on-secondary: oklch(0.12 0.02 78);
-
-  /* Border Colors */
-  --color-border: oklch(0.30 0.05 290);
-  --color-border-highlighted: oklch(0.40 0.08 290);
-
-  /* Font Family */
-  --font-family-sans: 'Satoshi', system-ui, -apple-system, sans-serif;
 }
 
 * {
