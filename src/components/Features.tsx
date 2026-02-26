@@ -1,4 +1,5 @@
 import { trackInstallExtension } from '../utils/analytics';
+import { getCWSLink } from '../utils/constants';
 
 const Features = () => {
     const features = [
@@ -110,7 +111,7 @@ const Features = () => {
                 <div className="mt-16 text-center">
                     <p className="text-text-muted mb-6">Ready to transform your screen recordings?</p>
                     <a
-                        href="https://chrome.google.com/webstore"
+                        href={getCWSLink('features')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary inline-block"

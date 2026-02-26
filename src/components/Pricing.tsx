@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { getCWSLink } from '../utils/constants';
 
 interface PricingProps {
     onJoinWaitlist: () => void;
@@ -23,7 +24,7 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                 '~Recordio watermark',
             ],
             cta: 'Start Free',
-            ctaLink: 'https://chrome.google.com/webstore',
+            ctaLink: getCWSLink('pricing'),
             popular: false,
             style: 'secondary' as const,
         },

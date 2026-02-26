@@ -1,4 +1,5 @@
 import { trackInstallExtension } from '../utils/analytics';
+import { getCWSLink } from '../utils/constants';
 
 const steps = [
     {
@@ -84,7 +85,7 @@ const HowItWorks = () => {
                 {/* CTA */}
                 <div className="mt-16 text-center">
                     <a
-                        href="https://chrome.google.com/webstore"
+                        href={getCWSLink('how-it-works')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary inline-block text-lg px-8 py-4"
