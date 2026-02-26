@@ -36,7 +36,7 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                 'Everything in Free, plus:',
                 'Unlimited 4K exports',
                 'No watermarks',
-                '5 Shareable links',
+                '10 Shareable links',
                 'Priority support',
             ],
             cta: 'Get Pro',
