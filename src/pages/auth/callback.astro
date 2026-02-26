@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthHandler from '../../components/AuthHandler';
+---
+
+<BaseLayout
+    title="Signing In — Recordio"
+    description="Completing authentication..."
+    path="/auth/callback"
+>
+    <AuthHandler client:load />
+</BaseLayout>

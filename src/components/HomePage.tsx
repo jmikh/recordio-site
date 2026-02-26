@@ -1,27 +1,22 @@
 import { useState } from 'react';
-import Header from '../components/Header'
-import Hero from '../components/Hero'
-// @ts-expect-error – kept for future use
-import FeatureShowcase from '../components/FeatureShowcase'
-import InteractiveShowcase from '../components/features/InteractiveShowcase'
-import Pricing from '../components/Pricing'
-import FAQ from '../components/FAQ'
-import Footer from '../components/Footer'
-import WaitlistModal from '../components/WaitlistModal'
-import SEO from '../components/SEO'
+import Header from './Header';
+import Hero from './Hero';
+import InteractiveShowcase from './features/InteractiveShowcase';
+import Pricing from './Pricing';
+import FAQ from './FAQ';
+import Footer from './Footer';
+import WaitlistModal from './WaitlistModal';
 
-const Home = () => {
+const HomePage = () => {
     const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
     const openWaitlist = () => setIsWaitlistOpen(true);
     const closeWaitlist = () => setIsWaitlistOpen(false);
 
     return (
         <>
-            <SEO />
             <Header onJoinWaitlist={openWaitlist} />
             <main>
                 <Hero onJoinWaitlist={openWaitlist} />
-                {/* <FeatureShowcase /> */}
                 <InteractiveShowcase />
                 <Pricing onJoinWaitlist={openWaitlist} />
                 <FAQ />
@@ -32,4 +27,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;

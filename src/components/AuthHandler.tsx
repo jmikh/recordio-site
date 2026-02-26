@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 /**
@@ -7,26 +6,22 @@ import { supabase } from '../lib/supabase';
  * After Supabase processes the auth tokens from the URL hash,
  * redirects to the path specified in the ?redirect= param (or /).
  */
-const AuthCallback = () => {
-    const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
-
+const AuthHandler = () => {
     useEffect(() => {
         const handleCallback = async () => {
-            // Supabase auto-detects the hash fragment and sets the session
             const { error } = await supabase.auth.getSession();
 
             if (error) {
                 console.error('[AuthCallback] Error getting session:', error.message);
             }
 
-            // Redirect to the original destination
+            const searchParams = new URLSearchParams(window.location.search);
             const redirectPath = searchParams.get('redirect') || '/';
-            navigate(redirectPath, { replace: true });
+            window.location.href = redirectPath;
         };
 
         handleCallback();
-    }, [navigate, searchParams]);
+    }, []);
 
     return (
         <div className="min-h-screen flex items-center justify-center">
@@ -38,4 +33,4 @@ const AuthCallback = () => {
     );
 };
 
-export default AuthCallback;
+export default AuthHandler;

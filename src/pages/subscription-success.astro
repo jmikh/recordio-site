@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubscriptionSuccess from '../components/SubscriptionSuccess';
+---
+
+<BaseLayout
+    title="Welcome to Recordio Pro! — Recordio"
+    description="Your subscription has been successfully activated."
+    path="/subscription-success"
+>
+    <SubscriptionSuccess client:load />
+</BaseLayout>
