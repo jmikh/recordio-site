@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from './Header';
 import Hero from './Hero';
+import BeforeAfterComparison from './BeforeAfterComparison';
 import InteractiveShowcase from './features/InteractiveShowcase';
 import Pricing from './Pricing';
 import FAQ from './FAQ';
@@ -17,6 +18,7 @@ const HomePage = () => {
             <Header onJoinWaitlist={openWaitlist} />
             <main>
                 <Hero onJoinWaitlist={openWaitlist} />
+                <BeforeAfterComparison />
                 <InteractiveShowcase />
                 <Pricing onJoinWaitlist={openWaitlist} />
                 <FAQ />

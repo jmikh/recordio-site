@@ -473,3 +473,53 @@ html {
     transform: scale(1);
   }
 }
+
+/* ===== Before / After Video Comparison ===== */
+
+.before-after-video {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  transition: border-color 0.3s ease;
+}
+
+.before-after-video--after {
+  border-color: color-mix(in oklch, var(--color-primary) 50%, var(--color-border));
+}
+
+.before-after-label {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+.before-after-label--before {
+  background-color: var(--color-surface-raised);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.before-after-label--after {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-highlighted));
+  color: var(--color-text-on-primary);
+  box-shadow: 0 0 12px color-mix(in oklch, var(--color-primary) 40%, transparent);
+}
+
+.callout-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background-color: color-mix(in oklch, var(--color-surface-overlay), transparent 20%);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in oklch, var(--color-primary) 30%, var(--color-border));
+  box-shadow: 0 0 20px color-mix(in oklch, var(--color-primary) 8%, transparent);
+}

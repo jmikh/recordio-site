@@ -215,6 +215,8 @@ const InteractiveShowcase = () => {
                                 zIndex: 0,
                                 opacity: hasEditor ? 1 : 0,
                                 transition: TRANSITION,
+                                border: '2px solid #3b3b3bff',
+                                borderRadius: '12px',
                             }}
                         />
 
@@ -227,7 +229,7 @@ const InteractiveShowcase = () => {
                                 border: hasBg ? '2px solid var(--color-border-highlighted)' : '2px solid transparent',
                                 overflow: 'hidden',
                                 transition: TRANSITION,
-                                transform: hasEditor ? 'scale(0.63) translate(28%, -15%)' : 'none',
+                                transform: hasEditor ? 'scale(0.65) translate(25%, -12%)' : 'none',
                                 zIndex: 1,
                             }}
                         >
