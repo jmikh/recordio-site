@@ -1,7 +1,5 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { getCWSLink } from '../utils/constants';
-
-const SplineBackground = lazy(() => import('./SplineBackground'));
 
 const AUTO_POLISHED_TEXT = 'Auto-Polished.';
 
@@ -14,10 +12,7 @@ const Hero = () => {
 
     return (
         <section aria-label="Hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-            {/* Spline Background — lazy-loaded to avoid blocking initial paint */}
-            <Suspense fallback={null}>
-                <SplineBackground />
-            </Suspense>
+            {/* Spline Background is rendered as a separate client:idle Astro island */}
 
             {/* Animated Background (Optional overlay) */}
             <div className="absolute inset-0 animated-gradient opacity-30 mix-blend-overlay pointer-events-none" />

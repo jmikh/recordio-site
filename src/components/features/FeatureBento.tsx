@@ -52,7 +52,7 @@ const features: BentoFeature[] = [
     {
         title: 'Hotkey Overlays',
         description: 'Show keyboard shortcuts during playback.',
-        image: `${ASSETS}/hotkeys.png`,
+        image: `${ASSETS}/hotkeys.webp`,
     },
 ];
 

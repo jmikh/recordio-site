@@ -1,11 +1,25 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useAuth } from '../hooks/useAuth';
+import { useCheckout } from '../hooks/useCheckout';
 import { getCWSLink } from '../utils/constants';
 
 const Pricing = () => {
     const [isAnnual, setIsAnnual] = useState(true);
     const headerRef = useScrollReveal();
     const cardsRef = useScrollReveal();
+    const { user, loading: authLoading, signInWithGoogle } = useAuth();
+    const { startCheckout, checkoutLoading } = useCheckout();
+
+    const handleGetPro = async () => {
+        if (!user) {
+            // Not logged in — sign in first, then redirect back to pricing
+            await signInWithGoogle('/#pricing');
+            return;
+        }
+        // Logged in — start checkout
+        await startCheckout(user, isAnnual ? 'yearly' : 'monthly');
+    };
 
     const plans = [
         {
@@ -190,22 +204,20 @@ const Pricing = () => {
                                     </p>
                                 )}
                                 {/* CTA Button */}
-                                {plan.ctaLink?.startsWith('mailto') ? (
-                                    <a
-                                        href={plan.ctaLink}
-                                        className="btn-secondary w-full block text-center"
+                                {plan.popular ? (
+                                    <button
+                                        onClick={handleGetPro}
+                                        disabled={checkoutLoading || authLoading}
+                                        className="btn-primary w-full block text-center disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
-                                        {plan.cta}
-                                    </a>
+                                        {checkoutLoading ? 'Redirecting…' : authLoading ? 'Loading…' : plan.cta}
+                                    </button>
                                 ) : (
                                     <a
                                         href={getCWSLink('pricing')}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`w-full block text-center ${plan.style === 'primary'
-                                            ? 'btn-primary'
-                                            : 'btn-secondary'
-                                            }`}
+                                        className="btn-secondary w-full block text-center"
                                     >
                                         {plan.cta}
                                     </a>
