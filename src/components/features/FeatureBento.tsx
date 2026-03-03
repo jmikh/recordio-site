@@ -1,60 +1,107 @@
 import { useEffect, useRef } from 'react';
 
-const ASSETS = '/assets/features';
-
-interface BentoFeature {
+interface FeatureCategory {
     title: string;
-    description: string;
-    image: string;
+    items: string[];
 }
 
-/*
- * Order is intentional — CSS columns flow top-to-bottom, left-to-right.
- * With 3 columns and 7 items the browser distributes ~3-2-2:
- *   Col 1: Camera (tall), AutoCut (short), Toolbar (short)
- *   Col 2: Music (v.tall), Captions (short)
- *   Col 3: Export (medium), Hotkeys (medium)
- */
-const features: BentoFeature[] = [
-    /* ── Column 1 ── */
+const featureCategories: FeatureCategory[] = [
     {
-        title: 'Dynamic Camera',
-        description: 'Full-screen intros, outros, and transitions.',
-        image: `${ASSETS}/camera-dynamic.webp`,
+        title: 'Auto Zoom',
+        items: [
+            'Automatically zooms to the element you interact with',
+            'Each zoom is its own editable block — move, resize, adjust timing',
+            'No tangled keyframes — every zoom is independent',
+        ],
     },
     {
-        title: 'AutoCut',
-        description: 'Remove silence and dead air automatically.',
-        image: `${ASSETS}/autocut.webp`,
+        title: 'Auto Spotlight',
+        items: [
+            'Dims the background to draw viewer attention',
+            'Elevates and expands the spotlighted element',
+            'Fully editable blocks, just like zoom',
+        ],
     },
     {
-        title: 'Toolbar Settings',
-        description: 'Custom toolbar, dark mode, shortened URLs.',
-        image: `${ASSETS}/toolbar.webp`,
-    },
-    /* ── Column 2 ── */
-    {
-        title: 'Background Music',
-        description: 'Built-in presets or upload your own tracks.',
-        image: `${ASSETS}/music.webp`,
-    },
-    {
-        title: 'Auto Captions',
-        description: 'Local AI — your audio never leaves your device.',
-        image: `${ASSETS}/captions.webp`,
-    },
-    /* ── Column 3 ── */
-    {
-        title: 'Download or Share',
-        description: 'Download locally or publish shareable links with viewership analytics.',
-        image: `${ASSETS}/export.webp`,
+        title: 'Webcam',
+        items: [
+            'Full control over layout, size, and position',
+            'Auto shrink during zoom',
+            'Dynamic layout — full-screen intros, outros, or hide it entirely',
+            'Feathering — blend the camera into the screen behind it',
+            'Shadow borders and glow effects',
+        ],
     },
     {
-        title: 'Hotkey Overlays',
-        description: 'Show keyboard shortcuts during playback.',
-        image: `${ASSETS}/hotkeys.webp`,
+        title: 'Backgrounds',
+        items: [
+            'Customizable gradient colors',
+            'Solid background colors',
+            'Presets from a beautiful built-in library',
+            'Upload your own image',
+            'Blur the background image',
+        ],
+    },
+    {
+        title: 'Click & Keystroke Effects',
+        items: [
+            'Visual mouse-click and drag effects',
+            'Sound effects for clicks and drags',
+            'Multiple visual styles with full color control',
+            'Keyboard shortcut overlays (⌘C, ⌘V, etc.)',
+            'Customizable sizing and positioning',
+        ],
+    },
+    {
+        title: 'Captions',
+        items: [
+            'Auto-generated from your audio — edit if the AI gets it wrong',
+            'Control size, font, and colors',
+            'Word-by-word highlighting as you speak',
+        ],
+    },
+    {
+        title: 'Music',
+        items: [
+            'Choose from a built-in preset library',
+            'Upload your own tracks',
+        ],
+    },
+    {
+        title: 'Export & Sharing',
+        items: [
+            'Download locally or publish a shareable link',
+            'Viewership analytics on published links',
+            '4K resolution at up to 60 fps',
+            'Multiple aspect ratios for any platform',
+        ],
+    },
+    {
+        title: 'Recording Tools',
+        items: [
+            'Crop the recorded area',
+            'Blur sensitive information during recording',
+        ],
     },
 ];
+
+const Check = () => (
+    <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        style={{ flexShrink: 0, marginTop: '0.15em' }}
+    >
+        <path
+            d="M3.5 8.5L6.5 11.5L12.5 4.5"
+            stroke="var(--color-primary)"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+    </svg>
+);
 
 const FeatureBento = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -94,7 +141,7 @@ const FeatureBento = () => {
                 style={{
                     position: 'relative',
                     zIndex: 1,
-                    maxWidth: '72rem',
+                    maxWidth: '64rem',
                     marginInline: 'auto',
                     paddingInline: '1.5rem',
                 }}
@@ -116,67 +163,59 @@ const FeatureBento = () => {
                     </p>
                 </div>
 
-                {/* Masonry via CSS columns */}
-                <div className="bento-masonry">
-                    {features.map((f) => (
-                        <div key={f.title} className="bento-card">
-                            <div>
-                                <h3
-                                    style={{
-                                        fontSize: '1.1rem',
-                                        fontWeight: 700,
-                                        color: 'var(--color-text-highlighted)',
-                                        marginBottom: '0.25rem',
-                                    }}
-                                >
-                                    {f.title}
-                                </h3>
-                                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
-                                    {f.description}
-                                </p>
-                            </div>
-                            <img
-                                src={f.image}
-                                alt={f.title}
-                                loading="lazy"
+                {/* Feature list — multi-column flow */}
+                <div className="feature-checklist">
+                    {featureCategories.map((cat) => (
+                        <div key={cat.title} className="feature-checklist-group">
+                            <h3
                                 style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    borderRadius: '0.5rem',
-                                    display: 'block',
+                                    fontSize: '0.8rem',
+                                    fontWeight: 700,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.08em',
+                                    color: 'var(--color-primary-highlighted)',
+                                    marginBottom: '0.75rem',
                                 }}
-                            />
+                            >
+                                {cat.title}
+                            </h3>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                {cat.items.map((item) => (
+                                    <li
+                                        key={item}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'flex-start',
+                                            gap: '0.6rem',
+                                            fontSize: '0.9rem',
+                                            color: 'var(--color-text-main)',
+                                            lineHeight: 1.55,
+                                            paddingBlock: '0.3rem',
+                                        }}
+                                    >
+                                        <Check />
+                                        {item}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     ))}
                 </div>
 
                 <style>{`
-                    .bento-masonry {
+                    .feature-checklist {
                         columns: 3;
-                        column-gap: 0.75rem;
+                        column-gap: 3rem;
                     }
-                    .bento-card {
+                    .feature-checklist-group {
                         break-inside: avoid;
-                        margin-bottom: 0.75rem;
-                        background-color: var(--color-surface-raised);
-                        border: 1px solid var(--color-border);
-                        border-radius: 1rem;
-                        padding: 1.25rem;
-                        display: inline-flex;
-                        flex-direction: column;
-                        gap: 0.75rem;
-                        width: 100%;
-                        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-                    }
-                    .bento-card:hover {
-                        border-color: var(--color-border-highlighted);
-                        box-shadow: 0 0 24px color-mix(in oklch, var(--color-primary) 15%, transparent);
+                        margin-bottom: 2rem;
                     }
                     @media (max-width: 900px) {
-                        .bento-masonry { columns: 2; }
+                        .feature-checklist { columns: 2; column-gap: 2.5rem; }
                     }
                     @media (max-width: 560px) {
-                        .bento-masonry { columns: 1; }
+                        .feature-checklist { columns: 1; }
                     }
                 `}</style>
             </div>
