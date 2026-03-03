@@ -83,6 +83,14 @@ const featureCategories: FeatureCategory[] = [
             'Blur sensitive information during recording',
         ],
     },
+    {
+        title: 'Custom Toolbar',
+        items: [
+            'Hides bookmarks and tabs behind one clean toolbar',
+            'Shortens URLs to just the website name to avoid clutter',
+            'Choose between dark mode and light mode',
+        ],
+    },
 ];
 
 const Check = () => (
