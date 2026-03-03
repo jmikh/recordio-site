@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { getCWSLink } from '../utils/constants';
 
-interface PricingProps {
-    onJoinWaitlist: () => void;
-}
-
-const Pricing = ({ onJoinWaitlist }: PricingProps) => {
+const Pricing = () => {
     const [isAnnual, setIsAnnual] = useState(true);
     const headerRef = useScrollReveal();
     const cardsRef = useScrollReveal();
@@ -202,15 +198,17 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                                         {plan.cta}
                                     </a>
                                 ) : (
-                                    <button
-                                        onClick={onJoinWaitlist}
-                                        className={`w-full ${plan.style === 'primary'
+                                    <a
+                                        href={getCWSLink('pricing')}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`w-full block text-center ${plan.style === 'primary'
                                             ? 'btn-primary'
                                             : 'btn-secondary'
                                             }`}
                                     >
                                         {plan.cta}
-                                    </button>
+                                    </a>
                                 )}
                             </div>
                         </div>

@@ -3,7 +3,7 @@
  * All CWS links on the site should use getCWSLink() to include UTM tracking.
  */
 const CWS_BASE_URL =
-    'https://chromewebstore.google.com/detail/recordio/nihlpdaihoacconboieolmmnpnnhedan';
+    'https://chromewebstore.google.com/detail/recordio-smart-screen-rec/bbcdpipjplklaneplfmlhhibnllhinii';
 
 /**
  * Returns the CWS listing URL with UTM parameters for source attribution.

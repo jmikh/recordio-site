@@ -1,8 +1,6 @@
-interface HeaderProps {
-    onJoinWaitlist: () => void;
-}
+import { getCWSLink } from '../utils/constants';
 
-const Header = ({ onJoinWaitlist }: HeaderProps) => {
+const Header = () => {
 
     return (
         <header
@@ -44,12 +42,14 @@ const Header = ({ onJoinWaitlist }: HeaderProps) => {
                     </div>
 
                     {/* CTA Button */}
-                    <button
-                        onClick={onJoinWaitlist}
+                    <a
+                        href={getCWSLink('header')}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="btn-primary inline-flex items-center space-x-2"
                     >
-                        <span>Join Waitlist</span>
-                    </button>
+                        <span>+ Install Extension</span>
+                    </a>
                 </div>
             </nav>
         </header >

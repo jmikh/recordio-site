@@ -1,14 +1,11 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
+import { getCWSLink } from '../utils/constants';
 
 const SplineBackground = lazy(() => import('./SplineBackground'));
 
-interface HeroProps {
-    onJoinWaitlist: () => void;
-}
-
 const AUTO_POLISHED_TEXT = 'Auto-Polished.';
 
-const Hero = ({ onJoinWaitlist }: HeroProps) => {
+const Hero = () => {
     const [typewriterKey, setTypewriterKey] = useState(0);
 
     useEffect(() => {
@@ -65,14 +62,16 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 hero-entrance hero-entrance-delay-4">
-                        <button
-                            onClick={onJoinWaitlist}
+                        <a
+                            href={getCWSLink('hero')}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="btn-primary text-lg px-8 py-4"
                         >
                             <span className="flex items-center space-x-2">
-                                <span>Join the Waitlist</span>
+                                <span>Install Extension — It's Free</span>
                             </span>
-                        </button>
+                        </a>
                         <button
                             onClick={() => document.getElementById('before-after')?.scrollIntoView({ behavior: 'smooth' })}
                             className="btn-secondary text-lg px-8 py-4"

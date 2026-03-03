@@ -1,10 +1,7 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { getCWSLink } from '../utils/constants';
 
-interface FooterProps {
-    onJoinWaitlist: () => void;
-}
-
-const Footer = ({ onJoinWaitlist }: FooterProps) => {
+const Footer = () => {
     const currentYear = new Date().getFullYear();
     const contentRef = useScrollReveal();
 
@@ -27,12 +24,14 @@ const Footer = ({ onJoinWaitlist }: FooterProps) => {
                     </div>
 
                     {/* CTA */}
-                    <button
-                        onClick={onJoinWaitlist}
+                    <a
+                        href={getCWSLink('footer')}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="btn-primary flex-shrink-0"
                     >
-                        Join Waitlist
-                    </button>
+                        Install Extension
+                    </a>
                 </div>
 
                 {/* Bottom */}
@@ -52,4 +51,3 @@ const Footer = ({ onJoinWaitlist }: FooterProps) => {
 };
 
 export default Footer;
-
