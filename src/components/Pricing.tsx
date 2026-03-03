@@ -30,7 +30,7 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
         },
         {
             name: 'Pro',
-            price: isAnnual ? '$6' : '$12',
+            price: isAnnual ? '$6' : '$15',
             period: 'per month',
             priceNote: isAnnual ? 'Billed at $72 annually' : '$6/mo if billed annually',
             features: [
@@ -126,7 +126,7 @@ const Pricing = ({ onJoinWaitlist }: PricingProps) => {
                                                 }`}
                                         >
                                             Annual
-                                            <span className="ml-1 opacity-80">-50%</span>
+                                            <span className="ml-1 opacity-80">-60%</span>
                                         </button>
                                     </div>
                                 </div>
