@@ -1,5 +1,6 @@
-import { Component, useState, type ReactNode, type ErrorInfo } from 'react';
-import Spline from '@splinetool/react-spline';
+import { Component, useState, useEffect, lazy, Suspense, type ReactNode, type ErrorInfo } from 'react';
+
+const LazySpline = lazy(() => import('@splinetool/react-spline'));
 
 /** Catches WebGL / Three.js errors so the rest of the page still renders. */
 class WebGLErrorBoundary extends Component<
@@ -33,11 +34,20 @@ function isWebGLAvailable(): boolean {
     }
 }
 
+const LOAD_DELAY_MS = 3000;
+
 const SplineBackground = () => {
     const [loaded, setLoaded] = useState(false);
+    const [ready, setReady] = useState(false);
 
-    // Skip entirely when WebGL is known to be unavailable.
-    if (!isWebGLAvailable()) return null;
+    // Delay loading by 5s so it never appears in the critical path
+    useEffect(() => {
+        if (!isWebGLAvailable()) return;
+        const timer = setTimeout(() => setReady(true), LOAD_DELAY_MS);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (!ready) return null;
 
     return (
         <WebGLErrorBoundary>
@@ -48,10 +58,12 @@ const SplineBackground = () => {
                     transition: 'opacity 0.8s ease-in',
                 }}
             >
-                <Spline
-                    scene="https://prod.spline.design/BtxLdaGccGqNFp2Q/scene.splinecode"
-                    onLoad={() => setLoaded(true)}
-                />
+                <Suspense fallback={null}>
+                    <LazySpline
+                        scene="https://prod.spline.design/BtxLdaGccGqNFp2Q/scene.splinecode"
+                        onLoad={() => setLoaded(true)}
+                    />
+                </Suspense>
             </div>
         </WebGLErrorBoundary>
     );
