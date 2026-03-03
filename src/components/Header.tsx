@@ -24,7 +24,13 @@ const Header = ({ onJoinWaitlist }: HeaderProps) => {
                     {/* Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
                         <a
-                            href="#features"
+                            href="#interactive-demo"
+                            className="text-text-main hover:text-text-highlighted transition-colors duration-200"
+                        >
+                            Demo
+                        </a>
+                        <a
+                            href="#all-features"
                             className="text-text-main hover:text-text-highlighted transition-colors duration-200"
                         >
                             Features
@@ -34,12 +40,6 @@ const Header = ({ onJoinWaitlist }: HeaderProps) => {
                             className="text-text-main hover:text-text-highlighted transition-colors duration-200"
                         >
                             Pricing
-                        </a>
-                        <a
-                            href="#faq"
-                            className="text-text-main hover:text-text-highlighted transition-colors duration-200"
-                        >
-                            FAQ
                         </a>
                     </div>
 

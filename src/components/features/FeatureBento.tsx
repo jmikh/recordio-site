@@ -45,7 +45,7 @@ const features: BentoFeature[] = [
     },
     /* ── Column 3 ── */
     {
-        title: 'Download & Share',
+        title: 'Download or Share',
         description: 'Download locally or publish shareable links with viewership analytics.',
         image: `${ASSETS}/export.webp`,
     },
