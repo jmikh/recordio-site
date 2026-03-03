@@ -91,6 +91,14 @@ const featureCategories: FeatureCategory[] = [
             'Choose between dark mode and light mode',
         ],
     },
+    {
+        title: 'Screen Styling',
+        items: [
+            'Add padding around the screen recording',
+            'Colored borders or shadows',
+            'Choose from a set of device frames',
+        ],
+    },
 ];
 
 const Check = () => (
