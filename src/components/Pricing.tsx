@@ -1,25 +1,13 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { useAuth } from '../hooks/useAuth';
-import { useCheckout } from '../hooks/useCheckout';
 import { getCWSLink } from '../utils/constants';
+
+const APP_URL = 'https://app.recordio.cc';
 
 const Pricing = () => {
     const [isAnnual, setIsAnnual] = useState(true);
     const headerRef = useScrollReveal();
     const cardsRef = useScrollReveal();
-    const { user, loading: authLoading, signInWithGoogle } = useAuth();
-    const { startCheckout, checkoutLoading } = useCheckout();
-
-    const handleGetPro = async () => {
-        if (!user) {
-            // Not logged in — sign in first, then redirect back to pricing
-            await signInWithGoogle('/#pricing');
-            return;
-        }
-        // Logged in — start checkout
-        await startCheckout(user, isAnnual ? 'yearly' : 'monthly');
-    };
 
     const plans = [
         {
@@ -205,13 +193,12 @@ const Pricing = () => {
                                 )}
                                 {/* CTA Button */}
                                 {plan.popular ? (
-                                    <button
-                                        onClick={handleGetPro}
-                                        disabled={checkoutLoading || authLoading}
-                                        className="btn-primary w-full block text-center disabled:opacity-60 disabled:cursor-not-allowed"
+                                    <a
+                                        href={`${APP_URL}/?checkout=${isAnnual ? 'yearly' : 'monthly'}`}
+                                        className="btn-primary w-full block text-center"
                                     >
-                                        {checkoutLoading ? 'Redirecting…' : authLoading ? 'Loading…' : plan.cta}
-                                    </button>
+                                        {plan.cta}
+                                    </a>
                                 ) : (
                                     <a
                                         href={getCWSLink('pricing')}
