@@ -226,7 +226,7 @@ const InteractiveShowcase = () => {
                             style={{
                                 aspectRatio: '3131 / 1932',
                                 borderRadius: hasBg ? '16px' : '0px',
-                                border: hasBg ? '2px solid var(--color-border-highlighted)' : '2px solid transparent',
+                                border: hasBg && !hasEditor ? '2px solid var(--color-border-highlighted)' : '2px solid transparent',
                                 overflow: 'hidden',
                                 transition: TRANSITION,
                                 transform: hasEditor ? 'scale(0.65) translate(25%, -12%)' : 'none',

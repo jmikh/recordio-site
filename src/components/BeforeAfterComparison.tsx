@@ -58,6 +58,7 @@ const BeforeAfterComparison = () => {
 
     return (
         <section
+            id="before-after"
             ref={sectionRef}
             className="scroll-reveal relative py-24 md:py-32 overflow-hidden"
         >

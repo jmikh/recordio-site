@@ -74,7 +74,7 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
                             </span>
                         </button>
                         <button
-                            onClick={() => document.getElementById('interactive-demo')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => document.getElementById('before-after')?.scrollIntoView({ behavior: 'smooth' })}
                             className="btn-secondary text-lg px-8 py-4"
                         >
                             See It in Action ↓
