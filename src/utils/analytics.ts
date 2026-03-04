@@ -31,3 +31,25 @@ export const trackInstallExtension = (location: string) => {
         value: 1,
     });
 };
+
+/**
+ * Track Get Pro button click
+ */
+export const trackGetPro = (billingPeriod: 'yearly' | 'monthly') => {
+    trackEvent('get_pro_click', {
+        event_category: 'conversion',
+        event_label: billingPeriod,
+        value: 1,
+    });
+};
+
+/**
+ * Track FAQ question expanded
+ */
+export const trackFaqExpanded = (question: string) => {
+    trackEvent('faq_expanded', {
+        event_category: 'engagement',
+        event_label: question,
+        value: 1,
+    });
+};

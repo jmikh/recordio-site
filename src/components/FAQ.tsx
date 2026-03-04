@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { trackFaqExpanded } from '../utils/analytics';
 
 const faqs = [
     {
@@ -30,7 +31,11 @@ const FAQ = () => {
     const accordionRef = useScrollReveal<HTMLDListElement>();
 
     const toggle = (index: number) => {
-        setOpenIndex(openIndex === index ? null : index);
+        const isOpening = openIndex !== index;
+        setOpenIndex(isOpening ? index : null);
+        if (isOpening) {
+            trackFaqExpanded(faqs[index].question);
+        }
     };
 
     return (

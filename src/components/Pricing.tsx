@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { getCWSLink } from '../utils/constants';
+import { trackGetPro } from '../utils/analytics';
 
 const APP_URL = 'https://app.recordio.cc';
 
@@ -28,9 +29,9 @@ const Pricing = () => {
         },
         {
             name: 'Pro',
-            price: isAnnual ? '$6' : '$15',
-            period: 'per month',
-            priceNote: isAnnual ? 'Billed at $72 annually' : '$6/mo if billed annually',
+            price: isAnnual ? '$4' : '$15',
+            period: '/mo',
+            priceNote: isAnnual ? 'Billed at $48 annually' : '$4/mo if billed annually',
             features: [
                 'Everything in Free, plus:',
                 'Unlimited 4K exports',
@@ -124,7 +125,7 @@ const Pricing = () => {
                                                 }`}
                                         >
                                             Annual
-                                            <span className="ml-1 opacity-80">-60%</span>
+                                            <span className="ml-1 opacity-80">-73%</span>
                                         </button>
                                     </div>
                                 </div>
@@ -196,6 +197,7 @@ const Pricing = () => {
                                     <a
                                         href={`${APP_URL}/?checkout=${isAnnual ? 'yearly' : 'monthly'}`}
                                         className="btn-primary w-full block text-center"
+                                        onClick={() => trackGetPro(isAnnual ? 'yearly' : 'monthly')}
                                     >
                                         {plan.cta}
                                     </a>
