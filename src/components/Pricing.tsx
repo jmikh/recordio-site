@@ -30,8 +30,8 @@ const Pricing = () => {
         {
             name: 'Pro',
             price: isAnnual ? '$4' : '$15',
-            period: '/mo',
-            priceNote: isAnnual ? 'Billed at $48 annually' : '$4/mo if billed annually',
+            period: '/ month',
+            priceNote: isAnnual ? 'Billed at $48 annually' : '$4/month if billed annually',
             features: [
                 'Everything in Free, plus:',
                 'Unlimited 4K exports',
@@ -89,8 +89,13 @@ const Pricing = () => {
                                             <span className="text-5xl font-bold text-primary-highlighted">
                                                 {(plan as any).price}
                                             </span>
+                                            {plan.popular && (plan as any).period && (
+                                                <span className="text-xl text-text-muted ml-1">{(plan as any).period}</span>
+                                            )}
                                         </div>
-                                        <div className="text-text-muted mt-2">{(plan as any).period}</div>
+                                        {!plan.popular && (plan as any).period && (
+                                            <div className="text-text-muted mt-2">{(plan as any).period}</div>
+                                        )}
                                         {'priceNote' in plan && (plan as any).priceNote && (
                                             <div className="text-text-muted text-xs mt-1">{(plan as any).priceNote}</div>
                                         )}
