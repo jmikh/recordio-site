@@ -35,7 +35,7 @@ export const trackInstallExtension = (location: string) => {
 /**
  * Track Get Pro button click
  */
-export const trackGetPro = (billingPeriod: 'yearly' | 'monthly') => {
+export const trackGetPro = (billingPeriod: 'yearly' | 'monthly' | 'lifetime') => {
     trackEvent('get_pro_click', {
         event_category: 'conversion',
         event_label: billingPeriod,

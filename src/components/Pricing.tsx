@@ -6,7 +6,7 @@ import { trackGetPro } from '../utils/analytics';
 const APP_URL = 'https://app.recordio.cc';
 
 const Pricing = () => {
-    const [isAnnual, setIsAnnual] = useState(true);
+    const [isAnnual, setIsAnnual] = useState(false);
     const headerRef = useScrollReveal();
     const cardsRef = useScrollReveal();
 
@@ -29,18 +29,32 @@ const Pricing = () => {
         },
         {
             name: 'Pro',
-            price: isAnnual ? '$4' : '$15',
-            period: '/ month',
-            priceNote: isAnnual ? 'Billed at $48 annually' : '$4/month if billed annually',
+            price: isAnnual ? '$48' : '$15',
+            period: isAnnual ? '/ year' : '/ month',
+            priceNote: isAnnual ? 'Just $4/month' : '$4/month if billed annually',
             features: [
                 'Everything in Free, plus:',
                 'Unlimited 4K exports',
                 'No watermarks',
                 'Shareable links',
-                'Priority support',
             ],
             cta: 'Get Pro',
             popular: true,
+            style: 'primary' as const,
+        },
+        {
+            name: 'Lifetime',
+            price: '$89',
+            period: 'one-time',
+            features: [
+                'Everything in Pro',
+                'Pay once, yours forever',
+                'Lifetime updates',
+                'Priority support',
+            ],
+            cta: 'Get Lifetime',
+            popular: false,
+            bestValue: true,
             style: 'primary' as const,
         },
     ];
@@ -192,7 +206,7 @@ const Pricing = () => {
                                     })}
                                 </ul>
 
-                                {!plan.popular && (
+                                {!plan.popular && !(plan as any).bestValue && (
                                     <p className="text-center text-text-muted text-xs mb-3">
                                         Includes 7-day Pro trial — limited time
                                     </p>
@@ -203,6 +217,14 @@ const Pricing = () => {
                                         href={`${APP_URL}/?checkout=${isAnnual ? 'yearly' : 'monthly'}`}
                                         className="btn-primary w-full block text-center"
                                         onClick={() => trackGetPro(isAnnual ? 'yearly' : 'monthly')}
+                                    >
+                                        {plan.cta}
+                                    </a>
+                                ) : (plan as any).bestValue ? (
+                                    <a
+                                        href={`${APP_URL}/?checkout=lifetime`}
+                                        className="btn-primary w-full block text-center"
+                                        onClick={() => trackGetPro('lifetime')}
                                     >
                                         {plan.cta}
                                     </a>
