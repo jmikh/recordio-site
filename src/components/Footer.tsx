@@ -40,6 +40,7 @@ const Footer = () => {
                         © {currentYear} Recordio. All rights reserved.
                     </div>
                     <div className="flex items-center gap-6 text-sm">
+                        <a href="/blog/best-screen-recorders-2026" className="text-text-muted hover:text-primary transition-colors">Best Screen Recorders in 2026</a>
                         <a href="/privacy" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</a>
                         <a href="/terms" className="text-text-muted hover:text-primary transition-colors">Terms of Service</a>
                         <a href="mailto:support@recordio.cc" className="text-text-muted hover:text-primary transition-colors">Contact</a>

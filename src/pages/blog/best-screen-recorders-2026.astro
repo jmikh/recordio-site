@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogArticle from "../../components/blog/BlogArticle";
+import Footer from "../../components/Footer";
+---
+
+<BaseLayout
+    title="Best Screen Recorders in 2026: Recordio vs Screen Studio vs Focusee"
+    description="An honest comparison of the best screen recorders in 2026. See how Recordio's DOM-aware auto-zoom and 3D spotlight compare to Screen Studio and Focusee."
+    path="/blog/best-screen-recorders-2026"
+>
+    <main class="pt-12 md:pt-20">
+        <BlogArticle client:load />
+    </main>
+    <Footer client:visible />
+</BaseLayout>
+
+<script type="application/ld+json" is:inline>
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Best Screen Recorders in 2026: An Honest Comparison",
+        "description": "An honest comparison of the best screen recorders in 2026. See how Recordio's DOM-aware auto-zoom and 3D spotlight compare to Screen Studio and Focusee.",
+        "datePublished": "2026-03-05",
+        "dateModified": "2026-03-05",
+        "author": {
+            "@type": "Person",
+            "name": "John Mikhail",
+            "jobTitle": "Founder of Recordio",
+            "description": "MIT grad, previously at Google and Mixpanel, tech and AI enthusiast"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Recordio",
+            "url": "https://recordio.cc"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://recordio.cc/blog/best-screen-recorders-2026"
+        }
+    }
+</script>
