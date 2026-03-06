@@ -1,7 +1,9 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { getCWSLink } from '../utils/constants';
+import { trackInstallExtension } from '../utils/analytics';
 
-const Footer = () => {
+const Footer = ({ source = 'footer' }: { source?: string }) => {
+    const ctaSource = source === 'footer' ? 'footer' : `${source}_footer`;
     const currentYear = new Date().getFullYear();
     const contentRef = useScrollReveal();
 
@@ -25,10 +27,11 @@ const Footer = () => {
 
                     {/* CTA */}
                     <a
-                        href={getCWSLink('footer')}
+                        href={getCWSLink(ctaSource)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary flex-shrink-0"
+                        onClick={() => trackInstallExtension(ctaSource)}
                     >
                         Install Extension
                     </a>
