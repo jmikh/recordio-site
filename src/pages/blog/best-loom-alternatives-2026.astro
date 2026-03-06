@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LoomAlternativesArticle from "../../components/blog/LoomAlternativesArticle";
+import Footer from "../../components/Footer";
+---
+
+<BaseLayout
+    title="Best Loom Alternatives in 2026: Why Teams Are Switching"
+    description="Looking for a Loom alternative? See why teams are switching to Recordio for studio-quality recordings, shareable links with analytics, and no per-seat pricing."
+    path="/blog/best-loom-alternatives-2026"
+>
+    <main class="pt-12 md:pt-20">
+        <LoomAlternativesArticle client:load />
+    </main>
+    <Footer source="blog_best-loom-alternatives-2026" client:visible />
+</BaseLayout>
+
+<script type="application/ld+json" is:inline>
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Best Loom Alternatives in 2026: Why Teams Are Switching",
+        "description": "Looking for a Loom alternative? See why teams are switching to Recordio for studio-quality recordings, shareable links with analytics, and no per-seat pricing.",
+        "datePublished": "2026-03-05",
+        "dateModified": "2026-03-05",
+        "author": {
+            "@type": "Person",
+            "name": "John Mikhail",
+            "jobTitle": "Founder of Recordio",
+            "description": "MIT grad, previously at Google and Mixpanel, tech and AI enthusiast"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Recordio",
+            "url": "https://recordio.cc"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://recordio.cc/blog/best-loom-alternatives-2026"
+        }
+    }
+</script>

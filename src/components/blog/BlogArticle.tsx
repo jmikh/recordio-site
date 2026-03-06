@@ -3,6 +3,11 @@ import BeforeAfterComparison from '../BeforeAfterComparison';
 const BlogArticle = () => {
     return (
         <article className="prose max-w-3xl mx-auto px-6 py-12 md:py-20">
+            {/* ── Back link ── */}
+            <a href="/blog" className="not-prose inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors mb-8">
+                ← Back to Blog
+            </a>
+
             {/* ── Blog Hero ── */}
             <header className="mb-12 text-center">
                 <p className="text-primary-highlighted text-sm font-semibold uppercase tracking-wider mb-4">
@@ -294,8 +299,8 @@ const BlogArticle = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Monthly</td><td>$15/mo</td><td>$29/mo</td><td>$19.99/mo</td></tr>
-                        <tr><td>Annual</td><td>$48/yr ($4/mo)</td><td>$108/yr ($9/mo)</td><td>$49.99/yr (standard)</td></tr>
+                        <tr><td>Monthly</td><td>$15/mo</td><td>$29/mo</td><td>$19.99/mo (without AI)</td></tr>
+                        <tr><td>Annual</td><td>$48/yr ($4/mo)</td><td>$108/yr ($9/mo)</td><td>$49.99/yr (without AI)</td></tr>
                         <tr><td>Free Tier Exports</td><td>Yes (720p, watermark)</td><td>No</td><td>No</td></tr>
                         <tr><td>Shareable Links</td><td>Yes (with analytics)</td><td>Yes</td><td>Yes</td></tr>
                         <tr><td>Platforms</td><td>Chrome (any OS)</td><td>macOS only</td><td>Windows, macOS</td></tr>

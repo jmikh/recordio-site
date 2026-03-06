@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/Footer";
+---
+
+<BaseLayout
+    title="Blog | Recordio"
+    description="Insights, comparisons, and tips on screen recording from the Recordio team."
+    path="/blog"
+>
+    <main class="pt-12 md:pt-20 pb-20">
+        <div class="max-w-3xl mx-auto px-6">
+            <header class="mb-12 text-center">
+                <h1
+                    class="text-3xl md:text-5xl font-bold text-text-highlighted leading-tight mb-4"
+                >
+                    Blog
+                </h1>
+                <p class="text-text-muted text-base">
+                    Insights, comparisons, and tips on screen recording.
+                </p>
+            </header>
+
+            <div class="grid gap-6">
+                <!-- Article 1 -->
+                <a
+                    href="/blog/best-screen-recorders-2026"
+                    class="group block rounded-2xl border border-border bg-surface-overlay/40 hover:border-primary/40 transition-all duration-300 overflow-hidden"
+                >
+                    <div class="p-6 md:p-8">
+                        <p
+                            class="text-primary-highlighted text-xs font-semibold uppercase tracking-wider mb-2"
+                        >
+                            Comparison
+                        </p>
+                        <h2
+                            class="text-xl md:text-2xl font-bold text-text-highlighted group-hover:text-primary transition-colors mb-3"
+                        >
+                            Best Screen Recorders in 2026: An Honest Comparison
+                        </h2>
+                        <p class="text-text-muted text-sm leading-relaxed mb-4">
+                            How Recordio's DOM-aware auto-zoom and 3D spotlight
+                            compare to Screen Studio and Focusee. An honest look
+                            at features, pricing, and where each tool shines.
+                        </p>
+                        <span class="text-text-muted text-xs"
+                            >March 2026 · 10 min read</span
+                        >
+                    </div>
+                </a>
+
+                <!-- Article 2 -->
+                <a
+                    href="/blog/best-loom-alternatives-2026"
+                    class="group block rounded-2xl border border-border bg-surface-overlay/40 hover:border-primary/40 transition-all duration-300 overflow-hidden"
+                >
+                    <div class="p-6 md:p-8">
+                        <p
+                            class="text-primary-highlighted text-xs font-semibold uppercase tracking-wider mb-2"
+                        >
+                            Comparison
+                        </p>
+                        <h2
+                            class="text-xl md:text-2xl font-bold text-text-highlighted group-hover:text-primary transition-colors mb-3"
+                        >
+                            Best Loom Alternatives in 2026: Why Teams Are
+                            Switching
+                        </h2>
+                        <p class="text-text-muted text-sm leading-relaxed mb-4">
+                            Loom pioneered async video, but in 2026 your
+                            recordings can look a lot better without the
+                            per-seat pricing. Studio-quality output, shareable
+                            links, and no per-seat cost.
+                        </p>
+                        <span class="text-text-muted text-xs"
+                            >March 2026 · 8 min read</span
+                        >
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+    <Footer client:visible />
+</BaseLayout>
