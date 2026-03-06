@@ -33,10 +33,11 @@ const LoomAlternativesArticle = () => {
                 fairly basic recording tool.
             </p>
             <p>
-                The bigger issue is that Loom has never really invested in making recordings look good.
-                Since most Loom videos are shared internally, there's little incentive to add
-                post-production polish. What you record is what you get: raw screen footage with your
-                webcam in a circle. No zoom, no spotlight effects, no way to clean up the output.
+                The bigger issue is quality. Loom has started adding AI-powered zoom and manual
+                spotlight tools, but the results are basic: cursor-following zoom that doesn't understand
+                what you're interacting with, and shapes you have to draw yourself. Since most Loom
+                videos are shared internally, there's been little incentive to go further. What you
+                record is still mostly what you get.
             </p>
             <p>
                 We're the team behind <strong>Recordio</strong>, so we're biased. But we built it
@@ -188,16 +189,16 @@ const LoomAlternativesArticle = () => {
                     </thead>
                     <tbody>
                         <tr><td>Shareable Links</td><td>Yes, with viewership analytics</td><td>Yes</td></tr>
-                        <tr><td>Auto Zoom</td><td>DOM-aware (reads page structure)</td><td>No</td></tr>
-                        <tr><td>Auto Spotlight</td><td>Yes (3D elevation)</td><td>No</td></tr>
+                        <tr><td>Auto Zoom</td><td>DOM-aware (reads page structure)</td><td>Cursor-based (AI)</td></tr>
+                        <tr><td>Auto Zoom Editable</td><td>Yes (keyframe system)</td><td>No</td></tr>
+                        <tr><td>Auto Spotlight</td><td>Automatic, 3D elevation</td><td>Manual shapes (circles, arrows)</td></tr>
                         <tr><td>Device Frames</td><td>Yes</td><td>No</td></tr>
                         <tr><td>Smart AutoCut</td><td>Voice + interaction aware</td><td>No</td></tr>
                         <tr><td>Simplified Toolbar</td><td>Yes</td><td>No</td></tr>
-                        <tr><td>Auto Captions</td><td>Yes (local, 99 languages)</td><td>Basic</td></tr>
+                        <tr><td>Auto Captions</td><td>Yes (local, 99 languages)</td><td>Yes (cloud, 50+ languages)</td></tr>
                         <tr><td>Word-by-Word Highlighting</td><td>Yes</td><td>No</td></tr>
-                        <tr><td>Custom Backgrounds</td><td>Yes</td><td>No</td></tr>
+                        <tr><td>Custom Backgrounds</td><td>Yes</td><td>Yes</td></tr>
                         <tr><td>Local Processing</td><td>Yes (fully in-browser)</td><td>No (cloud-only)</td></tr>
-
                         <tr><td>Library Management</td><td>Coming soon</td><td>Yes</td></tr>
                         <tr><td>Permissions</td><td>Coming soon</td><td>Yes</td></tr>
                     </tbody>
