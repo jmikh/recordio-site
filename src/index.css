@@ -377,6 +377,24 @@ html {
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1), 0 0 30px rgba(157, 78, 221, 0.4);
 }
 
+/* Masonry grid — CSS columns, no JS */
+.masonry-grid {
+  columns: 1;
+  column-gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    columns: 3;
+  }
+}
+
 /* Animated gradient background */
 .animated-gradient {
   background: linear-gradient(-45deg,

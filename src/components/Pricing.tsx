@@ -95,11 +95,25 @@ const Pricing = () => {
                                 </h3>
                             </div>
 
+                            {/* Launch Sale badge — Lifetime only */}
+                            {(plan as any).bestValue && (
+                                <div className="flex justify-center mb-3">
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary border border-secondary/25">
+                                        🚀 Launch Sale
+                                    </span>
+                                </div>
+                            )}
+
                             {/* Price */}
                             <div className="text-center mb-4">
                                 {'price' in plan && (plan as any).price ? (
                                     <>
-                                        <div className="flex items-baseline justify-center">
+                                        <div className="flex items-baseline justify-center gap-2">
+                                            {(plan as any).bestValue && (
+                                                <span className="text-2xl text-text-muted line-through opacity-50">
+                                                    $119
+                                                </span>
+                                            )}
                                             <span className="text-5xl font-bold text-primary-highlighted">
                                                 {(plan as any).price}
                                             </span>
