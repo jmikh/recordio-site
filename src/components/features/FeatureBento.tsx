@@ -141,10 +141,10 @@ const FeatureBento = () => {
     return (
         <section
             id="all-features"
+            className="section-panel"
             style={{
                 paddingTop: '6rem',
                 paddingBottom: '6rem',
-                backgroundColor: 'var(--color-surface-body)',
                 position: 'relative',
                 overflow: 'hidden',
             }}

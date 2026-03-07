@@ -395,6 +395,20 @@ html {
   }
 }
 
+/* Section panel — alternating raised sections with rounded corners */
+.section-panel {
+  background-color: oklch(0.20 0.04 290);
+  border-radius: 2rem;
+  margin-inline: 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-panel {
+    margin-inline: 1.5rem;
+    border-radius: 2.5rem;
+  }
+}
+
 /* Animated gradient background */
 .animated-gradient {
   background: linear-gradient(-45deg,

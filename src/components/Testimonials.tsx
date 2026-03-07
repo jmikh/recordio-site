@@ -67,7 +67,7 @@ const Testimonials = () => {
     const gridRef = useScrollReveal();
 
     return (
-        <section id="testimonials" className="py-24 bg-surface relative overflow-hidden">
+        <section id="testimonials" className="py-24 bg-surface-body relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute inset-0">
                 <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />

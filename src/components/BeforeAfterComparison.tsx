@@ -60,7 +60,7 @@ const BeforeAfterComparison = () => {
         <section
             id="before-after"
             ref={sectionRef}
-            className="scroll-reveal relative py-24 md:py-32 overflow-hidden"
+            className="section-panel scroll-reveal relative py-24 md:py-32 overflow-hidden"
         >
             {/* Background glow */}
             <div className="absolute inset-0 pointer-events-none">
