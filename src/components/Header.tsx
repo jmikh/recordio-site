@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { getCWSLink } from '../utils/constants';
+import { trackInstallExtension } from '../utils/analytics';
 
 const NAV_LINKS = [
     { label: 'Demo', href: '#interactive-demo' },
@@ -56,6 +57,7 @@ const Header = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary hidden md:inline-flex items-center space-x-2"
+                        onClick={() => trackInstallExtension('header')}
                     >
                         <span>+ Install Extension</span>
                     </a>

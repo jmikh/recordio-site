@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { getCWSLink } from '../utils/constants';
-import { trackGetPro } from '../utils/analytics';
+import { trackGetPro, trackInstallExtension } from '../utils/analytics';
 
 const APP_URL = 'https://app.recordio.cc';
 
@@ -248,6 +248,7 @@ const Pricing = () => {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="btn-secondary w-full block text-center"
+                                        onClick={() => trackInstallExtension('pricing')}
                                     >
                                         {plan.cta}
                                     </a>

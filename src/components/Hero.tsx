@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getCWSLink } from '../utils/constants';
+import { trackInstallExtension } from '../utils/analytics';
 
 const AUTO_POLISHED_TEXT = 'Auto-Polished.';
 
@@ -62,6 +63,7 @@ const Hero = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-primary text-lg px-8 py-4"
+                            onClick={() => trackInstallExtension('hero')}
                         >
                             <span className="flex items-center space-x-2">
                                 <span>Install Extension — It's Free</span>
