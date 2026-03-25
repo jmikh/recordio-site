@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CompareHero from "../../components/compare/CompareHero";
+import CompareValueProps from "../../components/compare/CompareValueProps";
+import CompareFeatureTable from "../../components/compare/CompareFeatureTable";
+import CompareCTA from "../../components/compare/CompareCTA";
+import FeatureVideos from "../../components/FeatureVideos";
+import Pricing from "../../components/Pricing";
+
+const compareNavLinks = [
+    { label: 'Comparison', href: '#comparison' },
+    { label: 'Features', href: '#feature-videos' },
+    { label: 'Pricing', href: '#pricing' },
+];
+
+const valueProps = [
+    {
+        title: "Studio-Quality, Automatically",
+        description:
+            "DOM-aware auto zoom, 3D spotlight, and a clean toolbar — applied to every recording with zero manual editing.",
+    },
+    {
+        title: "Flat Pricing, No Per-Seat Tax",
+        description:
+            "Loom charges $15-20/user/month. Recordio runs locally — no cloud overhead means dramatically lower pricing.",
+    },
+    {
+        title: "Local, Private, and Secure",
+        description:
+            "Recording, editing, and transcription all happen in your browser. Nothing touches a server unless you share a link.",
+    },
+    {
+        title: "Smart AutoCut",
+        description:
+            "Automatically removes dead air while preserving quiet moments where you're typing or clicking.",
+    },
+];
+
+const featureRows = [
+    {
+        feature: "Shareable Links",
+        recordio: "Yes, with viewership analytics",
+        competitor: "Yes",
+    },
+    {
+        feature: "Auto Zoom",
+        description: "Reads your page's DOM structure for perfect framing",
+        recordio: "DOM-aware (reads page elements)",
+        competitor: "Cursor-based (AI)",
+    },
+    {
+        feature: "Auto Zoom Editing",
+        description: "Fully editable via keyframe system",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Auto Spotlight",
+        description: "3D elevation effect on interacted elements",
+        recordio: "Automatic, 3D elevation",
+        competitor: "Manual shapes",
+    },
+    {
+        feature: "Device Frames",
+        description: "MacBook Pro / Air frames around your recording",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Smart AutoCut",
+        description: "Voice + interaction-aware silence removal",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Simplified Toolbar",
+        description: "Hides messy bookmarks, tabs, and extensions",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Auto Captions",
+        recordio: "Local, 99 languages, word-level highlighting",
+        competitor: "Cloud, 50+ languages",
+    },
+    {
+        feature: "Custom Backgrounds",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Local Processing",
+        description: "Recordings never leave your machine",
+        recordio: "Fully in-browser",
+        competitor: "Cloud-only",
+    },
+    {
+        feature: "Cross-Platform",
+        recordio: "Chrome, Edge, Brave (Mac, Windows, Linux, ChromeOS)",
+        competitor: "Web + Desktop + Mobile",
+    },
+    {
+        feature: "Pricing",
+        recordio: "Free tier + $48/yr or $89 lifetime",
+        competitor: "$15-20 / user / month",
+    },
+];
+---
+
+<BaseLayout
+    title="Screen Recordings That Sell Themselves — Loom Alternative"
+    description="Auto zoom, spotlight, and shareable links — without Loom's per-seat pricing. Recordio processes locally, starts free, and costs up to 80% less."
+    path="/compare/loom"
+>
+    <Header client:load navLinks={compareNavLinks} />
+
+    <main>
+        <CompareHero
+            client:load
+            competitorName="Loom"
+            headline="Recordio vs Loom"
+            subheadline="Studio-quality screen recordings with shareable links — at a fraction of the cost. No per-seat pricing, no cloud dependency."
+        />
+
+        <CompareValueProps
+            client:visible
+            competitorName="Loom"
+            props={valueProps}
+            variant="purple"
+        />
+
+        <CompareFeatureTable
+            client:visible
+            competitorName="Loom"
+            rows={featureRows}
+            variant="white"
+        />
+
+        <FeatureVideos client:visible />
+        <Pricing client:visible />
+
+        <CompareCTA
+            client:visible
+            competitorName="Loom"
+            variant="purple"
+        />
+    </main>
+
+    <Footer client:visible source="compare-loom" />
+</BaseLayout>

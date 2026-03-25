@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CompareHero from "../../components/compare/CompareHero";
+import CompareValueProps from "../../components/compare/CompareValueProps";
+import CompareFeatureTable from "../../components/compare/CompareFeatureTable";
+import CompareCTA from "../../components/compare/CompareCTA";
+import FeatureVideos from "../../components/FeatureVideos";
+import Pricing from "../../components/Pricing";
+
+const compareNavLinks = [
+    { label: 'Comparison', href: '#comparison' },
+    { label: 'Features', href: '#feature-videos' },
+    { label: 'Pricing', href: '#pricing' },
+];
+
+const valueProps = [
+    {
+        title: "Auto-Polished, Not Manually Edited",
+        description:
+            "Camtasia requires you to manually edit every zoom, transition, and effect. Recordio applies auto zoom, spotlight, and clean toolbar automatically.",
+    },
+    {
+        title: "Nothing to Install",
+        description:
+            "Camtasia is a heavyweight desktop app. Recordio is a Chrome extension — install in seconds, record instantly.",
+    },
+    {
+        title: "Share a Link, Not a File",
+        description:
+            "Recordio gives you shareable links with viewership analytics. No exporting, uploading, or emailing large video files.",
+    },
+    {
+        title: "From $0, Not $300",
+        description:
+            "Camtasia starts at $180/yr or $300 perpetual. Recordio is free to start, $48/yr for Pro, or $89 lifetime.",
+    },
+];
+
+const featureRows = [
+    {
+        feature: "Setup",
+        recordio: "Chrome extension, instant",
+        competitor: "Desktop app install",
+    },
+    {
+        feature: "Auto Zoom",
+        description: "Automatic zoom on interactions",
+        recordio: "DOM-aware, automatic",
+        competitor: false,
+    },
+    {
+        feature: "Auto Spotlight",
+        description: "3D elevation on interacted elements",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Simplified Toolbar",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Smart AutoCut",
+        description: "Automatic silence removal",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Shareable Links",
+        recordio: "With viewership analytics",
+        competitor: false,
+    },
+    {
+        feature: "Auto Captions",
+        recordio: "Local, 99 languages, word-level highlighting",
+        competitor: "AI-generated",
+    },
+    {
+        feature: "Cursor Highlight",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Custom Backgrounds",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Video Library",
+        description: "Organize and manage past recordings",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Cross-Platform",
+        recordio: "Any OS via Chrome/Edge/Brave",
+        competitor: "Mac + Windows",
+    },
+    {
+        feature: "Local Processing",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Pricing",
+        recordio: "Free / $48yr / $89 lifetime",
+        competitor: "$180/yr or $300 one-time",
+    },
+];
+---
+
+<BaseLayout
+    title="Pro Recordings in Seconds, Not Hours — Camtasia Alternative"
+    description="Skip the $300 desktop app and the editing timeline. Recordio auto-polishes every recording with zoom, spotlight, and shareable links — from a Chrome extension."
+    path="/compare/camtasia"
+>
+    <Header client:load navLinks={compareNavLinks} />
+
+    <main>
+        <CompareHero
+            client:load
+            competitorName="Camtasia"
+            headline="Recordio vs Camtasia"
+            subheadline="Professional recordings in seconds — not hours of manual editing. Auto zoom, auto spotlight, and shareable links, all built in."
+        />
+
+        <CompareValueProps
+            client:visible
+            competitorName="Camtasia"
+            props={valueProps}
+            variant="purple"
+        />
+
+        <CompareFeatureTable
+            client:visible
+            competitorName="Camtasia"
+            rows={featureRows}
+            variant="white"
+        />
+
+        <FeatureVideos client:visible />
+        <Pricing client:visible />
+
+        <CompareCTA
+            client:visible
+            competitorName="Camtasia"
+            variant="purple"
+        />
+    </main>
+
+    <Footer client:visible source="compare-camtasia" />
+</BaseLayout>

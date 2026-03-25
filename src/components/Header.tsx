@@ -2,13 +2,18 @@ import { useState, useEffect, useRef } from 'react';
 import { getCWSLink } from '../utils/constants';
 import { trackInstallExtension } from '../utils/analytics';
 
-const NAV_LINKS = [
+const DEFAULT_NAV_LINKS = [
     { label: 'Features', href: '#feature-videos' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'FAQ', href: '#faq' },
 ];
 
-const Header = () => {
+interface HeaderProps {
+    navLinks?: { label: string; href: string }[];
+}
+
+const Header = ({ navLinks }: HeaderProps) => {
+    const links = navLinks || DEFAULT_NAV_LINKS;
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +44,7 @@ const Header = () => {
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
-                        {NAV_LINKS.map(({ label, href }) => (
+                        {links.map(({ label, href }) => (
                             <a
                                 key={href}
                                 href={href}
@@ -98,7 +103,7 @@ const Header = () => {
                                     : 'opacity-0 scale-95 pointer-events-none'}`}
                         >
                             <div className="py-2">
-                                {NAV_LINKS.map(({ label, href }) => (
+                                {links.map(({ label, href }) => (
                                     <a
                                         key={href}
                                         href={href}

@@ -1,0 +1,165 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CompareHero from "../../components/compare/CompareHero";
+import CompareValueProps from "../../components/compare/CompareValueProps";
+import CompareFeatureTable from "../../components/compare/CompareFeatureTable";
+import CompareCTA from "../../components/compare/CompareCTA";
+import FeatureVideos from "../../components/FeatureVideos";
+import Pricing from "../../components/Pricing";
+
+const compareNavLinks = [
+    { label: 'Comparison', href: '#comparison' },
+    { label: 'Features', href: '#feature-videos' },
+    { label: 'Pricing', href: '#pricing' },
+];
+
+const valueProps = [
+    {
+        title: "Works Everywhere, Not Just Mac",
+        description:
+            "Recordio runs on Chrome, Edge, and Brave — on Mac, Windows, Linux, and ChromeOS. Your whole team can use it.",
+    },
+    {
+        title: "Share Links, Track Views",
+        description:
+            "Share a link and see who watched. Total views and average watch time, built right into your video library.",
+    },
+    {
+        title: "Smarter Zoom",
+        description:
+            "Recordio reads the DOM and zooms into the actual UI element you're interacting with — no clipping, no jitter.",
+    },
+    {
+        title: "$89 Lifetime vs $209",
+        description:
+            "Free to start, $48/yr for Pro, or $89 one-time for lifetime access. No separate upgrade fees.",
+    },
+];
+
+const featureRows = [
+    {
+        feature: "Cross-Platform",
+        recordio: "Chrome, Edge, Brave (all OS)",
+        competitor: "macOS only",
+    },
+    {
+        feature: "Auto Zoom",
+        description: "How zoom targets are determined",
+        recordio: "DOM-aware (reads page elements)",
+        competitor: "Cursor-based",
+    },
+    {
+        feature: "Auto Zoom Editing",
+        recordio: "Keyframe system",
+        competitor: "Timeline drag",
+    },
+    {
+        feature: "Auto Spotlight",
+        description: "3D elevation on interacted elements",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Shareable Links",
+        recordio: "With viewership analytics",
+        competitor: false,
+    },
+    {
+        feature: "Device Frames",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Smart AutoCut",
+        description: "Voice + interaction-aware silence removal",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Simplified Toolbar",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Auto Captions",
+        recordio: "Local, 99 languages",
+        competitor: false,
+    },
+    {
+        feature: "Custom Backgrounds",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Built-In Editor",
+        description: "Edit without leaving the app",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Video Library",
+        description: "Organize and manage past recordings",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Local Processing",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Free Tier",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Pricing",
+        recordio: "Free / $48yr / $89 lifetime",
+        competitor: "$209 one-time",
+    },
+];
+---
+
+<BaseLayout
+    title="Studio-Quality on Any OS, Not Just Mac — Screen Studio Alternative"
+    description="Screen Studio is Mac-only and $209. Recordio runs on any browser, adds shareable links with analytics, and starts free. Same polish, wider reach."
+    path="/compare/screen-studio"
+>
+    <Header client:load navLinks={compareNavLinks} />
+
+    <main>
+        <CompareHero
+            client:load
+            competitorName="Screen Studio"
+            headline="Recordio vs Screen Studio"
+            subheadline="Smarter auto zoom — on any platform. Plus a project and shared video library you can manage."
+        />
+
+        <CompareValueProps
+            client:visible
+            competitorName="Screen Studio"
+            props={valueProps}
+            variant="purple"
+        />
+
+        <CompareFeatureTable
+            client:visible
+            competitorName="Screen Studio"
+            rows={featureRows}
+            variant="white"
+        />
+
+        <FeatureVideos client:visible />
+        <Pricing client:visible />
+
+        <CompareCTA
+            client:visible
+            competitorName="Screen Studio"
+            variant="purple"
+        />
+    </main>
+
+    <Footer client:visible source="compare-screen-studio" />
+</BaseLayout>

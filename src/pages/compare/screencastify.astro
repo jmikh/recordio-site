@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CompareHero from "../../components/compare/CompareHero";
+import CompareValueProps from "../../components/compare/CompareValueProps";
+import CompareFeatureTable from "../../components/compare/CompareFeatureTable";
+import CompareCTA from "../../components/compare/CompareCTA";
+import FeatureVideos from "../../components/FeatureVideos";
+import Pricing from "../../components/Pricing";
+
+const compareNavLinks = [
+    { label: 'Comparison', href: '#comparison' },
+    { label: 'Features', href: '#feature-videos' },
+    { label: 'Pricing', href: '#pricing' },
+];
+
+const valueProps = [
+    {
+        title: "Recordings That Look Professional",
+        description:
+            "Screencastify gives you a raw screen capture. Recordio adds auto zoom, spotlight, and a clean toolbar — automatically.",
+    },
+    {
+        title: "No Per-Seat Pricing",
+        description:
+            "Screencastify charges $7-10/user/month. Recordio is free to start, $48/yr, or $89 lifetime — for one person or a whole team.",
+    },
+    {
+        title: "No Watermark on Free",
+        description:
+            "Screencastify's free plan brands every video with a watermark. Recordio's free tier has no watermark.",
+    },
+    {
+        title: "Smarter Editing, Less Work",
+        description:
+            "AutoCut removes silence, auto captions add subtitles, and DOM-aware zoom highlights what matters — all without a timeline.",
+    },
+];
+
+const featureRows = [
+    {
+        feature: "Platform",
+        recordio: "Chrome, Edge, Brave",
+        competitor: "Chrome",
+    },
+    {
+        feature: "Auto Zoom",
+        description: "Automatic zoom on interactions",
+        recordio: "DOM-aware, automatic",
+        competitor: false,
+    },
+    {
+        feature: "Auto Spotlight",
+        description: "3D elevation on interacted elements",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Simplified Toolbar",
+        description: "Hides bookmarks, tabs, and extensions",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Smart AutoCut",
+        description: "Automatic silence removal",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Device Frames",
+        description: "MacBook Pro / Air frames",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Shareable Links",
+        recordio: "With viewership analytics",
+        competitor: "Yes",
+    },
+    {
+        feature: "Auto Captions",
+        recordio: "Local, 99 languages, word-level highlighting",
+        competitor: "AI-generated",
+    },
+    {
+        feature: "Custom Backgrounds",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Built-In Editor",
+        description: "Edit without leaving the app",
+        recordio: true,
+        competitor: "Basic trimming",
+    },
+    {
+        feature: "Video Library",
+        description: "Organize and manage past recordings",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Watermark-Free on Free Tier",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Local Processing",
+        description: "Recordings stay on your machine",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Pricing",
+        recordio: "Free / $48yr / $89 lifetime",
+        competitor: "Free (watermark) / $7-10 per user/mo",
+    },
+];
+---
+
+<BaseLayout
+    title="Every Recording Comes Out Polished — Screencastify Alternative"
+    description="Same Chrome extension simplicity, but with auto zoom, spotlight, device frames, and no watermark on free. Starts at $0, not $7/user/month."
+    path="/compare/screencastify"
+>
+    <Header client:load navLinks={compareNavLinks} />
+
+    <main>
+        <CompareHero
+            client:load
+            competitorName="Screencastify"
+            headline="Recordio vs Screencastify"
+            subheadline="Same Chrome extension simplicity — but every recording comes out polished. Auto zoom, spotlight, and a clean toolbar, built in."
+        />
+
+        <CompareValueProps
+            client:visible
+            competitorName="Screencastify"
+            props={valueProps}
+            variant="purple"
+        />
+
+        <CompareFeatureTable
+            client:visible
+            competitorName="Screencastify"
+            rows={featureRows}
+            variant="white"
+        />
+
+        <FeatureVideos client:visible />
+        <Pricing client:visible />
+
+        <CompareCTA
+            client:visible
+            competitorName="Screencastify"
+            variant="purple"
+        />
+    </main>
+
+    <Footer client:visible source="compare-screencastify" />
+</BaseLayout>

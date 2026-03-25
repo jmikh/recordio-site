@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CompareHero from "../../components/compare/CompareHero";
+import CompareValueProps from "../../components/compare/CompareValueProps";
+import CompareFeatureTable from "../../components/compare/CompareFeatureTable";
+import CompareCTA from "../../components/compare/CompareCTA";
+import FeatureVideos from "../../components/FeatureVideos";
+import Pricing from "../../components/Pricing";
+
+const compareNavLinks = [
+    { label: 'Comparison', href: '#comparison' },
+    { label: 'Features', href: '#feature-videos' },
+    { label: 'Pricing', href: '#pricing' },
+];
+
+const valueProps = [
+    {
+        title: "Auto-Polished, Not Just Captured",
+        description:
+            "Screenity captures your screen. Recordio captures it and auto-applies zoom, spotlight, clean toolbar, and device frames.",
+    },
+    {
+        title: "Shareable Links with Analytics",
+        description:
+            "Recordio gives you shareable links with view counts and watch time — built in, no Pro upgrade required.",
+    },
+    {
+        title: "SmartCut Removes Dead Air",
+        description:
+            "Recordio's AutoCut detects silence and low-activity moments and trims them automatically. No manual editing.",
+    },
+    {
+        title: "Auto Captions in 99 Languages",
+        description:
+            "Local, word-level highlighted captions — processed entirely in your browser. No cloud, no upload wait.",
+    },
+];
+
+const featureRows = [
+    {
+        feature: "Platform",
+        recordio: "Chrome, Edge, Brave",
+        competitor: "Chrome, Chromium-based",
+    },
+    {
+        feature: "Auto Zoom",
+        description: "Automatic zoom on interactions",
+        recordio: "DOM-aware, automatic",
+        competitor: "Click-based (Pro only)",
+    },
+    {
+        feature: "Auto Spotlight",
+        description: "3D elevation on interacted elements",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Simplified Toolbar",
+        description: "Hides bookmarks, tabs, and extensions",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Smart AutoCut",
+        description: "Automatic silence removal",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Device Frames",
+        description: "MacBook Pro / Air frames",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Shareable Links",
+        recordio: "Built-in with analytics",
+        competitor: "Pro only",
+    },
+    {
+        feature: "Auto Captions",
+        recordio: "Local, 99 languages, word-level",
+        competitor: "Pro only",
+    },
+    {
+        feature: "Custom Backgrounds",
+        recordio: true,
+        competitor: "Pro only",
+    },
+    {
+        feature: "Built-In Editor",
+        description: "Edit without leaving the app",
+        recordio: true,
+        competitor: "Basic (Pro for advanced)",
+    },
+    {
+        feature: "Video Library",
+        description: "Organize and manage past recordings",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Local Processing",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Pricing",
+        recordio: "Free / $48yr / $89 lifetime",
+        competitor: "Free / Pro (paid)",
+    },
+];
+---
+
+<BaseLayout
+    title="From Raw Capture to Polished Video, Automatically — Screenity Alternative"
+    description="Both live in your browser. Recordio adds what Screenity doesn't — auto zoom, 3D spotlight, shareable links, and AutoCut. No Pro paywall for core features."
+    path="/compare/screenity"
+>
+    <Header client:load navLinks={compareNavLinks} />
+
+    <main>
+        <CompareHero
+            client:load
+            competitorName="Screenity"
+            headline="Recordio vs Screenity"
+            subheadline="Both live in your browser. Recordio adds the polish — auto zoom, spotlight, and shareable links — so every recording looks professional."
+        />
+
+        <CompareValueProps
+            client:visible
+            competitorName="Screenity"
+            props={valueProps}
+            variant="purple"
+        />
+
+        <CompareFeatureTable
+            client:visible
+            competitorName="Screenity"
+            rows={featureRows}
+            variant="white"
+        />
+
+        <FeatureVideos client:visible />
+        <Pricing client:visible />
+
+        <CompareCTA
+            client:visible
+            competitorName="Screenity"
+            variant="purple"
+        />
+    </main>
+
+    <Footer client:visible source="compare-screenity" />
+</BaseLayout>

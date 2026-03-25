@@ -895,3 +895,105 @@ html {
     background-position: -200% 0;
   }
 }
+
+/* ===== Compare Pages ===== */
+
+.compare-index-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--color-text-highlighted);
+  background-color: var(--color-section-white);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.compare-index-link:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.06), 0 0 20px color-mix(in oklch, var(--color-primary) 12%, transparent);
+}
+
+/* Comparison Table */
+.compare-table-wrapper {
+  overflow-x: auto;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-section-white);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.04);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 580px;
+}
+
+.compare-th {
+  padding: 1rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-align: left;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.compare-th--feature {
+  width: 38%;
+  color: var(--color-text-main);
+}
+
+.compare-th--recordio {
+  width: 31%;
+  color: var(--color-text-highlighted);
+  background-color: color-mix(in oklch, var(--color-primary) 5%, var(--color-section-white));
+  border-left: 1px solid color-mix(in oklch, var(--color-primary) 15%, var(--color-border));
+  border-right: 1px solid color-mix(in oklch, var(--color-primary) 15%, var(--color-border));
+}
+
+.compare-th--competitor {
+  width: 31%;
+  color: var(--color-text-muted);
+}
+
+.compare-row {
+  transition: background-color 0.15s ease;
+}
+
+.compare-row:hover {
+  background-color: color-mix(in oklch, var(--color-surface-raised), transparent 60%);
+}
+
+.compare-td {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid color-mix(in oklch, var(--color-border), transparent 40%);
+  vertical-align: middle;
+}
+
+.compare-td--feature {
+  color: var(--color-text-highlighted);
+}
+
+.compare-td--recordio {
+  background-color: color-mix(in oklch, var(--color-primary) 3%, var(--color-section-white));
+  border-left: 1px solid color-mix(in oklch, var(--color-primary) 10%, var(--color-border));
+  border-right: 1px solid color-mix(in oklch, var(--color-primary) 10%, var(--color-border));
+}
+
+.compare-td--competitor {
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .compare-th,
+  .compare-td {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+}

@@ -1,0 +1,167 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CompareHero from "../../components/compare/CompareHero";
+import CompareValueProps from "../../components/compare/CompareValueProps";
+import CompareFeatureTable from "../../components/compare/CompareFeatureTable";
+import CompareCTA from "../../components/compare/CompareCTA";
+import FeatureVideos from "../../components/FeatureVideos";
+import Pricing from "../../components/Pricing";
+
+const compareNavLinks = [
+    { label: 'Comparison', href: '#comparison' },
+    { label: 'Features', href: '#feature-videos' },
+    { label: 'Pricing', href: '#pricing' },
+];
+
+const valueProps = [
+    {
+        title: "Your Data Stays on Your Machine",
+        description:
+            "Clueso uploads everything to the cloud. Recordio records, edits, and processes entirely in your browser — nothing leaves unless you share a link.",
+    },
+    {
+        title: "No Export Limits",
+        description:
+            "Clueso caps exports to 6-12 hours/year depending on plan. Recordio has no limits on recordings or exports.",
+    },
+    {
+        title: "Flat Pricing, Not Per-Seat SaaS",
+        description:
+            "Clueso starts at $120/mo for just 2 users. Recordio is free to start, $48/yr, or $89 lifetime — no seat limits.",
+    },
+    {
+        title: "Instant Setup, No Onboarding",
+        description:
+            "Install a Chrome extension and start recording. No demos, no sales calls, no enterprise onboarding process.",
+    },
+];
+
+const featureRows = [
+    {
+        feature: "Setup",
+        recordio: "Chrome extension, instant",
+        competitor: "Web app, account required",
+    },
+    {
+        feature: "Auto Zoom",
+        description: "Automatic zoom on interactions",
+        recordio: "DOM-aware, automatic",
+        competitor: "AI cloud-based",
+    },
+    {
+        feature: "Auto Spotlight",
+        description: "3D elevation on interacted elements",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Simplified Toolbar",
+        description: "Hides bookmarks, tabs, and extensions",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Smart AutoCut",
+        description: "Automatic silence removal",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Device Frames",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Shareable Links",
+        recordio: "With viewership analytics",
+        competitor: "Yes",
+    },
+    {
+        feature: "Auto Captions",
+        recordio: "Local, 99 languages, word-level",
+        competitor: "AI-generated, multi-language",
+    },
+    {
+        feature: "Custom Backgrounds",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Built-In Editor",
+        description: "Edit without leaving the app",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Video Library",
+        description: "Organize and manage past recordings",
+        recordio: true,
+        competitor: true,
+    },
+    {
+        feature: "Local Processing",
+        description: "Recordings never leave your machine",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Unlimited Exports",
+        recordio: true,
+        competitor: "Capped per plan",
+    },
+    {
+        feature: "Cross-Platform",
+        recordio: "Chrome, Edge, Brave (all OS)",
+        competitor: "Web app",
+    },
+    {
+        feature: "Pricing",
+        recordio: "Free / $48yr / $89 lifetime",
+        competitor: "From $120/mo (2 users)",
+    },
+];
+---
+
+<BaseLayout
+    title="Unlimited Exports, No Per-Seat Bill — Clueso Alternative"
+    description="Clueso caps exports and starts at $120/mo. Recordio has no limits, processes locally, and costs $89 lifetime. Same polish, fraction of the price."
+    path="/compare/clueso"
+>
+    <Header client:load navLinks={compareNavLinks} />
+
+    <main>
+        <CompareHero
+            client:load
+            competitorName="Clueso"
+            headline="Recordio vs Clueso"
+            subheadline="Studio-quality recordings that stay on your machine. No per-seat pricing, no export limits, no cloud dependency."
+        />
+
+        <CompareValueProps
+            client:visible
+            competitorName="Clueso"
+            props={valueProps}
+            variant="purple"
+        />
+
+        <CompareFeatureTable
+            client:visible
+            competitorName="Clueso"
+            rows={featureRows}
+            variant="white"
+        />
+
+        <FeatureVideos client:visible />
+        <Pricing client:visible />
+
+        <CompareCTA
+            client:visible
+            competitorName="Clueso"
+            variant="purple"
+        />
+    </main>
+
+    <Footer client:visible source="compare-clueso" />
+</BaseLayout>

@@ -1,0 +1,155 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CompareHero from "../../components/compare/CompareHero";
+import CompareValueProps from "../../components/compare/CompareValueProps";
+import CompareFeatureTable from "../../components/compare/CompareFeatureTable";
+import CompareCTA from "../../components/compare/CompareCTA";
+import FeatureVideos from "../../components/FeatureVideos";
+import Pricing from "../../components/Pricing";
+
+const compareNavLinks = [
+    { label: 'Comparison', href: '#comparison' },
+    { label: 'Features', href: '#feature-videos' },
+    { label: 'Pricing', href: '#pricing' },
+];
+
+const valueProps = [
+    {
+        title: "Polished Output, Not Raw Footage",
+        description:
+            "Bandicam captures raw video files. Recordio auto-applies zoom, spotlight, device frames, and a clean toolbar to every recording.",
+    },
+    {
+        title: "Share a Link, Not a File",
+        description:
+            "Recordio gives you shareable links with view counts and watch time. No exporting, uploading, or emailing large files.",
+    },
+    {
+        title: "Works on Any Platform",
+        description:
+            "Bandicam is Windows-only. Recordio runs on Chrome, Edge, and Brave — Mac, Windows, Linux, and ChromeOS.",
+    },
+    {
+        title: "No Install, No Configuration",
+        description:
+            "Add a Chrome extension and start recording. No desktop app, no encoder settings, no scene setup.",
+    },
+];
+
+const featureRows = [
+    {
+        feature: "Platform",
+        recordio: "Any OS via Chrome/Edge/Brave",
+        competitor: "Windows only",
+    },
+    {
+        feature: "Setup",
+        recordio: "Chrome extension, instant",
+        competitor: "Desktop app install",
+    },
+    {
+        feature: "Auto Zoom",
+        description: "Automatic zoom on interactions",
+        recordio: "DOM-aware, automatic",
+        competitor: false,
+    },
+    {
+        feature: "Auto Spotlight",
+        description: "3D elevation on interacted elements",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Simplified Toolbar",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Smart AutoCut",
+        description: "Automatic silence removal",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Device Frames",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Shareable Links",
+        recordio: "With viewership analytics",
+        competitor: false,
+    },
+    {
+        feature: "Auto Captions",
+        recordio: "Local, 99 languages",
+        competitor: false,
+    },
+    {
+        feature: "Custom Backgrounds",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Built-In Editor",
+        description: "Edit without leaving the app",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Video Library",
+        description: "Organize and manage past recordings",
+        recordio: true,
+        competitor: false,
+    },
+    {
+        feature: "Local Processing",
+        recordio: true,
+        competitor: true,
+    },
+];
+---
+
+<BaseLayout
+    title="Share a Link, Not a File — Bandicam Alternative"
+    description="Bandicam records files on Windows. Recordio records, polishes, and gives you a shareable link — on any OS, from a Chrome extension."
+    path="/compare/bandicam"
+>
+    <Header client:load navLinks={compareNavLinks} />
+
+    <main>
+        <CompareHero
+            client:load
+            competitorName="Bandicam"
+            headline="Recordio vs Bandicam"
+            subheadline="Professional product videos on any platform — auto zoom, spotlight, and shareable links, with no desktop app required."
+        />
+
+        <CompareValueProps
+            client:visible
+            competitorName="Bandicam"
+            props={valueProps}
+            variant="purple"
+        />
+
+        <CompareFeatureTable
+            client:visible
+            competitorName="Bandicam"
+            rows={featureRows}
+            variant="white"
+        />
+
+        <FeatureVideos client:visible />
+        <Pricing client:visible />
+
+        <CompareCTA
+            client:visible
+            competitorName="Bandicam"
+            variant="purple"
+        />
+    </main>
+
+    <Footer client:visible source="compare-bandicam" />
+</BaseLayout>

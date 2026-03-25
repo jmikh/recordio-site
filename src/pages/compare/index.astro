@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+---
+
+<BaseLayout
+    title="Best Screen Recording Alternatives in 2026 — Recordio Comparisons"
+    description="Screen recordings that auto-polish themselves. See how Recordio stacks up against Loom, Screen Studio, Camtasia, OBS, and more — with side-by-side feature breakdowns."
+    path="/compare"
+>
+    <Header client:load />
+
+    <main>
+        <section class="relative overflow-hidden" style="background-color: var(--color-section-purple);">
+            <!-- Ambient glow -->
+            <div class="absolute inset-0 opacity-40 pointer-events-none">
+                <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-primary/15 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-32 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative z-10 max-w-4xl mx-auto px-6 pt-40 pb-24 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-text-highlighted mb-16 hero-entrance hero-entrance-delay-1">
+                    Compare Recordio To
+                </h1>
+
+                <div class="flex flex-wrap justify-center gap-4 hero-entrance hero-entrance-delay-2">
+                    <a href="/compare/loom" class="compare-index-link">Loom</a>
+                    <a href="/compare/screen-studio" class="compare-index-link">Screen Studio</a>
+                    <a href="/compare/obs" class="compare-index-link">OBS</a>
+                    <a href="/compare/camtasia" class="compare-index-link">Camtasia</a>
+                    <a href="/compare/screencastify" class="compare-index-link">Screencastify</a>
+                    <a href="/compare/screenity" class="compare-index-link">Screenity</a>
+                    <a href="/compare/bandicam" class="compare-index-link">Bandicam</a>
+                    <a href="/compare/clueso" class="compare-index-link">Clueso</a>
+                    <a href="/compare/tella" class="compare-index-link">Tella</a>
+                    <a href="/compare/focusee" class="compare-index-link">FocuSee</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer client:visible source="compare" />
+</BaseLayout>
