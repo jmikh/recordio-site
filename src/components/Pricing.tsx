@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { getCWSLink } from '../utils/constants';
 import { trackInstallExtension } from '../utils/analytics';
+import { BsFillRocketTakeoffFill } from 'react-icons/bs';
 
 const Pricing = () => {
     const [isAnnual, setIsAnnual] = useState(true);
@@ -106,8 +107,8 @@ const Pricing = () => {
                             {/* Launch Sale badge — Lifetime only */}
                             {(plan as any).bestValue && (
                                 <div className="flex justify-center mb-3">
-                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary border border-secondary/25">
-                                        🚀 Launch Sale
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">
+                                        <BsFillRocketTakeoffFill size={14} className="mr-0.5" /> Launch Sale
                                     </span>
                                 </div>
                             )}
