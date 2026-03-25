@@ -129,7 +129,7 @@ const Hero = () => {
                             <div className="before-after-video">
                                 <video
                                     ref={beforeRef}
-                                    src={`${CDN_BASE}/before.mp4`}
+                                    src={`${CDN_BASE}/before.webm`}
                                     muted
                                     loop
                                     playsInline
@@ -147,7 +147,7 @@ const Hero = () => {
                             <div className="before-after-video before-after-video--after">
                                 <video
                                     ref={afterRef}
-                                    src={`${CDN_BASE}/after.mp4`}
+                                    src={`${CDN_BASE}/after.webm`}
                                     muted
                                     loop
                                     playsInline
