@@ -2,12 +2,6 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const reviews = [
     {
-        name: 'Paper Lemon',
-        photo: '/assets/testimonials/paperlemon.jpg',
-        text: 'I found Recordio while looking for a screen recorder to make tutorials and demos for a digital product I\'m working on. Tried a couple of other tools first but they all felt a bit heavy and overcomplicated for what I needed.\n\nRecordio is just simpler. It loads fast, the interface makes sense straight away and it doesn\'t feel like overkill. What surprised me was how much it helps with making recordings look polished without needing to do a ton of editing after. The auto zoom and spotlight features are genuinely useful when you\'re walking someone through something on screen. Little things like being able to change the canvas size, background color and add mouse click sounds also make a bigger difference than you\'d expect for tutorial-style content.\n\nI also figured out you can crop to portrait mode in the screen settings which is handy for making reels or shorts.\n\nOverall it strikes a good balance between being simple to use and still giving you enough control to make things look good. Happy with it so far.',
-        gradient: 'from-emerald-400 to-teal-600',
-    },
-    {
         name: 'John Jenkins',
         text: 'Incredible snappy extension',
         gradient: 'from-blue-400 to-indigo-600',
@@ -50,6 +44,56 @@ const reviews = [
         text: 'Great time saver! It smoothly recorded my walkthrough and already did an edited video that gave me full set of tools to adjust how I want it. Very intuitive and easy to use as well. Hope they do a version that can join meetings well to record them with other people to collaborate with other teams.',
         gradient: 'from-orange-400 to-red-600',
     },
+    {
+        name: 'Mark Andrawis',
+        photo: '/assets/testimonials/mark.jpg',
+        text: 'Excellent product - Easy to use and very intuitive.',
+        gradient: 'from-sky-400 to-blue-600',
+    },
+    {
+        name: 'Abdelrahman Elbashandy',
+        photo: '/assets/testimonials/abdelrahman.jpg',
+        text: 'To the point! Very simple to use. The features are well thought out. I don\'t need to do background work to make it look professional. Recordio makes it ready to go live right away. Exactly what I was looking for!',
+        gradient: 'from-teal-400 to-cyan-600',
+    },
+    {
+        name: 'Irene Rodríguez Pérez',
+        text: 'Practical and super easy to use, loved it! Will use it a lot',
+        gradient: 'from-rose-400 to-pink-600',
+    },
+    {
+        name: 'Adham Kalila',
+        text: 'This is much easier than microsoft stream or other screen recordings ive used as an instructor at my SaaS company. Easy to install and edit. And it does automatic zooming in to where i need the audiences attention. Definitely going to use this more.',
+        gradient: 'from-indigo-400 to-violet-600',
+    },
+    {
+        name: 'Jason Chou',
+        text: 'I didn\'t know it was possible to have a screen recording AND editing tool AS A CHROME EXTENSION. This is a game changer! The super intuitive editor with auto zoom and spotlight feature makes the whole process a breeze. I was able to get a product demo video done with zero friction.',
+        gradient: 'from-emerald-400 to-green-600',
+    },
+    {
+        name: 'Arvin Ahmadi',
+        photo: '/assets/testimonials/arvin.jpg',
+        text: 'Couldn\'t believe how easy it was to make a high-quality product demo with this extension. Loved the zoom/spotlight feature in particular. Highly recommend!',
+        gradient: 'from-amber-400 to-yellow-600',
+    },
+    {
+        name: 'Lauren Wilson',
+        photo: '/assets/testimonials/lauren.png',
+        text: 'I use it for creating clean software demos and tutorials. The automatic zoom, spotlight, and captions make recordings much easier to follow without spending hours editing.',
+        gradient: 'from-purple-400 to-fuchsia-600',
+    },
+    {
+        name: 'Dijvar Donmez',
+        text: 'Simple, fast, and very easy to use. Recordio makes screen recording effortless and perfect for quick demos or explanations. Really useful tool.',
+        gradient: 'from-red-400 to-orange-600',
+    },
+    {
+        name: 'Kardelen Güldaş',
+        photo: '/assets/testimonials/kardalen.jpg',
+        text: 'Recordio is one of the easiest screen recording tools I\'ve used. It\'s fast, intuitive, and the recordings look polished without needing much editing. The zoom and spotlight features make it great for demos and tutorials.\nSimple, effective, and a big time saver.',
+        gradient: 'from-blue-400 to-cyan-600',
+    },
 ];
 
 const Star = () => (
@@ -64,19 +108,51 @@ const ChromeIcon = () => (
 
 const Testimonials = () => {
     const headerRef = useScrollReveal();
-    const gridRef = useScrollReveal();
 
-    return (
-        <section id="testimonials" className="py-24 bg-surface-body relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute inset-0">
-                <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+    // Split reviews into two rows for the marquee
+    const mid = Math.ceil(reviews.length / 2);
+    const row1 = reviews.slice(0, mid);
+    const row2 = reviews.slice(mid);
+
+    const ReviewCard = ({ review }: { review: typeof reviews[0] }) => (
+        <div className="testimonial-card">
+            {/* Header: avatar + name left, stars right */}
+            <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-2.5">
+                    {review.photo ? (
+                        <img
+                            src={review.photo}
+                            alt={review.name}
+                            className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+                        />
+                    ) : (
+                        <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${review.gradient} flex items-center justify-center flex-shrink-0`}>
+                            <span className="text-white font-bold text-xs">
+                                {review.name.charAt(0)}
+                            </span>
+                        </div>
+                    )}
+                    <span className="font-semibold text-text-highlighted text-sm">
+                        {review.name}
+                    </span>
+                </div>
+                <div className="flex space-x-0.5">
+                    {[...Array(5)].map((_, i) => <Star key={i} />)}
+                </div>
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6">
+            {/* Review text */}
+            <p className="text-text-main leading-relaxed text-[0.935rem] whitespace-pre-line">
+                {review.text}
+            </p>
+        </div>
+    );
+
+    return (
+        <section id="testimonials" className="py-24 section-panel relative overflow-hidden">
+            <div className="relative z-10">
                 {/* Section Header */}
-                <div ref={headerRef} className="text-center mb-16 scroll-reveal">
+                <div ref={headerRef} className="text-center mb-16 scroll-reveal px-6">
                     {/* Chrome Web Store badge */}
                     <a
                         href="https://chromewebstore.google.com/detail/recordio-smart-screen-rec/bbcdpipjplklaneplfmlhhibnllhinii/reviews"
@@ -100,41 +176,14 @@ const Testimonials = () => {
                     </p>
                 </div>
 
-                {/* Masonry Grid */}
-                <div ref={gridRef} className="masonry-grid scroll-reveal scroll-reveal-delay-2">
-                    {reviews.map((review, index) => (
-                        <div key={index} className="card-premium mb-6 break-inside-avoid">
-                            {/* Header: avatar + name left, stars right */}
-                            <div className="flex items-center justify-between mb-3">
-                                <div className="flex items-center space-x-2.5">
-                                    {review.photo ? (
-                                        <img
-                                            src={review.photo}
-                                            alt={review.name}
-                                            className="w-8 h-8 rounded-full object-cover flex-shrink-0"
-                                        />
-                                    ) : (
-                                        <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${review.gradient} flex items-center justify-center flex-shrink-0`}>
-                                            <span className="text-white font-bold text-xs">
-                                                {review.name.charAt(0)}
-                                            </span>
-                                        </div>
-                                    )}
-                                    <span className="font-semibold text-text-highlighted text-sm">
-                                        {review.name}
-                                    </span>
-                                </div>
-                                <div className="flex space-x-0.5">
-                                    {[...Array(5)].map((_, i) => <Star key={i} />)}
-                                </div>
-                            </div>
-
-                            {/* Review text */}
-                            <p className="text-text-main leading-relaxed text-[0.935rem] whitespace-pre-line">
-                                {review.text}
-                            </p>
+                {/* Scrolling marquee with fade edges */}
+                <div className="testimonial-marquee-wrapper">
+                    <div className="testimonial-marquee">
+                        <div className="testimonial-marquee-track">
+                            {reviews.map((r, i) => <ReviewCard key={`a-${i}`} review={r} />)}
+                            {reviews.map((r, i) => <ReviewCard key={`b-${i}`} review={r} />)}
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         </section>
@@ -142,3 +191,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+

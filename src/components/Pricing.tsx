@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { getCWSLink } from '../utils/constants';
-import { trackGetPro, trackInstallExtension } from '../utils/analytics';
-
-const APP_URL = 'https://app.recordio.cc';
+import { trackInstallExtension } from '../utils/analytics';
 
 const Pricing = () => {
-    const [isAnnual, setIsAnnual] = useState(false);
+    const [isAnnual, setIsAnnual] = useState(true);
     const headerRef = useScrollReveal();
     const cardsRef = useScrollReveal();
 
@@ -38,7 +36,8 @@ const Pricing = () => {
                 'No watermarks',
                 'Shareable links',
             ],
-            cta: 'Get Pro',
+            cta: 'Get Started',
+            ctaLink: getCWSLink('pricing-pro'),
             popular: true,
             style: 'primary' as const,
         },
@@ -52,7 +51,8 @@ const Pricing = () => {
                 'Lifetime updates',
                 'Priority support',
             ],
-            cta: 'Get Lifetime',
+            cta: 'Get Started',
+            ctaLink: getCWSLink('pricing-lifetime'),
             popular: false,
             bestValue: true,
             style: 'primary' as const,
@@ -60,7 +60,7 @@ const Pricing = () => {
     ];
 
     return (
-        <section id="pricing" aria-label="Pricing" className="section-panel py-24 relative overflow-hidden">
+        <section id="pricing" aria-label="Pricing" className="section-panel-white py-24 relative overflow-hidden">
             {/* Background — matches features section */}
             <div className="absolute inset-0 opacity-30 pointer-events-none">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
@@ -87,6 +87,14 @@ const Pricing = () => {
                         >
 
 
+
+                            {plan.popular && (
+                                <div className="absolute -top-[14px] left-1/2 -translate-x-1/2">
+                                    <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[0.65rem] font-bold uppercase tracking-wider bg-primary text-text-on-primary shadow-md border border-primary-highlighted whitespace-nowrap">
+                                        Most Popular
+                                    </span>
+                                </div>
+                            )}
 
                             {/* Plan Name */}
                             <div className="text-center mb-6">
@@ -228,17 +236,21 @@ const Pricing = () => {
                                 {/* CTA Button */}
                                 {plan.popular ? (
                                     <a
-                                        href={`${APP_URL}/?checkout=${isAnnual ? 'yearly' : 'monthly'}`}
+                                        href={(plan as any).ctaLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="btn-primary w-full block text-center"
-                                        onClick={() => trackGetPro(isAnnual ? 'yearly' : 'monthly')}
+                                        onClick={() => trackInstallExtension('pricing-pro')}
                                     >
                                         {plan.cta}
                                     </a>
                                 ) : (plan as any).bestValue ? (
                                     <a
-                                        href={`${APP_URL}/?checkout=lifetime`}
+                                        href={(plan as any).ctaLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="btn-primary w-full block text-center"
-                                        onClick={() => trackGetPro('lifetime')}
+                                        onClick={() => trackInstallExtension('pricing-lifetime')}
                                     >
                                         {plan.cta}
                                     </a>

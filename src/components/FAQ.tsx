@@ -39,7 +39,7 @@ const FAQ = () => {
     };
 
     return (
-        <section id="faq" aria-label="Frequently Asked Questions" className="py-24 bg-surface-body relative overflow-hidden">
+        <section id="faq" aria-label="Frequently Asked Questions" className="py-24 section-panel relative overflow-hidden">
             <div className="absolute inset-0 gradient-mesh opacity-20" />
 
             <div className="relative z-10 max-w-3xl mx-auto px-6">

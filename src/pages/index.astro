@@ -2,10 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import SplineBackground from "../components/SplineBackground";
-import BeforeAfterComparison from "../components/BeforeAfterComparison";
-import InteractiveShowcase from "../components/features/InteractiveShowcase";
-import FeatureBento from "../components/features/FeatureBento";
+import FeatureVideos from "../components/FeatureVideos";
 import Testimonials from "../components/Testimonials";
 import Pricing from "../components/Pricing";
 import FAQ from "../components/FAQ";
@@ -18,16 +15,8 @@ import Footer from "../components/Footer";
 >
     <Header client:load />
     <main>
-        <!-- Hero section wrapper: positions Spline behind Hero content -->
-        <div class="relative">
-            <div class="absolute inset-0 w-full h-full pointer-events-none z-0">
-                <SplineBackground client:idle />
-            </div>
-            <Hero client:load />
-        </div>
-        <BeforeAfterComparison client:visible />
-        <InteractiveShowcase client:visible />
-        <FeatureBento client:visible />
+        <Hero client:load />
+        <FeatureVideos client:visible />
         <Testimonials client:visible />
         <Pricing client:visible />
         <FAQ client:visible />

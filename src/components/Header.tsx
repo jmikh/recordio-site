@@ -3,8 +3,7 @@ import { getCWSLink } from '../utils/constants';
 import { trackInstallExtension } from '../utils/analytics';
 
 const NAV_LINKS = [
-    { label: 'Demo', href: '#interactive-demo' },
-    { label: 'Features', href: '#all-features' },
+    { label: 'Features', href: '#feature-videos' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'FAQ', href: '#faq' },
 ];
@@ -26,13 +25,13 @@ const Header = () => {
     }, [menuOpen]);
 
     return (
-        <header className="absolute top-4 left-0 right-0 z-50 px-4">
+        <header className="fixed top-4 left-0 right-0 z-50 px-4">
             <nav className="max-w-5xl mx-auto px-6 py-4 rounded-2xl glass shadow-lg/20 backdrop-blur-xl">
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <a href="/" className="flex items-center shrink-0">
                         <img
-                            src="/assets/fulllogo-dark.webp"
+                            src="/assets/fulllogo-light.webp"
                             alt="Recordio"
                             className="h-8 w-auto transition-opacity hover:opacity-80"
                         />
@@ -92,7 +91,7 @@ const Header = () => {
 
                         {/* Dropdown */}
                         <div
-                            className={`absolute right-0 top-full mt-4 w-48 rounded-xl bg-surface-body/70 backdrop-blur-2xl border border-border shadow-xl/20 overflow-hidden
+                            className={`absolute right-0 top-full mt-4 w-48 rounded-xl bg-white/90 backdrop-blur-2xl border border-border shadow-xl/20 overflow-hidden
                                         transition-all duration-200 origin-top-right
                                         ${menuOpen
                                     ? 'opacity-100 scale-100 pointer-events-auto'
