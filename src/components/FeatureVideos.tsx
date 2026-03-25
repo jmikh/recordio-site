@@ -107,15 +107,19 @@ const LazyVideo = ({ src }: { src: string }) => {
         const el = containerRef.current;
         if (!video || !el) return;
 
+        if (video.readyState >= 2) {
+            setIsLoaded(true);
+        }
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    video.play().catch(() => { });
+                    video.play().then(() => setIsLoaded(true)).catch(() => { });
                 } else {
                     video.pause();
                 }
             },
-            { threshold: 0.3 },
+            { threshold: 0.1 },
         );
         observer.observe(el);
         return () => observer.disconnect();
@@ -137,8 +141,10 @@ const LazyVideo = ({ src }: { src: string }) => {
                     muted
                     loop
                     playsInline
+                    autoPlay
                     preload="metadata"
                     onLoadedData={() => setIsLoaded(true)}
+                    onCanPlay={() => setIsLoaded(true)}
                     style={{
                         width: '100%',
                         height: '100%',
