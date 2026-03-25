@@ -148,7 +148,7 @@ const LazyVideo = ({ src }: { src: string }) => {
                         transition: 'opacity 0.4s ease',
                     }}
                 >
-                    <source src={src} type="video/mp4" />
+                    <source src={src} type="video/webm" />
                 </video>
             )}
         </div>
