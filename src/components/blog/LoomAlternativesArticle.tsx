@@ -1,6 +1,70 @@
-import BeforeAfterComparison from '../BeforeAfterComparison';
+import { useEffect, useRef, useCallback } from 'react';
+
+const CDN_BASE = '/videos';
 
 const LoomAlternativesArticle = () => {
+    const beforeRef = useRef<HTMLVideoElement>(null);
+    const afterRef = useRef<HTMLVideoElement>(null);
+    const videoSectionRef = useRef<HTMLDivElement>(null);
+    const hasStarted = useRef(false);
+
+    /* ── Start playback when videos enter viewport ── */
+    const startPlayback = useCallback(() => {
+        if (hasStarted.current) return;
+        const before = beforeRef.current;
+        const after = afterRef.current;
+        if (!before || !after) return;
+        hasStarted.current = true;
+        before.play().catch(() => {});
+        after.play().catch(() => {});
+    }, []);
+
+    useEffect(() => {
+        const el = videoSectionRef.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) startPlayback(); },
+            { threshold: 0.25 },
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [startPlayback]);
+
+    /* ── Keep videos frame-locked ── */
+    useEffect(() => {
+        const before = beforeRef.current;
+        const after = afterRef.current;
+        if (!before || !after) return;
+
+        let animationFrameId: number;
+
+        const syncLoop = () => {
+            // Master clock is 'before' video. If 'after' drifts by more than 0.1s, snap it back.
+            if (!before.paused && !before.ended) {
+                if (Math.abs(before.currentTime - after.currentTime) > 0.1) {
+                    after.currentTime = before.currentTime;
+                }
+            }
+            animationFrameId = requestAnimationFrame(syncLoop);
+        };
+
+        const forceSync = () => {
+            after.currentTime = before.currentTime;
+        };
+
+        before.addEventListener('seeked', forceSync);
+        before.addEventListener('play', forceSync);
+        before.addEventListener('playing', forceSync);
+
+        syncLoop();
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            before.removeEventListener('seeked', forceSync);
+            before.removeEventListener('play', forceSync);
+            before.removeEventListener('playing', forceSync);
+        };
+    }, []);
     return (
         <article className="prose max-w-3xl mx-auto px-6 py-12 md:py-20">
             {/* ── Back link ── */}
@@ -68,8 +132,42 @@ const LoomAlternativesArticle = () => {
             <p>Here's what the difference looks like:</p>
 
             {/* ── Before / After video showcase ── */}
-            <div className="my-12 -mx-6 md:-mx-16 lg:-mx-32">
-                <BeforeAfterComparison />
+            <div ref={videoSectionRef} className="my-12 -mx-6 md:-mx-16 lg:-mx-32 flex flex-col gap-4">
+                {/* After (Recordio) */}
+                <div className="relative">
+                    <div className="before-after-video before-after-video--after">
+                        <video
+                            ref={afterRef}
+                            src={`${CDN_BASE}/after.webm`}
+                            muted
+                            loop
+                            playsInline
+                            preload="metadata"
+                            className="w-full h-auto block"
+                        />
+                    </div>
+                    <span className="before-after-label before-after-label--after">
+                        RECORDIO
+                    </span>
+                </div>
+
+                {/* Before (Loom) */}
+                <div className="relative text-opacity-80">
+                    <div className="before-after-video opacity-80 backdrop-blur-sm grayscale-[20%]">
+                        <video
+                            ref={beforeRef}
+                            src={`${CDN_BASE}/before.webm`}
+                            muted
+                            loop
+                            playsInline
+                            preload="metadata"
+                            className="w-full h-auto block"
+                        />
+                    </div>
+                    <span className="before-after-label before-after-label--before">
+                        LOOM
+                    </span>
+                </div>
             </div>
 
             <p>
