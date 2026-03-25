@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import PlatformHero from "../../components/platform/PlatformHero";
+import FeatureVideos from "../../components/FeatureVideos";
+import Testimonials from "../../components/Testimonials";
+import Pricing from "../../components/Pricing";
+import FAQ from "../../components/FAQ";
+---
+
+<BaseLayout
+    title="Best Screen Recorder for Mac in 2026 — Recordio"
+    description="The best screen recorder for Mac. Auto-zoom, spotlight, captions, and a clean toolbar — all inside your browser. No app install needed. Free to start."
+    path="/for/mac"
+>
+    <Header client:load />
+
+    <main>
+        <PlatformHero
+            client:load
+            platformName="Mac"
+            headline="The best screen recorder for <span class='underline decoration-primary decoration-4 underline-offset-4'>Mac.</span>"
+            subheadline="No clunky desktop app. Recordio lives right in your browser — Chrome, Edge, or Brave on macOS. Hit record, and every video comes out polished with auto-zoom, spotlight, and captions."
+        />
+
+        <FeatureVideos client:visible />
+        <Testimonials client:visible />
+        <Pricing client:visible />
+        <FAQ client:visible />
+    </main>
+
+    <Footer client:visible source="for-mac" />
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import PlatformHero from "../../components/platform/PlatformHero";
+import FeatureVideos from "../../components/FeatureVideos";
+import Testimonials from "../../components/Testimonials";
+import Pricing from "../../components/Pricing";
+import FAQ from "../../components/FAQ";
+---
+
+<BaseLayout
+    title="Best Screen Recorder Chrome Extension in 2026 — Recordio"
+    description="The best screen recording Chrome extension. Auto-zoom, spotlight, and AI captions — no desktop app needed. Record, edit, and share polished videos in seconds. Free to start."
+    path="/for/chrome"
+>
+    <Header client:load />
+
+    <main>
+        <PlatformHero
+            client:load
+            platformName="Chrome"
+            tagLabel="Best Chrome Extension"
+            headline="The best screen recorder for <span class='underline decoration-primary decoration-4 underline-offset-4'>Chrome.</span>"
+            subheadline="A lightweight Chrome extension that turns raw screen recordings into polished product videos. Auto-zoom, spotlight, captions, and a clean toolbar — all without leaving your browser."
+        />
+
+        <FeatureVideos client:visible />
+        <Testimonials client:visible />
+        <Pricing client:visible />
+        <FAQ client:visible />
+    </main>
+
+    <Footer client:visible source="for-chrome" />
+</BaseLayout>

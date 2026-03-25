@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+---
+
+<BaseLayout
+    title="Best Screen Recorder by Platform — Recordio"
+    description="Find the best screen recorder for your platform. Recordio works on Mac, Windows, Linux, Ubuntu, and Chrome — all from a lightweight browser extension."
+    path="/for"
+>
+    <Header client:load />
+
+    <main>
+        <section class="relative overflow-hidden" style="background-color: var(--color-section-purple);">
+            <!-- Ambient glow -->
+            <div class="absolute inset-0 opacity-40 pointer-events-none">
+                <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-primary/15 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-32 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative z-10 max-w-4xl mx-auto px-6 pt-40 pb-24 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-text-highlighted mb-16 hero-entrance hero-entrance-delay-1">
+                    Best Screen Recorder For
+                </h1>
+
+                <div class="flex flex-wrap justify-center gap-4 hero-entrance hero-entrance-delay-2">
+                    <a href="/for/mac" class="compare-index-link">Mac</a>
+                    <a href="/for/windows" class="compare-index-link">Windows & PC</a>
+                    <a href="/for/linux" class="compare-index-link">Linux & Ubuntu</a>
+                    <a href="/for/chrome" class="compare-index-link">Chrome</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer client:visible source="for" />
+</BaseLayout>
