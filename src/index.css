@@ -142,15 +142,15 @@ html {
 }
 
 .hero-entrance-delay-2 {
-  animation-delay: 0.9s;
+  animation-delay: 0.4s;
 }
 
 .hero-entrance-delay-3 {
-  animation-delay: 1.6s;
+  animation-delay: 0.7s;
 }
 
 .hero-entrance-delay-4 {
-  animation-delay: 2.0s;
+  animation-delay: 1.0s;
 }
 
 @keyframes heroFadeIn {
@@ -416,9 +416,7 @@ html {
   animation-name: marquee-scroll-reverse;
 }
 
-.testimonial-marquee-wrapper:hover .testimonial-marquee-track {
-  animation-play-state: paused;
-}
+
 
 /* Feature Marquee — single-row horizontal auto-scroll */
 .feature-marquee-wrapper {
@@ -440,9 +438,7 @@ html {
   animation: marquee-scroll 45s linear infinite;
 }
 
-.feature-marquee-wrapper:hover .feature-marquee-track {
-  animation-play-state: paused;
-}
+
 
 .testimonial-card {
   flex-shrink: 0;

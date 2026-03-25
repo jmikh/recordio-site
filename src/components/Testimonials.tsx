@@ -169,7 +169,7 @@ const Testimonials = () => {
                     </a>
 
                     <h2 className="text-4xl md:text-5xl font-bold text-text-highlighted mb-4">
-                        Loved by <span className="gradient-text">Real Users</span>
+                        Loved by Real Users
                     </h2>
                     <p className="text-xl text-text-muted max-w-2xl mx-auto">
                         5 stars across every review. Here's what people are saying.

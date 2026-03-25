@@ -15,7 +15,7 @@ const Footer = ({ source = 'footer' }: { source?: string }) => {
                     <div className="flex flex-col items-center md:items-start gap-3">
                         <a href="/" className="inline-block">
                             <img
-                                src="/assets/fulllogo-dark.webp"
+                                src="/assets/fulllogo-light.webp"
                                 alt="Recordio logo"
                                 className="h-8 w-auto transition-opacity hover:opacity-80"
                             />
