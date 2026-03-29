@@ -4,19 +4,17 @@ import "../index.css";
 interface Props {
     title: string;
     description: string;
-    path?: string;
     ogImage?: string;
 }
 
 const {
     title,
     description,
-    path = "/",
     ogImage = "https://recordio.cc/og-image.png",
 } = Astro.props;
 
 const siteUrl = "https://recordio.cc";
-const canonicalUrl = `${siteUrl}${path}`;
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 ---
 
 <!doctype html>

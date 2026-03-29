@@ -1,4 +1,7 @@
-/sitemap.xml
+/sitemap-index.xml
+  Content-Type: application/xml; charset=utf-8
+
+/sitemap-0.xml
   Content-Type: application/xml; charset=utf-8
 
 /robots.txt
