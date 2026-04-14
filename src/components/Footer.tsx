@@ -43,11 +43,11 @@ const Footer = ({ source = 'footer' }: { source?: string }) => {
                         © {currentYear} Recordio. All rights reserved.
                     </div>
                     <div className="flex items-center gap-6 text-sm">
-                        <a href="/compare" className="text-text-muted hover:text-primary transition-colors">Compare</a>
-                        <a href="/for" className="text-text-muted hover:text-primary transition-colors">Platforms</a>
-                        <a href="/blog" className="text-text-muted hover:text-primary transition-colors">Blog</a>
-                        <a href="/privacy" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</a>
-                        <a href="/terms" className="text-text-muted hover:text-primary transition-colors">Terms of Service</a>
+                        <a href="/compare/" className="text-text-muted hover:text-primary transition-colors">Compare</a>
+                        <a href="/for/" className="text-text-muted hover:text-primary transition-colors">Platforms</a>
+                        <a href="/blog/" className="text-text-muted hover:text-primary transition-colors">Blog</a>
+                        <a href="/privacy/" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</a>
+                        <a href="/terms/" className="text-text-muted hover:text-primary transition-colors">Terms of Service</a>
                         <a href="mailto:support@recordio.cc" className="text-text-muted hover:text-primary transition-colors">Contact</a>
                     </div>
                 </div>

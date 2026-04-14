@@ -1,34 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 ---
 
 <BaseLayout
     title="Privacy Policy — Recordio"
     description="Learn how Recordio handles your data. Recordings stay on your device by default. Shared videos are hosted on Cloudflare Stream."
 >
-    <div class="min-h-screen relative overflow-hidden">
-        <!-- Animated Background -->
-        <div class="absolute inset-0 animated-gradient"></div>
-        <div class="absolute inset-0 gradient-mesh opacity-60"></div>
-
-        <!-- Floating particles -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div
-                class="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl float"
-            >
-            </div>
-            <div
-                class="absolute top-40 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl float"
-                style="animation-delay: 2s"
-            >
-            </div>
-            <div
-                class="absolute bottom-20 left-1/3 w-80 h-80 bg-primary-highlighted/10 rounded-full blur-3xl float"
-                style="animation-delay: 4s"
-            >
-            </div>
-        </div>
-
+    <Header client:load />
+    <main class="min-h-screen relative pb-16 mt-16 md:mt-24">
         <!-- Content -->
         <div class="relative z-10 max-w-4xl mx-auto px-6 py-16">
             <!-- Header -->
@@ -36,7 +17,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 <h1
                     class="text-5xl md:text-6xl font-bold text-text-highlighted mb-4"
                 >
-                    Privacy <span class="gradient-text">Policy</span>
+                    Privacy Policy
                 </h1>
                 <p class="text-xl text-text-muted">
                     Last updated: February 26, 2026
@@ -44,7 +25,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </div>
 
             <!-- Policy Content -->
-            <div class="glass rounded-3xl p-8 md:p-12 space-y-8">
+            <div class="rounded-3xl p-8 md:p-12 space-y-8 bg-surface-body">
                 <!-- Introduction -->
                 <section>
                     <p class="text-text-main text-lg leading-relaxed">
@@ -807,5 +788,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+    <Footer client:visible />
 </BaseLayout>
