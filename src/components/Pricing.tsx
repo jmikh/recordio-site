@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { getCWSLink } from '../utils/constants';
 import { trackInstallExtension } from '../utils/analytics';
-import { BsFillRocketTakeoffFill } from 'react-icons/bs';
-
 const Pricing = () => {
     const [isAnnual, setIsAnnual] = useState(true);
     const headerRef = useScrollReveal();
@@ -40,22 +38,6 @@ const Pricing = () => {
             cta: 'Get Started',
             ctaLink: getCWSLink('pricing-pro'),
             popular: true,
-            style: 'primary' as const,
-        },
-        {
-            name: 'Lifetime',
-            price: '$89',
-            period: 'one-time',
-            features: [
-                'Everything in Pro',
-                'Pay once, yours forever',
-                'Lifetime updates',
-                'Priority support',
-            ],
-            cta: 'Get Started',
-            ctaLink: getCWSLink('pricing-lifetime'),
-            popular: false,
-            bestValue: true,
             style: 'primary' as const,
         },
     ];
@@ -104,25 +86,11 @@ const Pricing = () => {
                                 </h3>
                             </div>
 
-                            {/* Launch Sale badge — Lifetime only */}
-                            {(plan as any).bestValue && (
-                                <div className="flex justify-center mb-3">
-                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">
-                                        <BsFillRocketTakeoffFill size={14} className="mr-0.5" /> Launch Sale
-                                    </span>
-                                </div>
-                            )}
-
                             {/* Price */}
                             <div className="text-center mb-4">
                                 {'price' in plan && (plan as any).price ? (
                                     <>
                                         <div className="flex items-baseline justify-center gap-2">
-                                            {(plan as any).bestValue && (
-                                                <span className="text-2xl text-text-muted line-through opacity-50">
-                                                    $119
-                                                </span>
-                                            )}
                                             <span className="text-5xl font-bold text-primary-highlighted">
                                                 {(plan as any).price}
                                             </span>
@@ -229,7 +197,7 @@ const Pricing = () => {
                                     })}
                                 </ul>
 
-                                {!plan.popular && !(plan as any).bestValue && (
+                                {!plan.popular && (
                                     <p className="text-center text-text-muted text-xs mb-3">
                                         Includes 7-day Pro trial — limited time
                                     </p>
@@ -242,16 +210,6 @@ const Pricing = () => {
                                         rel="noopener noreferrer"
                                         className="btn-primary w-full block text-center"
                                         onClick={() => trackInstallExtension('pricing-pro')}
-                                    >
-                                        {plan.cta}
-                                    </a>
-                                ) : (plan as any).bestValue ? (
-                                    <a
-                                        href={(plan as any).ctaLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="btn-primary w-full block text-center"
-                                        onClick={() => trackInstallExtension('pricing-lifetime')}
                                     >
                                         {plan.cta}
                                     </a>
