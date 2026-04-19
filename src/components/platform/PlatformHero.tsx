@@ -133,6 +133,7 @@ const PlatformHero = ({ platformName, headline, subheadline, tagLabel }: Platfor
                                 }}
                             >
                                 <source src="/videos/after.webm" type="video/webm" />
+                                <source src="/videos/after.mp4" type="video/mp4" />
                             </video>
                         )}
                     </div>

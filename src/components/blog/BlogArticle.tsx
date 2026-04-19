@@ -15,8 +15,28 @@ const BlogArticle = () => {
         const after = afterRef.current;
         if (!before || !after) return;
         hasStarted.current = true;
-        before.play().catch(() => {});
-        after.play().catch(() => {});
+
+        before.preload = 'auto';
+        after.preload = 'auto';
+        before.load();
+        after.load();
+
+        let played = false;
+
+        const tryPlay = () => {
+            if (played) return;
+            if (before.readyState >= 3 && after.readyState >= 3) {
+                played = true;
+                before.currentTime = 0;
+                after.currentTime = 0;
+                before.play().catch(() => {});
+                after.play().catch(() => {});
+            }
+        };
+
+        before.addEventListener('canplay', tryPlay);
+        after.addEventListener('canplay', tryPlay);
+        tryPlay();
     }, []);
 
     useEffect(() => {
@@ -30,40 +50,20 @@ const BlogArticle = () => {
         return () => observer.disconnect();
     }, [startPlayback]);
 
-    /* ── Keep videos frame-locked ── */
+    /* ── Gentle sync: only correct large drift ── */
     useEffect(() => {
         const before = beforeRef.current;
         const after = afterRef.current;
         if (!before || !after) return;
 
-        let animationFrameId: number;
-
-        const syncLoop = () => {
-            // Master clock is 'before' video. If 'after' drifts by more than 0.1s, snap it back.
-            if (!before.paused && !before.ended) {
-                if (Math.abs(before.currentTime - after.currentTime) > 0.1) {
-                    after.currentTime = before.currentTime;
-                }
+        const interval = setInterval(() => {
+            if (before.paused || after.paused) return;
+            if (Math.abs(before.currentTime - after.currentTime) > 0.5) {
+                after.currentTime = before.currentTime;
             }
-            animationFrameId = requestAnimationFrame(syncLoop);
-        };
+        }, 2000);
 
-        const forceSync = () => {
-            after.currentTime = before.currentTime;
-        };
-
-        before.addEventListener('seeked', forceSync);
-        before.addEventListener('play', forceSync);
-        before.addEventListener('playing', forceSync);
-
-        syncLoop();
-
-        return () => {
-            cancelAnimationFrame(animationFrameId);
-            before.removeEventListener('seeked', forceSync);
-            before.removeEventListener('play', forceSync);
-            before.removeEventListener('playing', forceSync);
-        };
+        return () => clearInterval(interval);
     }, []);
     return (
         <article className="prose max-w-3xl mx-auto px-6 py-12 md:py-20">
@@ -168,13 +168,15 @@ const BlogArticle = () => {
                     <div className="before-after-video before-after-video--after">
                         <video
                             ref={afterRef}
-                            src={`${CDN_BASE}/after.webm`}
                             muted
                             loop
                             playsInline
                             preload="metadata"
                             className="w-full h-auto block"
-                        />
+                        >
+                            <source src={`${CDN_BASE}/after.webm`} type="video/webm" />
+                            <source src={`${CDN_BASE}/after.mp4`} type="video/mp4" />
+                        </video>
                     </div>
                     <span className="before-after-label before-after-label--after">
                         RECORDIO
@@ -186,13 +188,15 @@ const BlogArticle = () => {
                     <div className="before-after-video opacity-80 backdrop-blur-sm grayscale-[20%]">
                         <video
                             ref={beforeRef}
-                            src={`${CDN_BASE}/before.webm`}
                             muted
                             loop
                             playsInline
                             preload="metadata"
                             className="w-full h-auto block"
-                        />
+                        >
+                            <source src={`${CDN_BASE}/before.webm`} type="video/webm" />
+                            <source src={`${CDN_BASE}/before.mp4`} type="video/mp4" />
+                        </video>
                     </div>
                     <span className="before-after-label before-after-label--before">
                         LOOM

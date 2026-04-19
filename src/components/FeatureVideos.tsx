@@ -155,6 +155,7 @@ const LazyVideo = ({ src }: { src: string }) => {
                     }}
                 >
                     <source src={src} type="video/webm" />
+                    <source src={src.replace('.webm', '.mp4')} type="video/mp4" />
                 </video>
             )}
         </div>

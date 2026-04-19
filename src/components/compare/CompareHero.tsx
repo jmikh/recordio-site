@@ -116,6 +116,7 @@ const CompareHero = ({ competitorName, headline, subheadline }: CompareHeroProps
                                 }}
                             >
                                 <source src="/videos/after.webm" type="video/webm" />
+                                <source src="/videos/after.mp4" type="video/mp4" />
                             </video>
                         )}
                     </div>
