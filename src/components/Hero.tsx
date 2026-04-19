@@ -15,15 +15,28 @@ const Hero = () => {
         setTypewriterKey(k => k + 1);
     }, []);
 
-    /* ── Start playback when videos enter viewport ── */
+    /* ── Wait for both videos to be ready, then start together ── */
     const startPlayback = useCallback(() => {
         if (hasStarted.current) return;
         const before = beforeRef.current;
         const after = afterRef.current;
         if (!before || !after) return;
         hasStarted.current = true;
-        before.play().catch(() => {});
-        after.play().catch(() => {});
+
+        const tryPlay = () => {
+            if (before.readyState >= 3 && after.readyState >= 3) {
+                // Both have enough data — align and go
+                before.currentTime = 0;
+                after.currentTime = 0;
+                before.play().catch(() => {});
+                after.play().catch(() => {});
+            }
+        };
+
+        before.addEventListener('canplaythrough', tryPlay);
+        after.addEventListener('canplaythrough', tryPlay);
+        // In case they're already ready
+        tryPlay();
     }, []);
 
     useEffect(() => {
@@ -43,35 +56,54 @@ const Hero = () => {
         const after = afterRef.current;
         if (!before || !after) return;
 
-        let animationFrameId: number;
+        let rafId: number;
 
         const syncLoop = () => {
-            // Master clock is 'before' video. If 'after' drifts by more than 0.1s, snap it back.
-            if (!before.paused && !before.ended) {
-                if (Math.abs(before.currentTime - after.currentTime) > 0.1) {
+            if (!before.paused && !before.ended && !after.paused && !after.ended) {
+                const drift = before.currentTime - after.currentTime;
+                if (Math.abs(drift) > 0.1) {
                     after.currentTime = before.currentTime;
                 }
             }
-            animationFrameId = requestAnimationFrame(syncLoop);
+            rafId = requestAnimationFrame(syncLoop);
         };
 
-        // Aggressively sync on seek/play events too
-        const forceSync = () => {
+        // When either video stalls, pause the other so they stay together
+        const onBeforeWaiting = () => { if (!after.paused) after.pause(); };
+        const onAfterWaiting = () => { if (!before.paused) before.pause(); };
+
+        // When a stalled video resumes, sync and restart both
+        const onBeforePlaying = () => {
             after.currentTime = before.currentTime;
+            if (after.paused && after.readyState >= 3) after.play().catch(() => {});
+        };
+        const onAfterPlaying = () => {
+            before.currentTime = after.currentTime;
+            if (before.paused && before.readyState >= 3) before.play().catch(() => {});
         };
 
-        before.addEventListener('seeked', forceSync);
-        before.addEventListener('play', forceSync);
-        before.addEventListener('playing', forceSync);
+        // Sync loop resets — when master loops, reset follower too
+        const onBeforeLoop = () => {
+            if (before.currentTime < 0.5) {
+                after.currentTime = 0;
+            }
+        };
 
-        // Start the polling loop
-        syncLoop();
+        before.addEventListener('waiting', onBeforeWaiting);
+        after.addEventListener('waiting', onAfterWaiting);
+        before.addEventListener('playing', onBeforePlaying);
+        after.addEventListener('playing', onAfterPlaying);
+        before.addEventListener('timeupdate', onBeforeLoop);
+
+        rafId = requestAnimationFrame(syncLoop);
 
         return () => {
-            cancelAnimationFrame(animationFrameId);
-            before.removeEventListener('seeked', forceSync);
-            before.removeEventListener('play', forceSync);
-            before.removeEventListener('playing', forceSync);
+            cancelAnimationFrame(rafId);
+            before.removeEventListener('waiting', onBeforeWaiting);
+            after.removeEventListener('waiting', onAfterWaiting);
+            before.removeEventListener('playing', onBeforePlaying);
+            after.removeEventListener('playing', onAfterPlaying);
+            before.removeEventListener('timeupdate', onBeforeLoop);
         };
     }, []);
 
@@ -129,13 +161,15 @@ const Hero = () => {
                             <div className="before-after-video before-after-video--after">
                                 <video
                                     ref={afterRef}
-                                    src={`${CDN_BASE}/after.webm`}
                                     muted
                                     loop
                                     playsInline
                                     preload="metadata"
                                     className="w-full h-auto block"
-                                />
+                                >
+                                    <source src={`${CDN_BASE}/after.webm`} type="video/webm" />
+                                    <source src={`${CDN_BASE}/after.mp4`} type="video/mp4" />
+                                </video>
                             </div>
                             <span className="before-after-label before-after-label--after">
                                 RECORDIO
@@ -147,13 +181,15 @@ const Hero = () => {
                             <div className="before-after-video opacity-80 backdrop-blur-sm grayscale-[20%]">
                                 <video
                                     ref={beforeRef}
-                                    src={`${CDN_BASE}/before.webm`}
                                     muted
                                     loop
                                     playsInline
                                     preload="metadata"
                                     className="w-full h-auto block"
-                                />
+                                >
+                                    <source src={`${CDN_BASE}/before.webm`} type="video/webm" />
+                                    <source src={`${CDN_BASE}/before.mp4`} type="video/mp4" />
+                                </video>
                             </div>
                             <span className="before-after-label before-after-label--before">
                                 LOOM
