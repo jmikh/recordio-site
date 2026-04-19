@@ -15,7 +15,7 @@ const Hero = () => {
         setTypewriterKey(k => k + 1);
     }, []);
 
-    /* ── Wait for both videos to be ready, then start together ── */
+    /* ── Start playback when videos enter viewport ── */
     const startPlayback = useCallback(() => {
         if (hasStarted.current) return;
         const before = beforeRef.current;
@@ -23,9 +23,18 @@ const Hero = () => {
         if (!before || !after) return;
         hasStarted.current = true;
 
+        // Kick off loading, then play together once both are ready
+        before.preload = 'auto';
+        after.preload = 'auto';
+        before.load();
+        after.load();
+
+        let played = false;
+
         const tryPlay = () => {
+            if (played) return;
             if (before.readyState >= 3 && after.readyState >= 3) {
-                // Both have enough data — align and go
+                played = true;
                 before.currentTime = 0;
                 after.currentTime = 0;
                 before.play().catch(() => {});
@@ -33,9 +42,8 @@ const Hero = () => {
             }
         };
 
-        before.addEventListener('canplaythrough', tryPlay);
-        after.addEventListener('canplaythrough', tryPlay);
-        // In case they're already ready
+        before.addEventListener('canplay', tryPlay);
+        after.addEventListener('canplay', tryPlay);
         tryPlay();
     }, []);
 
@@ -50,61 +58,22 @@ const Hero = () => {
         return () => observer.disconnect();
     }, [startPlayback]);
 
-    /* ── Keep videos frame-locked ── */
+    /* ── Gentle sync: only correct large drift, no mid-playback seeks ── */
     useEffect(() => {
         const before = beforeRef.current;
         const after = afterRef.current;
         if (!before || !after) return;
 
-        let rafId: number;
-
-        const syncLoop = () => {
-            if (!before.paused && !before.ended && !after.paused && !after.ended) {
-                const drift = before.currentTime - after.currentTime;
-                if (Math.abs(drift) > 0.1) {
-                    after.currentTime = before.currentTime;
-                }
+        // Check drift every 2 seconds — only correct if >500ms off
+        const interval = setInterval(() => {
+            if (before.paused || after.paused) return;
+            const drift = Math.abs(before.currentTime - after.currentTime);
+            if (drift > 0.5) {
+                after.currentTime = before.currentTime;
             }
-            rafId = requestAnimationFrame(syncLoop);
-        };
+        }, 2000);
 
-        // When either video stalls, pause the other so they stay together
-        const onBeforeWaiting = () => { if (!after.paused) after.pause(); };
-        const onAfterWaiting = () => { if (!before.paused) before.pause(); };
-
-        // When a stalled video resumes, sync and restart both
-        const onBeforePlaying = () => {
-            after.currentTime = before.currentTime;
-            if (after.paused && after.readyState >= 3) after.play().catch(() => {});
-        };
-        const onAfterPlaying = () => {
-            before.currentTime = after.currentTime;
-            if (before.paused && before.readyState >= 3) before.play().catch(() => {});
-        };
-
-        // Sync loop resets — when master loops, reset follower too
-        const onBeforeLoop = () => {
-            if (before.currentTime < 0.5) {
-                after.currentTime = 0;
-            }
-        };
-
-        before.addEventListener('waiting', onBeforeWaiting);
-        after.addEventListener('waiting', onAfterWaiting);
-        before.addEventListener('playing', onBeforePlaying);
-        after.addEventListener('playing', onAfterPlaying);
-        before.addEventListener('timeupdate', onBeforeLoop);
-
-        rafId = requestAnimationFrame(syncLoop);
-
-        return () => {
-            cancelAnimationFrame(rafId);
-            before.removeEventListener('waiting', onBeforeWaiting);
-            after.removeEventListener('waiting', onAfterWaiting);
-            before.removeEventListener('playing', onBeforePlaying);
-            after.removeEventListener('playing', onAfterPlaying);
-            before.removeEventListener('timeupdate', onBeforeLoop);
-        };
+        return () => clearInterval(interval);
     }, []);
 
     return (
