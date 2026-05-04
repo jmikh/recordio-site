@@ -7,7 +7,7 @@ import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
 
 <BaseLayout
     title="Privacy Policy — Recordio"
-    description="Learn how Recordio handles your data. Recordings stay on your device by default. Shared videos are hosted on Cloudflare Stream."
+    description="Learn how Recordio handles your data. Recordings are securely stored in the cloud via Supabase and AWS S3."
 >
     <Header client:load />
     <main class="min-h-screen relative pb-16 mt-16 md:mt-24">
@@ -21,7 +21,7 @@ import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
                     Privacy Policy
                 </h1>
                 <p class="text-xl text-text-muted">
-                    Last updated: February 26, 2026
+                    Last updated: May 4, 2026
                 </p>
             </div>
 
@@ -35,7 +35,7 @@ import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
                         >, we take your privacy seriously. This Privacy Policy
                         explains how we collect, use, store, and protect your
                         personal information when you use our Chrome extension,
-                        web application, and related services.
+                        web application, cloud platform, and related services.
                     </p>
                 </section>
 
@@ -115,8 +115,8 @@ import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
                                     <span
                                         ><strong class="text-text-highlighted"
                                             >Project metadata</strong
-                                        > (e.g. creation date, duration) — video content
-                                        stays in your browser</span
+                                        > (e.g. creation date, duration) and video
+                                        content stored securely in the cloud</span
                                     >
                                 </li>
                                 <li class="flex items-start">
@@ -332,17 +332,17 @@ import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
                                     <h3
                                         class="text-text-highlighted font-semibold"
                                     >
-                                        Local Browser Storage
+                                        Cloud Storage
                                     </h3>
                                     <p class="text-text-main">
                                         Your video recordings and projects are
-                                        stored <strong>locally</strong> in your browser's
-                                        IndexedDB by default. If you use the shareable
-                                        links feature, your video is uploaded to <strong
-                                            >Cloudflare Stream</strong
-                                        > for hosting and delivery. You can delete
-                                        a shared video at any time, which permanently
-                                        removes it from Cloudflare's servers.
+                                        uploaded via <strong>Supabase</strong> and
+                                        stored securely in <strong>AWS S3</strong>.
+                                        Shared videos are delivered through <strong
+                                            >Mux</strong
+                                        > for playback. You can delete your videos
+                                        at any time, which permanently removes them
+                                        from our servers.
                                     </p>
                                 </div>
                             </div>
@@ -606,19 +606,17 @@ import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
                             <li class="flex items-start">
                                 <span class="text-secondary mr-2">•</span><span
                                     ><strong class="text-text-highlighted"
-                                        >Hugging Face:</strong
-                                    > AI model hosting for captions. Models are downloaded
-                                    to your browser and run locally — your audio is
-                                    never sent to external servers</span>
+                                        >AWS S3:</strong
+                                    > Secure cloud storage for your video recordings
+                                    and project files</span>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-secondary mr-2">•</span><span
                                     ><strong class="text-text-highlighted"
-                                        >Cloudflare Stream:</strong
+                                        >Mux:</strong
                                     > Video hosting and delivery for shared videos.
-                                    Only videos you explicitly share via shareable
-                                    links are uploaded. You can delete a shared video
-                                    at any time to permanently remove it from Cloudflare</span>
+                                    You can delete a shared video at any time to
+                                    permanently remove it</span>
                             </li>
                         </ul>
                     </div>
