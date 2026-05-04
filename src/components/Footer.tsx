@@ -1,5 +1,5 @@
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { getCWSLink } from '../utils/constants';
+import { getCWSLink, SUPPORT_EMAIL } from '../utils/constants';
 import { trackInstallExtension } from '../utils/analytics';
 
 const Footer = ({ source = 'footer' }: { source?: string }) => {
@@ -48,7 +48,7 @@ const Footer = ({ source = 'footer' }: { source?: string }) => {
                         <a href="/blog/" className="text-text-muted hover:text-primary transition-colors">Blog</a>
                         <a href="/privacy/" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</a>
                         <a href="/terms/" className="text-text-muted hover:text-primary transition-colors">Terms of Service</a>
-                        <a href="mailto:support@recordio.cc" className="text-text-muted hover:text-primary transition-colors">Contact</a>
+                        <a href={`mailto:${SUPPORT_EMAIL}`} className="text-text-muted hover:text-primary transition-colors">Contact</a>
                     </div>
                 </div>
             </div>

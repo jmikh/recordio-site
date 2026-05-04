@@ -2,6 +2,31 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogArticle from "../../components/blog/BlogArticle";
 import Footer from "../../components/Footer";
+import { SITE_URL } from "../../utils/constants";
+
+const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Best Screen Recorders in 2026: An Honest Comparison",
+    "description": "An honest comparison of the best screen recorders in 2026. See how Recordio's DOM-aware auto-zoom and 3D spotlight compare to Screen Studio and Focusee.",
+    "datePublished": "2026-03-05",
+    "dateModified": "2026-03-05",
+    "author": {
+        "@type": "Person",
+        "name": "John Mikhail",
+        "jobTitle": "Founder of Recordio",
+        "description": "MIT grad, previously at Google and Mixpanel, tech and AI enthusiast"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Recordio",
+        "url": SITE_URL
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `${SITE_URL}/blog/best-screen-recorders-2026`
+    }
+});
 ---
 
 <BaseLayout
@@ -14,28 +39,4 @@ import Footer from "../../components/Footer";
     <Footer source="blog_best-screen-recorders-2026" client:visible />
 </BaseLayout>
 
-<script type="application/ld+json" is:inline>
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Best Screen Recorders in 2026: An Honest Comparison",
-        "description": "An honest comparison of the best screen recorders in 2026. See how Recordio's DOM-aware auto-zoom and 3D spotlight compare to Screen Studio and Focusee.",
-        "datePublished": "2026-03-05",
-        "dateModified": "2026-03-05",
-        "author": {
-            "@type": "Person",
-            "name": "John Mikhail",
-            "jobTitle": "Founder of Recordio",
-            "description": "MIT grad, previously at Google and Mixpanel, tech and AI enthusiast"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Recordio",
-            "url": "https://recordio.cc"
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://recordio.cc/blog/best-screen-recorders-2026"
-        }
-    }
-</script>
+<script type="application/ld+json" set:html={jsonLd} />

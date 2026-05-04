@@ -1,6 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-
-const CDN_BASE = '/videos';
+import { VIDEOS_BASE } from '../../utils/constants';
 
 const BlogArticle = () => {
     const beforeRef = useRef<HTMLVideoElement>(null);
@@ -174,8 +173,8 @@ const BlogArticle = () => {
                             preload="metadata"
                             className="w-full h-auto block"
                         >
-                            <source src={`${CDN_BASE}/after.webm`} type="video/webm" />
-                            <source src={`${CDN_BASE}/after.mp4`} type="video/mp4" />
+                            <source src={`${VIDEO_BASE}/after.webm`} type="video/webm" />
+                            <source src={`${VIDEO_BASE}/after.mp4`} type="video/mp4" />
                         </video>
                     </div>
                     <span className="before-after-label before-after-label--after">
@@ -194,8 +193,8 @@ const BlogArticle = () => {
                             preload="metadata"
                             className="w-full h-auto block"
                         >
-                            <source src={`${CDN_BASE}/before.webm`} type="video/webm" />
-                            <source src={`${CDN_BASE}/before.mp4`} type="video/mp4" />
+                            <source src={`${VIDEO_BASE}/before.webm`} type="video/webm" />
+                            <source src={`${VIDEO_BASE}/before.mp4`} type="video/mp4" />
                         </video>
                     </div>
                     <span className="before-after-label before-after-label--before">

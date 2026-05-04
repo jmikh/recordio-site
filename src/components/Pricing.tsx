@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { getCWSLink } from '../utils/constants';
+import { getCWSLink, SUPPORT_EMAIL } from '../utils/constants';
 import { trackInstallExtension } from '../utils/analytics';
 const Pricing = () => {
     const [isAnnual, setIsAnnual] = useState(true);
@@ -233,10 +233,10 @@ const Pricing = () => {
                 <p className="text-center text-text-muted text-sm mt-10">
                     Looking to get Recordio for your team?{' '}
                     Contact <a
-                        href="mailto:support@recordio.cc"
+                        href={`mailto:${SUPPORT_EMAIL}`}
                         className="text-text-highlighted hover:underline"
                     >
-                        support@recordio.cc
+                        {SUPPORT_EMAIL}
                     </a>
                 </p>
 

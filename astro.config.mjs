@@ -3,7 +3,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-    site: 'https://recordio.cc',
+    site: 'https://recordio.io',
     trailingSlash: 'always',
     integrations: [
         react(),

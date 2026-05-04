@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { getCWSLink } from '../utils/constants';
+import { getCWSLink, VIDEOS_BASE } from '../utils/constants';
 import { trackInstallExtension } from '../utils/analytics';
-
-const CDN_BASE = '/videos';
 
 const Hero = () => {
     const [typewriterKey, setTypewriterKey] = useState(0);
@@ -136,8 +134,8 @@ const Hero = () => {
                                     preload="metadata"
                                     className="w-full h-auto block"
                                 >
-                                    <source src={`${CDN_BASE}/after.webm`} type="video/webm" />
-                                    <source src={`${CDN_BASE}/after.mp4`} type="video/mp4" />
+                                    <source src={`${VIDEOS_BASE}/after.webm`} type="video/webm" />
+                                    <source src={`${VIDEOS_BASE}/after.mp4`} type="video/mp4" />
                                 </video>
                             </div>
                             <span className="before-after-label before-after-label--after">
@@ -156,8 +154,8 @@ const Hero = () => {
                                     preload="metadata"
                                     className="w-full h-auto block"
                                 >
-                                    <source src={`${CDN_BASE}/before.webm`} type="video/webm" />
-                                    <source src={`${CDN_BASE}/before.mp4`} type="video/mp4" />
+                                    <source src={`${VIDEOS_BASE}/before.webm`} type="video/webm" />
+                                    <source src={`${VIDEOS_BASE}/before.mp4`} type="video/mp4" />
                                 </video>
                             </div>
                             <span className="before-after-label before-after-label--before">

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-
-const CDN_BASE = '/videos';
+import { VIDEOS_BASE, SUPPORT_EMAIL } from '../../utils/constants';
 
 const LoomAlternativesArticle = () => {
     const beforeRef = useRef<HTMLVideoElement>(null);
@@ -144,8 +143,8 @@ const LoomAlternativesArticle = () => {
                             preload="metadata"
                             className="w-full h-auto block"
                         >
-                            <source src={`${CDN_BASE}/after.webm`} type="video/webm" />
-                            <source src={`${CDN_BASE}/after.mp4`} type="video/mp4" />
+                            <source src={`${VIDEOS_BASE}/after.webm`} type="video/webm" />
+                            <source src={`${VIDEOS_BASE}/after.mp4`} type="video/mp4" />
                         </video>
                     </div>
                     <span className="before-after-label before-after-label--after">
@@ -164,8 +163,8 @@ const LoomAlternativesArticle = () => {
                             preload="metadata"
                             className="w-full h-auto block"
                         >
-                            <source src={`${CDN_BASE}/before.webm`} type="video/webm" />
-                            <source src={`${CDN_BASE}/before.mp4`} type="video/mp4" />
+                            <source src={`${VIDEOS_BASE}/before.webm`} type="video/webm" />
+                            <source src={`${VIDEOS_BASE}/before.mp4`} type="video/mp4" />
                         </video>
                     </div>
                     <span className="before-after-label before-after-label--before">
@@ -258,7 +257,7 @@ const LoomAlternativesArticle = () => {
                 behind every recording. Videos are only uploaded if you choose to share them via a link.
                 That means Recordio can offer significantly lower pricing than tools like Loom that
                 process everything server-side. For team pricing, reach out
-                to <a href="mailto:support@recordio.cc">support@recordio.cc</a>.
+                to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
             </p>
 
             <hr />

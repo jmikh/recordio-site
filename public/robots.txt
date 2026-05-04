@@ -3,4 +3,4 @@ Allow: /
 Disallow: /auth/callback
 Disallow: /subscription-success
 
-Sitemap: https://recordio.cc/sitemap-index.xml
+Sitemap: https://recordio.io/sitemap-index.xml

@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
 ---
 
 <BaseLayout
@@ -519,10 +520,10 @@ import Footer from "../components/Footer";
                                 To exercise any of these rights, please contact
                                 us at
                                 <a
-                                    href="mailto:support@recordio.cc"
+                                    href={`mailto:${SUPPORT_EMAIL}`}
                                     class="text-primary-highlighted hover:text-secondary underline font-semibold"
                                 >
-                                    support@recordio.cc
+                                    {SUPPORT_EMAIL}
                                 </a>
                             </p>
                         </div>
@@ -726,7 +727,7 @@ import Footer from "../components/Footer";
                         </p>
                         <div class="flex flex-col space-y-3">
                             <a
-                                href="mailto:support@recordio.cc"
+                                href={`mailto:${SUPPORT_EMAIL}`}
                                 class="text-primary-highlighted hover:text-secondary underline text-lg font-semibold flex items-center"
                             >
                                 <svg
@@ -741,10 +742,10 @@ import Footer from "../components/Footer";
                                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                                     ></path></svg
                                 >
-                                support@recordio.cc
+                                {SUPPORT_EMAIL}
                             </a>
                             <a
-                                href="https://recordio.cc"
+                                href={SITE_DOMAIN}
                                 class="text-text-main hover:text-primary-highlighted flex items-center"
                             >
                                 <svg
@@ -759,7 +760,7 @@ import Footer from "../components/Footer";
                                         d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
                                     ></path></svg
                                 >
-                                https://recordio.cc
+                                {SITE_DOMAIN}
                             </a>
                         </div>
                     </div>

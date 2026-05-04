@@ -1,3 +1,7 @@
+export const SITE_URL = 'https://recordio.io';
+export const SUPPORT_EMAIL = 'john@recordio.io';
+export const VIDEOS_BASE = '/videos';
+
 /**
  * Chrome Web Store listing URL for Recordio.
  * All CWS links on the site should use getCWSLink() to include UTM tracking.
