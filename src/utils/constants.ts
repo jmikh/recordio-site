@@ -1,4 +1,5 @@
 export const SITE_URL = 'https://recordio.io';
+export const SITE_DOMAIN = 'recordio.io';
 export const SUPPORT_EMAIL = 'john@recordio.io';
 export const VIDEOS_BASE = '/videos';
 
