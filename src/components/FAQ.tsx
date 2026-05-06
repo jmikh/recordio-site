@@ -5,15 +5,15 @@ import { trackFaqExpanded } from '../utils/analytics';
 const faqs = [
     {
         question: 'Is Recordio free?',
-        answer: 'Yes — record, edit, and export as many videos as you want for free. You get unlimited 720p exports with a small Recordio watermark. For a limited time, new users also get a free 1-week Pro trial with unlimited 4K exports and no watermark.',
+        answer: 'Yes! Recordio offers a generous free plan that includes auto-zoom, automatic silence cutting, and more — no credit card required. Free users get up to 5 recordings with videos available for 7 days. When you need more, Pro unlocks unlimited recordings, cloud rendering, longer video retention, and premium transcription.',
     },
     {
-        question: 'Do I need an account?',
-        answer: 'No. You can record, edit, and export without signing up. An account is only needed to claim your free Pro trial or upgrade to Pro.',
+        question: 'What\'s the difference between Free and Pro?',
+        answer: 'The Free plan gives you up to 5 recordings with all the core smart-editing features. Videos expire after 7 days, transcription uses a lightweight local model, and rendering happens in your browser (the tab needs to stay in focus). Pro removes all those limits — you get unlimited recordings that never expire, cloud rendering so you can close your tab, transcription powered by a top-tier OpenAI model, and the ability to restore deleted videos for up to 30 days.',
     },
-    {
-        question: 'Do my recordings leave my computer?',
-        answer: 'By default, no. Your recordings, edits, and projects stay on your computer. Captions are also generated locally on your device — your content is never uploaded to any server. If you use the shareable links feature, your video is uploaded to Cloudflare Stream for hosting. You can delete it at any time and it will be permanently removed.',
+{
+        question: 'What does "browser rendering" mean?',
+        answer: 'On the Free plan, your video is rendered right in your browser. It works great, but the tab needs to stay open and in focus while rendering. Pro users get cloud rendering — your video is processed on our servers so you can close the tab and come back when it\'s ready.',
     },
     {
         question: 'How is Recordio different from other screen recorders?',

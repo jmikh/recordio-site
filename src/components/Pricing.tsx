@@ -9,31 +9,34 @@ const Pricing = () => {
 
     const plans = [
         {
-            name: 'Basic',
-            price: 'Free',
-            period: 'No credit card',
+            name: 'FREE',
+            price: '$0',
+            period: '/ forever',
+            priceNote: 'No card needed',
             features: [
-                'Unlimited 720p exports',
-                'Unlimited projects',
-                'Auto Zoom, Spotlight & Captions',
-                '~No HD exports',
-                '~Recordio watermark',
+                'Auto-zooms, auto cut silences & more',
+                'Up to 5 recordings',
+                'Video expires after 7 days',
+                'Transcription via small local model',
+                'Rendering in the browser (tab must stay in focus)',
             ],
-            cta: 'Start Free',
+            cta: 'Your current plan',
             ctaLink: getCWSLink('pricing'),
             popular: false,
             style: 'secondary' as const,
         },
         {
-            name: 'Pro',
-            price: isAnnual ? '$48' : '$15',
-            period: isAnnual ? '/ year' : '/ month',
-            priceNote: isAnnual ? 'Just $4/month' : '$4/month if billed annually',
+            name: 'PRO',
+            price: isAnnual ? '$12' : '$15',
+            period: '/ month',
+            priceNote: isAnnual ? 'Billed annually' : 'Billed monthly',
             features: [
-                'Everything in Free, plus:',
-                'Unlimited 4K exports',
-                'No watermarks',
-                'Shareable links',
+                '**Everything in Free**',
+                '**Cloud rendering**',
+                '**Unlimited recordings**',
+                '**Transcription via top OpenAI model**',
+                '**No video expiration**',
+                '**Restore deleted videos within 30 days**',
             ],
             cta: 'Get Started',
             ctaLink: getCWSLink('pricing-pro'),
@@ -74,7 +77,7 @@ const Pricing = () => {
                             {plan.popular && (
                                 <div className="absolute -top-[14px] left-1/2 -translate-x-1/2">
                                     <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[0.65rem] font-bold uppercase tracking-wider bg-primary text-text-on-primary shadow-md border border-primary-highlighted whitespace-nowrap">
-                                        Most Popular
+                                        Recommended
                                     </span>
                                 </div>
                             )}
@@ -135,61 +138,35 @@ const Pricing = () => {
                                                 }`}
                                         >
                                             Annual
-                                            <span className="ml-1 opacity-80">-73%</span>
+                                            <span className="ml-1 opacity-80">-20%</span>
                                         </button>
                                     </div>
                                 </div>
                             )}
+
                             {/* Features + CTA pushed to bottom */}
                             <div className="mt-auto">
                                 {/* Features */}
                                 <ul className="space-y-4 mb-8">
                                     {plan.features.map((feature: string, featureIndex: number) => {
-                                        const isNegative = feature.startsWith('~');
-                                        const label = isNegative ? feature.slice(1) : feature;
+                                        const isBold = feature.startsWith('**') && feature.endsWith('**');
+                                        const label = isBold ? feature.slice(2, -2) : feature;
                                         return (
                                             <li key={featureIndex} className="flex items-start">
-                                                {isNegative ? (
-                                                    <svg
-                                                        className="w-5 h-5 mr-3 flex-shrink-0 mt-0.5 text-text-muted opacity-40"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth={2}
-                                                            d="M5 12h14"
-                                                        />
-                                                    </svg>
-                                                ) : (
-                                                    <svg
-                                                        className={`w-5 h-5 mr-3 flex-shrink-0 mt-0.5 ${feature.startsWith('Everything')
-                                                            ? 'text-text-muted'
-                                                            : 'text-secondary'
-                                                            }`}
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            strokeWidth={2}
-                                                            d="M5 13l4 4L19 7"
-                                                        />
-                                                    </svg>
-                                                )}
-                                                <span
-                                                    className={
-                                                        isNegative
-                                                            ? 'text-text-muted opacity-60'
-                                                            : feature.startsWith('Everything')
-                                                                ? 'text-text-muted font-semibold'
-                                                                : 'text-text-main'
-                                                    }
+                                                <svg
+                                                    className="w-5 h-5 mr-3 flex-shrink-0 mt-0.5 text-secondary"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
                                                 >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M5 13l4 4L19 7"
+                                                    />
+                                                </svg>
+                                                <span className={isBold ? 'text-text-main font-semibold' : 'text-text-main'}>
                                                     {label}
                                                 </span>
                                             </li>
@@ -197,11 +174,6 @@ const Pricing = () => {
                                     })}
                                 </ul>
 
-                                {!plan.popular && (
-                                    <p className="text-center text-text-muted text-xs mb-3">
-                                        Includes 7-day Pro trial — limited time
-                                    </p>
-                                )}
                                 {/* CTA Button */}
                                 {plan.popular ? (
                                     <a
