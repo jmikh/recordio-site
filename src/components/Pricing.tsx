@@ -10,20 +10,36 @@ const Pricing = () => {
 
     const plans = [
         {
+            name: 'FREE',
+            price: '$0',
+            period: '/ forever',
+            priceNote: 'No credit card needed',
+            features: [
+                'Auto smart zooms, spotlights & more',
+                'Automatic silence cutting',
+                '1080p downloads',
+                'Beautiful music & background library',
+                'Up to 5 active projects',
+            ],
+            cta: 'Start For Free',
+            ctaLink: getCWSLink('pricing'),
+            highlight: false,
+        },
+        {
             name: 'PRO',
             price: isAnnual ? '$12' : '$15',
             period: '/ seat / month',
             priceNote: isAnnual ? 'Billed annually' : 'Billed monthly',
             features: [
+                '**Everything in Free**',
                 '4K exports',
                 'Auto-generated captions',
                 'Collaboration and team library',
-                'Automatic zooms, spotlights and more',
+                'Unlimited viewer seats',
                 'Shareable links',
             ],
-            cta: 'Start For Free',
+            cta: 'Get Pro',
             ctaLink: getCWSLink('pricing-pro'),
-            popular: true,
             highlight: true,
         },
     ];
@@ -70,11 +86,14 @@ const Pricing = () => {
                 </div>
 
                 {/* Pricing Cards */}
-                <div ref={cardsRef} className="flex flex-wrap justify-center gap-8 scroll-reveal scroll-reveal-delay-2">
+                <div ref={cardsRef} className="flex flex-wrap justify-center items-center gap-8 scroll-reveal scroll-reveal-delay-2">
                     {plans.map((plan, index) => (
                         <div
                             key={index}
-                            className="relative w-88 flex flex-col card-premium ring-2 ring-primary scale-100 md:scale-105"
+                            className={`relative w-88 flex flex-col ${plan.highlight
+                                ? 'card-premium ring-2 ring-primary scale-100 md:scale-105'
+                                : 'card-premium'
+                                }`}
                         >
                             {/* Plan Name */}
                             <div className="text-center mb-6">
@@ -97,24 +116,30 @@ const Pricing = () => {
                             {/* Features + CTA pushed to bottom */}
                             <div className="mt-auto">
                                 <ul className="space-y-4 mb-8">
-                                    {plan.features.map((feature: string, featureIndex: number) => (
-                                        <li key={featureIndex} className="flex items-start">
-                                            <svg
-                                                className="w-5 h-5 mr-3 shrink-0 mt-0.5 text-secondary"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M5 13l4 4L19 7"
-                                                />
-                                            </svg>
-                                            <span className="text-text-main">{feature}</span>
-                                        </li>
-                                    ))}
+                                    {plan.features.map((feature: string, featureIndex: number) => {
+                                        const isBold = feature.startsWith('**') && feature.endsWith('**');
+                                        const label = isBold ? feature.slice(2, -2) : feature;
+                                        return (
+                                            <li key={featureIndex} className="flex items-start">
+                                                <svg
+                                                    className="w-5 h-5 mr-3 shrink-0 mt-0.5 text-secondary"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M5 13l4 4L19 7"
+                                                    />
+                                                </svg>
+                                                <span className={isBold ? 'text-text-main font-semibold' : 'text-text-main'}>
+                                                    {label}
+                                                </span>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
 
                                 {/* CTA Button */}
@@ -122,8 +147,8 @@ const Pricing = () => {
                                     href={plan.ctaLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="btn-primary w-full block text-center"
-                                    onClick={() => trackInstallExtension('pricing-pro')}
+                                    className={`${plan.highlight ? 'btn-primary' : 'btn-secondary'} w-full block text-center`}
+                                    onClick={() => trackInstallExtension(plan.highlight ? 'pricing-pro' : 'pricing')}
                                 >
                                     {plan.cta}
                                 </a>
