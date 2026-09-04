@@ -39,8 +39,8 @@ const FEATURES: Feature[] = [
     {
         label: 'Captions',
         icon: <TbArticle size={14} className="mr-1" />,
-        title: 'Locally AI-generated captions',
-        description: 'AI generates perfectly-timed captions from your audio. Easily edit any mistakes, and style everything — font, color, position — to match your brand.',
+        title: 'AI-generated captions',
+        description: 'AI generates perfectly-timed captions from your audio that tracks to the word level. Easily edit any mistakes, or cut the video based on the captions.',
         video: 'captions.webm',
     },
     {
