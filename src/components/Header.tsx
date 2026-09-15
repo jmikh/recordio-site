@@ -4,6 +4,7 @@ import { trackInstallExtension } from '../utils/analytics';
 
 const DEFAULT_NAV_LINKS = [
     { label: 'Features', href: '#feature-videos' },
+    { label: 'How it works', href: '#how-it-works' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'FAQ', href: '#faq' },
 ];
@@ -56,15 +57,18 @@ const Header = ({ navLinks }: HeaderProps) => {
                     </div>
 
                     {/* Desktop CTA Button */}
-                    <a
-                        href={getCWSLink('header')}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary hidden md:inline-flex items-center space-x-2"
-                        onClick={() => trackInstallExtension('header')}
-                    >
-                        <span>+ Install Extension</span>
-                    </a>
+                    <div className="hidden md:block">
+                        <a
+                            href={getCWSLink('header')}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary"
+                            onClick={() => trackInstallExtension('header')}
+                        >
+                            <img src="/assets/chrome-store.svg" alt="" className="w-4 h-4" />
+                            <span>Add to Chrome</span>
+                        </a>
+                    </div>
 
                     {/* Mobile Hamburger Button */}
                     <div className="md:hidden relative" ref={menuRef}>

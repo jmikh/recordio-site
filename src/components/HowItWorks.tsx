@@ -1,34 +1,32 @@
-import { trackInstallExtension } from '../utils/analytics';
-import { getCWSLink } from '../utils/constants';
-
 const steps = [
     {
-        number: '01',
-        title: 'Install & Record',
-        description: 'Add Recordio from the Chrome Web Store. Hit record on any tab, window, or your full desktop.',
+        number: '1',
+        title: 'Install and record',
+        description: 'Add Recordio from the Chrome Web Store. Hit record on any tab, window, or your whole desktop.',
         icon: (
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <circle cx="12" cy="12" r="3.5" fill="currentColor" stroke="none" />
             </svg>
         ),
     },
     {
-        number: '02',
-        title: 'Auto-Edit',
-        description: 'Recordio applies Auto Zoom, Auto Spotlight, and captions automatically. Tweak anything on the timeline.',
+        number: '2',
+        title: 'Let it edit itself',
+        description: 'Auto Zoom, Auto Spotlight and captions are applied as you record. Tweak anything on the timeline, or don\'t.',
         icon: (
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l1.8 4.6L18.4 9l-4.6 1.8L12 15.4l-1.8-4.6L5.6 9l4.6-1.4L12 3zM5 17l.9 2.1L8 20l-2.1.9L5 23l-.9-2.1L2 20l2.1-.9L5 17zM19 15l.7 1.6 1.6.7-1.6.7L19 19.6l-.7-1.6-1.6-.7 1.6-.7L19 15z" />
             </svg>
         ),
     },
     {
-        number: '03',
-        title: 'Export & Share',
-        description: 'Export in 4K. Your first export is free — no watermark, no paywall surprise.',
+        number: '3',
+        title: 'Export and share',
+        description: 'Download in 1080p on the free plan or 4K on Pro, or send a link and watch the view count climb.',
         icon: (
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 4v12m0-12l-4 4m4-4l4 4" />
             </svg>
         ),
     },
@@ -36,64 +34,24 @@ const steps = [
 
 const HowItWorks = () => {
     return (
-        <section className="py-24 bg-surface-body relative overflow-hidden">
-            <div className="absolute inset-0 gradient-mesh opacity-20" />
-
-            <div className="relative z-10 max-w-6xl mx-auto px-6">
-                {/* Section Header */}
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-text-highlighted mb-4">
-                        From Recording to Published <span className="gradient-text">in Minutes</span>
-                    </h2>
-                    <p className="text-xl text-text-muted max-w-2xl mx-auto">
-                        Three steps. No learning curve.
-                    </p>
+        <section id="how-it-works" aria-label="How it works" className="how-section">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="section-head">
+                    <span className="eyebrow">How it works</span>
+                    <h2 className="section-title">From recording to published in minutes.</h2>
+                    <p className="section-subtitle">Three steps. No timeline scrubbing, no learning curve.</p>
                 </div>
 
-                {/* Steps */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                    {steps.map((step, index) => (
-                        <div key={index} className="relative text-center group">
-                            {/* Connector line (hidden on last item and mobile) */}
-                            {index < steps.length - 1 && (
-                                <div className="hidden md:block absolute top-12 left-[calc(50%+2rem)] right-[calc(-50%+2rem)] h-px bg-gradient-to-r from-border-highlighted to-border" />
-                            )}
-
-                            {/* Icon */}
-                            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary to-primary-highlighted flex items-center justify-center text-text-on-primary mx-auto mb-6 shadow-lg group-hover:scale-105 transition-transform duration-300">
-                                {step.icon}
-                            </div>
-
-                            {/* Step number */}
-                            <div className="text-xs font-bold tracking-widest uppercase text-primary-highlighted mb-2">
-                                Step {step.number}
-                            </div>
-
-                            {/* Title */}
-                            <h3 className="text-xl font-bold text-text-highlighted mb-3">
-                                {step.title}
-                            </h3>
-
-                            {/* Description */}
-                            <p className="text-text-muted leading-relaxed">
-                                {step.description}
-                            </p>
-                        </div>
+                <ol className="how-grid">
+                    {steps.map((step) => (
+                        <li key={step.number} className="how-card">
+                            <span className="how-number" aria-hidden="true">{step.number}</span>
+                            <span className="how-icon">{step.icon}</span>
+                            <h3 className="how-title">{step.title}</h3>
+                            <p className="how-desc">{step.description}</p>
+                        </li>
                     ))}
-                </div>
-
-                {/* CTA */}
-                <div className="mt-16 text-center">
-                    <a
-                        href={getCWSLink('how-it-works')}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary inline-block text-lg px-8 py-4"
-                        onClick={() => trackInstallExtension('how-it-works')}
-                    >
-                        Start Recording — Free
-                    </a>
-                </div>
+                </ol>
             </div>
         </section>
     );

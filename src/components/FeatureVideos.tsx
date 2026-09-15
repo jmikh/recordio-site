@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { TbZoomIn, TbBackground, TbArticle } from 'react-icons/tb';
 import { RiLightbulbFlashLine } from 'react-icons/ri';
 import { CgToolbarTop } from 'react-icons/cg';
@@ -12,6 +12,7 @@ interface Feature {
     title: string;
     description: string;
     video: string; // filename in /videos/
+    hue: number;   // oklch hue that colors this row's panel, pill and glow
 }
 
 const FEATURES: Feature[] = [
@@ -21,6 +22,7 @@ const FEATURES: Feature[] = [
         title: 'Zooms to exactly what matters',
         description: 'Recordio doesn\'t just follow the cursor, it understands the layout of all elements you are interacting with, so no input box or form is clipped out. A zoom that gets it right every single time.',
         video: 'zoom.webm',
+        hue: 290,
     },
     {
         label: 'Auto Spotlight',
@@ -28,6 +30,7 @@ const FEATURES: Feature[] = [
         title: 'Elevate important elements',
         description: 'The background dims and the element you interact with pops forward with a subtle glow. It makes the page comes alive.',
         video: 'spotlight.webm',
+        hue: 78,
     },
     {
         label: 'Backgrounds',
@@ -35,6 +38,7 @@ const FEATURES: Feature[] = [
         title: 'Beautiful, dynamic canvas',
         description: 'Add depth and polish with vibrant backgrounds. Pick from a curated library, build your own using color gradients, or upload your own brand-matched image.',
         video: 'backgrounds.webm',
+        hue: 290,
     },
     {
         label: 'Captions',
@@ -42,6 +46,7 @@ const FEATURES: Feature[] = [
         title: 'AI-generated captions',
         description: 'AI generates perfectly-timed captions from your audio that tracks to the word level. Easily edit any mistakes, or cut the video based on the captions.',
         video: 'captions.webm',
+        hue: 78,
     },
     {
         label: 'Clean Toolbar',
@@ -49,6 +54,7 @@ const FEATURES: Feature[] = [
         title: 'No more messy browser tabs',
         description: 'Your toolbar is replaced with a clean, minimal bar that shows just the page title. No messy bookmark bars, 47 open tabs, or embarrassing URLs.',
         video: 'toolbar.webm',
+        hue: 290,
     },
     {
         label: 'Overlays',
@@ -56,6 +62,7 @@ const FEATURES: Feature[] = [
         title: 'Blur sensitive information',
         description: 'Use overlays to blur out sensitive information, add explanatory text, arrows or overlays to highlight important information.',
         video: 'overlays.webm',
+        hue: 78,
     },
 ];
 
@@ -76,9 +83,72 @@ const ADDITIONAL_FEATURES = [
     'Viewership stats',
 ];
 
-// ── Lazy video: only loads when section enters viewport ──
-const LazyVideo = ({ src }: { src: string }) => {
-    const videoRef = useRef<HTMLVideoElement>(null);
+/**
+ * Decides which single video should be playing: the one whose container is
+ * most in view (at least 40% visible, closest to the viewport centre).
+ * Everything else is paused.
+ */
+const useSinglePlayer = () => {
+    const observer = useRef<IntersectionObserver | null>(null);
+    const ratios = useRef(new Map<Element, number>());
+
+    const evaluate = useCallback(() => {
+        const viewportCenter = window.innerHeight / 2;
+        let best: Element | null = null;
+        let bestDistance = Infinity;
+
+        ratios.current.forEach((ratio, el) => {
+            if (ratio < 0.4) return;
+            const rect = el.getBoundingClientRect();
+            const distance = Math.abs(rect.top + rect.height / 2 - viewportCenter);
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                best = el;
+            }
+        });
+
+        ratios.current.forEach((_, el) => {
+            const video = el.querySelector('video');
+            if (!video) return;
+            if (el === best) {
+                if (video.paused) video.play().catch(() => { });
+            } else if (!video.paused) {
+                video.pause();
+            }
+        });
+    }, []);
+
+    const getObserver = useCallback(() => {
+        if (!observer.current) {
+            observer.current = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((e) => ratios.current.set(e.target, e.intersectionRatio));
+                    evaluate();
+                },
+                { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] },
+            );
+        }
+        return observer.current;
+    }, [evaluate]);
+
+    // Container refs attach before this effect runs, so the observer is created lazily
+    const register = useCallback((el: HTMLElement | null) => {
+        if (el) getObserver().observe(el);
+    }, [getObserver]);
+
+    useEffect(() => () => observer.current?.disconnect(), []);
+
+    return { register, evaluate };
+};
+
+// ── Lazy video: loads when near the viewport; playback is decided by the parent ──
+interface LazyVideoProps {
+    src: string;
+    register: (el: HTMLElement | null) => void;
+    onMounted: () => void;
+}
+
+const LazyVideo = ({ src, register, onMounted }: LazyVideoProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [shouldLoad, setShouldLoad] = useState(false);
@@ -86,73 +156,40 @@ const LazyVideo = ({ src }: { src: string }) => {
     useEffect(() => {
         const el = containerRef.current;
         if (!el) return;
+        register(el);
 
-        const observer = new IntersectionObserver(
+        const loader = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setShouldLoad(true);
-                    observer.unobserve(el);
+                    loader.unobserve(el);
                 }
             },
-            { rootMargin: '200px' }, // start loading slightly before visible
+            { rootMargin: '300px' }, // start loading before it scrolls into view
         );
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, []);
+        loader.observe(el);
+        return () => loader.disconnect();
+    }, [register]);
 
-    // Play when visible
+    // Once the <video> exists, let the parent re-decide who plays
     useEffect(() => {
-        if (!shouldLoad) return;
-        const video = videoRef.current;
-        const el = containerRef.current;
-        if (!video || !el) return;
-
-        if (video.readyState >= 2) {
-            setIsLoaded(true);
-        }
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    video.play().then(() => setIsLoaded(true)).catch(() => { });
-                } else {
-                    video.pause();
-                }
-            },
-            { threshold: 0.1 },
-        );
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, [shouldLoad]);
+        if (shouldLoad) onMounted();
+    }, [shouldLoad, onMounted]);
 
     return (
-        <div
-            ref={containerRef}
-            className="feature-video-container"
-        >
-            {/* Shimmer placeholder while loading */}
-            {!isLoaded && (
-                <div className="feature-video-placeholder" />
-            )}
+        <div ref={containerRef} className="feature-video-container">
+            {!isLoaded && <div className="feature-video-placeholder" />}
 
             {shouldLoad && (
                 <video
-                    ref={videoRef}
                     muted
                     loop
                     playsInline
-                    autoPlay
-                    preload="metadata"
+                    preload="auto"
+                    onPlaying={() => setIsLoaded(true)}
                     onLoadedData={() => setIsLoaded(true)}
-                    onCanPlay={() => setIsLoaded(true)}
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        borderRadius: '12px',
-                        opacity: isLoaded ? 1 : 0,
-                        transition: 'opacity 0.4s ease',
-                    }}
+                    className="feature-video"
+                    style={{ opacity: isLoaded ? 1 : 0 }}
                 >
                     <source src={src} type="video/webm" />
                     <source src={src.replace('.webm', '.mp4')} type="video/mp4" />
@@ -163,7 +200,14 @@ const LazyVideo = ({ src }: { src: string }) => {
 };
 
 // ── Single feature row ──
-const FeatureRow = ({ feature, index }: { feature: Feature; index: number }) => {
+interface FeatureRowProps {
+    feature: Feature;
+    index: number;
+    register: (el: HTMLElement | null) => void;
+    onVideoMounted: () => void;
+}
+
+const FeatureRow = ({ feature, index, register, onVideoMounted }: FeatureRowProps) => {
     const ref = useRef<HTMLDivElement>(null);
     const [revealed, setRevealed] = useState(false);
     const isEven = index % 2 === 0;
@@ -188,17 +232,12 @@ const FeatureRow = ({ feature, index }: { feature: Feature; index: number }) => 
     return (
         <div
             ref={ref}
-            className="step-section"
-            style={{
-                flexDirection: isEven ? undefined : 'row-reverse',
-                opacity: revealed ? 1 : 0,
-                transform: revealed ? 'translateY(0)' : 'translateY(32px)',
-                transition: 'opacity 0.6s ease, transform 0.6s ease',
-            }}
+            className={`feature-panel${revealed ? ' is-revealed' : ''}${isEven ? '' : ' is-flipped'}`}
+            style={{ '--hue': feature.hue } as React.CSSProperties}
         >
             {/* Text column */}
-            <div className="step-text">
-                <div className="mb-4 inline-flex items-center px-3 py-1 bg-primary/10 text-primary uppercase tracking-wider text-xs font-bold rounded-full">
+            <div className="feature-panel-text">
+                <div className="feature-pill">
                     {feature.icon}
                     {feature.label}
                 </div>
@@ -207,8 +246,8 @@ const FeatureRow = ({ feature, index }: { feature: Feature; index: number }) => 
             </div>
 
             {/* Video column */}
-            <div className="step-visual">
-                <LazyVideo src={`/videos/${feature.video}`} />
+            <div className="feature-panel-visual">
+                <LazyVideo src={`/videos/${feature.video}`} register={register} onMounted={onVideoMounted} />
             </div>
         </div>
     );
@@ -216,6 +255,8 @@ const FeatureRow = ({ feature, index }: { feature: Feature; index: number }) => 
 
 // ── Main component ──
 const FeatureVideos = () => {
+    const { register, evaluate } = useSinglePlayer();
+
     return (
         <section
             id="feature-videos"
@@ -231,9 +272,17 @@ const FeatureVideos = () => {
                 </p>
             </div>
 
-            {FEATURES.map((feature, i) => (
-                <FeatureRow key={i} feature={feature} index={i} />
-            ))}
+            <div className="feature-panels">
+                {FEATURES.map((feature, i) => (
+                    <FeatureRow
+                        key={feature.video}
+                        feature={feature}
+                        index={i}
+                        register={register}
+                        onVideoMounted={evaluate}
+                    />
+                ))}
+            </div>
 
             {/* Additional Features Marquee */}
             <div className="mt-20 pt-16 border-t border-border/50 max-w-7xl mx-auto">

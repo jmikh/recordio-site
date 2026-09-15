@@ -1,55 +1,89 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
-import { getCWSLink, SUPPORT_EMAIL } from '../utils/constants';
-import { trackInstallExtension } from '../utils/analytics';
+import { SUPPORT_EMAIL, CWS_REVIEWS_URL } from '../utils/constants';
 
-const Footer = ({ source = 'footer' }: { source?: string }) => {
-    const ctaSource = source === 'footer' ? 'footer' : `${source}_footer`;
+const columns = [
+    {
+        title: 'Product',
+        links: [
+            { label: 'Features', href: '/#feature-videos' },
+            { label: 'How it works', href: '/#how-it-works' },
+            { label: 'Pricing', href: '/#pricing' },
+            { label: 'FAQ', href: '/#faq' },
+        ],
+    },
+    {
+        title: 'Compare',
+        links: [
+            { label: 'vs Loom', href: '/compare/loom/' },
+            { label: 'vs Screen Studio', href: '/compare/screen-studio/' },
+            { label: 'vs Tella', href: '/compare/tella/' },
+            { label: 'All comparisons', href: '/compare/' },
+        ],
+    },
+    {
+        title: 'Platforms',
+        links: [
+            { label: 'Mac', href: '/for/mac/' },
+            { label: 'Windows', href: '/for/windows/' },
+            { label: 'Linux', href: '/for/linux/' },
+            { label: 'Chrome', href: '/for/chrome/' },
+        ],
+    },
+    {
+        title: 'Company',
+        links: [
+            { label: 'Blog', href: '/blog/' },
+            { label: 'Reviews', href: CWS_REVIEWS_URL },
+            { label: 'Privacy', href: '/privacy/' },
+            { label: 'Terms', href: '/terms/' },
+            { label: 'Contact', href: `mailto:${SUPPORT_EMAIL}` },
+        ],
+    },
+];
+
+const Footer = () => {
     const currentYear = new Date().getFullYear();
-    const contentRef = useScrollReveal();
 
     return (
-        <footer className="bg-surface-body border-t border-border">
-            <div className="max-w-7xl mx-auto px-6 py-12">
-                <div ref={contentRef} className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8 scroll-reveal">
+        <footer className="border-t border-border">
+            <div className="max-w-7xl mx-auto px-6 py-14">
+                <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(4,1fr)]">
                     {/* Brand */}
-                    <div className="flex flex-col items-center md:items-start gap-3">
+                    <div className="flex flex-col gap-3">
                         <a href="/" className="inline-block">
                             <img
                                 src="/assets/fulllogo-light.webp"
-                                alt="Recordio logo"
-                                className="h-8 w-auto transition-opacity hover:opacity-80"
+                                alt="Recordio"
+                                className="h-7 w-auto"
                             />
                         </a>
-                        <p className="text-text-muted text-sm max-w-md text-center md:text-left">
-                            Professional screen recordings — polished and ready to share.
+                        <p className="text-text-muted text-sm max-w-xs">
+                            The screen recorder that understands your product.
                         </p>
                     </div>
 
-                    {/* CTA */}
-                    <a
-                        href={getCWSLink(ctaSource)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary flex-shrink-0"
-                        onClick={() => trackInstallExtension(ctaSource)}
-                    >
-                        Install Extension
-                    </a>
+                    {columns.map((col) => (
+                        <div key={col.title}>
+                            <div className="text-xs font-bold uppercase tracking-[0.12em] text-text-muted mb-3">{col.title}</div>
+                            <ul className="space-y-2">
+                                {col.links.map((l) => (
+                                    <li key={l.label}>
+                                        <a
+                                            href={l.href}
+                                            className="text-sm text-text-main hover:text-primary transition-colors"
+                                            {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                        >
+                                            {l.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
 
-                {/* Bottom */}
-                <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="text-text-muted text-sm">
-                        © {currentYear} Recordio. All rights reserved.
-                    </div>
-                    <div className="flex items-center gap-6 text-sm">
-                        <a href="/compare/" className="text-text-muted hover:text-primary transition-colors">Compare</a>
-                        <a href="/for/" className="text-text-muted hover:text-primary transition-colors">Platforms</a>
-                        <a href="/blog/" className="text-text-muted hover:text-primary transition-colors">Blog</a>
-                        <a href="/privacy/" className="text-text-muted hover:text-primary transition-colors">Privacy Policy</a>
-                        <a href="/terms/" className="text-text-muted hover:text-primary transition-colors">Terms of Service</a>
-                        <a href={`mailto:${SUPPORT_EMAIL}`} className="text-text-muted hover:text-primary transition-colors">Contact</a>
-                    </div>
+                <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-text-muted">
+                    <span>© {currentYear} Recordio. All rights reserved.</span>
+                    <span>Made for people who'd rather ship than edit.</span>
                 </div>
             </div>
         </footer>

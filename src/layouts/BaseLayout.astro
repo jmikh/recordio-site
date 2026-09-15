@@ -38,17 +38,17 @@ const faqJsonLd = JSON.stringify({
         {
             "@type": "Question",
             "name": "Is Recordio free?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes — record, edit, and export as many videos as you want for free. You get unlimited 720p exports with a small Recordio watermark. For a limited time, new users also get a free 1-week Pro trial with unlimited 4K exports and no watermark." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Recordio offers a generous free plan that includes auto-zoom, automatic silence cutting, and more, with no credit card required. Free users get up to 5 recordings with videos available for 7 days. Pro unlocks unlimited recordings, cloud rendering, longer video retention, and premium transcription." }
         },
         {
             "@type": "Question",
-            "name": "Do I need an account?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. You can record, edit, and export without signing up. An account is only needed to claim your free Pro trial or upgrade to Pro." }
+            "name": "What's the difference between Free and Pro?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Free plan gives you up to 5 recordings with all the core smart-editing features. Videos expire after 7 days, transcription uses a lightweight local model, and rendering happens in your browser. Pro removes those limits: unlimited recordings that never expire, cloud rendering, transcription powered by a top-tier OpenAI model, and the ability to restore deleted videos for up to 30 days." }
         },
         {
             "@type": "Question",
-            "name": "Do my recordings leave my computer?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. Your recordings, edits, and projects stay on your computer. Captions are also generated locally on your device — your content is never uploaded to any server." }
+            "name": "What does browser rendering mean?",
+            "acceptedAnswer": { "@type": "Answer", "text": "On the Free plan, your video is rendered in your browser, so the tab needs to stay open and in focus while rendering. Pro users get cloud rendering: the video is processed on our servers so you can close the tab and come back when it's ready." }
         },
         {
             "@type": "Question",
@@ -106,6 +106,14 @@ const faqJsonLd = JSON.stringify({
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Display face — Bricolage Grotesque for headlines */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap"
+        />
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#7c3aed" />
 

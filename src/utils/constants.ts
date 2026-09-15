@@ -24,3 +24,6 @@ export const getCWSLink = (section: string): string => {
     });
     return `${CWS_BASE_URL}?${params.toString()}`;
 };
+
+/** Public reviews page for the Chrome Web Store listing. */
+export const CWS_REVIEWS_URL = `${CWS_BASE_URL}/reviews`;
