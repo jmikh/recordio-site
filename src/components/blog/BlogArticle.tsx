@@ -67,7 +67,7 @@ const BlogArticle = () => {
     return (
         <article className="prose max-w-3xl mx-auto px-6 py-12 md:py-20">
             {/* ── Back link ── */}
-            <a href="/blog" className="not-prose inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors mb-8">
+            <a href="/blog/" className="not-prose inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors mb-8">
                 ← Back to Blog
             </a>
 
@@ -80,21 +80,21 @@ const BlogArticle = () => {
                     Best Screen Recorders in 2026: An Honest Comparison
                 </h1>
                 <p className="text-text-muted text-base">
-                    Last updated: March 2026 · 10 min read
+                    Last updated: September 2026 · 10 min read
                 </p>
             </header>
 
             <p>
-                The screen recording space has evolved dramatically. What started as simple screen capture
-                tools have become full post-production studios, adding auto-zoom, spotlight effects,
-                captions, and more, all without touching a video editor. Tools like <strong>Screen Studio</strong> and{' '}
-                <strong>Focusee</strong> have been around longer, but a newcomer, <strong>Recordio</strong>,
-                is challenging the status quo with a fundamentally different approach.
+                Screen recorders used to capture pixels and stop there. The best ones now behave like a
+                small post-production studio: they zoom, spotlight, caption, and trim your recording for
+                you, with no video editor in sight. <strong>Screen Studio</strong> and{' '}
+                <strong>FocuSee</strong> have been in this category for a while. <strong>Recordio</strong> is
+                the newer entrant, and it takes a different approach to the same problem.
             </p>
             <p>
-                We're the team behind Recordio, so yes, we're biased. But we're also builders who obsess
-                over this space daily. We'll lay out the facts, show you where each tool shines, and let
-                you decide.
+                We're the team behind Recordio, so we're biased. We also use all three tools constantly.
+                Below is a straight comparison of features and pricing, including the places where a
+                competitor is the better pick.
             </p>
 
             <hr />
@@ -102,62 +102,55 @@ const BlogArticle = () => {
             {/* ═══════════════════════════════ 1. RECORDIO ═══════════════════════════════ */}
 
             <h2>
-                1. Recordio: <span className="text-primary-highlighted">The Clear Winner</span> for
+                1. Recordio: <span className="text-primary-highlighted">The Best Pick</span> for
                 Web App Recordings
             </h2>
 
             <p className="text-text-muted text-sm mb-1">
-                <strong className="text-text-highlighted">Platforms:</strong> Chrome Extension (Mac, Windows, Linux, ChromeOS)
+                <strong className="text-text-highlighted">Platforms:</strong> Chrome extension (also works in Edge and Brave) on Mac, Windows, Linux, and ChromeOS
             </p>
             <p className="text-text-muted text-sm mb-6">
-                <strong className="text-text-highlighted">Pricing:</strong> $4/mo billed annually ($48/yr) · $15/mo
-                monthly · Free tier + 7-day Pro trial (no credit card)
+                <strong className="text-text-highlighted">Pricing:</strong> Free plan · Pro $12 per seat/month billed annually · $15 per seat/month billed monthly
             </p>
 
             <p>
-                Recordio takes a fundamentally different approach to screen recording. Instead of running
-                as a desktop app that watches your pixels, it runs <em>inside</em> your browser as a
-                Chrome extension. That distinction sounds small, but it unlocks a lot.
+                Recordio doesn't run as a desktop app that watches your screen. It runs <em>inside</em> your
+                browser as an extension. That sounds like a small distinction, but it changes what the
+                recorder can know about your video.
             </p>
 
             <h3>Why the Browser Extension Approach Matters</h3>
             <p>
-                Because Recordio lives inside Chrome, it doesn't just see your screen. It understands the
-                DOM structure of whatever web app you're using. It doesn't read your text or content; it
-                reads the <em>layout</em>: the hierarchy of elements on the page, how they're sized, and
-                how they relate to each other. It knows when you're hovering over a card. It knows when
-                you're typing into an input field, and how large that field is. It can distinguish a
-                dropdown menu from a modal from a sidebar.
+                Because Recordio lives inside Chrome, it sees more than pixels. It understands the layout
+                of the web app you're recording: which elements are on the page, how big they are, and how
+                they relate to each other. It doesn't read your content, only the structure. It knows when
+                you're hovering over a card, when you're typing into an input, and whether the thing under
+                your cursor is a dropdown, a modal, or a sidebar.
             </p>
-            <p>This page-awareness powers two features that no other screen recorder can match:</p>
+            <p>That page awareness powers two features no other screen recorder can match:</p>
 
             <h4>DOM-Aware Auto Zoom</h4>
             <p>
-                Most screen recorders apply zoom by following your mouse cursor. The result is jittery,
-                imprecise, and often requires manual cleanup. What makes it worse is that the auto-zoom
-                these tools generate isn't editable. If a zoom doesn't look right, you have to delete it
-                entirely and reapply it manually. That's because cursor-based zoom follows a mouse path
-                rather than working in a keyframe system.
+                Most screen recorders zoom by following your cursor. The result is jittery and imprecise,
+                and it clips things constantly: you zoom toward a form and the input you're typing in gets
+                cut off at the edge. Worse, the auto-zooms these tools generate usually can't be edited.
+                If one looks wrong, you delete it and redo it by hand.
             </p>
             <p>
-                Recordio's zoom is different. It reads the HTML structure of the page and targets the
-                actual UI element you're interacting with. The result is smooth, precise zooms that frame
-                exactly the right thing, every time. And because it uses a keyframe system, every
-                auto-generated zoom is fully editable: you can adjust timing, position, and framing
-                without starting over.
+                Recordio targets the actual UI element you're interacting with, so the frame lands on the
+                whole input, the whole card, or the whole menu. Every zoom is a keyframe on the timeline,
+                so you can adjust timing, position, and framing without starting over.
             </p>
             <p>
-                For web app recordings (product demos, onboarding walkthroughs, bug reports), this is a
-                no-brainer. You press record, do your thing, and the zoom just <em>works</em>. No
-                post-editing required.
+                For product demos, onboarding walkthroughs, and bug reports recorded in a web app, this
+                is the whole pitch. Press record, do the thing, and the zoom just works.
             </p>
 
             <h4>Auto Spotlight (3D Card Elevation)</h4>
             <p>
-                This is something only Recordio does. When you hover over a card or interactive element,
-                Recordio detects it, makes it visually "pop" from the page by floating it forward with a 3D
-                elevation effect while dimming the background. It's completely automatic and makes your
-                recordings look like they were produced by a design team.
+                Only Recordio does this. When you hover over a card, popover, or other interactive element,
+                Recordio lifts it forward with a subtle 3D elevation and glow while dimming the background.
+                It's completely automatic and gives the viewer's eye somewhere to land.
             </p>
 
             {/* ── Before / After video showcase ── */}
@@ -205,16 +198,14 @@ const BlogArticle = () => {
 
             <h3>Features Only Recordio Has</h3>
             <p>
-                Beyond the DOM-aware intelligence, Recordio packs several features you won't find
-                anywhere else:
+                Beyond the DOM-aware intelligence, a few features are unique to Recordio:
             </p>
 
             <h4>Device Frame Wrapping</h4>
             <p>
-                Recordio is the only screen recorder that lets you wrap your recording in a device frame,
-                like a MacBook Pro or MacBook Air. Instead of exporting a flat screen capture, your video
-                looks like it's being played on an actual device. It's a subtle touch that makes product
-                demos and marketing videos look significantly more polished.
+                Recordio can wrap your recording in a MacBook Pro or MacBook Air frame. Instead of a flat
+                screen capture, your video looks like it's playing on a real device. It's a small touch
+                that makes product demos and marketing clips look noticeably more finished.
             </p>
 
             <div className="not-prose my-6">
@@ -228,23 +219,22 @@ const BlogArticle = () => {
 
             <h4>Smart AutoCut</h4>
             <p>
-                AutoCut removes dead air from your recordings, but it's not just listening for silence.
-                It also tracks your interactions with the app. If you're quiet but actively typing or
-                clicking, it keeps that footage. It only cuts when there's both no voice <em>and</em> no
-                interaction, i.e. the moments where you're probably thinking about what to say next.
+                AutoCut removes dead air, but it isn't just listening for silence. It also watches your
+                interactions with the page. If you're quiet but actively typing or clicking, that footage
+                stays. It only cuts when there's no voice <em>and</em> no interaction, which is usually
+                the moment you're thinking about what to say next.
             </p>
             <p>
-                This is meaningfully better than voice-only silence detection, which tends to cut moments
-                where you're doing something important but not narrating it.
+                Voice-only silence detection tends to cut the parts where you're doing something important
+                but not narrating it. AutoCut doesn't make that mistake.
             </p>
 
-            <h4>Simplified Chrome Toolbar</h4>
+            <h4>Clean Chrome Toolbar</h4>
             <p>
-                If you've ever recorded a Chrome window and cringed at your messy bookmark bar, 47 open
-                tabs, and personal extensions visible in the toolbar, this feature is for you. Recordio
-                replaces the real toolbar with a clean, simplified version that shows just the essentials.
-                It can even shorten long URLs by stripping project IDs and query parameters, leaving a
-                clean, professional-looking address bar.
+                If you've ever recorded a Chrome window and cringed at your bookmark bar, 47 open tabs, and
+                a pile of extension icons, this one is for you. Recordio replaces the real toolbar with a
+                clean, minimal bar that shows just the page title. No messy bookmarks, no stray tabs, no
+                embarrassing URLs.
             </p>
 
             <div className="not-prose my-6 grid grid-cols-1 gap-6">
@@ -268,47 +258,43 @@ const BlogArticle = () => {
                 </div>
             </div>
 
-            <h3>Shareable Links with Viewership Analytics</h3>
+            <h3>Shareable Links, View Analytics, and a Team Library</h3>
             <p>
-                Instead of exporting and sending files around, Recordio lets you share a link directly.
-                Anyone with the link can watch your video without downloading anything or signing up. It goes further
-                than basic sharing: you get viewership analytics like total view count and average watch
-                time. If you've been using Loom for this, Recordio gives you the same sharing workflow
-                with significantly better-looking output. Imagine Loom, but with studio-quality
-                videos. Permissions (controlling who can view) are coming soon.
+                Instead of exporting a file and sending it around, Recordio Pro lets you share a link.
+                Anyone with the link can watch, and you can see how the video performed: total views and
+                average watch time. Pro also includes a shared team library with unlimited viewer seats,
+                so your teammates can browse and watch recordings without each needing a paid seat. If
+                you've been using Loom for this workflow, Recordio gives you the same sharing with
+                much better-looking output.
             </p>
 
             <h3>Other Notable Features</h3>
             <ul>
-                <li><strong>Auto Shrink Webcam</strong>: Your webcam automatically shrinks when you zoom into content, so it doesn't block what you're showing. It restores to full size when the zoom ends.</li>
-                <li><strong>Dynamic Camera Placement</strong>: Set your webcam to full-screen for intros and outros, then have it automatically return to a corner position for the main content.</li>
-                <li><strong>Local Transcription in 99 Languages</strong>: The generated transcript is fully editable if the AI gets a word wrong.</li>
-                <li><strong>Word-by-Word Caption Highlighting</strong>: As captions appear on screen, individual words highlight in sync with your speech.</li>
-                <li><strong>Camera Feathering</strong>: A soft edge effect that blends your webcam into the background, so your face doesn't feel like it's pasted on top.</li>
-                <li><strong>Custom Backgrounds</strong>: Swap your recording background or upload your own.</li>
-                <li><strong>Cross-Platform by Default</strong>: Since it's a Chrome extension, it works everywhere Chrome does, with no macOS lock-in.</li>
-                <li><strong>Privacy-First, Local Processing</strong>: Both Recordio and Screen Studio process everything locally; your recordings never leave your machine during editing. What's notable about Recordio is that it achieves this entirely within the browser, with no native app install required. Transcription runs on-device via Whisper models. The only exception is shared links, where the final video is uploaded to our cloud (which we take security seriously on).</li>
+                <li><strong>AI Captions with Word-Level Timing</strong>: OpenAI-powered captions that track to the individual word. Edit any mistake in place, or highlight a caption line and delete it to cut that segment from the video. No timeline scrubbing.</li>
+                <li><strong>Overlays and Blur</strong>: Blur out sensitive information, or add text, arrows, and shapes to call out what matters.</li>
+                <li><strong>Backgrounds and Music</strong>: Pick from a curated library, build a gradient, or upload a brand image. Add a music track from the built-in library.</li>
+                <li><strong>Smart Webcam Overlay</strong>: Add your face with customizable position and style. It shrinks out of the way when a zoom kicks in so it never covers what you're showing.</li>
+                <li><strong>Cloud Rendering on Pro</strong>: Free plan videos render in your browser tab. On Pro, rendering happens on our servers, so you can close the tab and come back when it's done.</li>
+                <li><strong>Cross-Platform by Default</strong>: It's a browser extension, so it works everywhere Chrome, Edge, or Brave do. No macOS lock-in.</li>
             </ul>
 
             <h3>Where Recordio Falls Short</h3>
             <p>
-                If you're recording native desktop apps (Figma desktop, Xcode, Final Cut), Recordio's
-                auto-zoom and auto-spotlight won't work automatically since they rely on reading the browser
-                DOM. You can still record these apps via screen/window capture and apply zooms and
-                spotlights manually through the editor. Recordio's zoom and spotlight timelines are more
-                intuitive than what Screen Studio and Focusee offer, and since you often end up manually
-                editing their auto-zoom anyway (because cursor-based zoom rarely nails it), you might
-                still save time with Recordio. That said, for pure desktop app recording, it's not the
-                zero-effort experience you get with web apps.
+                If you mostly record native desktop apps (Figma desktop, Xcode, Final Cut), Recordio's
+                auto-zoom and auto-spotlight won't fire automatically, because they rely on reading the
+                browser DOM. You can still record these apps through screen or window capture and add
+                zooms and spotlights manually in the editor. The zoom and spotlight timelines are simpler
+                than what Screen Studio and FocuSee offer, and since cursor-based auto-zoom usually needs
+                manual cleanup anyway, you may still come out ahead. But it's not the zero-effort
+                experience you get with web apps. Native desktop apps are on our roadmap.
             </p>
 
-            <h3>Free to Try, No Strings Attached</h3>
+            <h3>Free to Start, No Credit Card</h3>
             <p>
-                Recordio offers a permanent free tier with unlimited 720p exports. On top of that, every
-                new user gets a 7-day Pro trial, no credit card required. If you just need to make a
-                one-off video, Recordio Pro is basically yours for free. We believe in building the best
-                product and trusting that users will come back, which is why we offer the most generous
-                trial in the space. Neither Screen Studio nor Focusee offer any free export option.
+                Recordio's free plan isn't a trial. It includes auto zoom, auto spotlight, silence
+                cutting, the background and music library, and 1080p downloads, for up to 5 active
+                projects. Pro adds 4K exports, AI captions, shareable links, cloud rendering, and the team
+                library. Neither Screen Studio nor FocuSee offers any free export at all.
             </p>
 
             <hr />
@@ -322,66 +308,62 @@ const BlogArticle = () => {
             </p>
             <p className="text-text-muted text-sm mb-6">
                 <strong className="text-text-highlighted">Pricing:</strong> $9/mo billed annually ($108/yr)
-                · $29/mo monthly · $209 one-time (1 year of updates)
+                · $29/mo monthly · No free plan · One-time licenses are no longer sold
             </p>
 
             <p>
-                Screen Studio was the first tool to popularize the "beautiful screen recording" category.
-                It's been the dominant player in the macOS ecosystem for a couple of years, and for good
-                reason: it produces great-looking recordings with smooth cursor-following zoom and solid
-                background/wallpaper options.
+                Screen Studio created the "beautiful screen recording" category. It has been the dominant
+                choice on macOS for years, and for good reason: smooth cursor-following zoom, cinematic
+                motion blur, and a big library of wallpapers and backgrounds.
             </p>
 
             <h3>Strengths</h3>
             <ul>
-                <li><strong>Mature product</strong>: Screen Studio has had more time to polish edge cases and build a loyal user base.</li>
-                <li><strong>Full desktop capture</strong>: Because it's a native macOS app, it can record any app on your system with equal fidelity, not just browser tabs. Native apps can also access the camera at higher resolutions and frame rates, though this is rarely noticeable since the webcam ends up minimized in most recordings anyway.</li>
-                <li><strong>Motion blur and cursor smoothing</strong>: Screen Studio adds cinematic motion blur to transitions and smooths out cursor movements, which gives recordings a polished, professional feel.</li>
+                <li><strong>Mature product</strong>: More years of polish, more edge cases handled, and a large, loyal user base.</li>
+                <li><strong>Full desktop capture</strong>: As a native macOS app, it records any app on your system with equal fidelity, not just browser tabs. It can also pull higher webcam resolutions and frame rates, though that rarely shows once the webcam is tucked in a corner.</li>
+                <li><strong>Motion blur and cursor smoothing</strong>: Transitions get cinematic motion blur and cursor movement is smoothed, which gives recordings a polished feel.</li>
             </ul>
 
             <h3>Weaknesses</h3>
             <ul>
-                <li><strong>macOS only</strong>: If you're on Windows or Linux, Screen Studio isn't an option.</li>
-                <li><strong>Cursor-based zoom only</strong>: It follows your mouse, which means it doesn't understand what you're interacting with. The zoom can feel imprecise, especially in dense UIs where multiple elements are close together.</li>
-                <li><strong>No auto-spotlight</strong>: No equivalent to Recordio's card elevation / 3D spotlight effect.</li>
-                <li><strong>More expensive</strong>: At $108/year, it's more than double Recordio's annual price. The monthly rate of $29 is nearly twice Recordio's $15/mo.</li>
-                <li><strong>No free tier</strong>: No way to try before you buy. There's no freemium export option.</li>
-                <li><strong>No viewership analytics</strong>: Shareable links exist, but no insight into who watched or how much.</li>
-                <li><strong>No simplified toolbar</strong>: You're stuck with whatever your browser chrome looks like.</li>
-                <li><strong>No device frames</strong>: No option to wrap your recording in a MacBook frame.</li>
+                <li><strong>macOS only</strong>: If anyone on your team uses Windows or Linux, Screen Studio is out.</li>
+                <li><strong>Cursor-based zoom only</strong>: It follows the mouse, so it doesn't know what you're interacting with. Zooms feel imprecise in dense UIs where elements sit close together.</li>
+                <li><strong>No auto-spotlight</strong>: Nothing equivalent to Recordio's 3D card elevation.</li>
+                <li><strong>No free plan</strong>: There's no way to export a video without paying. Recordio's free plan is genuinely free.</li>
+                <li><strong>Pricier month to month</strong>: $29/mo versus Recordio's $15. On annual billing Screen Studio is slightly cheaper ($9/mo versus $12), but you're paying for one Mac app rather than a cross-platform tool with links and a team library.</li>
+                <li><strong>No view analytics or team library</strong>: You can share a file, but there's no insight into who watched or a shared place for your team's recordings.</li>
+                <li><strong>No clean toolbar</strong>: Your browser chrome is whatever it is.</li>
             </ul>
 
             <hr />
 
             {/* ═══════════════════════════════ 3. FOCUSEE ═══════════════════════════════ */}
 
-            <h2>3. Focusee: The AI Avatar Bet</h2>
+            <h2>3. FocuSee: The AI Avatar Bet</h2>
 
             <p className="text-text-muted text-sm mb-1">
                 <strong className="text-text-highlighted">Platforms:</strong> Windows, macOS
             </p>
             <p className="text-text-muted text-sm mb-6">
-                <strong className="text-text-highlighted">Pricing:</strong> $49.99/yr standard · $79.99/yr advanced
-                · $19.99/mo standard · $199.99 one-time (5 PCs)
+                <strong className="text-text-highlighted">Pricing:</strong> $19.99/mo · $49.99/yr standard · $79.99/yr advanced
+                · $199.99 one-time (tied to the current major version) · No free plan
             </p>
 
             <p>
-                Focusee is a cross-platform desktop app that borrows heavily from Screen Studio's editing
-                model. Where it differentiates is its heavy investment in AI: AI-generated avatars, AI voice
-                replacement, and AI-powered content creation. If you want to generate a talking-head video
-                without actually recording yourself, Focusee is one of the few tools offering that.
+                FocuSee is a cross-platform desktop app that borrows heavily from Screen Studio's editing
+                model. Where it differs is its bet on AI: AI-generated avatars, AI voice replacement, and
+                AI-assisted content creation. If you want a talking-head video without recording yourself,
+                FocuSee is one of the few tools offering it.
             </p>
             <p>
-                That said, the AI approach has been controversial. Viewers can usually tell when a voice is
-                synthetic or when an avatar is AI-generated, and engagement tends to drop. Authentic voice
-                and face consistently outperform AI alternatives in product demos and tutorials. This isn't new;
-                AI-generated content has been promising "just as good as real" for years, but audiences
-                still prefer the real thing.
+                That bet is a mixed one. Viewers can usually tell when a voice is synthetic or an avatar is
+                generated, and engagement drops when they do. Real voice and a real face still outperform
+                AI stand-ins in product demos and tutorials.
             </p>
             <p>
-                Beyond the AI features (which run on a credit system, so heavy use costs extra), Focusee
-                offers the same cursor-based zoom as Screen Studio with no DOM awareness, no auto-spotlight,
-                no device frames for desktop recordings, no toolbar simplification, and no free tier.
+                Beyond the AI features (which run on a credit system, so heavy use costs extra), FocuSee
+                offers the same cursor-based zoom as Screen Studio, with no DOM awareness, no
+                auto-spotlight, no device frames, no toolbar cleanup, and no free plan.
             </p>
 
             <hr />
@@ -396,15 +378,16 @@ const BlogArticle = () => {
                             <th></th>
                             <th>Recordio</th>
                             <th>Screen Studio</th>
-                            <th>Focusee</th>
+                            <th>FocuSee</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Monthly</td><td>$15/mo</td><td>$29/mo</td><td>$19.99/mo (without AI)</td></tr>
-                        <tr><td>Annual</td><td>$48/yr ($4/mo)</td><td>$108/yr ($9/mo)</td><td>$49.99/yr (without AI)</td></tr>
-                        <tr><td>Free Tier Exports</td><td>Yes (720p, watermark)</td><td>No</td><td>No</td></tr>
-                        <tr><td>Shareable Links</td><td>Yes (with analytics)</td><td>Yes</td><td>Yes</td></tr>
-                        <tr><td>Platforms</td><td>Chrome (any OS)</td><td>macOS only</td><td>Windows, macOS</td></tr>
+                        <tr><td>Monthly</td><td>$15 per seat</td><td>$29</td><td>$19.99 (without AI)</td></tr>
+                        <tr><td>Annual</td><td>$12 per seat/mo ($144/yr)</td><td>$9/mo ($108/yr)</td><td>$49.99/yr (without AI)</td></tr>
+                        <tr><td>One-time license</td><td>No</td><td>No longer offered</td><td>$199.99 (current major version)</td></tr>
+                        <tr><td>Free plan</td><td>Yes (5 active projects, 1080p downloads)</td><td>No</td><td>No</td></tr>
+                        <tr><td>Shareable links</td><td>Yes, with view analytics (Pro)</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>Platforms</td><td>Chrome, Edge, Brave (any OS)</td><td>macOS only</td><td>Windows, macOS</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -421,21 +404,21 @@ const BlogArticle = () => {
                             <th>Feature</th>
                             <th>Recordio</th>
                             <th>Screen Studio</th>
-                            <th>Focusee</th>
+                            <th>FocuSee</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Auto Zoom</td><td>DOM + cursor based</td><td>Cursor-based</td><td>Cursor-based</td></tr>
-                        <tr><td>Auto Zoom Editable</td><td>Yes</td><td>No (delete &amp; redo)</td><td>No (delete &amp; redo)</td></tr>
+                        <tr><td>Auto Zoom</td><td>DOM-aware + cursor</td><td>Cursor-based</td><td>Cursor-based</td></tr>
+                        <tr><td>Auto Zoom Editable</td><td>Yes (keyframes)</td><td>No (delete &amp; redo)</td><td>No (delete &amp; redo)</td></tr>
                         <tr><td>Auto Spotlight</td><td>Yes (3D elevation)</td><td>Dimming only</td><td>Dimming only</td></tr>
-                        <tr><td>Device Frames</td><td>Yes</td><td>No</td><td>No</td></tr>
-                        <tr><td>Smart AutoCut</td><td>Voice + interaction</td><td>Basic</td><td>No</td></tr>
-                        <tr><td>Simplified Toolbar</td><td>Yes</td><td>No</td><td>No</td></tr>
-                        <tr><td>Auto Captions</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-                        <tr><td>Webcam Auto Shrink</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-                        <tr><td>Dynamic Camera Positions</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-                        <tr><td>Captions Word Highlighting</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-                        <tr><td>Shareable Links</td><td>Yes, with viewership analytics</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>Device Frames</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+                        <tr><td>Smart AutoCut</td><td>Voice + interaction</td><td>Basic</td><td>Basic</td></tr>
+                        <tr><td>Clean Toolbar</td><td>Yes</td><td>No</td><td>No</td></tr>
+                        <tr><td>AI Captions</td><td>Yes, word-level, edit to cut</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>Overlays &amp; Blur</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>Webcam Overlay</td><td>Yes, auto-shrinks on zoom</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>Shareable Links</td><td>Yes, with view analytics</td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td>Team Library</td><td>Yes (Pro)</td><td>No</td><td>No</td></tr>
                         <tr><td>Music</td><td>Yes</td><td>Yes</td><td>No</td></tr>
                         <tr><td>Custom Backgrounds</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
                         <tr><td>AI Avatars</td><td>No</td><td>No</td><td>Yes</td></tr>
@@ -450,23 +433,20 @@ const BlogArticle = () => {
             <h2>The Bottom Line</h2>
             <p>
                 If you record <strong>web apps</strong> (SaaS products, internal tools, dashboards,
-                web-based workflows), Recordio is the clear winner. Its DOM-aware intelligence produces
-                auto-zoom and auto-spotlight results that simply aren't possible with cursor-tracking
-                tools. Add in device frames, smart AutoCut, and simplified toolbar, and you're looking at
-                a screen recorder that was purpose-built for this use case, at roughly half the price of
-                Screen Studio. And because it's web-based, Recordio is actively building toward a full
-                Loom replacement, with library management, viewership analytics, and permissions: a
-                direction that desktop-only tools simply aren't positioned for.
+                anything in a browser), Recordio is the best pick. DOM-aware zoom and spotlight produce
+                results that cursor-tracking tools can't, and device frames, AutoCut, and the clean
+                toolbar round it out. It's also the only one of the three with a real free plan, and the
+                only one built around sharing: links, view analytics, and a team library that works on
+                every operating system.
             </p>
             <p>
-                If you live entirely in the <strong>macOS native app ecosystem</strong> and rarely record
-                browser content, Screen Studio remains a strong, mature choice. It's pricier, but it's
-                proven.
+                If you live in the <strong>macOS native app ecosystem</strong> and rarely record browser
+                content, Screen Studio remains a strong, mature choice. It's Mac-only and has no free
+                plan, but it's proven.
             </p>
             <p>
-                If you want <strong>AI-generated avatars and voice replacement</strong>, Focusee is about
-                the only option in this category. Just know that audiences still overwhelmingly prefer
-                authentic recordings over synthetic ones.
+                If you want <strong>AI-generated avatars and voice replacement</strong>, FocuSee is about
+                the only option here. Just know that audiences still prefer authentic recordings.
             </p>
             <p>
                 For most people building, demoing, or documenting web-based products in 2026,{' '}
