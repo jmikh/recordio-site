@@ -53,3 +53,14 @@ export const trackFaqExpanded = (question: string) => {
         value: 1,
     });
 };
+
+/**
+ * Track Open app button click
+ */
+export const trackOpenApp = (location: string) => {
+    trackEvent('open_app_click', {
+        event_category: 'engagement',
+        event_label: location,
+        value: 1,
+    });
+};

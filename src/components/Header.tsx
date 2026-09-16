@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { getCWSLink } from '../utils/constants';
-import { trackInstallExtension } from '../utils/analytics';
+import { getAppLink, getCWSLink } from '../utils/constants';
+import { trackInstallExtension, trackOpenApp } from '../utils/analytics';
 
 const DEFAULT_NAV_LINKS = [
     { label: 'Features', href: '#feature-videos' },
@@ -44,7 +44,7 @@ const Header = ({ navLinks }: HeaderProps) => {
                     </a>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
                         {links.map(({ label, href }) => (
                             <a
                                 key={href}
@@ -56,8 +56,15 @@ const Header = ({ navLinks }: HeaderProps) => {
                         ))}
                     </div>
 
-                    {/* Desktop CTA Button */}
-                    <div className="hidden md:block">
+                    {/* Desktop CTA Buttons */}
+                    <div className="hidden md:flex items-center gap-2 lg:gap-3">
+                        <a
+                            href={getAppLink('header')}
+                            className="btn-secondary !px-3.5 !py-2 text-sm"
+                            onClick={() => trackOpenApp('header')}
+                        >
+                            Open App
+                        </a>
                         <a
                             href={getCWSLink('header')}
                             target="_blank"
@@ -119,6 +126,18 @@ const Header = ({ navLinks }: HeaderProps) => {
                                         {label}
                                     </a>
                                 ))}
+                                <div className="my-2 border-t border-border" />
+                                <a
+                                    href={getAppLink('header-mobile')}
+                                    onClick={() => {
+                                        setMenuOpen(false);
+                                        trackOpenApp('header-mobile');
+                                    }}
+                                    className="block px-5 py-3 text-sm font-semibold text-text-highlighted
+                                               hover:bg-surface-overlay/40 transition-colors duration-150"
+                                >
+                                    Open App
+                                </a>
                             </div>
                         </div>
                     </div>
