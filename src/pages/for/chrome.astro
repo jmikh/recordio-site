@@ -2,6 +2,17 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedLinks from "../../components/RelatedLinks";
+import { PLATFORM_PAGES, platformLink, compareLink, blogPostLink } from "../../data/siteLinks";
+
+const related = [
+    ...PLATFORM_PAGES.filter((p) => p.slug !== "chrome").map((p) => platformLink(p.slug)),
+    { label: "Full-page screenshot and annotation tool", href: "/screenshots/", blurb: "Capture the visible area, the full page or a region from the same extension." },
+    { label: "Bug report screen recording", href: "/use-cases/bug-report-screen-recording/", blurb: "Reproduce the bug on video, blur customer data, link it in the ticket." },
+    compareLink("screencastify"),
+    blogPostLink("how-to-make-a-product-walkthrough-video"),
+];
 import PlatformHero from "../../components/platform/PlatformHero";
 import FeatureVideos from "../../components/FeatureVideos";
 import Testimonials from "../../components/Testimonials";
@@ -25,10 +36,15 @@ import FAQ from "../../components/FAQ";
             subheadline="A lightweight Chrome extension that turns raw screen recordings into polished product videos. Auto-zoom, spotlight, captions, and a clean toolbar — all without leaving your browser."
         />
 
+        <div class="max-w-6xl mx-auto px-6 pt-8">
+            <Breadcrumbs items={[{ name: "Platforms", href: "/for/" }, { name: "Chrome" }]} />
+        </div>
+
         <FeatureVideos client:visible />
         <Testimonials client:visible />
         <Pricing client:visible />
         <FAQ client:visible />
+        <RelatedLinks heading="Related pages" links={related} variant="white" />
     </main>
 
     <Footer client:visible source="for-chrome" />

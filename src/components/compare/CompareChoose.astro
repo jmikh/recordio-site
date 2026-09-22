@@ -1,0 +1,70 @@
+---
+/** Two-column "Choose X if / Choose Recordio if" box. */
+import { inline } from "../../data/compare/inline";
+
+interface Props {
+    name: string;
+    chooseThem: string[];
+    chooseRecordio: string[];
+}
+const { name, chooseThem, chooseRecordio } = Astro.props;
+---
+
+<section class="section-panel py-20 px-6" aria-labelledby="choose-heading">
+    <div class="max-w-5xl mx-auto">
+        <div class="section-head">
+            <span class="eyebrow">Which one is for you</span>
+            <h2 id="choose-heading" class="section-title">Choose {name} or Recordio</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="card-premium">
+                <h3 class="text-lg font-bold text-text-highlighted mb-4">Choose {name} if</h3>
+                <ul class="compare-choose-list">
+                    {chooseThem.map((item) => <li set:html={inline(item)} />)}
+                </ul>
+            </div>
+            <div class="card-premium compare-choose-card--recordio">
+                <h3 class="text-lg font-bold text-text-highlighted mb-4">Choose Recordio if</h3>
+                <ul class="compare-choose-list">
+                    {chooseRecordio.map((item) => <li set:html={inline(item)} />)}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .compare-choose-list {
+        display: grid;
+        gap: 0.75rem;
+        color: var(--color-text-main);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .compare-choose-list li {
+        position: relative;
+        padding-left: 1.5rem;
+    }
+    .compare-choose-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 0.6rem;
+        height: 0.6rem;
+        border-radius: 9999px;
+        background-color: var(--color-text-muted);
+        opacity: 0.5;
+    }
+    .compare-choose-card--recordio .compare-choose-list li::before {
+        background-color: var(--color-primary);
+        opacity: 1;
+    }
+    .compare-choose-list :global(a) {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+</style>

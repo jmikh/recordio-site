@@ -1,14 +1,18 @@
 ---
 import "../index.css";
-import { SITE_URL } from "../utils/constants";
-import { faqs } from "../data/faq";
+import fs from "node:fs";
+import path from "node:path";
+import { SITE_URL, SUPPORT_EMAIL, CWS_LISTING_URL, LINKEDIN_URL } from "../utils/constants";
+import { faqs, type FaqItem } from "../data/faq";
 
 interface Props {
     title: string;
     description: string;
     ogImage?: string;
-    /** Emit FAQPage JSON-LD. Only set on pages that render the <FAQ /> section. */
+    /** Emit FAQPage JSON-LD. Only set on pages that render an FAQ section. */
     faqSchema?: boolean;
+    /** Page-specific FAQ items. When present they replace the shared list in the FAQPage JSON-LD. */
+    faqItems?: FaqItem[];
     /** Keep the page out of search indexes (404, thank-you pages, etc). */
     noindex?: boolean;
     /** Open Graph object type. Blog posts pass "article". */
@@ -18,14 +22,59 @@ interface Props {
 const {
     title,
     description,
-    ogImage = `${SITE_URL}/og-image.png`,
+    ogImage: ogImageProp,
     faqSchema = false,
+    faqItems,
     noindex = false,
     ogType = "website",
 } = Astro.props;
 
 const siteUrl = SITE_URL;
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+
+/**
+ * Per-page Open Graph image. Pages can pass `ogImage` explicitly; otherwise we look for a
+ * pre-rendered image in public/og/ named after the path ("/compare/loom/" -> "og/compare-loom.jpg",
+ * "/" -> "og/home.jpg") and fall back to the generic og-image.png. Images are produced by
+ * `node scripts/generate-og.mjs` (see that file for the list of pages).
+ */
+const ogSlug = Astro.url.pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-") || "home";
+const ogCandidate = `/og/${ogSlug}.jpg`;
+const ogImage =
+    ogImageProp ??
+    (fs.existsSync(path.join(process.cwd(), "public", ogCandidate))
+        ? `${SITE_URL}${ogCandidate}`
+        : `${SITE_URL}/og-image.png`);
+
+/**
+ * Organization JSON-LD, emitted once per page. The `@id` lets other schema on the site
+ * (Person on /about/, Article publisher on blog posts) reference it instead of repeating it.
+ * sameAs: Chrome Web Store listing and the founder's LinkedIn page. Confirm additions with John.
+ */
+const organizationJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    "name": "Recordio",
+    "url": SITE_URL,
+    "logo": {
+        "@type": "ImageObject",
+        "url": `${SITE_URL}/assets/fulllogo-light.png`,
+    },
+    "description": "Cloud-based screen recorder for teams making product walkthroughs and demos.",
+    "founder": {
+        "@type": "Person",
+        "name": "John Mikhail",
+        "url": `${SITE_URL}/about/`,
+    },
+    "sameAs": [CWS_LISTING_URL, LINKEDIN_URL],
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": SUPPORT_EMAIL,
+        "url": `${SITE_URL}/about/`,
+    },
+});
 
 const softwareAppJsonLd = JSON.stringify({
     "@context": "https://schema.org",
@@ -74,7 +123,7 @@ const softwareAppJsonLd = JSON.stringify({
 const faqJsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map((f) => ({
+    "mainEntity": (faqItems ?? faqs).map((f) => ({
         "@type": "Question",
         "name": f.question,
         "acceptedAnswer": { "@type": "Answer", "text": f.answer },
@@ -167,6 +216,9 @@ const faqJsonLd = JSON.stringify({
                 setTimeout(initGA, 2000);
             }
         </script>
+
+        {/* Structured Data: Organization (once per page) */}
+        <script type="application/ld+json" set:html={organizationJsonLd} />
 
         {/* Structured Data: SoftwareApplication */}
         <script type="application/ld+json" set:html={softwareAppJsonLd} />

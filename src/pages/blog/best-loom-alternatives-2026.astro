@@ -1,8 +1,23 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import LoomAlternativesArticle from "../../components/blog/LoomAlternativesArticle";
+import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedLinks from "../../components/RelatedLinks";
+import { compareLink, blogPost } from "../../data/siteLinks";
 import { SITE_URL } from "../../utils/constants";
+
+// Loom pricing checked on loom.com/pricing on 2026-09-22: Starter free (25 videos, 5 min each),
+// Business $18 per user monthly (about $15 annual, "save up to 17%"), Business + AI $24 monthly (about $20 annual).
+const related = [
+    compareLink("loom"),
+    compareLink("tella"),
+    compareLink("clueso"),
+    blogPost("best-screen-studio-alternatives-2026"),
+    blogPost("best-camtasia-alternatives-2026"),
+    { label: "All comparisons", href: "/compare/", blurb: "Recordio compared with ten other screen recorders." },
+];
 
 const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
@@ -10,7 +25,7 @@ const jsonLd = JSON.stringify({
     "headline": "Best Loom Alternatives in 2026: Why Teams Are Switching",
     "description": "Looking for a Loom alternative? See why teams are switching to Recordio for studio-quality recordings, shareable links with view analytics, and a free plan with no credit card.",
     "datePublished": "2026-03-05",
-    "dateModified": "2026-09-15",
+    "dateModified": "2026-09-22",
     "author": {
         "@type": "Person",
         "name": "John Mikhail",
@@ -40,8 +55,13 @@ const jsonLd = JSON.stringify({
     description="Loom alternatives in 2026: what Loom costs per seat, where its videos fall short, and how Recordio and Screen Studio compare on features and price."
     ogType="article"
 >
-    <main class="pt-12 md:pt-20">
+    <Header client:load navLinks={[]} />
+    <main class="pt-28 md:pt-36">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: "Best Loom alternatives in 2026" }]} />
+        </div>
         <LoomAlternativesArticle client:load />
+        <RelatedLinks heading="Related" links={related} variant="purple" />
     </main>
     <Footer source="blog_best-loom-alternatives-2026" client:visible />
 </BaseLayout>

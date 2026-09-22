@@ -1,0 +1,238 @@
+---
+/**
+ * Video embed that also emits VideoObject JSON-LD (Plan 12, item 5).
+ *
+ * Self-hosted (files under /public):
+ *   <VideoEmbed
+ *     title="Auto zoom in Recordio"
+ *     description="How the DOM-aware zoom frames the input you type into."
+ *     src="/videos/zoom.webm"
+ *     poster="/videos/posters/zoom.jpg"
+ *     uploadDate="2026-03-25"
+ *     durationSeconds={7.6}
+ *   />
+ *
+ * YouTube (click-to-load facade, no third-party requests until the viewer plays):
+ *   <VideoEmbed
+ *     title="How to record your screen on Ubuntu"
+ *     description="Sixty-second tutorial."
+ *     youtubeId="VIDEO_ID"
+ *     uploadDate="2026-10-01"
+ *     durationSeconds={58}
+ *   />
+ *
+ * Rules: title and description are what Google shows in video results, so write
+ * them for the reader. `poster` is required for self-hosted video (VideoObject needs
+ * a thumbnail); for YouTube it defaults to the maxresdefault frame. Posters for the
+ * existing feature videos live in /videos/posters/<name>.jpg (1280x720).
+ */
+import { SITE_URL } from "../utils/constants";
+
+interface Props {
+    title: string;
+    description: string;
+    /** YYYY-MM-DD */
+    uploadDate: string;
+    durationSeconds: number;
+    /** Self-hosted file, .webm or .mp4. The sibling format is added as a second source when present. */
+    src?: string;
+    youtubeId?: string;
+    /** Absolute path under /public, or a full URL. Required with `src`. */
+    poster?: string;
+    /** Visible caption under the player. */
+    caption?: string;
+    /** Plain-text transcript. Added to the JSON-LD; not rendered. */
+    transcript?: string;
+    /** Extra classes on the <figure>. */
+    class?: string;
+}
+
+const {
+    title,
+    description,
+    uploadDate,
+    durationSeconds,
+    src,
+    youtubeId,
+    poster: posterProp,
+    caption,
+    transcript,
+    class: className = "",
+} = Astro.props;
+
+if (!src && !youtubeId) {
+    throw new Error(`VideoEmbed "${title}": pass either src or youtubeId.`);
+}
+if (src && !posterProp) {
+    throw new Error(`VideoEmbed "${title}": self-hosted video needs a poster (VideoObject requires thumbnailUrl).`);
+}
+if (!/^\d{4}-\d{2}-\d{2}$/.test(uploadDate)) {
+    throw new Error(`VideoEmbed "${title}": uploadDate must be YYYY-MM-DD.`);
+}
+
+const absolute = (p: string) => (p.startsWith("http") ? p : `${SITE_URL}${p}`);
+
+const poster = posterProp
+    ? absolute(posterProp)
+    : `https://i.ytimg.com/vi/${youtubeId}/maxresdefault.jpg`;
+
+const seconds = Math.max(1, Math.round(durationSeconds));
+const isoDuration = `PT${Math.floor(seconds / 60)}M${seconds % 60}S`;
+
+// Self-hosted sources: whichever extension was passed first, then the sibling.
+const sources = src
+    ? src.endsWith(".webm")
+        ? [
+              { url: src, type: "video/webm" },
+              { url: src.replace(/\.webm$/, ".mp4"), type: "video/mp4" },
+          ]
+        : [
+              { url: src, type: "video/mp4" },
+              { url: src.replace(/\.mp4$/, ".webm"), type: "video/webm" },
+          ]
+    : [];
+const mp4 = sources.find((s) => s.type === "video/mp4")?.url;
+
+const embedUrl = youtubeId
+    ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`
+    : undefined;
+
+const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": title,
+    "description": description,
+    "thumbnailUrl": [poster],
+    "uploadDate": `${uploadDate}T00:00:00+00:00`,
+    "duration": isoDuration,
+    ...(mp4 ? { "contentUrl": absolute(mp4) } : {}),
+    ...(youtubeId
+        ? { "embedUrl": `https://www.youtube-nocookie.com/embed/${youtubeId}` }
+        : {}),
+    ...(transcript ? { "transcript": transcript } : {}),
+    "publisher": {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        "name": "Recordio",
+        "logo": {
+            "@type": "ImageObject",
+            "url": `${SITE_URL}/assets/fulllogo-light.png`,
+        },
+    },
+});
+---
+
+<figure class={`video-embed ${className}`}>
+    {src ? (
+        <video
+            class="video-embed-player"
+            controls
+            playsinline
+            preload="metadata"
+            poster={poster}
+            aria-label={title}
+        >
+            {sources.map((s) => (
+                <source src={s.url} type={s.type} />
+            ))}
+            Your browser does not support embedded video.
+        </video>
+    ) : (
+        <button
+            type="button"
+            class="video-embed-facade"
+            data-video-facade
+            data-embed-url={embedUrl}
+            data-title={title}
+            aria-label={`Play video: ${title}`}
+        >
+            <img src={poster} alt="" width="1280" height="720" loading="lazy" decoding="async" />
+            <span class="video-embed-play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </span>
+        </button>
+    )}
+    {caption && <figcaption class="video-embed-caption">{caption}</figcaption>}
+</figure>
+<script type="application/ld+json" set:html={jsonLd} />
+
+<style>
+    .video-embed {
+        margin: 2rem 0;
+    }
+    .video-embed-player,
+    .video-embed-facade {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--color-surface-raised);
+        border: 1px solid var(--color-border);
+        box-shadow: 0 16px 40px -20px oklch(0.3 0.08 292 / 0.35);
+    }
+    .video-embed-facade {
+        position: relative;
+        padding: 0;
+        cursor: pointer;
+    }
+    .video-embed-facade img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .video-embed-play {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: 64px;
+        height: 64px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: var(--color-primary);
+        color: var(--color-text-on-primary);
+        box-shadow: 0 8px 24px -8px oklch(0.3 0.15 292 / 0.6);
+        transition: transform 0.2s ease;
+    }
+    .video-embed-facade:hover .video-embed-play,
+    .video-embed-facade:focus-visible .video-embed-play {
+        transform: scale(1.06);
+    }
+    .video-embed iframe {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 0;
+        border-radius: 14px;
+    }
+    .video-embed-caption {
+        margin-top: 0.75rem;
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        text-align: center;
+    }
+</style>
+
+<script>
+    // Swap the poster facade for the YouTube iframe on first click. Runs once per page.
+    document.querySelectorAll<HTMLButtonElement>("[data-video-facade]").forEach((btn) => {
+        btn.addEventListener(
+            "click",
+            () => {
+                const iframe = document.createElement("iframe");
+                iframe.src = btn.dataset.embedUrl ?? "";
+                iframe.title = btn.dataset.title ?? "Video";
+                iframe.allow =
+                    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                iframe.allowFullscreen = true;
+                iframe.loading = "lazy";
+                btn.replaceWith(iframe);
+            },
+            { once: true },
+        );
+    });
+</script>

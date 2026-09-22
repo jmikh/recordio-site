@@ -1,0 +1,99 @@
+# Inbound links to add (consumed by Plan 08)
+
+Append one line per link. Format: `- [ ] <where: header|footer|homepage|compare-hub|platforms-hub|blog-index|page:/path/> -> <target path> "<anchor text>"`
+
+- [x] footer (Product column) -> /screenshots/ "Screenshots" (done, Plan 08: PRODUCT_LINKS in siteLinks.ts)
+- [x] header (Product dropdown when it exists) -> /screenshots/ "Screenshots" (done, Plan 08: Product dropdown)
+- [x] homepage (one line in hero facts or features: "Also captures full-page screenshots you can annotate and share") -> /screenshots/ "full-page screenshots" (done, Plan 08: Hero facts line)
+- [x] page:/for/chrome/ -> /screenshots/ "full-page screenshot and annotation tool" (done, Plan 08: related block on /for/chrome/)
+- [ ] page:/use-cases/bug-report-screen-recording/ -> /screenshots/ "annotated screenshots"
+- [ ] page:/features/blur/ -> /screenshots/ "blur a screenshot before sharing"
+- [x] footer -> /about/ "About" (Company column, Plan 10) (done, Plan 08)
+- [x] footer (Platforms column, after Linux) -> /for/chromebook/ "Chromebook" (done, Plan 08: Footer via PLATFORM_PAGES in src/data/siteLinks.ts)
+- [x] platforms-hub -> /for/chromebook/ "Chromebook & ChromeOS" (done, Plan 08: /for/ hub card "Screen recorder for Chromebook")
+- [x] page:/for/chrome/ -> /for/chromebook/ "screen recorder for Chromebook" (done, Plan 08: "Recordio on other platforms" block on /for/chrome/)
+- [ ] page:/for/linux/ (platform sibling links) -> /for/chromebook/ "Chromebook" (Plan 08 note: linux.astro was mid-rewrite by Plan 03; swap its hand-written relatedLinks for otherPlatforms("linux") from src/data/siteLinks.ts)
+- [ ] page:/compare/screencastify/ -> /for/chromebook/ "Recordio on Chromebooks" (Plan 08 note: compare pages left to Plan 01; set related.platform in the data file)
+- [ ] page:/use-cases/bug-report-screen-recording/ -> /for/chromebook/ "support agents on Chromebooks"
+- [ ] page:/compare/obs/ -> /for/linux/ "screen recorder for Linux" (Plan 08 note: compare pages left to Plan 01; set related.platform in the data file)
+- [x] page:/for/mac/ -> /for/linux/ "Recordio on Linux" (done, Plan 08: "Recordio on other platforms" block on /for/mac/)
+- [x] page:/for/windows/ -> /for/linux/ "Recordio on Linux" (done, Plan 08: "Recordio on other platforms" block on /for/windows/)
+- [x] page:/for/chrome/ -> /for/linux/ "screen recorder for Linux and Ubuntu" (done, Plan 08: "Recordio on other platforms" block on /for/chrome/)
+- [x] page:/blog/best-screen-recorders-2026/ -> /for/linux/ "best screen recorder for Linux" (done, Plan 08: Related block on the post)
+- [x] footer -> /use-cases/ "Use cases" (Product column, or a new "Use cases" column listing the five below) (done, Plan 08: Product column has the hub, new Use cases column has the five)
+- [x] footer -> /use-cases/product-walkthrough-video/ "Product walkthroughs" (done, Plan 08)
+- [x] footer -> /use-cases/software-demo-recording/ "Software demos" (done, Plan 08)
+- [x] footer -> /use-cases/customer-onboarding-videos/ "Customer onboarding" (done, Plan 08)
+- [x] footer -> /use-cases/bug-report-screen-recording/ "Bug reports" (done, Plan 08)
+- [x] footer -> /use-cases/release-walkthrough-video/ "Release updates" (done, Plan 08)
+- [x] header -> /use-cases/ "Use cases" (Product dropdown once it exists) (done, Plan 08)
+- [x] homepage -> /use-cases/product-walkthrough-video/ "product walkthroughs" (strip under Testimonials: "Built for product walkthroughs, demos, onboarding and bug reports", one link per use case plus "All use cases" -> /use-cases/) (done, Plan 08: LinkStrip under Testimonials)
+- [x] homepage -> /use-cases/software-demo-recording/ "demos" (done, Plan 08)
+- [x] homepage -> /use-cases/customer-onboarding-videos/ "onboarding" (done, Plan 08)
+- [x] homepage -> /use-cases/bug-report-screen-recording/ "bug reports" (done, Plan 08)
+- [x] homepage -> /use-cases/release-walkthrough-video/ "release updates" (done, Plan 08)
+- [x] compare-hub -> /use-cases/ "what teams record with Recordio" (done, Plan 08)
+- [ ] page:/compare/loom/ -> /use-cases/product-walkthrough-video/ "product walkthrough videos"
+- [ ] page:/compare/loom/ -> /use-cases/software-demo-recording/ "software demo recording"
+- [ ] page:/compare/screenity/ -> /use-cases/bug-report-screen-recording/ "bug report screen recording"
+- [ ] page:/compare/screen-studio/ -> /use-cases/release-walkthrough-video/ "release walkthrough videos"
+- [x] page:/for/chrome/ -> /use-cases/bug-report-screen-recording/ "bug report screen recording" (done, Plan 08: related block on /for/chrome/)
+- [ ] page:/screenshots/ (Plan 05) -> /use-cases/bug-report-screen-recording/ "bug report screen recording"
+- [ ] page:/features/* (Plan 07) -> matching use case: auto-zoom -> product-walkthrough-video, share-links -> software-demo-recording, ai-captions -> customer-onboarding-videos, blur -> bug-report-screen-recording, team-library -> release-walkthrough-video
+- [x] footer (Product column) -> /features/ "Features" (replace the current "/#feature-videos" link) (done, Plan 08)
+- [x] header (Product dropdown when it exists) -> /features/ "Features" (done, Plan 08)
+- [x] homepage (FeatureVideos.tsx carousel, "Auto Zoom" item title) -> /features/auto-zoom/ "Zooms to exactly what matters" (done, Plan 08)
+- [x] homepage (FeatureVideos.tsx carousel, "Captions" item title) -> /features/ai-captions/ "AI-generated captions" (done, Plan 08)
+- [x] homepage (FeatureVideos.tsx carousel, "Overlays" item title) -> /features/blur/ "Blur sensitive information" (done, Plan 08)
+- [x] homepage (FeatureVideos.tsx marquee "Shared links") -> /features/share-links/ "Shared links" (done, Plan 08)
+- [x] homepage (FeatureVideos.tsx marquee "Viewership stats") -> /features/share-links/ "Viewership stats" (done, Plan 08, plus a "Team library" pill to /features/team-library/)
+- [x] compare-hub -> /features/ "See every feature Recordio applies automatically" (done, Plan 08: anchor "see every feature")
+- [ ] page:/compare/* (feature table rows, Plan 01 data files) -> /features/auto-zoom/ "Auto Zoom"; -> /features/ai-captions/ "AI Captions"; -> /features/blur/ "Blur"; -> /features/share-links/ "Shareable Links"; -> /features/team-library/ "Team library"
+- [ ] page:/use-cases/* (Plan 06) -> the matching feature page (each feature page already links one use case in its Related block)
+- [ ] page:/screenshots/ (Plan 05) -> /features/blur/ "blur in recordings" and -> /features/team-library/ "team library"
+- [x] blog-index -> /blog/best-bandicam-alternatives-2026/ "Best Bandicam Alternatives in 2026 for Mac, Linux and Teams" (card, "Alternatives", September 2026 · 11 min read) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [x] blog-index -> /blog/best-screen-studio-alternatives-2026/ "Best Screen Studio Alternatives in 2026 for Windows, Linux and Teams" (card) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [x] blog-index -> /blog/best-screencastify-alternatives-2026/ "Best Screencastify Alternatives in 2026 for Education and Chrome" (card) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [x] blog-index -> /blog/best-camtasia-alternatives-2026/ "Best Camtasia Alternatives in 2026 for Fast Product Demos" (card) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [ ] page:/compare/bandicam/ (Plan 01 data file `related.post`) -> /blog/best-bandicam-alternatives-2026/ "Best Bandicam alternatives in 2026"
+- [ ] page:/compare/screen-studio/ (Plan 01 data file `related.post`) -> /blog/best-screen-studio-alternatives-2026/ "Best Screen Studio alternatives in 2026"
+- [ ] page:/compare/screencastify/ (Plan 01 data file `related.post`) -> /blog/best-screencastify-alternatives-2026/ "Best Screencastify alternatives in 2026"
+- [ ] page:/compare/camtasia/ (Plan 01 data file `related.post`) -> /blog/best-camtasia-alternatives-2026/ "Best Camtasia alternatives in 2026"
+- [ ] page:/compare/loom/ (Plan 01 data file `related.post`) -> /blog/best-loom-alternatives-2026/ "Best Loom alternatives in 2026"
+- [ ] page:/for/linux/ -> /blog/best-bandicam-alternatives-2026/ "Bandicam alternatives for Linux"
+- [x] page:/for/windows/ -> /blog/best-screen-studio-alternatives-2026/ "Screen Studio alternatives for Windows" (done, Plan 08: Related pages block)
+- [ ] page:/for/chromebook/ -> /blog/best-screencastify-alternatives-2026/ "Screencastify alternatives for schools"
+- [x] page:/for/mac/ -> /blog/best-camtasia-alternatives-2026/ "Camtasia alternatives for fast demos" (done, Plan 08: Related pages block)
+- [ ] blog-index -> /blog/walkthrough-watch-time/ "What N product walkthroughs taught us about watch time" (Plan 12 data asset; only once src/pages/blog/_walkthrough-watch-time.astro is renamed to publish)
+- [ ] page:/features/share-links/ -> /blog/walkthrough-watch-time/ "what the watch-time data says" (Plan 12; once published)
+- [ ] page:/use-cases/product-walkthrough-video/ -> /blog/walkthrough-watch-time/ "walkthrough watch-time benchmarks" (Plan 12; once published)
+- [ ] page:/blog/how-to-make-a-product-walkthrough-video/ -> /blog/walkthrough-watch-time/ "where viewers stop watching walkthroughs" (Plan 12; once published)
+- [x] footer -> /compare/screencastify/ "vs Screencastify" (done, Plan 08: footer lists all ten comparisons)
+- [x] footer -> /compare/screenity/ "vs Screenity" (done, Plan 08: footer lists all ten comparisons)
+- [x] footer -> /compare/clueso/ "vs Clueso" (done, Plan 08: footer lists all ten comparisons)
+- [x] footer -> /compare/focusee/ "vs FocuSee" (done, Plan 08: footer lists all ten comparisons)
+- [x] page:/blog/best-loom-alternatives-2026/ -> /compare/loom/ "Recordio vs Loom" (done, Plan 08: Related block on the post)
+- [x] page:/blog/best-loom-alternatives-2026/ -> /compare/tella/ "Recordio vs Tella" (done, Plan 08: Related block on the post)
+- [x] page:/blog/best-screen-recorders-2026/ -> /compare/screen-studio/ "Recordio vs Screen Studio" (done, Plan 08: Related block on the post)
+- [x] page:/blog/best-screen-recorders-2026/ -> /compare/focusee/ "Recordio vs FocuSee" (done, Plan 08: Related block on the post)
+- [x] page:/for/windows/ -> /compare/bandicam/ "Recordio vs Bandicam" (done, Plan 08: Related pages block)
+- [x] page:/for/linux/ -> /compare/obs/ "Recordio vs OBS" (already present in the Plan 03 rewrite of linux.astro)
+- [x] page:/for/chrome/ -> /compare/screencastify/ "Recordio vs Screencastify" (done, Plan 08: Related pages block)
+- [x] page:/for/mac/ -> /compare/screen-studio/ "Recordio vs Screen Studio" (done, Plan 08: Related pages block)
+- [ ] compare-hub -> every /compare/<slug>/ with the one-line verdict from src/data/compare/<slug>.ts (Plan 08 can import `competitors` from src/data/compare/index.ts) (Plan 08 note: hub links all ten from COMPARE_PAGES in siteLinks.ts with its own blurbs; swap blurbs for verdicts once all ten data files exist)
+- [ ] page:/compare/<slug>/ byline -> /about/ "John Mikhail" once Plan 10 ships the about page (src/components/compare/CompareByline.astro currently links LinkedIn)
+- [x] blog-index -> /blog/how-to-record-screen-on-ubuntu/ "How to Record Your Screen on Ubuntu (With Audio)" (eyebrow How-to, September 2026 · 8 min read) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [x] blog-index -> /blog/how-to-screen-record-on-chromebook/ "How to Screen Record on a Chromebook in 2026" (eyebrow How-to, September 2026 · 8 min read) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [x] blog-index -> /blog/how-to-record-screen-on-mac-with-audio/ "How to Record Your Screen on Mac With Audio" (eyebrow How-to, September 2026 · 8 min read) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [x] blog-index -> /blog/best-tutorial-recording-software/ "Best Tutorial Recording Software in 2026" (eyebrow Guide, September 2026 · 10 min read) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [x] blog-index -> /blog/how-to-make-a-product-walkthrough-video/ "How to Make a Product Walkthrough Video" (eyebrow Guide, September 2026 · 9 min read) (done, Plan 08: blog index renders BLOG_POSTS from src/data/siteLinks.ts)
+- [ ] page:/for/linux/ -> /blog/how-to-record-screen-on-ubuntu/ "How to record your screen on Ubuntu with audio"
+- [ ] page:/for/chromebook/ -> /blog/how-to-screen-record-on-chromebook/ "How to screen record on a Chromebook"
+- [x] page:/for/mac/ -> /blog/how-to-record-screen-on-mac-with-audio/ "How to record your screen on Mac with audio" (done, Plan 08: Related pages block)
+- [x] page:/for/chrome/ -> /blog/how-to-make-a-product-walkthrough-video/ "How to make a product walkthrough video" (done, Plan 08: Related pages block)
+- [ ] page:/compare/obs/ -> /blog/how-to-record-screen-on-ubuntu/ "Recording your screen on Ubuntu with OBS"
+- [ ] page:/compare/screencastify/ -> /blog/how-to-screen-record-on-chromebook/ "How to screen record on a Chromebook"
+- [ ] page:/compare/screen-studio/ -> /blog/how-to-record-screen-on-mac-with-audio/ "How to record your screen on Mac with audio"
+- [ ] page:/compare/camtasia/ -> /blog/best-tutorial-recording-software/ "Best tutorial recording software in 2026"
+- [x] homepage -> /blog/how-to-make-a-product-walkthrough-video/ "How to make a product walkthrough video" (Plan 09; use-case pages from Plan 06 should also link this post once they exist) (done, Plan 08: guide link in the use-case strip)
+- [x] page:/blog/best-screen-recorders-2026/ -> /blog/best-tutorial-recording-software/ "Best tutorial recording software" (done, Plan 08: Related block on the post)

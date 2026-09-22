@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedLinks from "../../components/RelatedLinks";
+import FAQ from "../../components/FAQ";
+import AlternativesArticle from "../../components/blog/AlternativesArticle";
+import { articleJsonLd, itemListJsonLd } from "../../components/blog/structuredData";
+import { SITE_URL } from "../../utils/constants";
+import { post } from "../../data/blog/screen-studio-alternatives";
+
+const path = `/blog/${post.slug}/`;
+
+const article = articleJsonLd({
+    headline: post.headline,
+    description: post.description,
+    path,
+    datePublished: post.datePublished,
+    dateModified: post.dateModified,
+});
+
+const itemList = itemListJsonLd({
+    name: post.headline,
+    description: post.description,
+    items: post.tools.map((tool) => ({
+        name: tool.name,
+        url: tool.url.startsWith("/") ? `${SITE_URL}${tool.url}` : tool.url,
+        description: tool.bestFor,
+    })),
+});
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    ogType="article"
+    faqSchema
+    faqItems={post.faq}
+>
+    <Header client:load navLinks={[]} />
+    <main class="pt-28 md:pt-36">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: post.crumb }]} />
+        </div>
+        <AlternativesArticle client:load post={post} />
+        <FAQ client:visible items={post.faq} />
+        <RelatedLinks heading="Related" links={post.related} variant="purple" />
+    </main>
+    <Footer source={`blog_${post.slug}`} client:visible />
+</BaseLayout>
+
+<script type="application/ld+json" set:html={article} />
+<script type="application/ld+json" set:html={itemList} />

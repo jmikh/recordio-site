@@ -1,0 +1,29 @@
+---
+/** Author line with the last-updated date. */
+interface Props {
+    updated: string;
+}
+const { updated } = Astro.props;
+const formatted = new Date(`${updated}T00:00:00Z`).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+});
+---
+
+<div class="section-panel-white px-6 py-10">
+    <p class="max-w-4xl mx-auto text-sm text-text-muted flex flex-wrap items-center gap-x-2 gap-y-1">
+        <span>
+            Written by
+            <a
+                href="https://www.linkedin.com/in/john-mikhail/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-semibold text-text-highlighted hover:text-primary transition-colors"
+            >John Mikhail</a>, founder of Recordio.
+        </span>
+        <span aria-hidden="true" class="opacity-50">/</span>
+        <span>Updated <time datetime={updated}>{formatted}</time>.</span>
+    </p>
+</div>

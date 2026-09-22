@@ -1,0 +1,50 @@
+# Recordio
+
+> Recordio is a cloud-based screen recorder for teams making product walkthroughs and demos. It runs as a Chrome extension (also Edge and Brave) with a web app at https://app.recordio.io, so it works on macOS, Windows, Linux and ChromeOS. An account is required; a free account is enough to start.
+
+Website: https://recordio.io
+Web app: https://app.recordio.io
+Chrome Web Store: https://chromewebstore.google.com/detail/recordio-beautiful-screen/bbcdpipjplklaneplfmlhhibnllhinii
+Contact: john@recordio.io
+
+## What it does
+
+- Auto zoom that reads the page DOM and frames the input, card or menu you interact with. Every zoom is an editable keyframe.
+- Auto spotlight: 3D elevation of the element you interact with.
+- Smart AutoCut: silence removal that keeps typing and clicking pauses.
+- Simplified toolbar that hides bookmarks, tabs and extensions from the recording.
+- Blur sensitive regions, webcam bubble, device frames (MacBook Pro and Air), backgrounds and a music library.
+- AI captions with word-level timing. Captions are editable; deleting a caption line cuts that segment (Pro).
+- Exports at 480p, 720p and 1080p on Free; 2K and 4K on Pro. Cloud rendering on Pro, browser rendering on Free.
+- Share links with view analytics (view counts, watch time) and a public watch page (Pro).
+- Team workspace with roles, collaboration and a shared team library. Unlimited viewer seats (Pro).
+- Screenshots: capture the visible area, full page or a region, annotate in the web app, then copy, download PNG or PDF, or share a link.
+
+## Pricing (per seat)
+
+- Free: $0, no card required. Up to 5 active projects, videos expire after 7 days, 1080p downloads, lightweight local transcription, browser rendering.
+- Pro: $12 per seat per month billed annually, or $15 per seat per month billed monthly. 4K export, captions, share links, team library, unlimited viewer seats, cloud rendering, unlimited projects, no expiry, 30-day restore.
+
+## Pages
+
+- Home: https://recordio.io/
+- About: https://recordio.io/about/
+- Blog: https://recordio.io/blog/
+- Compare hub: https://recordio.io/compare/
+  - vs Loom: https://recordio.io/compare/loom/
+  - vs Screen Studio: https://recordio.io/compare/screen-studio/
+  - vs Tella: https://recordio.io/compare/tella/
+  - vs Bandicam: https://recordio.io/compare/bandicam/
+  - vs OBS: https://recordio.io/compare/obs/
+  - vs Camtasia: https://recordio.io/compare/camtasia/
+  - vs Clueso: https://recordio.io/compare/clueso/
+  - vs FocuSee: https://recordio.io/compare/focusee/
+  - vs Screencastify: https://recordio.io/compare/screencastify/
+  - vs Screenity: https://recordio.io/compare/screenity/
+- Platforms hub: https://recordio.io/for/
+  - Mac: https://recordio.io/for/mac/
+  - Windows: https://recordio.io/for/windows/
+  - Linux: https://recordio.io/for/linux/
+  - Chrome: https://recordio.io/for/chrome/
+- Privacy: https://recordio.io/privacy/
+- Terms: https://recordio.io/terms/

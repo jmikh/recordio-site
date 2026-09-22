@@ -1003,9 +1003,18 @@ h2,
   transition: opacity 0.4s ease;
 }
 
+.feature-video-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .feature-video-placeholder {
   position: absolute;
   inset: 0;
+  opacity: 0.3;
   background: linear-gradient(
     110deg,
     var(--tint-deep) 30%,

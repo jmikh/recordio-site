@@ -1,0 +1,76 @@
+import { c as createComponent, r as renderComponent, a as renderTemplate } from '../../chunks/astro/server_C5ewKNw0.mjs';
+import 'piccolore';
+import { $ as $$FeatureLayout } from '../../chunks/FeatureLayout_BgI6VYOZ.mjs';
+import { g as getFeature } from '../../chunks/features_CbJNs_cj.mjs';
+export { renderers } from '../../renderers.mjs';
+
+const $$ShareLinks = createComponent(($$result, $$props, $$slots) => {
+  const me = getFeature("share-links");
+  const team = getFeature("team-library");
+  const captions = getFeature("ai-captions");
+  const steps = [
+    {
+      title: "One link, no file",
+      body: `<p>When the render finishes, copy the link. The watch page plays the finished video with zoom, spotlight and captions already applied. No download, no upload to Drive or YouTube, and no 200 MB attachment bouncing off someone's mail server.</p><p>Paste it into Slack, a ticket, a pull request or an email and the viewer is watching in one click.</p>`
+    },
+    {
+      title: "View counts and watch time",
+      body: `<p>Each video in your library shows how many times it was viewed and how long people watched. View count tells you whether the link was opened. Watch time tells you whether the eight-minute version was worth it or a 90-second cut would have done.</p><p>The numbers sit next to the video in the library, not in a separate analytics product.</p>`
+    },
+    {
+      title: "A public watch page",
+      body: `<p>Anyone with the link can watch. Viewers do not need a Recordio account and do not count as a seat. The page is the video and its title, with no feed of unrelated videos and no ads.</p><p>Customers, prospects and contractors all see the same clean page as your teammates.</p>`
+    }
+  ];
+  const useCases = {
+    heading: "Any time you would otherwise attach a file",
+    items: [
+      "<strong>Async product updates</strong> to the whole company, where you want to know if anyone outside your team watched.",
+      "<strong>Sales follow-ups</strong> after a call. Watch time shows which prospect actually opened the recap and how far they got.",
+      "<strong>Support answers</strong> that get reused. One link in the help desk macro instead of re-recording the same fix.",
+      '<strong>Customer onboarding</strong>, with the finished video kept in the <a href="' + team.href + '">team library</a> so success and sales send the same version.'
+    ]
+  };
+  const planNote = `Share links with view analytics are a Pro feature, at $12 per seat per month billed annually or $15 monthly. The Free plan exports 1080p files you can send any way you like.`;
+  const comparedWith = `<p><a href="/compare/loom/">Loom</a> built its whole product around the share link and does it well: instant links, comments on the video, and viewer insights on its paid plans. Those plans run $15 to $20 per user per month, and the link points to a raw recording unless you edit it separately. <a href="/compare/screen-studio/">Screen Studio</a> produces beautiful videos but exports a file. To share it you upload it somewhere else, and there is no view count. Recordio gives you Loom-style links with view counts and watch time on top of a video that already has auto zoom, spotlight and <a href="${captions.href}">captions</a> applied.</p>`;
+  const faq = [
+    {
+      question: "Do viewers need a Recordio account?",
+      answer: "No. Anyone with the link can open the public watch page. Viewers never need a seat, so you can send a link to a customer, a prospect or your whole company at no extra cost."
+    },
+    {
+      question: "What analytics do I get?",
+      answer: "Recordio shows the number of views and the watch time for each shared video, right next to the video in your library."
+    },
+    {
+      question: "Do share links expire?",
+      answer: "Share links are a Pro feature, and Pro videos do not expire. Videos on the Free plan expire after 7 days, and the Free plan shares videos as downloaded files rather than links."
+    },
+    {
+      question: "Can I still download the video?",
+      answer: "Yes. Every recording can be downloaded as a file, up to 1080p on the Free plan and up to 4K on Pro, whether or not you also share a link."
+    }
+  ];
+  const related = [
+    { label: `${team.name} for shared recordings`, href: team.href, blurb: team.blurb },
+    { label: `${captions.name} for muted viewers`, href: captions.href, blurb: captions.blurb },
+    { label: "Recordio vs Tella", href: "/compare/tella/", blurb: "Tella keeps view analytics for its Premium plan. Recordio includes them on Pro." },
+    { label: "Screen recorder for Linux", href: "/for/linux/", blurb: "Record in Chrome on Ubuntu or any distro and share the same links." },
+    { label: "Software demo recordings", href: "/use-cases/software-demo-recording/", blurb: "Record a demo once and send the link to every prospect." }
+  ];
+  return renderTemplate`${renderComponent($$result, "FeatureLayout", $$FeatureLayout, { "slug": me.slug, "name": me.name, "title": "Share Screen Recordings as a Link With Analytics | Recordio", "description": "Share a screen recording as a link with a public watch page and see view counts and watch time. Viewers need no account. A Recordio Pro feature.", "eyebrow": "Share links", "h1": "Share screen recordings as a link and see who watched", "intro": "On Pro, every recording gets a share link with a public watch page. No file to attach and no upload to a video host. Send the link in Slack, email or a ticket and see view counts and watch time from your library.", "plan": me.plan, "planNote": planNote, "steps": steps, "useCases": useCases, "comparedWith": comparedWith, "faq": faq, "related": related })}`;
+}, "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/pages/features/share-links.astro", void 0);
+
+const $$file = "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/pages/features/share-links.astro";
+const $$url = "/features/share-links/";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+    __proto__: null,
+    default: $$ShareLinks,
+    file: $$file,
+    url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

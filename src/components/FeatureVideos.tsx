@@ -13,6 +13,7 @@ interface Feature {
     description: string;
     video: string; // filename in /videos/
     hue: number;   // oklch hue that colors this row's panel, pill and glow
+    href?: string; // feature page the title links to
 }
 
 const FEATURES: Feature[] = [
@@ -23,6 +24,7 @@ const FEATURES: Feature[] = [
         description: 'Recordio doesn\'t just follow the cursor, it understands the layout of all elements you are interacting with, so no input box or form is clipped out. A zoom that gets it right every single time.',
         video: 'zoom.webm',
         hue: 290,
+        href: '/features/auto-zoom/',
     },
     {
         label: 'Auto Spotlight',
@@ -47,6 +49,7 @@ const FEATURES: Feature[] = [
         description: 'AI generates perfectly-timed captions from your audio that tracks to the word level. Easily edit any mistakes, or cut the video based on the captions.',
         video: 'captions.webm',
         hue: 78,
+        href: '/features/ai-captions/',
     },
     {
         label: 'Clean Toolbar',
@@ -63,24 +66,26 @@ const FEATURES: Feature[] = [
         description: 'Use overlays to blur out sensitive information, add explanatory text, arrows or overlays to highlight important information.',
         video: 'overlays.webm',
         hue: 78,
+        href: '/features/blur/',
     },
 ];
 
-const ADDITIONAL_FEATURES = [
-    'Music',
-    'Cursor effects',
-    'Keyboard effects',
-    'Aspect ratio formatting',
-    'Cut and trim',
-    'Speed up',
-    '4K exports',
-    'Shared links',
-    'Intros and outros',
-    'Intuitive editor',
-    'Camera auto shrink',
-    'Dynamic camera layouts',
-    'Light and dark mode',
-    'Viewership stats',
+const ADDITIONAL_FEATURES: { label: string; href?: string }[] = [
+    { label: 'Music' },
+    { label: 'Cursor effects' },
+    { label: 'Keyboard effects' },
+    { label: 'Aspect ratio formatting' },
+    { label: 'Cut and trim' },
+    { label: 'Speed up' },
+    { label: '4K exports' },
+    { label: 'Shared links', href: '/features/share-links/' },
+    { label: 'Intros and outros' },
+    { label: 'Intuitive editor' },
+    { label: 'Camera auto shrink' },
+    { label: 'Dynamic camera layouts' },
+    { label: 'Light and dark mode' },
+    { label: 'Viewership stats', href: '/features/share-links/' },
+    { label: 'Team library', href: '/features/team-library/' },
 ];
 
 /**
@@ -176,9 +181,18 @@ const LazyVideo = ({ src, register, onMounted }: LazyVideoProps) => {
         if (shouldLoad) onMounted();
     }, [shouldLoad, onMounted]);
 
+    // Poster frames (1280x720 JPEGs extracted with ffmpeg) live in /videos/posters/<name>.jpg,
+    // shared with VideoEmbed.astro. They show before the video is fetched.
+    const poster = src.replace('/videos/', '/videos/posters/').replace('.webm', '.jpg');
+
     return (
         <div ref={containerRef} className="feature-video-container">
-            {!isLoaded && <div className="feature-video-placeholder" />}
+            {!isLoaded && (
+                <>
+                    <img src={poster} alt="" aria-hidden="true" className="feature-video-poster" loading="lazy" decoding="async" />
+                    <div className="feature-video-placeholder" />
+                </>
+            )}
 
             {shouldLoad && (
                 <video
@@ -186,6 +200,7 @@ const LazyVideo = ({ src, register, onMounted }: LazyVideoProps) => {
                     loop
                     playsInline
                     preload="auto"
+                    poster={poster}
                     onPlaying={() => setIsLoaded(true)}
                     onLoadedData={() => setIsLoaded(true)}
                     className="feature-video"
@@ -241,7 +256,13 @@ const FeatureRow = ({ feature, index, register, onVideoMounted }: FeatureRowProp
                     {feature.icon}
                     {feature.label}
                 </div>
-                <h3 className="step-title">{feature.title}</h3>
+                <h3 className="step-title">
+                    {feature.href ? (
+                        <a href={feature.href} className="hover:text-primary transition-colors">{feature.title}</a>
+                    ) : (
+                        feature.title
+                    )}
+                </h3>
                 <p className="step-description">{feature.description}</p>
             </div>
 
@@ -295,14 +316,18 @@ const FeatureVideos = () => {
                 <div className="feature-marquee-wrapper">
                     <div className="feature-marquee-track">
                         {/* Duplicate the array twice for seamless continuous scrolling */}
-                        {[...ADDITIONAL_FEATURES, ...ADDITIONAL_FEATURES].map((feat, i) => (
-                            <div
-                                key={i}
-                                className="inline-flex items-center px-5 py-2.5 rounded-full border border-border bg-surface-raised font-medium whitespace-nowrap text-text-main shadow-sm"
-                            >
-                                {feat}
-                            </div>
-                        ))}
+                        {[...ADDITIONAL_FEATURES, ...ADDITIONAL_FEATURES].map((feat, i) => {
+                            const pill = 'inline-flex items-center px-5 py-2.5 rounded-full border border-border bg-surface-raised font-medium whitespace-nowrap text-text-main shadow-sm';
+                            return feat.href ? (
+                                <a key={i} href={feat.href} className={`${pill} hover:border-primary hover:text-primary transition-colors`}>
+                                    {feat.label}
+                                </a>
+                            ) : (
+                                <div key={i} className={pill}>
+                                    {feat.label}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>

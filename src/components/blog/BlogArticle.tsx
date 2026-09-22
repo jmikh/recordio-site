@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { VIDEOS_BASE } from '../../utils/constants';
+import { VIDEOS_BASE, LINKEDIN_URL } from '../../utils/constants';
 
 const BlogArticle = () => {
     const beforeRef = useRef<HTMLVideoElement>(null);
@@ -465,9 +465,9 @@ const BlogArticle = () => {
                         loading="lazy"
                     />
                     <div className="flex flex-col gap-0.5">
-                        <span className="text-text-highlighted text-base font-semibold">
+                        <a href="/about/" className="text-text-highlighted text-base font-semibold hover:text-primary transition-colors">
                             John Mikhail
-                        </span>
+                        </a>
                         <span className="text-text-muted text-sm">
                             Founder of Recordio
                         </span>
@@ -477,7 +477,7 @@ const BlogArticle = () => {
                     </div>
                 </div>
                 <a
-                    href="https://www.linkedin.com/in/john-mikhail/"
+                    href={LINKEDIN_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-text-muted hover:text-[#0a66c2] transition-colors shrink-0"

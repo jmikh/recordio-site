@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FAQ from "../../components/FAQ";
+import RelatedLinks from "../../components/RelatedLinks";
+import ProductWalkthroughArticle from "../../components/blog/ProductWalkthroughArticle";
+import { articleJsonLd, howToJsonLd } from "../../components/blog/structuredData";
+import type { FaqItem } from "../../data/faq";
+
+const path = "/blog/how-to-make-a-product-walkthrough-video/";
+const title = "How to Make a Product Walkthrough Video | Recordio";
+const description =
+    "A practical guide to product walkthrough videos: pick one job, script the beats, record, cut the silence, add captions and share a link.";
+
+const faq: FaqItem[] = [
+    {
+        question: "How long should a product walkthrough video be?",
+        answer: "Two to four minutes for one job with several steps, 45 to 90 seconds for a single feature or setting, and up to six minutes for an end-to-end first-run setup. Anything longer should be split into a short series. Watch time drops sharply after about three minutes for videos the viewer did not choose to watch.",
+    },
+    {
+        question: "Do I need a script for a product walkthrough video?",
+        answer: "Not a word-for-word one. Write one line per screen, five to eight beats, saying what you do and why it matters. Open with the end state the viewer will reach, close with the next job. Reading a full script makes you sound like you are reading; beats keep it natural and are easy to cut in editing.",
+    },
+    {
+        question: "What tool should I use to make a product walkthrough video?",
+        answer: "Any screen recorder works for the capture. The differences are in what happens after. Recordio records the browser tab, applies auto zoom and spotlight to the controls you use, cuts silence automatically, adds editable captions on Pro, and gives you a share link with view analytics in a team library. A raw recorder such as OBS or QuickTime leaves those steps to you.",
+    },
+];
+
+const article = articleJsonLd({
+    headline: "How to Make a Product Walkthrough Video",
+    description,
+    path,
+    datePublished: "2026-09-22",
+    dateModified: "2026-09-22",
+});
+
+const howTo = howToJsonLd({
+    name: "How to make a product walkthrough video",
+    description: "Plan, record, edit and share a product walkthrough video that people watch to the end.",
+    path,
+    anchor: "record",
+    totalTime: "PT2H",
+    steps: [
+        { name: "Pick one job and write the beats", text: "Choose a task with a clear end state and write one line per screen, five to eight beats, before you record." },
+        { name: "Prepare the account", text: "Use a demo workspace with fake data, size the browser window consistently, silence notifications and do one dry run." },
+        { name: "Record from the viewer's first screen", text: "Say the end state in the first five seconds, narrate what you do and why, pause briefly before each click, and keep going through mistakes." },
+        { name: "Edit: cut silence, check zooms, add captions, blur", text: "Remove pauses and fumbles, make sure each zoom lands on the control in use, add captions, and blur sensitive data. Keep it under four minutes or split it." },
+        { name: "Share a link and check the analytics", text: "Put the link where the question is asked, then review views and watch time after two weeks and shorten or split the video if people drop off." },
+    ],
+});
+
+const related = [
+    { label: "Screen recorder for Chrome", href: "/for/chrome/", blurb: "How tab recording powers auto zoom and spotlight." },
+    { label: "Recordio vs Loom", href: "/compare/loom/", blurb: "Auto zoom, captions and share links, side by side." },
+    { label: "Best tutorial recording software in 2026", href: "/blog/best-tutorial-recording-software/", blurb: "Seven tools compared on zoom, captions, sharing and price." },
+    { label: "How to record your screen on Mac with audio", href: "/blog/how-to-record-screen-on-mac-with-audio/", blurb: "Shift-Command-5, QuickTime and system audio." },
+    { label: "How to record your screen on Ubuntu", href: "/blog/how-to-record-screen-on-ubuntu/", blurb: "GNOME's recorder, OBS and Kooha, with audio fixes." },
+    { label: "All posts", href: "/blog/", blurb: "Guides and comparisons from the Recordio team." },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqSchema faqItems={faq}>
+    <Header client:load navLinks={[]} />
+    <main class="pt-28 md:pt-36">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: "Make a product walkthrough video" }]} />
+        </div>
+        <ProductWalkthroughArticle />
+        <FAQ client:visible items={faq} />
+        <RelatedLinks heading="Related guides" links={related} />
+    </main>
+    <Footer client:visible source="blog_how-to-make-a-product-walkthrough-video" />
+</BaseLayout>
+
+<script type="application/ld+json" set:html={article} />
+<script type="application/ld+json" set:html={howTo} />

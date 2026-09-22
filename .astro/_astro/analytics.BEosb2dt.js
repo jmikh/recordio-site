@@ -1,0 +1,1 @@
+const n=(e,t)=>{typeof window<"u"&&window.gtag&&window.gtag("event",e,t)},a=e=>{n("install_extension_click",{event_category:"engagement",event_label:e,value:1})},c=e=>{n("faq_expanded",{event_category:"engagement",event_label:e,value:1})},l=e=>{n("open_app_click",{event_category:"engagement",event_label:e,value:1})};export{a,c as b,l as t};

@@ -1,0 +1,54 @@
+---
+/**
+ * A one-row strip of internal links with a heading, used on the homepage to
+ * point at the compare and platform pages. Static HTML, no JS.
+ * Usage:
+ *   <LinkStrip heading="..." intro="..." links={[{ label, href }]} all={{ label, href }} />
+ */
+import type { SiteLink } from "../data/siteLinks";
+
+interface Props {
+    eyebrow?: string;
+    heading: string;
+    intro?: string;
+    links: SiteLink[];
+    /** Trailing link to the hub page, rendered in a different style. */
+    all?: SiteLink;
+    /** Optional guide link shown under the intro. */
+    note?: SiteLink;
+    variant?: "white" | "purple";
+    id?: string;
+}
+
+const { eyebrow, heading, intro, links, all, note, variant = "white", id } = Astro.props;
+const sectionClass = variant === "white" ? "section-panel-white" : "section-panel";
+---
+
+<section id={id} aria-label={heading} class={`${sectionClass} py-14 px-6`}>
+    <div class="max-w-7xl mx-auto grid gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)] md:items-center">
+        <div>
+            {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+            <h2 class="text-2xl md:text-3xl font-bold text-text-highlighted mt-2">{heading}</h2>
+            {intro && <p class="mt-2 text-text-muted leading-relaxed">{intro}</p>}
+            {note && (
+                <p class="mt-2 text-sm">
+                    <a href={note.href} class="font-semibold text-primary hover:underline underline-offset-4">{note.label}</a>
+                </p>
+            )}
+        </div>
+        <ul class="flex flex-wrap gap-3 md:justify-end">
+            {links.map((l) => (
+                <li>
+                    <a href={l.href} class="compare-index-link !py-2.5 !px-5 !text-base">{l.label}</a>
+                </li>
+            ))}
+            {all && (
+                <li class="flex items-center">
+                    <a href={all.href} class="inline-flex items-center px-3 py-2 font-semibold text-primary hover:underline underline-offset-4">
+                        {all.label}
+                    </a>
+                </li>
+            )}
+        </ul>
+    </div>
+</section>

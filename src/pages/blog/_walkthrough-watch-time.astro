@@ -1,0 +1,80 @@
+---
+/**
+ * Data asset: "What N product walkthroughs taught us about watch time" (Plan 12, item 4).
+ * The leading underscore keeps this page OUT of the build. To publish:
+ *   1. Fill src/data/watch-time-report.ts from Mux Data (docs/offsite/data-asset-brief.md)
+ *      and set status to "final".
+ *   2. git mv src/pages/blog/_walkthrough-watch-time.astro src/pages/blog/walkthrough-watch-time.astro
+ *   3. Add the blog-index card and inbound links listed in docs/plans/inbound-links-todo.md.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedLinks from "../../components/RelatedLinks";
+import WatchTimeReport from "../../components/blog/WatchTimeReport";
+import Footer from "../../components/Footer";
+import { SITE_URL } from "../../utils/constants";
+import { report } from "../../data/watch-time-report";
+
+const path = "/blog/walkthrough-watch-time/";
+const headline = `What ${report.sampleSize.toLocaleString()} product walkthroughs taught us about watch time`;
+const description =
+    "Retention, completion and the effect of captions across product walkthroughs shared with Recordio. Anonymised data with charts you can cite.";
+
+const jsonLd = JSON.stringify([
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": headline,
+        "description": description,
+        "datePublished": report.datePublished,
+        "dateModified": report.dateModified,
+        "author": {
+            "@type": "Person",
+            "name": "John Mikhail",
+            "jobTitle": "Founder of Recordio",
+            "url": "https://www.linkedin.com/in/john-mikhail/",
+        },
+        "image": `${SITE_URL}/og-image.png`,
+        "publisher": { "@type": "Organization", "@id": `${SITE_URL}/#organization`, "name": "Recordio" },
+        "mainEntityOfPage": { "@type": "WebPage", "@id": `${SITE_URL}${path}` },
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Product walkthrough watch-time benchmarks",
+        "description": `Aggregated retention, completion and captions statistics for ${report.sampleSize} product walkthroughs shared through Recordio, ${report.periodStart} to ${report.periodEnd}.`,
+        "url": `${SITE_URL}${path}`,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": { "@type": "Organization", "@id": `${SITE_URL}/#organization`, "name": "Recordio" },
+        "temporalCoverage": `${report.periodStart}/${report.periodEnd}`,
+        "variableMeasured": ["viewer retention by position", "completion rate by video length", "completion rate with and without captions"],
+    },
+]);
+---
+
+<BaseLayout
+    title="Product Walkthrough Watch Time: What the Data Says | Recordio"
+    description={description}
+    ogType="article"
+    noindex={report.status === "draft"}
+>
+    <main class="pt-12 md:pt-20">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: "Walkthrough watch time" }]} />
+        </div>
+        <WatchTimeReport client:visible />
+        <RelatedLinks
+            client:visible
+            heading="Keep reading"
+            links={[
+                { label: "How to make a product walkthrough video", href: "/blog/how-to-make-a-product-walkthrough-video/", blurb: "Plan, record and share a walkthrough people finish." },
+                { label: "Share links with view analytics", href: "/features/share-links/", blurb: "See your own retention curve for every recording." },
+                { label: "AI captions", href: "/features/ai-captions/", blurb: "Word-level captions, editable, delete a line to cut the clip." },
+                { label: "Best Loom alternatives in 2026", href: "/blog/best-loom-alternatives-2026/", blurb: "What Loom costs per seat and how the alternatives compare." },
+            ]}
+        />
+    </main>
+    <Footer source="blog_walkthrough-watch-time" client:visible />
+</BaseLayout>
+
+<script type="application/ld+json" set:html={jsonLd} />

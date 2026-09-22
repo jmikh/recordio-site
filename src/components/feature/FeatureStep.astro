@@ -1,0 +1,71 @@
+---
+/**
+ * One "How it works" step on a feature page: H3, body copy and an optional
+ * video or image. With media it renders as an alternating two-column row;
+ * without media the parent renders steps as a card grid instead.
+ */
+interface Media {
+    /** Filename in /public/videos/, e.g. "zoom.webm". An .mp4 with the same name is expected too. */
+    video?: string;
+    /** Path to an image under /public/. */
+    image?: string;
+    alt: string;
+}
+interface Props {
+    index: number;
+    title: string;
+    /** HTML string. Keep links relative and descriptive. */
+    body: string;
+    media?: Media;
+}
+const { index, title, body, media } = Astro.props;
+const flipped = index % 2 === 1;
+---
+
+<article class={`step-section ${flipped ? 'lg:flex-row-reverse' : ''}`}>
+    <div class="step-text">
+        <span class="step-number" aria-hidden="true">{index + 1}</span>
+        <h3 class="step-title">{title}</h3>
+        <div class="text-text-muted leading-relaxed space-y-3" set:html={body} />
+    </div>
+    {media && (
+        <div class="step-visual">
+            <div class="rounded-2xl overflow-hidden border border-border bg-surface-raised shadow-xl aspect-video">
+                {media.video ? (
+                    <video
+                        data-feature-video
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        aria-label={media.alt}
+                        class="block w-full h-full object-cover"
+                    >
+                        <source src={`/videos/${media.video}`} type="video/webm" />
+                        <source src={`/videos/${media.video.replace('.webm', '.mp4')}`} type="video/mp4" />
+                    </video>
+                ) : (
+                    <img src={media.image} alt={media.alt} loading="lazy" class="block w-full h-full object-cover" />
+                )}
+            </div>
+        </div>
+    )}
+</article>
+
+<script>
+    // Play a step video only while it is on screen. Astro dedupes this script per page.
+    const videos = document.querySelectorAll<HTMLVideoElement>('video[data-feature-video]');
+    if (videos.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((e) => {
+                    const v = e.target as HTMLVideoElement;
+                    if (e.isIntersecting) v.play().catch(() => {});
+                    else v.pause();
+                });
+            },
+            { threshold: 0.35 },
+        );
+        videos.forEach((v) => io.observe(v));
+    }
+</script>

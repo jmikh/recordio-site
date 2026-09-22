@@ -25,6 +25,12 @@ export const getCWSLink = (section: string): string => {
     return `${CWS_BASE_URL}?${params.toString()}`;
 };
 
+/** Chrome Web Store listing without tracking parameters, for schema.org sameAs and llms.txt. */
+export const CWS_LISTING_URL = CWS_BASE_URL;
+
+/** Founder's LinkedIn profile, used in Organization/Person schema and author cards. */
+export const LINKEDIN_URL = 'https://www.linkedin.com/in/john-mikhail/';
+
 /** Public reviews page for the Chrome Web Store listing. */
 export const CWS_REVIEWS_URL = `${CWS_BASE_URL}/reviews`;
 

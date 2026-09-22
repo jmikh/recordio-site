@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FAQ from "../../components/FAQ";
+import RelatedLinks from "../../components/RelatedLinks";
+import HowToChromebookArticle from "../../components/blog/HowToChromebookArticle";
+import { articleJsonLd, howToJsonLd } from "../../components/blog/structuredData";
+import type { FaqItem } from "../../data/faq";
+
+const path = "/blog/how-to-screen-record-on-chromebook/";
+const title = "How to Screen Record on a Chromebook in 2026 | Recordio";
+const description =
+    "How to screen record on a Chromebook: the built-in shortcut, mic and device audio settings, where the file saves, and fixes for common problems.";
+
+const faq: FaqItem[] = [
+    {
+        question: "How do I screen record on a Chromebook with sound?",
+        answer: "Press Shift + Ctrl + Show windows, click the video camera icon, then click the gear and turn on Microphone. Recent ChromeOS versions also offer device audio in the same menu for sound the Chromebook is playing. Wear headphones if you record both, or the mic picks up the speakers.",
+    },
+    {
+        question: "Where do Chromebook screen recordings go?",
+        answer: "By default they save to the Downloads folder as WebM files, and a notification lets you open the recording straight away. You can change the folder from the gear menu in the Screen capture toolbar. Upload to Google Drive to share, or use an extension such as Recordio that gives you a link instead of a file.",
+    },
+    {
+        question: "Can I screen record on a school Chromebook?",
+        answer: "Often, but it depends on your school's policy. Admins can disable the built-in Screen capture tool and can block or allow extensions. If the shortcut does nothing, ask your admin; they can allow a specific extension by its ID in Google Admin, which is how schools enable Recordio for teachers.",
+    },
+];
+
+const article = articleJsonLd({
+    headline: "How to Screen Record on a Chromebook in 2026",
+    description,
+    path,
+    datePublished: "2026-09-22",
+    dateModified: "2026-09-22",
+});
+
+const howTo = howToJsonLd({
+    name: "How to screen record on a Chromebook with the built-in Screen capture tool",
+    description: "Record your Chromebook screen with your microphone using the ChromeOS Screen capture toolbar.",
+    path,
+    anchor: "built-in",
+    totalTime: "PT2M",
+    steps: [
+        { name: "Open the Screen capture toolbar", text: "Press Shift + Ctrl + Show windows, or click the time and choose Screen capture from Quick Settings." },
+        { name: "Switch to video and choose what to record", text: "Click the video camera icon, then choose full screen, partial screen or a window." },
+        { name: "Turn on audio in the gear menu", text: "Click the gear and toggle Microphone. On recent ChromeOS versions you can also enable device audio and the front camera." },
+        { name: "Start recording", text: "Click the screen, or click Record inside the selected region or window. A countdown runs, then a red stop button appears on the shelf." },
+        { name: "Stop and find the file", text: "Click the red stop button. The recording saves to Downloads as a WebM file; click the notification to open it." },
+    ],
+});
+
+const related = [
+    { label: "Screen recorder for Chromebook", href: "/for/chromebook/", blurb: "Managed devices, admin allow-listing and set-up for ChromeOS." },
+    { label: "Recordio vs Screencastify", href: "/compare/screencastify/", blurb: "An honest comparison for classrooms and schools." },
+    { label: "How to record your screen on Mac with audio", href: "/blog/how-to-record-screen-on-mac-with-audio/", blurb: "Shift-Command-5, QuickTime and system audio." },
+    { label: "How to record your screen on Ubuntu", href: "/blog/how-to-record-screen-on-ubuntu/", blurb: "GNOME's recorder, OBS and Kooha, with audio fixes." },
+    { label: "How to make a product walkthrough video", href: "/blog/how-to-make-a-product-walkthrough-video/", blurb: "Scripting, recording, editing and sharing." },
+    { label: "All posts", href: "/blog/", blurb: "Guides and comparisons from the Recordio team." },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqSchema faqItems={faq}>
+    <Header client:load navLinks={[]} />
+    <main class="pt-28 md:pt-36">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: "Screen record on a Chromebook" }]} />
+        </div>
+        <HowToChromebookArticle />
+        <FAQ client:visible items={faq} />
+        <RelatedLinks heading="Related guides" links={related} />
+    </main>
+    <Footer client:visible source="blog_how-to-screen-record-on-chromebook" />
+</BaseLayout>
+
+<script type="application/ld+json" set:html={article} />
+<script type="application/ld+json" set:html={howTo} />

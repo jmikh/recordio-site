@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import { trackFaqExpanded } from '../utils/analytics';
 import { SUPPORT_EMAIL } from '../utils/constants';
-import { faqs } from '../data/faq';
+import { faqs as defaultFaqs, type FaqItem } from '../data/faq';
 
 
-const FAQ = () => {
+interface FAQProps {
+    /** Page-specific questions; defaults to the shared homepage list. Pass the same array to BaseLayout's faqItems. */
+    items?: FaqItem[];
+}
+
+const FAQ = ({ items }: FAQProps) => {
+    const faqs = items ?? defaultFaqs;
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     const toggle = (index: number) => {

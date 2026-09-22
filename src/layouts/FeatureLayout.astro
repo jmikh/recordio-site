@@ -1,0 +1,150 @@
+---
+/**
+ * Shared layout for /features/<slug>/ pages (Plan 07).
+ * Sections: hero, how it works, where it helps + which plan, compared with,
+ * page-specific FAQ (also emitted as FAQPage JSON-LD), related links, CTA.
+ */
+import BaseLayout from "./BaseLayout.astro";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import FAQ from "../components/FAQ";
+import FinalCTA from "../components/FinalCTA";
+import RelatedLinks, { type RelatedLink } from "../components/RelatedLinks";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import FeatureStep from "../components/feature/FeatureStep.astro";
+import InstallCTA from "../components/feature/InstallCTA";
+import type { FaqItem } from "../data/faq";
+
+interface Step {
+    title: string;
+    body: string;
+    media?: { video?: string; image?: string; alt: string };
+}
+interface Props {
+    slug: string;
+    /** Breadcrumb and short name. */
+    name: string;
+    title: string;
+    description: string;
+    eyebrow: string;
+    h1: string;
+    intro: string;
+    plan: "Free" | "Pro";
+    /** HTML. One or two sentences on what the plan includes for this feature. */
+    planNote: string;
+    steps: Step[];
+    useCases: { heading: string; items: string[] };
+    /** HTML. One paragraph naming two competitors, linking their compare pages. */
+    comparedWith: string;
+    faq: FaqItem[];
+    related: RelatedLink[];
+}
+
+const {
+    slug, name, title, description, eyebrow, h1, intro, plan, planNote,
+    steps, useCases, comparedWith, faq, related,
+} = Astro.props;
+
+const source = `feature-${slug}`;
+const hasMedia = steps.some((s) => s.media);
+const navLinks = [
+    { label: "All features", href: "/features/" },
+    { label: "How it works", href: "#how-it-works" },
+    { label: "FAQ", href: "#faq" },
+];
+---
+
+<BaseLayout title={title} description={description} faqSchema faqItems={faq}>
+    <Header client:load navLinks={navLinks} />
+
+    <main>
+        <section class="relative overflow-hidden" style="background-color: var(--color-section-purple);">
+            <div class="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
+                <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-primary/15 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-32 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative z-10 max-w-4xl mx-auto px-6 pt-32 md:pt-36 pb-16 md:pb-20">
+                <Breadcrumbs items={[{ name: "Features", href: "/features/" }, { name }]} class="mb-8 hero-entrance hero-entrance-delay-1" />
+                <span class="eyebrow hero-entrance hero-entrance-delay-1">{eyebrow}</span>
+                <h1 class="mt-4 text-4xl md:text-5xl lg:text-[3.4rem] font-bold text-text-highlighted leading-tight hero-entrance hero-entrance-delay-1">
+                    {h1}
+                </h1>
+                <p class="mt-6 text-lg md:text-xl text-text-muted max-w-2xl leading-relaxed hero-entrance hero-entrance-delay-2">
+                    {intro}
+                </p>
+                <div class="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 hero-entrance hero-entrance-delay-2">
+                    <InstallCTA client:load source={source} />
+                    <span class="text-sm text-text-muted">
+                        {plan === "Free" ? "Included in the Free plan." : "Pro feature. Free plan to start."}
+                        {" "}<a href="/#pricing" class="text-primary font-semibold hover:underline underline-offset-4">See pricing</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="section-panel-white py-20 md:py-24">
+            <div class="section-head">
+                <span class="eyebrow">How it works</span>
+                <h2 class="section-title">What Recordio does for you</h2>
+            </div>
+            {hasMedia ? (
+                <div class="flex flex-col gap-4">
+                    {steps.map((s, i) => <FeatureStep index={i} title={s.title} body={s.body} media={s.media} />)}
+                </div>
+            ) : (
+                <div class="max-w-6xl mx-auto px-6 grid gap-6 md:grid-cols-3">
+                    {steps.map((s, i) => (
+                        <article class="rounded-2xl border border-border bg-surface-overlay/40 p-7">
+                            <span class="step-number" aria-hidden="true">{i + 1}</span>
+                            <h3 class="text-xl font-bold text-text-highlighted mb-3">{s.title}</h3>
+                            <div class="text-text-muted leading-relaxed space-y-3" set:html={s.body} />
+                        </article>
+                    ))}
+                </div>
+            )}
+        </section>
+
+        <section class="section-panel py-20 md:py-24">
+            <div class="max-w-6xl mx-auto px-6 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+                <div>
+                    <span class="eyebrow">Where it helps</span>
+                    <h2 class="text-3xl font-bold text-text-highlighted mt-3 mb-6">{useCases.heading}</h2>
+                    <ul class="space-y-4">
+                        {useCases.items.map((item) => (
+                            <li class="flex gap-3 text-text-main leading-relaxed">
+                                <span class="mt-2 w-2 h-2 rounded-full bg-primary shrink-0" aria-hidden="true"></span>
+                                <span set:html={item} />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <aside class="rounded-2xl border border-border bg-surface-overlay/40 p-7 self-start">
+                    <span class="eyebrow">Which plan</span>
+                    <p class="mt-3 text-2xl font-bold text-text-highlighted">{plan}</p>
+                    <div class="mt-3 text-text-muted leading-relaxed" set:html={planNote} />
+                    <a href="/#pricing" class="inline-block mt-5 text-primary font-semibold hover:underline underline-offset-4">Compare Free and Pro</a>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section-panel-white py-20 md:py-24">
+            <div class="max-w-3xl mx-auto px-6">
+                <span class="eyebrow">Compared with</span>
+                <h2 class="text-3xl font-bold text-text-highlighted mt-3 mb-6">How other recorders handle this</h2>
+                <div class="prose" set:html={comparedWith} />
+                <p class="mt-2 text-sm text-text-muted">
+                    Every comparison on this site says where the other tool wins. <a href="/compare/" class="text-primary font-semibold hover:underline underline-offset-4">See all comparisons</a>.
+                </p>
+            </div>
+        </section>
+
+        <FAQ client:visible items={faq} />
+
+        <RelatedLinks client:visible heading="Related" links={related} />
+
+        <FinalCTA client:visible source={`${source}-cta`} />
+    </main>
+
+    <Footer client:visible />
+</BaseLayout>

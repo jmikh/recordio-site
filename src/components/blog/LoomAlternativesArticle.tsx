@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { VIDEOS_BASE, SUPPORT_EMAIL } from '../../utils/constants';
+import { VIDEOS_BASE, SUPPORT_EMAIL, LINKEDIN_URL } from '../../utils/constants';
 
 const LoomAlternativesArticle = () => {
     const beforeRef = useRef<HTMLVideoElement>(null);
@@ -80,7 +80,8 @@ const LoomAlternativesArticle = () => {
                     Best Loom Alternatives in 2026: Why Teams Are Switching
                 </h1>
                 <p className="text-text-muted text-base">
-                    Last updated: September 2026 · 8 min read
+                    By <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">John Mikhail</a>,
+                    founder of Recordio · Last updated: September 2026 · 9 min read
                 </p>
             </header>
 
@@ -103,7 +104,8 @@ const LoomAlternativesArticle = () => {
             <p>
                 We're the team behind <strong>Recordio</strong>, so we're biased. But we built it
                 specifically to fix this: studio-quality recordings that are just as easy to share, at a
-                lower price per seat. Here's why teams are switching.
+                lower price per seat. Here's why teams are switching. If you only want the feature table
+                and a five-person price, go straight to <a href="/compare/loom/">Recordio vs Loom</a>.
             </p>
 
             <hr />
@@ -246,6 +248,8 @@ const LoomAlternativesArticle = () => {
                 <li><strong>Backgrounds and Music</strong>: A curated background library, custom gradients, brand image uploads, and a music library.</li>
                 <li><strong>Smart Webcam Overlay</strong>: Customizable position and style, and it shrinks out of the way when a zoom kicks in.</li>
                 <li><strong>4K Exports on Pro</strong>: Download in 1080p on the free plan or 4K on Pro, alongside the shareable link.</li>
+                <li><strong>Team Workspace</strong>: Invite teammates with roles, collaborate on projects, and keep every walkthrough in a shared team library on Pro. Viewer seats are unlimited and free.</li>
+                <li><strong>Full-Page Screenshots</strong>: The same extension captures the visible area, the full page, or a region. Annotate it in the web app with text, arrows, shapes, and blur, then copy it, download a PNG or PDF, or share a link.</li>
                 <li><strong>Cross-Platform</strong>: Works in Chrome, Edge, and Brave on Mac, Windows, Linux, and ChromeOS.</li>
             </ul>
 
@@ -269,7 +273,22 @@ const LoomAlternativesArticle = () => {
                 cursor-based auto zoom and motion blur. It's a solid tool for making demos look good.
                 But it's not a Loom replacement: there's no free plan, no shared video library, no view
                 analytics, and no team features. It's a recording and editing tool, not an async
-                communication platform, and it leaves out anyone on Windows or Linux.
+                communication platform, and it leaves out anyone on Windows or Linux. We list eight
+                options for those users in <a href="/blog/best-screen-studio-alternatives-2026/">best
+                Screen Studio alternatives</a>.
+            </p>
+
+            <h2>Leaving a Different Tool?</h2>
+            <p>
+                The same honest format, with pricing checked on each vendor's own site, is available for
+                the other recorders teams tend to outgrow:{' '}
+                <a href="/blog/best-camtasia-alternatives-2026/">best Camtasia alternatives</a> for
+                demos without a timeline,{' '}
+                <a href="/blog/best-bandicam-alternatives-2026/">best Bandicam alternatives</a> for Mac
+                and Linux users, and{' '}
+                <a href="/blog/best-screencastify-alternatives-2026/">best Screencastify alternatives</a>{' '}
+                for schools and Chrome users. Every head-to-head lives on the{' '}
+                <a href="/compare/">compare page</a>.
             </p>
 
             <hr />
@@ -323,8 +342,9 @@ const LoomAlternativesArticle = () => {
             </p>
             <p>
                 If your team records web apps, documents processes, or creates product demos,{' '}
-                <strong>Recordio is the Loom alternative worth trying</strong>. The free plan makes it
-                risk-free to see the difference for yourself.
+                <strong>Recordio is the Loom alternative worth trying</strong>. The{' '}
+                <a href="/">free plan</a> makes it risk-free to see the difference for yourself, and the{' '}
+                <a href="/compare/loom/">full Recordio vs Loom comparison</a> has the feature table.
             </p>
 
             {/* ── Author ── */}
@@ -337,9 +357,9 @@ const LoomAlternativesArticle = () => {
                         loading="lazy"
                     />
                     <div className="flex flex-col">
-                        <span className="text-text-highlighted font-semibold text-base leading-snug">
+                        <a href="/about/" className="text-text-highlighted font-semibold text-base leading-snug hover:text-primary transition-colors">
                             John Mikhail
-                        </span>
+                        </a>
                         <span className="text-primary-highlighted text-sm leading-snug mt-0.5">
                             Founder of Recordio
                         </span>
@@ -349,7 +369,7 @@ const LoomAlternativesArticle = () => {
                     </div>
                 </div>
                 <a
-                    href="https://www.linkedin.com/in/john-mikhail/"
+                    href={LINKEDIN_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-shrink-0 text-text-muted hover:text-primary transition-colors"

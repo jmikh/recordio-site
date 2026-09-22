@@ -1,0 +1,28 @@
+---
+/** "What {name} does well": the honest section. Two or three H3 cards. */
+import type { CompareSection } from "../../data/compare/types";
+import { inline } from "../../data/compare/inline";
+
+interface Props {
+    name: string;
+    items: CompareSection[];
+}
+const { name, items } = Astro.props;
+---
+
+<section class="section-panel py-20 px-6" aria-labelledby="strengths-heading">
+    <div class="max-w-5xl mx-auto">
+        <div class="section-head">
+            <span class="eyebrow">Credit where it is due</span>
+            <h2 id="strengths-heading" class="section-title">What {name} does well</h2>
+        </div>
+        <div class={`grid gap-6 ${items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
+            {items.map((item) => (
+                <div class="card-premium">
+                    <h3 class="text-lg font-bold text-text-highlighted mb-3">{item.heading}</h3>
+                    <p class="text-sm text-text-muted leading-relaxed compare-copy" set:html={inline(item.body)} />
+                </div>
+            ))}
+        </div>
+    </div>
+</section>

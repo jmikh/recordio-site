@@ -1,0 +1,90 @@
+---
+/** Pricing for a five-person team, with the arithmetic written out. */
+import type { ComparePricing } from "../../data/compare/types";
+import { inline } from "../../data/compare/inline";
+
+interface Props {
+    name: string;
+    pricing: ComparePricing;
+}
+const { name, pricing } = Astro.props;
+const checked = new Date(`${pricing.checkedOn}T00:00:00Z`).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+});
+
+const rows = [
+    {
+        label: "Per seat, billed annually",
+        recordio: "$12 per seat per month",
+        competitor: pricing.competitorAnnual,
+    },
+    {
+        label: "Per seat, billed monthly",
+        recordio: "$15 per seat per month",
+        competitor: pricing.competitorMonthly,
+    },
+    {
+        label: "Free plan",
+        recordio: "$0, no card. Up to 5 active projects, 1080p downloads, videos expire after 7 days.",
+        competitor: pricing.competitorFree,
+    },
+    {
+        label: "Five people, one year",
+        recordio: "5 seats x $12 = $60 per month, $720 per year on annual billing. Monthly billing is 5 x $15 = $75 per month.",
+        competitor: pricing.competitorTeamOfFive,
+    },
+    {
+        label: "People who only watch",
+        recordio: "Free and unlimited. Only people who record need a Pro seat.",
+        competitor: pricing.competitorViewers,
+    },
+];
+---
+
+<section id="pricing-comparison" class="section-panel py-20 px-6" aria-labelledby="pricing-comparison-heading">
+    <div class="max-w-4xl mx-auto">
+        <div class="section-head">
+            <span class="eyebrow">Pricing</span>
+            <h2 id="pricing-comparison-heading" class="section-title">Pricing for a five-person team</h2>
+            <p class="section-subtitle">Recordio Pro against {name}, using the plan a small product team would actually pick.</p>
+        </div>
+
+        <div class="compare-table-wrapper">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th class="compare-th compare-th--feature">Cost</th>
+                        <th class="compare-th compare-th--recordio">
+                            <img src="/favicon-32x32.png" alt="" class="w-5 h-5 rounded inline-block mr-2 -mt-0.5" />
+                            Recordio Pro
+                        </th>
+                        <th class="compare-th compare-th--competitor">{name}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows.map((row) => (
+                        <tr class="compare-row">
+                            <td class="compare-td compare-td--feature">
+                                <div class="font-medium text-text-highlighted text-sm">{row.label}</div>
+                            </td>
+                            <td class="compare-td compare-td--recordio">
+                                <span class="text-sm font-medium text-text-highlighted">{row.recordio}</span>
+                            </td>
+                            <td class="compare-td compare-td--competitor">
+                                <span class="text-sm font-medium text-text-muted" set:html={inline(row.competitor)} />
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+
+        <p class="mt-6 text-sm text-text-muted leading-relaxed compare-copy" set:html={inline(pricing.notes)} />
+        <p class="mt-2 text-xs text-text-muted">
+            {name} prices checked on {checked} on {name}'s own pricing page. Recordio prices are current.
+        </p>
+    </div>
+</section>

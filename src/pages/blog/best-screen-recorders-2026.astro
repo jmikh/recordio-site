@@ -1,8 +1,21 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogArticle from "../../components/blog/BlogArticle";
+import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedLinks from "../../components/RelatedLinks";
+import { compareLink, blogPostLink } from "../../data/siteLinks";
 import { SITE_URL } from "../../utils/constants";
+
+const related = [
+    compareLink("screen-studio"),
+    compareLink("focusee"),
+    { label: "Best screen recorder for Linux", href: "/for/linux/", blurb: "Auto zoom on Ubuntu, Fedora and any distro, on Wayland or X11." },
+    blogPostLink("best-loom-alternatives-2026"),
+    blogPostLink("best-tutorial-recording-software"),
+    { label: "All comparisons", href: "/compare/", blurb: "Recordio compared with ten other screen recorders." },
+];
 
 const jsonLd = JSON.stringify({
     "@context": "https://schema.org",
@@ -40,8 +53,13 @@ const jsonLd = JSON.stringify({
     description="Recordio, Screen Studio and FocuSee compared for product demos and tutorials: auto zoom, captions, share links, platforms and 2026 pricing. Pros and cons."
     ogType="article"
 >
-    <main class="pt-12 md:pt-20">
+    <Header client:load navLinks={[]} />
+    <main class="pt-28 md:pt-36">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: "Best screen recorders in 2026" }]} />
+        </div>
         <BlogArticle client:load />
+        <RelatedLinks heading="Related" links={related} variant="purple" />
     </main>
     <Footer source="blog_best-screen-recorders-2026" client:visible />
 </BaseLayout>

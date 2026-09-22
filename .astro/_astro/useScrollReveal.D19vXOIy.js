@@ -1,0 +1,1 @@
+import{r as t}from"./index.BmW6Ki2V.js";function u(s=.1){const n=t.useRef(null);return t.useEffect(()=>{const e=n.current;if(!e)return;const r=new IntersectionObserver(([c])=>{c.isIntersecting&&(e.classList.add("revealed"),r.unobserve(e))},{threshold:s});return r.observe(e),()=>r.disconnect()},[s]),n}export{u};

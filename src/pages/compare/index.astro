@@ -2,41 +2,92 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedLinks from "../../components/RelatedLinks";
+import { COMPARE_GROUPS, COMPARE_PAGES, compareHref, blogPostLink } from "../../data/siteLinks";
+
+const furtherReading = [
+    blogPostLink("best-screen-recorders-2026"),
+    blogPostLink("best-loom-alternatives-2026"),
+    blogPostLink("best-bandicam-alternatives-2026"),
+    blogPostLink("best-screen-studio-alternatives-2026"),
+    blogPostLink("best-screencastify-alternatives-2026"),
+    blogPostLink("best-camtasia-alternatives-2026"),
+    blogPostLink("best-tutorial-recording-software"),
+    { label: "Screen recorder for Mac, Windows, Linux and Chromebook", href: "/for/", blurb: "The same recorder and team library on every operating system." },
+];
 ---
 
 <BaseLayout
     title="Screen Recorder Alternatives: Loom, Bandicam, OBS | Recordio"
     description="Side-by-side comparisons of Recordio with Loom, Bandicam, OBS, Camtasia, Screen Studio, Tella, Clueso and more. Features, pricing and who each tool suits."
 >
-    <Header client:load />
+    <Header client:load navLinks={[]} />
 
     <main>
         <section class="relative overflow-hidden" style="background-color: var(--color-section-purple);">
-            <!-- Ambient glow -->
             <div class="absolute inset-0 opacity-40 pointer-events-none">
                 <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-primary/15 rounded-full blur-3xl"></div>
                 <div class="absolute -bottom-32 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl"></div>
             </div>
 
-            <div class="relative z-10 max-w-4xl mx-auto px-6 pt-40 pb-24 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-text-highlighted mb-16 hero-entrance hero-entrance-delay-1">
-                    Compare Recordio To
+            <div class="relative z-10 max-w-4xl mx-auto px-6 pt-32 md:pt-36 pb-16">
+                <Breadcrumbs items={[{ name: "Compare" }]} class="mb-8 hero-entrance hero-entrance-delay-1" />
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-highlighted leading-tight mb-6 hero-entrance hero-entrance-delay-1">
+                    Recordio compared with other screen recorders
                 </h1>
-
-                <div class="flex flex-wrap justify-center gap-4 hero-entrance hero-entrance-delay-2">
-                    <a href="/compare/loom/" class="compare-index-link">Loom</a>
-                    <a href="/compare/screen-studio/" class="compare-index-link">Screen Studio</a>
-                    <a href="/compare/obs/" class="compare-index-link">OBS</a>
-                    <a href="/compare/camtasia/" class="compare-index-link">Camtasia</a>
-                    <a href="/compare/screencastify/" class="compare-index-link">Screencastify</a>
-                    <a href="/compare/screenity/" class="compare-index-link">Screenity</a>
-                    <a href="/compare/bandicam/" class="compare-index-link">Bandicam</a>
-                    <a href="/compare/clueso/" class="compare-index-link">Clueso</a>
-                    <a href="/compare/tella/" class="compare-index-link">Tella</a>
-                    <a href="/compare/focusee/" class="compare-index-link">FocuSee</a>
+                <div class="flex flex-col gap-4 text-lg text-text-muted leading-relaxed max-w-3xl hero-entrance hero-entrance-delay-2">
+                    <p>
+                        These comparisons are written by <a href="/about/" class="text-primary font-semibold hover:underline underline-offset-4">the Recordio team</a>, so read them knowing where we stand. Each page says plainly where the other tool wins, whether that is a timeline editor, game capture, offline work or a much bigger install base. Then it shows where Recordio is different: auto zoom that reads the page you are recording, automatic spotlight, Smart AutoCut, AI captions, share links with view analytics and a team library.
+                    </p>
+                    <p>
+                        Prices are checked against each vendor's own pricing page during 2026 and quoted per seat, with the cost of a five-person team written out, so you can compare like for like. Recordio has a free plan with 1080p downloads and up to five active projects. Pro is $12 per seat per month billed annually, or $15 monthly, and people who only watch never need a seat.
+                    </p>
                 </div>
             </div>
         </section>
+
+        {COMPARE_GROUPS.map((group, i) => {
+            const pages = COMPARE_PAGES.filter((c) => c.group === group.key);
+            const panel = i % 2 === 0 ? "section-panel-white" : "section-panel";
+            return (
+                <section aria-labelledby={`group-${group.key}`} class={`${panel} py-16 px-6`}>
+                    <div class="max-w-4xl mx-auto">
+                        <h2 id={`group-${group.key}`} class="text-2xl md:text-3xl font-bold text-text-highlighted">{group.title}</h2>
+                        <p class="mt-3 text-text-muted leading-relaxed max-w-3xl">{group.lead}</p>
+                        <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {pages.map((c) => (
+                                <li>
+                                    <a
+                                        href={compareHref(c.slug)}
+                                        class="block h-full rounded-2xl border border-border bg-surface-overlay/40 hover:border-primary/40 transition-colors p-5"
+                                    >
+                                        <span class="block font-semibold text-text-highlighted">Recordio vs {c.name}</span>
+                                        <span class="block mt-1 text-sm text-text-muted">{c.blurb}</span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+            );
+        })}
+
+        <section class="section-panel-white py-16 px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold text-text-highlighted">How to read these pages</h2>
+                <div class="mt-4 flex flex-col gap-4 text-text-muted leading-relaxed max-w-3xl">
+                    <p>
+                        Every comparison follows the same shape. A short verdict up top, a "choose them if, choose Recordio if" box, a feature table, a section on what the other tool does well, and the pricing arithmetic for a small team. If you only have a minute, read the verdict and the pricing table. For the full list of what Recordio applies automatically, <a href="/features/" class="text-primary font-semibold hover:underline underline-offset-4">see every feature</a>, and for the videos teams actually make with it, see <a href="/use-cases/" class="text-primary font-semibold hover:underline underline-offset-4">what teams record with Recordio</a>.
+                    </p>
+                    <p>
+                        Recordio is a Chrome extension that also runs in Edge and Brave, so it works on <a href="/for/mac/" class="text-primary font-semibold hover:underline underline-offset-4">Mac</a>, <a href="/for/windows/" class="text-primary font-semibold hover:underline underline-offset-4">Windows</a>, <a href="/for/linux/" class="text-primary font-semibold hover:underline underline-offset-4">Linux</a> and <a href="/for/chromebook/" class="text-primary font-semibold hover:underline underline-offset-4">Chromebook</a>. Capture is of a browser tab, and an account is always required, free or Pro. If you need to record a native app, a game or a terminal, the desktop tools in the list above will suit you better, and the pages say so.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <RelatedLinks heading="Further reading" links={furtherReading} variant="purple" />
     </main>
 
     <Footer client:visible source="compare" />

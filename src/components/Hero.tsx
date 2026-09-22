@@ -60,6 +60,7 @@ const Hero = () => {
                         <li>One-click install</li>
                         <li>Mac, Windows, Linux &amp; ChromeOS</li>
                         <li>No credit card</li>
+                        <li>Also captures <a href="/screenshots/" className="underline underline-offset-4 decoration-border hover:text-primary hover:decoration-primary transition-colors">full-page screenshots</a></li>
                     </ul>
                 </div>
 

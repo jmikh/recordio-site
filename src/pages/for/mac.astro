@@ -2,6 +2,16 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedLinks from "../../components/RelatedLinks";
+import { PLATFORM_PAGES, platformLink, compareLink, blogPostLink } from "../../data/siteLinks";
+
+const related = [
+    ...PLATFORM_PAGES.filter((p) => p.slug !== "mac").map((p) => platformLink(p.slug)),
+    compareLink("screen-studio"),
+    blogPostLink("how-to-record-screen-on-mac-with-audio"),
+    blogPostLink("best-camtasia-alternatives-2026"),
+];
 import PlatformHero from "../../components/platform/PlatformHero";
 import FeatureVideos from "../../components/FeatureVideos";
 import Testimonials from "../../components/Testimonials";
@@ -24,10 +34,15 @@ import FAQ from "../../components/FAQ";
             subheadline="No clunky desktop app. Recordio lives right in your browser — Chrome, Edge, or Brave on macOS. Hit record, and every video comes out polished with auto-zoom, spotlight, and captions."
         />
 
+        <div class="max-w-6xl mx-auto px-6 pt-8">
+            <Breadcrumbs items={[{ name: "Platforms", href: "/for/" }, { name: "Mac" }]} />
+        </div>
+
         <FeatureVideos client:visible />
         <Testimonials client:visible />
         <Pricing client:visible />
         <FAQ client:visible />
+        <RelatedLinks heading="Related pages" links={related} variant="white" />
     </main>
 
     <Footer client:visible source="for-mac" />

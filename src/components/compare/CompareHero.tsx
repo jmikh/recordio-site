@@ -3,16 +3,19 @@ import { getCWSLink } from '../../utils/constants';
 import { trackInstallExtension } from '../../utils/analytics';
 
 interface CompareHeroProps {
-    competitorName: string;
-    headline: string;
-    subheadline: string;
+    /** Competitor slug, e.g. "screen-studio". Used for the CTA's utm_content and analytics label. */
+    slug: string;
+    name: string;
+    /** Two sentences shown under the H1. */
+    verdict: string;
 }
 
-const CompareHero = ({ competitorName, headline, subheadline }: CompareHeroProps) => {
+const CompareHero = ({ slug, name, verdict }: CompareHeroProps) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [shouldLoad, setShouldLoad] = useState(false);
+    const cta = `compare-${slug}`;
 
     useEffect(() => {
         const el = containerRef.current;
@@ -35,7 +38,6 @@ const CompareHero = ({ competitorName, headline, subheadline }: CompareHeroProps
         const video = videoRef.current;
         const el = containerRef.current;
         if (!video || !el) return;
-        if (video.readyState >= 2) setIsLoaded(true);
 
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -63,35 +65,33 @@ const CompareHero = ({ competitorName, headline, subheadline }: CompareHeroProps
             </div>
 
             <div className="relative z-10 max-w-5xl mx-auto px-6 pt-36 pb-20 flex flex-col items-center text-center">
-                {/* Tag */}
                 <span className="mb-8 inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 text-primary uppercase tracking-widest text-xs font-bold rounded-full border border-primary/20 hero-entrance hero-entrance-delay-1">
-                    {competitorName} Alternative
+                    {name} Alternative
                 </span>
 
-                {/* Main headline */}
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-highlighted leading-tight mb-6 hero-entrance hero-entrance-delay-1">
-                    {headline}
+                    Recordio vs {name}
                 </h1>
 
-                {/* Subheadline */}
-                <p className="text-lg md:text-xl text-text-muted max-w-2xl mb-14 leading-relaxed hero-entrance hero-entrance-delay-2">
-                    {subheadline}
+                <p className="text-lg md:text-xl text-text-muted max-w-2xl mb-10 leading-relaxed hero-entrance hero-entrance-delay-2">
+                    {verdict}
                 </p>
 
-                {/* CTA */}
-                <div className="mb-14 hero-entrance hero-entrance-delay-2">
+                <div className="mb-14 flex flex-col sm:flex-row items-center gap-4 hero-entrance hero-entrance-delay-2">
                     <a
-                        href={getCWSLink(`compare-${competitorName.toLowerCase()}`)}
+                        href={getCWSLink(cta)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary text-lg px-10 py-4"
-                        onClick={() => trackInstallExtension(`compare-${competitorName.toLowerCase()}`)}
+                        onClick={() => trackInstallExtension(cta)}
                     >
-                        Install Extension — It's Free
+                        Add to Chrome, it's free
+                    </a>
+                    <a href="#pricing-comparison" className="btn-secondary text-lg px-10 py-4">
+                        See pricing
                     </a>
                 </div>
 
-                {/* Video showcase — Recordio only */}
                 <div
                     ref={containerRef}
                     className="w-full max-w-4xl hero-entrance hero-entrance-delay-3"

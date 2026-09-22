@@ -1,0 +1,87 @@
+---
+/**
+ * "Where Recordio is different": three or four H2 panels, each with a video or
+ * image and a caption written for this competitor. Reuses the homepage's
+ * feature-panel styles; videos load lazily and play only while in view.
+ */
+import type { CompareSection } from "../../data/compare/types";
+import { inline } from "../../data/compare/inline";
+
+interface Props {
+    name: string;
+    items: CompareSection[];
+}
+const { name, items } = Astro.props;
+const hues = [290, 78];
+---
+
+<section id="differences" class="section-panel-white py-20" aria-label={`Where Recordio is different from ${name}`}>
+    <div class="section-head px-6 mb-12">
+        <span class="eyebrow">Where Recordio is different</span>
+        <p class="section-subtitle">What changes when a {name} recording becomes a Recordio recording.</p>
+    </div>
+
+    <div class="feature-panels">
+        {items.map((item, i) => (
+            <article
+                class={`feature-panel is-revealed${i % 2 === 1 ? " is-flipped" : ""}`}
+                style={`--hue: ${hues[i % 2]}`}
+            >
+                <div class="feature-panel-text">
+                    <h2 class="step-title">{item.heading}</h2>
+                    <p class="step-description compare-copy" set:html={inline(item.body)} />
+                </div>
+                <div class="feature-panel-visual">
+                    {item.media?.video && (
+                        <div class="feature-video-container">
+                            <video
+                                class="feature-video"
+                                muted
+                                loop
+                                playsinline
+                                preload="none"
+                                data-lazy-video
+                                aria-label={item.media.alt}
+                            >
+                                <source data-src={`/videos/${item.media.video}`} type="video/webm" />
+                                <source data-src={`/videos/${item.media.video.replace(/\.webm$/, ".mp4")}`} type="video/mp4" />
+                            </video>
+                        </div>
+                    )}
+                    {!item.media?.video && item.media?.image && (
+                        <div class="feature-video-container">
+                            <img class="feature-video" src={item.media.image} alt={item.media.alt} loading="lazy" />
+                        </div>
+                    )}
+                </div>
+            </article>
+        ))}
+    </div>
+</section>
+
+<script>
+    const videos = document.querySelectorAll<HTMLVideoElement>("video[data-lazy-video]");
+    if (videos.length > 0) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const video = entry.target as HTMLVideoElement;
+                    if (entry.isIntersecting) {
+                        if (!video.dataset.loaded) {
+                            video.querySelectorAll("source").forEach((source) => {
+                                source.src = source.dataset.src ?? "";
+                            });
+                            video.load();
+                            video.dataset.loaded = "1";
+                        }
+                        video.play().catch(() => {});
+                    } else if (!video.paused) {
+                        video.pause();
+                    }
+                });
+            },
+            { rootMargin: "200px", threshold: 0.1 },
+        );
+        videos.forEach((video) => observer.observe(video));
+    }
+</script>

@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FAQ from "../../components/FAQ";
+import RelatedLinks from "../../components/RelatedLinks";
+import HowToUbuntuArticle from "../../components/blog/HowToUbuntuArticle";
+import { articleJsonLd, howToJsonLd } from "../../components/blog/structuredData";
+import type { FaqItem } from "../../data/faq";
+
+const path = "/blog/how-to-record-screen-on-ubuntu/";
+const title = "How to Record Your Screen on Ubuntu (With Audio) | Recordio";
+const description =
+    "Record your screen on Ubuntu 22.04 or 24.04 with the built-in GNOME recorder, OBS or Kooha, then fix the audio. Plus a polished option for walkthroughs.";
+
+const faq: FaqItem[] = [
+    {
+        question: "Does Ubuntu have a built-in screen recorder?",
+        answer: "Yes. Ubuntu 22.04 and later ship GNOME's screen recorder. Press Ctrl+Alt+Shift+R to start and stop, or press Print and switch the toolbar to video mode. Recordings save as WebM files in ~/Videos/Screencasts. It records no audio, so use OBS Studio or Kooha when you need your microphone or desktop sound.",
+    },
+    {
+        question: "How do I record my screen with audio on Ubuntu?",
+        answer: "Install OBS Studio with sudo apt install obs-studio, add a Screen Capture (PipeWire) source on Wayland, check that the Desktop Audio and Mic/Aux meters move in the Audio Mixer, and click Start Recording. Kooha is a simpler Wayland app that records mic and desktop audio with two toggles. For a walkthrough of a web app, the Recordio extension records the tab with your microphone and that tab's audio.",
+    },
+    {
+        question: "Where are screen recordings saved on Ubuntu?",
+        answer: "GNOME's recorder saves to ~/Videos/Screencasts. OBS saves to the recording path set under Settings, then Output. Kooha asks where to save. Recordio saves the project to your cloud workspace, where you can download it as a 1080p file on the free plan or 4K on Pro.",
+    },
+];
+
+const article = articleJsonLd({
+    headline: "How to Record Your Screen on Ubuntu (With Audio)",
+    description,
+    path,
+    datePublished: "2026-09-22",
+    dateModified: "2026-09-22",
+});
+
+const howTo = howToJsonLd({
+    name: "How to record your screen on Ubuntu with audio using OBS Studio",
+    description: "Record your Ubuntu desktop with microphone and desktop audio using the free OBS Studio.",
+    path,
+    anchor: "obs",
+    totalTime: "PT10M",
+    tools: ["OBS Studio"],
+    steps: [
+        { name: "Install OBS", text: "Run sudo apt install obs-studio, or install the com.obsproject.Studio Flatpak from Flathub." },
+        { name: "Add a screen source", text: "In Sources click the plus button and choose Screen Capture (PipeWire) on Wayland or Screen Capture (XSHM) on Xorg, then pick the screen in the picker." },
+        { name: "Check the audio mixer", text: "Confirm the Desktop Audio and Mic/Aux meters move. Add missing devices under Settings, Audio, Global Audio Devices." },
+        { name: "Set the output", text: "Under Settings, Output, set the recording path, a quality preset and MKV as the format. Remux to MP4 afterwards from the File menu." },
+        { name: "Record", text: "Click Start Recording, then Stop Recording when done. The file is in the folder you set." },
+    ],
+});
+
+const related = [
+    { label: "Screen recorder for Linux", href: "/for/linux/", blurb: "Distros, Wayland notes and set-up steps for Recordio on Linux." },
+    { label: "Recordio vs OBS", href: "/compare/obs/", blurb: "Where OBS wins and where a walkthrough tool wins." },
+    { label: "How to record your screen on Mac with audio", href: "/blog/how-to-record-screen-on-mac-with-audio/", blurb: "Shift-Command-5, QuickTime and system audio." },
+    { label: "How to screen record on a Chromebook", href: "/blog/how-to-screen-record-on-chromebook/", blurb: "The built-in ChromeOS tool and an extension for lessons." },
+    { label: "Best tutorial recording software in 2026", href: "/blog/best-tutorial-recording-software/", blurb: "Seven tools compared on zoom, captions, sharing and price." },
+    { label: "All posts", href: "/blog/", blurb: "Guides and comparisons from the Recordio team." },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqSchema faqItems={faq}>
+    <Header client:load navLinks={[]} />
+    <main class="pt-28 md:pt-36">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: "Record your screen on Ubuntu" }]} />
+        </div>
+        <HowToUbuntuArticle />
+        <FAQ client:visible items={faq} />
+        <RelatedLinks heading="Related guides" links={related} />
+    </main>
+    <Footer client:visible source="blog_how-to-record-screen-on-ubuntu" />
+</BaseLayout>
+
+<script type="application/ld+json" set:html={article} />
+<script type="application/ld+json" set:html={howTo} />

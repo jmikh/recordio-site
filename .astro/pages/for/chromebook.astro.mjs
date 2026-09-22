@@ -1,0 +1,107 @@
+import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../../chunks/astro/server_C5ewKNw0.mjs';
+import 'piccolore';
+import { $ as $$BaseLayout } from '../../chunks/BaseLayout_BMmOTL_5.mjs';
+import { H as Header, F as Footer } from '../../chunks/Footer_CETPJvN_.mjs';
+import { $ as $$Breadcrumbs } from '../../chunks/Breadcrumbs_DNl1Z9iS.mjs';
+import { P as PlatformHero } from '../../chunks/PlatformHero_aSIttFzv.mjs';
+import { P as PlatformSteps } from '../../chunks/PlatformSteps_B3b7AAn7.mjs';
+import { P as Pricing } from '../../chunks/Pricing_FQzwYBKa.mjs';
+import { F as FAQ } from '../../chunks/FAQ_DdSn-1-7.mjs';
+import { R as RelatedLinks } from '../../chunks/RelatedLinks_DlwSg6Vn.mjs';
+export { renderers } from '../../renderers.mjs';
+
+const $$Chromebook = createComponent(($$result, $$props, $$slots) => {
+  const EXTENSION_ID = "bbcdpipjplklaneplfmlhhibnllhinii";
+  const navLinks = [
+    { label: "Why Recordio", href: "#why-recordio" },
+    { label: "How to record", href: "#how-to-record" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "FAQ", href: "#faq" }
+  ];
+  const steps = [
+    {
+      title: "Add Recordio from the Chrome Web Store",
+      body: "Open the Chrome Web Store on your Chromebook and click Add to Chrome. It takes a few seconds and nothing is written to your Downloads folder. On a managed device, your admin may need to allow the extension first."
+    },
+    {
+      title: "Sign in with a free account",
+      body: "Click the Recordio icon in the toolbar and sign in. The free plan needs no card. Your recordings live in your Recordio workspace, so you can open them from any Chromebook or laptop you sign in on."
+    },
+    {
+      title: "Pick the tab and press record",
+      body: "Choose the tab you want to show, turn on the microphone and the webcam bubble if you want them, and start. Recordio records the tab, its audio and your voice. Do the walkthrough at a normal pace. Smart AutoCut removes the long pauses later."
+    },
+    {
+      title: "Review, then share the link",
+      body: "Stop the recording and the web app opens the editor. Auto zoom, spotlight and the simplified toolbar are already applied. Adjust any keyframe, add captions on Pro, then copy the share link or download the 1080p file."
+    }
+  ];
+  const chromebookFaq = [
+    {
+      question: "Does Recordio work on a Chromebook?",
+      answer: "Yes. Recordio is a Chrome extension with a web app, so it runs on any Chromebook that can install extensions from the Chrome Web Store. It works on consumer Chromebooks and on managed school or work devices where the admin allows the extension."
+    },
+    {
+      question: "Do I need to install anything on my Chromebook?",
+      answer: "Only the extension. Add Recordio from the Chrome Web Store, sign in with a free account, and record from the toolbar icon. There is no Android app, Linux container or desktop installer involved, and nothing to update by hand."
+    },
+    {
+      question: "Can Recordio record audio on a Chromebook?",
+      answer: "Yes. Recordio records your microphone through Chrome and captures the audio playing in the tab you record, so voice-over and in-app sound both end up in the video. Pick the microphone in the recording popup before you start."
+    },
+    {
+      question: "Where are my Chromebook recordings stored?",
+      answer: "In your Recordio workspace at app.recordio.io, not on the Chromebook's local storage. Open the web app to edit, download a 1080p file to your Files app or share a link. On the free plan videos are kept for 7 days; on Pro they never expire."
+    },
+    {
+      question: "Is there a free plan for Chromebook users?",
+      answer: "Yes. The free plan costs nothing and needs no card. It includes auto zoom, spotlight, Smart AutoCut, up to 5 active projects and 1080p downloads. Pro adds 4K, AI captions, share links with analytics, cloud rendering and a team library at $12 per seat per month billed annually."
+    }
+  ];
+  const relatedLinks = [
+    { label: "Screen recorder for Chrome", href: "/for/chrome/", blurb: "How the extension records any tab in Chrome, Edge or Brave." },
+    { label: "Screen recorder for Mac", href: "/for/mac/", blurb: "The same walkthrough recorder for teammates on macOS." },
+    { label: "Screen recorder for Windows", href: "/for/windows/", blurb: "Set-up notes for Windows laptops and PCs." },
+    { label: "Recordio vs Screencastify", href: "/compare/screencastify/", blurb: "An honest comparison for classrooms and schools." },
+    { label: "Recordio vs Loom", href: "/compare/loom/", blurb: "Auto zoom, captions and share links, side by side." },
+    { label: "Best screen recorders in 2026", href: "/blog/best-screen-recorders-2026/", blurb: "Our ranked list, including the ones that skip ChromeOS." }
+  ];
+  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Best Screen Recorder for Chromebook | Recordio", "description": "Record your screen on a Chromebook with the Recordio Chrome extension. Auto zoom, captions and share links for walkthroughs and lessons. Free plan.", "faqSchema": true, "faqItems": chromebookFaq }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "Header", Header, { "client:load": true, "navLinks": navLinks, "client:component-hydration": "load", "client:component-path": "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/components/Header", "client:component-export": "default" })} ${maybeRenderHead()}<main> ${renderComponent($$result2, "PlatformHero", PlatformHero, { "client:load": true, "platformName": "Chromebook", "tagLabel": "Best for Chromebook & ChromeOS", "headline": "The best screen recorder for <span class='underline decoration-primary decoration-4 underline-offset-4'>Chromebook.</span>", "subheadline": "Recordio is a Chrome extension, so it runs on any Chromebook, including managed school and work devices. Record a tab, and auto zoom, spotlight and clean framing are applied for you. Share a link when you are done.", "client:component-hydration": "load", "client:component-path": "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/components/platform/PlatformHero", "client:component-export": "default" })} <!-- Why an extension beats the built-in recorder --> <section id="why-recordio" class="section-panel-white py-20 px-6"> <div class="max-w-4xl mx-auto"> ${renderComponent($$result2, "Breadcrumbs", $$Breadcrumbs, { "items": [{ name: "Platforms", href: "/for/" }, { name: "Chromebook" }], "class": "mb-10" })} <div class="section-head section-head--left mb-10"> <span class="eyebrow">Built-in vs Recordio</span> <h2 class="section-title">Why an extension beats the built-in recorder</h2> </div> <div class="prose"> <p>
+Every Chromebook ships with a screen capture tool. Open Quick Settings, pick Screen capture, and you can record the full screen, one window or a selected region. It can include your microphone and a small camera view, and it saves a WebM file to your Downloads folder. Newer Chromebooks also have the Screencast app, which adds a transcript, drawing tools and sharing through Google Drive. For a quick clip that nobody will watch twice, that is enough.
+</p> <p>
+The built-in tool stops at capture. What you record is what you get: the full browser chrome, your bookmarks bar, every tab title and a cursor wandering across a 1366 by 768 screen where the important field is about 40 pixels tall. If you want a viewer to actually follow a lesson or a product walkthrough, you then need an editor, and most desktop editors do not run on ChromeOS.
+</p> <p>
+Recordio does the editing part for you, in the browser, at record time. Because it runs inside Chrome, it can read the page you are recording. It knows which input you clicked, which card you opened and which menu you scrolled, and it frames each one as an editable zoom keyframe. It hides your bookmarks, tabs and other extensions, elevates the element you are using with a spotlight, and trims the silent gaps while keeping the natural pauses around typing and clicking. When you stop, the video is already watchable.
+</p> </div> <div class="compare-table-wrapper mt-10"> <table class="compare-table"> <thead> <tr> <th class="compare-th compare-th--feature" scope="col">On a Chromebook</th> <th class="compare-th compare-th--recordio" scope="col">Recordio</th> <th class="compare-th compare-th--competitor" scope="col">Built-in screen capture</th> </tr> </thead> <tbody> <tr class="compare-row"> <td class="compare-td compare-td--feature">Capture target</td> <td class="compare-td compare-td--recordio">Browser tab, with tab audio</td> <td class="compare-td compare-td--competitor">Full screen, window or region</td> </tr> <tr class="compare-row"> <td class="compare-td compare-td--feature">Auto zoom on the element you use</td> <td class="compare-td compare-td--recordio">Yes, every zoom is an editable keyframe</td> <td class="compare-td compare-td--competitor">No</td> </tr> <tr class="compare-row"> <td class="compare-td compare-td--feature">Hide bookmarks, tabs and extensions</td> <td class="compare-td compare-td--recordio">Yes, simplified toolbar</td> <td class="compare-td compare-td--competitor">No, records the screen as shown</td> </tr> <tr class="compare-row"> <td class="compare-td compare-td--feature">Silence removal</td> <td class="compare-td compare-td--recordio">Smart AutoCut</td> <td class="compare-td compare-td--competitor">Trim only, in the Gallery app</td> </tr> <tr class="compare-row"> <td class="compare-td compare-td--feature">Blur sensitive regions</td> <td class="compare-td compare-td--recordio">Yes</td> <td class="compare-td compare-td--competitor">No</td> </tr> <tr class="compare-row"> <td class="compare-td compare-td--feature">Captions</td> <td class="compare-td compare-td--recordio">AI captions, word-level, editable (Pro)</td> <td class="compare-td compare-td--competitor">Transcript in the Screencast app only</td> </tr> <tr class="compare-row"> <td class="compare-td compare-td--feature">Sharing</td> <td class="compare-td compare-td--recordio">Share link with view analytics (Pro)</td> <td class="compare-td compare-td--competitor">WebM file in Downloads, or Drive link from Screencast</td> </tr> <tr class="compare-row"> <td class="compare-td compare-td--feature">Team or class library</td> <td class="compare-td compare-td--recordio">Shared workspace with roles (Pro)</td> <td class="compare-td compare-td--competitor">No</td> </tr> <tr class="compare-row"> <td class="compare-td compare-td--feature">Local storage used</td> <td class="compare-td compare-td--recordio">None, recordings live in your workspace</td> <td class="compare-td compare-td--competitor">One WebM file per recording</td> </tr> </tbody> </table> </div> <div class="prose mt-10"> <p>
+The storage row matters more on a Chromebook than on a laptop. Many school and budget models have 32 or 64 GB of storage, and a week of lesson recordings in WebM fills that quickly. Recordio uploads to your workspace, so the device stays light and the videos are still there when you sign in on a different machine.
+</p> </div> </div> </section> <!-- Managed and school Chromebooks --> <section class="section-panel py-20 px-6"> <div class="max-w-4xl mx-auto"> <div class="section-head section-head--left mb-10"> <span class="eyebrow">Managed devices</span> <h2 class="section-title">Works on managed and school Chromebooks</h2> </div> <div class="prose"> <p>
+Most Chromebooks in schools and companies are enrolled in Google Admin, and the admin decides which extensions users can add. Recordio is a standard Chrome Web Store extension, so it fits the normal allow-list process. There is no side-loading, no developer mode and no Linux container to enable.
+</p> <p>
+If the Chrome Web Store is blocked or extensions are limited to an allow list, send your admin the extension ID below. In the Google Admin console the setting lives under Devices, then Chrome, then Apps and extensions. The admin picks the users or organisational unit, adds the extension by ID, and sets it to Allow install or Force install. Force install puts Recordio on every enrolled device without each person visiting the store.
+</p> <p>
+Recordio extension ID: <code>${EXTENSION_ID}</code> </p> <p>
+Two things to check with your admin before you rely on it. First, ChromeOS has a policy that can disable screen capture entirely; if it is off for your account, no recorder will work, built-in or otherwise. Second, some organisations only allow sign-in with the school or company Google account, which is fine, as long as you can reach app.recordio.io to open your recordings. Recordio always needs an account, free or Pro, so the web app has to be reachable. Every organisation writes its own policy, and we cannot promise how a particular district or IT team will decide.
+</p> <p>
+For a class or a support team, one Pro workspace is the simplest set-up. Members record from their own Chromebooks, everything lands in the shared team library, and viewer seats are unlimited, so students or customers can watch share links without a seat each. Read more on the <a href="/#pricing">pricing section</a> or in the FAQ below.
+</p> </div> </div> </section> <!-- ASSET NEEDED: /assets/platform/chromebook-popup.webp (extension popup on a Chromebook, ChromeOS shelf visible). Pass image={{ src, alt, caption }} to PlatformSteps once it exists. --> ${renderComponent($$result2, "PlatformSteps", PlatformSteps, { "client:visible": true, "ctaSection": "for-chromebook-steps", "eyebrow": "Four steps", "heading": "Record on a Chromebook in four steps", "intro": "From a fresh Chromebook to a shared walkthrough in a few minutes. No file management, no separate editor.", "steps": steps, "ctaLabel": "Add Recordio to Chrome, free", "variant": "white", "client:component-hydration": "visible", "client:component-path": "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/components/platform/PlatformSteps", "client:component-export": "default" })} <!-- Teachers and support teams --> <section class="section-panel py-20 px-6"> <div class="max-w-4xl mx-auto"> <div class="section-head section-head--left mb-10"> <span class="eyebrow">Who uses it</span> <h2 class="section-title">For teachers and support teams</h2> </div> <div class="prose"> <h3>Lessons and flipped classrooms</h3> <p>
+A teacher recording a lesson on a Chromebook usually has three problems: the class can't see the small text in Google Classroom or a maths tool, the recording is full of dead air while a page loads, and it ends up as a file that has to be uploaded somewhere. Recordio's auto zoom keeps the part of the page you are working in large enough to read on a phone. Smart AutoCut removes the loading pauses. On Pro, captions are generated with word-level timing and can be edited, which helps students who read along or watch without sound. The video is a link you paste into Classroom, not an attachment. If your school already uses Screencastify, our <a href="/compare/screencastify/">Recordio vs Screencastify</a> page compares the two honestly.
+</p> <h3>Customer support replies</h3> <p>
+Support agents on Chromebooks answer the same "where is that setting" question dozens of times a week. A 40-second recording beats a five-paragraph reply, but only if the customer can see what you clicked. Record the help-centre or product tab, let spotlight highlight the button, blur the customer's account details, and send the share link. On Pro you can see whether the customer watched it and for how long, and the recording sits in the team library so the next agent can reuse it instead of recording it again. Teams that used Loom for this can see how the two compare on our <a href="/compare/loom/">Recordio vs Loom</a> page.
+</p> <!-- TODO Plan 06: link /use-cases/bug-report-screen-recording/ and /use-cases/customer-onboarding-videos/ here once those pages exist. --> </div> </div> </section> <!-- Chromebook vs Mac vs Windows --> <section class="section-panel-white py-20 px-6"> <div class="max-w-4xl mx-auto"> <div class="section-head section-head--left mb-10"> <span class="eyebrow">Other platforms</span> <h2 class="section-title">Chromebook vs Mac vs Windows</h2> </div> <div class="prose"> <p>
+There is no Chromebook edition of Recordio, and that is the point. The same extension runs in Chrome, Edge or Brave on ChromeOS, macOS, Windows and Linux, and every recording lands in the same workspace. A teacher on a school Chromebook, a product manager on a MacBook and an engineer on Ubuntu record into one library and share links that look identical. The only platform difference is what the operating system allows around it: a Mac or Windows laptop has more local storage and CPU for browser rendering on the free plan, while a Chromebook benefits most from Pro's cloud rendering because the work moves off the device. See the set-up notes for <a href="/for/mac/">Mac</a>, <a href="/for/windows/">Windows</a> and <a href="/for/linux/">Linux</a>, or the general <a href="/for/chrome/">Chrome screen recorder</a> page.
+</p> </div> </div> </section> ${renderComponent($$result2, "FAQ", FAQ, { "client:visible": true, "items": chromebookFaq, "client:component-hydration": "visible", "client:component-path": "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/components/FAQ", "client:component-export": "default" })} ${renderComponent($$result2, "Pricing", Pricing, { "client:visible": true, "client:component-hydration": "visible", "client:component-path": "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/components/Pricing", "client:component-export": "default" })} ${renderComponent($$result2, "RelatedLinks", RelatedLinks, { "client:visible": true, "heading": "Related pages", "links": relatedLinks, "variant": "purple", "client:component-hydration": "visible", "client:component-path": "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/components/RelatedLinks", "client:component-export": "default" })} </main> ${renderComponent($$result2, "Footer", Footer, { "client:visible": true, "source": "for-chromebook", "client:component-hydration": "visible", "client:component-path": "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/components/Footer", "client:component-export": "default" })} ` })}`;
+}, "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/pages/for/chromebook.astro", void 0);
+
+const $$file = "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/pages/for/chromebook.astro";
+const $$url = "/for/chromebook/";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+    __proto__: null,
+    default: $$Chromebook,
+    file: $$file,
+    url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

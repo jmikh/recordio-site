@@ -8,6 +8,16 @@ import Testimonials from "../components/Testimonials";
 import Pricing from "../components/Pricing";
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
+import LinkStrip from "../components/LinkStrip.astro";
+import { compareHref, PLATFORM_PAGES, platformHref, USE_CASE_LINKS } from "../data/siteLinks";
+
+const compareStrip = [
+    { label: "Recordio vs Loom", href: compareHref("loom") },
+    { label: "Recordio vs Screen Studio", href: compareHref("screen-studio") },
+    { label: "Recordio vs Bandicam", href: compareHref("bandicam") },
+];
+
+const platformStrip = PLATFORM_PAGES.map((p) => ({ label: p.label, href: platformHref(p.slug) }));
 ---
 
 <BaseLayout
@@ -20,7 +30,35 @@ import Footer from "../components/Footer";
         <Hero client:load />
         <FeatureVideos client:visible />
         <Testimonials client:visible />
+        <LinkStrip
+            id="use-cases"
+            eyebrow="Use cases"
+            heading="Built for product walkthroughs, demos, onboarding and bug reports"
+            intro="One recorder for every video a product team sends, with a guide for each."
+            links={USE_CASE_LINKS}
+            all={{ label: "All use cases", href: "/use-cases/" }}
+            note={{ label: "Guide: how to make a product walkthrough video", href: "/blog/how-to-make-a-product-walkthrough-video/" }}
+            variant="white"
+        />
+        <LinkStrip
+            id="compare"
+            eyebrow="Comparisons"
+            heading="Switching from Loom, Screen Studio or Bandicam?"
+            intro="Honest comparisons written by the Recordio team, with pricing checked in 2026 and a section on what the other tool does better."
+            links={compareStrip}
+            all={{ label: "All comparisons", href: "/compare/" }}
+            variant="purple"
+        />
         <Pricing client:visible />
+        <LinkStrip
+            id="platforms"
+            eyebrow="Platforms"
+            heading="Works on Mac, Windows, Linux and Chromebook"
+            intro="One extension for Chrome, Edge and Brave, so a team on mixed machines records into one shared library."
+            links={platformStrip}
+            all={{ label: "All platforms", href: "/for/" }}
+            variant="white"
+        />
         <FAQ client:visible />
         <FinalCTA client:visible />
     </main>

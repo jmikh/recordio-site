@@ -1,0 +1,45 @@
+---
+/**
+ * Visible breadcrumb trail plus BreadcrumbList JSON-LD.
+ * Usage: <Breadcrumbs items={[{ name: "Compare", href: "/compare/" }, { name: "Loom" }]} />
+ * "Home" is prepended automatically; the last item has no link.
+ */
+import { SITE_URL } from "../utils/constants";
+
+interface Crumb {
+    name: string;
+    href?: string;
+}
+interface Props {
+    items: Crumb[];
+    class?: string;
+}
+const { items, class: className = "" } = Astro.props;
+const trail: Crumb[] = [{ name: "Home", href: "/" }, ...items];
+const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": trail.map((c, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": c.name,
+        ...(c.href ? { "item": `${SITE_URL}${c.href}` } : {}),
+    })),
+});
+---
+
+<nav aria-label="Breadcrumb" class={`breadcrumbs ${className}`}>
+    <ol class="flex flex-wrap items-center gap-1 text-sm text-text-muted">
+        {trail.map((c, i) => (
+            <li class="flex items-center gap-1">
+                {c.href && i < trail.length - 1 ? (
+                    <a href={c.href} class="hover:text-primary transition-colors">{c.name}</a>
+                ) : (
+                    <span aria-current="page" class="text-text-highlighted">{c.name}</span>
+                )}
+                {i < trail.length - 1 && <span aria-hidden="true" class="opacity-50">/</span>}
+            </li>
+        ))}
+    </ol>
+</nav>
+<script type="application/ld+json" set:html={jsonLd} />

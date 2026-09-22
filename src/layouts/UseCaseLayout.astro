@@ -1,0 +1,261 @@
+---
+/**
+ * Shared layout for /use-cases/* pages. Each page passes data (traits, steps,
+ * example, template, roles, FAQ, related links) and optional HTML prose in the
+ * default slot, which renders directly under the hero. Every use-case page
+ * therefore shares one structure: hero, what good looks like, how to record it
+ * in Recordio, example, template, who it is for, FAQ, related links, CTA.
+ */
+import BaseLayout from "./BaseLayout.astro";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import FAQ from "../components/FAQ";
+import FinalCTA from "../components/FinalCTA";
+import RelatedLinks, { type RelatedLink } from "../components/RelatedLinks";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { getCWSLink, getAppLink, VIDEOS_BASE } from "../utils/constants";
+import type { FaqItem } from "../data/faq";
+import type {
+    UseCaseTrait,
+    UseCaseStep,
+    UseCaseExample,
+    UseCaseTemplate,
+    UseCaseRole,
+} from "../data/use-cases";
+
+interface Props {
+    slug: string;
+    title: string;
+    description: string;
+    /** Breadcrumb label and short name for the page. */
+    name: string;
+    eyebrow?: string;
+    h1: string;
+    /** One or two short paragraphs in the reader's words. */
+    intro: string[];
+    traitsHeading: string;
+    traits: UseCaseTrait[];
+    steps: UseCaseStep[];
+    example: UseCaseExample;
+    template: UseCaseTemplate;
+    roles: UseCaseRole[];
+    faq: FaqItem[];
+    related: RelatedLink[];
+}
+
+const {
+    slug,
+    title,
+    description,
+    name,
+    eyebrow = "Use case",
+    h1,
+    intro,
+    traitsHeading,
+    traits,
+    steps,
+    example,
+    template,
+    roles,
+    faq,
+    related,
+} = Astro.props;
+
+const source = `use-case-${slug}`;
+const hasProse = Astro.slots.has("default");
+
+const navLinks = [
+    { label: "How it works", href: "#how-it-works" },
+    { label: "Template", href: "#template" },
+    { label: "FAQ", href: "#faq" },
+];
+---
+
+<BaseLayout title={title} description={description} faqSchema faqItems={faq}>
+    <Header client:load navLinks={navLinks} />
+
+    <main>
+        {/* Hero */}
+        <section class="relative overflow-hidden" style="background-color: var(--color-section-purple);">
+            <div class="absolute inset-0 opacity-40 pointer-events-none">
+                <div class="absolute -top-32 left-1/4 w-[600px] h-[600px] bg-primary/15 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-32 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative z-10 max-w-3xl mx-auto px-6 pt-36 pb-20">
+                <Breadcrumbs
+                    class="mb-8 hero-entrance hero-entrance-delay-1"
+                    items={[{ name: "Use cases", href: "/use-cases/" }, { name }]}
+                />
+                <span class="eyebrow hero-entrance hero-entrance-delay-1">{eyebrow}</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-text-highlighted leading-tight mt-4 mb-6 hero-entrance hero-entrance-delay-1">
+                    {h1}
+                </h1>
+                {intro.map((p) => (
+                    <p class="text-lg md:text-xl text-text-muted leading-relaxed mb-4 hero-entrance hero-entrance-delay-2">{p}</p>
+                ))}
+                <div class="mt-8 flex flex-col sm:flex-row gap-3 hero-entrance hero-entrance-delay-3">
+                    <a
+                        href={getCWSLink(source)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-primary btn-lg"
+                        data-install-source={source}
+                    >
+                        <img src="/assets/chrome-store.svg" alt="" class="w-5 h-5" />
+                        Add to Chrome, it's free
+                    </a>
+                    <a href={getAppLink(source)} class="btn-secondary btn-lg" data-open-app-source={source}>
+                        Open the web app
+                    </a>
+                </div>
+                <p class="mt-4 text-sm text-text-muted hero-entrance hero-entrance-delay-3">
+                    Free plan included. Works in Chrome, Edge and Brave on Mac, Windows, Linux and ChromeOS.
+                </p>
+            </div>
+        </section>
+
+        {/* Optional prose from the page (context, in-copy links) */}
+        {hasProse && (
+            <section class="section-panel-white py-16 px-6">
+                <div class="prose max-w-3xl mx-auto">
+                    <slot />
+                </div>
+            </section>
+        )}
+
+        {/* What a good one looks like */}
+        <section class="section-panel py-20 px-6" aria-labelledby="traits-heading">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-head section-head--left mb-10">
+                    <span class="eyebrow">What good looks like</span>
+                    <h2 id="traits-heading" class="section-title">{traitsHeading}</h2>
+                </div>
+                <ol class="grid gap-4 sm:grid-cols-2">
+                    {traits.map((t, i) => (
+                        <li class="rounded-2xl border border-border bg-white/70 p-6">
+                            <span class="text-xs font-bold uppercase tracking-[0.12em] text-primary">{String(i + 1).padStart(2, "0")}</span>
+                            <h3 class="mt-2 text-lg font-bold text-text-highlighted">{t.title}</h3>
+                            <p class="mt-2 text-text-main leading-relaxed">{t.body}</p>
+                        </li>
+                    ))}
+                </ol>
+            </div>
+        </section>
+
+        {/* How to record one in Recordio */}
+        <section id="how-it-works" class="section-panel-white py-20 px-6 scroll-mt-28" aria-labelledby="steps-heading">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-head section-head--left mb-12">
+                    <span class="eyebrow">How it works</span>
+                    <h2 id="steps-heading" class="section-title">How to record one in Recordio</h2>
+                    <p class="section-subtitle">
+                        Four steps. Most of the work happens while you record, not after.
+                    </p>
+                </div>
+                <ol class="grid gap-6 md:grid-cols-2">
+                    {steps.map((s, i) => (
+                        <li class="rounded-2xl border border-border bg-surface p-6 flex flex-col">
+                            <div class="flex items-center gap-3">
+                                <span class="step-number !mb-0">{i + 1}</span>
+                                <span class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">{s.feature}</span>
+                            </div>
+                            <h3 class="mt-4 text-xl font-bold text-text-highlighted">{s.title}</h3>
+                            <p class="mt-2 text-text-main leading-relaxed">{s.body}</p>
+                        </li>
+                    ))}
+                </ol>
+            </div>
+        </section>
+
+        {/* Example */}
+        <section class="section-panel py-20 px-6" aria-labelledby="example-heading">
+            <div class="max-w-4xl mx-auto">
+                <div class="section-head mb-10">
+                    <span class="eyebrow">Example</span>
+                    <h2 id="example-heading" class="section-title">What it looks like</h2>
+                </div>
+                <figure>
+                    <div class="before-after-video before-after-video--after">
+                        <video muted loop playsinline autoplay preload="metadata" class="w-full h-auto block">
+                            <source src={`${VIDEOS_BASE}/${example.video}.webm`} type="video/webm" />
+                            <source src={`${VIDEOS_BASE}/${example.video}.mp4`} type="video/mp4" />
+                        </video>
+                    </div>
+                    <figcaption class="mt-4 text-center text-sm text-text-muted">{example.caption}</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        {/* Template or checklist */}
+        <section id="template" class="section-panel-white py-20 px-6 scroll-mt-28" aria-labelledby="template-heading">
+            <div class="max-w-3xl mx-auto">
+                <div class="section-head section-head--left mb-8">
+                    <span class="eyebrow">Copy and reuse</span>
+                    <h2 id="template-heading" class="section-title">{template.heading}</h2>
+                    <p class="section-subtitle">{template.intro}</p>
+                </div>
+                <div class="relative rounded-2xl border border-border bg-surface-raised p-6 pr-24">
+                    <button
+                        type="button"
+                        class="btn-secondary !px-3.5 !py-2 text-sm absolute top-4 right-4"
+                        data-copy-target="use-case-template"
+                    >
+                        Copy
+                    </button>
+                    <pre id="use-case-template" class="font-mono text-sm leading-relaxed text-text-main whitespace-pre-wrap">{template.lines.join("\n")}</pre>
+                </div>
+            </div>
+        </section>
+
+        {/* Who this is for */}
+        <section class="section-panel py-20 px-6" aria-labelledby="roles-heading">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-head section-head--left mb-10">
+                    <span class="eyebrow">Who this is for</span>
+                    <h2 id="roles-heading" class="section-title">Teams that record these every week</h2>
+                </div>
+                <ul class="grid gap-4 md:grid-cols-3">
+                    {roles.map((r) => (
+                        <li class="rounded-2xl border border-border bg-white/70 p-6">
+                            <h3 class="text-lg font-bold text-text-highlighted">{r.role}</h3>
+                            <p class="mt-2 text-text-main leading-relaxed">{r.body}</p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </section>
+
+        <FAQ client:visible items={faq} />
+
+        <RelatedLinks client:visible heading="Related" links={related} />
+
+        <FinalCTA client:visible source={source} />
+    </main>
+
+    <Footer client:visible />
+</BaseLayout>
+
+<script>
+    import { trackInstallExtension, trackOpenApp } from "../utils/analytics";
+
+    document.querySelectorAll<HTMLAnchorElement>("[data-install-source]").forEach((a) => {
+        a.addEventListener("click", () => trackInstallExtension(a.dataset.installSource ?? "use-case"));
+    });
+    document.querySelectorAll<HTMLAnchorElement>("[data-open-app-source]").forEach((a) => {
+        a.addEventListener("click", () => trackOpenApp(a.dataset.openAppSource ?? "use-case"));
+    });
+    document.querySelectorAll<HTMLButtonElement>("[data-copy-target]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+            const target = document.getElementById(btn.dataset.copyTarget ?? "");
+            if (!target) return;
+            try {
+                await navigator.clipboard.writeText(target.textContent ?? "");
+                btn.textContent = "Copied";
+                setTimeout(() => (btn.textContent = "Copy"), 1500);
+            } catch {
+                btn.textContent = "Select and copy";
+            }
+        });
+    });
+</script>

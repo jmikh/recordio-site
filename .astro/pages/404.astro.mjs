@@ -1,0 +1,28 @@
+import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_C5ewKNw0.mjs';
+import 'piccolore';
+import { $ as $$BaseLayout } from '../chunks/BaseLayout_BMmOTL_5.mjs';
+export { renderers } from '../renderers.mjs';
+
+const $$404 = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Page Not Found \u2014 Recordio", "description": "The page you're looking for doesn't exist.", "noindex": true }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<div class="min-h-screen flex items-center justify-center" style="background-color: var(--color-section-purple);"> <div class="text-center px-6 py-24"> <!-- Big 404 number --> <p class="text-[10rem] md:text-[14rem] font-black leading-none tracking-tighter gradient-text select-none" style="line-height: 0.85;">
+404
+</p> <!-- Copy --> <h1 class="text-2xl md:text-3xl font-bold text-text-highlighted mt-6 mb-3">
+Page not found
+</h1> <p class="text-text-muted text-lg max-w-md mx-auto mb-10">
+The page you're looking for doesn't exist or has been moved.
+</p> <!-- CTA --> <a href="/" class="btn-primary inline-flex items-center gap-2 text-lg px-8 py-4"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path> </svg> <span>Back to Home</span> </a> </div> </div> ` })}`;
+}, "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/pages/404.astro", void 0);
+
+const $$file = "/Users/johnmikhail/Projects/recordio-all/recordio-landing/src/pages/404.astro";
+const $$url = "/404/";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+    __proto__: null,
+    default: $$404,
+    file: $$file,
+    url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

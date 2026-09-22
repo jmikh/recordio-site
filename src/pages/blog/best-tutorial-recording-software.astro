@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FAQ from "../../components/FAQ";
+import RelatedLinks from "../../components/RelatedLinks";
+import TutorialSoftwareArticle from "../../components/blog/TutorialSoftwareArticle";
+import { articleJsonLd, itemListJsonLd } from "../../components/blog/structuredData";
+import { SITE_URL } from "../../utils/constants";
+import type { FaqItem } from "../../data/faq";
+
+const path = "/blog/best-tutorial-recording-software/";
+const title = "Best Tutorial Recording Software in 2026 | Recordio";
+const description =
+    "Seven tutorial recording tools compared on auto zoom, captions, silence removal, sharing and 2026 pricing, from Recordio and Camtasia to OBS.";
+
+const faq: FaqItem[] = [
+    {
+        question: "What is the best software for recording tutorials?",
+        answer: "It depends on what you record and who watches. For teams making walkthroughs of a web app, Recordio automates zoom, silence removal and captions and ends in a share link with a team library. Camtasia suits long-form courses with heavy manual editing. Screen Studio gives Mac users the best-looking cursor zoom for native apps. OBS is the best free option if you only need raw capture.",
+    },
+    {
+        question: "What is the best free tutorial recording software?",
+        answer: "OBS Studio is free and open source but gives you a raw file with no editing. Recordio's free plan needs no card and includes auto zoom, auto spotlight, Smart AutoCut and 1080p downloads for up to 5 active projects, with videos expiring after 7 days. Loom's free plan allows 25 videos of up to 5 minutes. Screencastify's free plan allows 10 videos with a watermark.",
+    },
+    {
+        question: "Do I need a Mac to make polished tutorial videos?",
+        answer: "No. Screen Studio is Mac-only, but Recordio runs as an extension in Chrome, Edge or Brave on Mac, Windows, Linux and ChromeOS and applies auto zoom, spotlight and captions to any web app recording. Camtasia and OBS run on both Windows and macOS.",
+    },
+];
+
+const article = articleJsonLd({
+    headline: "Best Tutorial Recording Software in 2026",
+    description,
+    path,
+    datePublished: "2026-09-22",
+    dateModified: "2026-09-22",
+});
+
+// Positions match the H2 order in TutorialSoftwareArticle.tsx. Prices checked 2026-09-22; see the comment there.
+const itemList = itemListJsonLd({
+    name: "Best tutorial recording software in 2026",
+    description: "Seven tools for recording software tutorials, ranked by how much of the work they do for you.",
+    items: [
+        { name: "Recordio", url: `${SITE_URL}${path}#recordio`, description: "Best for teams recording web app walkthroughs. Free plan; Pro $12 per seat per month billed annually." },
+        { name: "Camtasia", url: `${SITE_URL}${path}#camtasia`, description: "Best for long-form course editing. Annual plans from $39 a year." },
+        { name: "Screen Studio", url: `${SITE_URL}${path}#screen-studio`, description: "Best-looking cursor zoom on a Mac. $9 a month billed yearly, macOS only." },
+        { name: "Loom", url: `${SITE_URL}${path}#loom`, description: "Best for quick async explainers. Free plan; Business $15 per user per month billed annually." },
+        { name: "Clueso", url: `${SITE_URL}${path}#clueso`, description: "Best for AI voiceover and docs from one recording. Free plan; Solo $40 a month billed yearly." },
+        { name: "Screencastify", url: `${SITE_URL}${path}#screencastify`, description: "Best for schools. Free plan with watermark; Starter $7 per user per month billed annually." },
+        { name: "OBS Studio", url: `${SITE_URL}${path}#obs`, description: "Best free option with full control. Free and open source." },
+    ],
+});
+
+const related = [
+    { label: "Best screen recorders in 2026", href: "/blog/best-screen-recorders-2026/", blurb: "Ranked on recording quality alone." },
+    { label: "Best Loom alternatives in 2026", href: "/blog/best-loom-alternatives-2026/", blurb: "What teams switch to, and why." },
+    { label: "How to make a product walkthrough video", href: "/blog/how-to-make-a-product-walkthrough-video/", blurb: "Scripting, recording, editing and sharing." },
+    { label: "Recordio vs Camtasia", href: "/compare/camtasia/", blurb: "Manual timeline editing versus automatic polish." },
+    { label: "Screen recorder for Chrome", href: "/for/chrome/", blurb: "How tab recording powers auto zoom in Chrome, Edge and Brave." },
+    { label: "All posts", href: "/blog/", blurb: "Guides and comparisons from the Recordio team." },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqSchema faqItems={faq}>
+    <Header client:load navLinks={[]} />
+    <main class="pt-28 md:pt-36">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: "Best tutorial recording software" }]} />
+        </div>
+        <TutorialSoftwareArticle />
+        <FAQ client:visible items={faq} />
+        <RelatedLinks heading="Related reading" links={related} />
+    </main>
+    <Footer client:visible source="blog_best-tutorial-recording-software" />
+</BaseLayout>
+
+<script type="application/ld+json" set:html={article} />
+<script type="application/ld+json" set:html={itemList} />

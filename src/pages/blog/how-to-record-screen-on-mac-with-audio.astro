@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FAQ from "../../components/FAQ";
+import RelatedLinks from "../../components/RelatedLinks";
+import HowToMacArticle from "../../components/blog/HowToMacArticle";
+import { articleJsonLd, howToJsonLd } from "../../components/blog/structuredData";
+import type { FaqItem } from "../../data/faq";
+
+const path = "/blog/how-to-record-screen-on-mac-with-audio/";
+const title = "How to Record Your Screen on Mac With Audio | Recordio";
+const description =
+    "Record your Mac screen with audio using Shift-Command-5 or QuickTime, capture system audio on any macOS version, and fix the usual no-sound problems.";
+
+const faq: FaqItem[] = [
+    {
+        question: "How do I record my Mac screen with internal audio?",
+        answer: "On macOS 27 or later, press Shift-Command-5, open Options and choose Include System Audio. On macOS 26 and earlier, the built-in recorder captures only a microphone, so install the free BlackHole virtual audio driver, create a Multi-Output Device in Audio MIDI Setup, and select BlackHole as the microphone. If the sound comes from a web page, recording the tab with Recordio in Chrome captures that tab's audio on any macOS version.",
+    },
+    {
+        question: "Where do Mac screen recordings save?",
+        answer: "Shift-Command-5 and QuickTime save a .mov file to the Desktop by default. Change the folder under Options, then Save to, in the Screenshot toolbar. Recordio saves the project to your cloud workspace, where you can download 1080p on the free plan or 4K on Pro, or share a link on Pro.",
+    },
+    {
+        question: "Is there a time limit for screen recording on a Mac?",
+        answer: "No. Shift-Command-5 and QuickTime record until you stop or run out of disk space. Files are large at full Retina resolution, so trim in QuickTime and export a 1080p version before sharing. Recordio's free plan allows up to 5 active projects, which expire after 7 days; Pro has no expiry.",
+    },
+];
+
+const article = articleJsonLd({
+    headline: "How to Record Your Screen on Mac With Audio",
+    description,
+    path,
+    datePublished: "2026-09-22",
+    dateModified: "2026-09-22",
+});
+
+const howTo = howToJsonLd({
+    name: "How to record your screen on a Mac with audio using Shift-Command-5",
+    description: "Record your Mac screen with your microphone using the built-in Screenshot toolbar.",
+    path,
+    anchor: "screenshot-toolbar",
+    totalTime: "PT2M",
+    steps: [
+        { name: "Open the Screenshot toolbar", text: "Press Shift-Command-5 together." },
+        { name: "Choose what to record", text: "Click Record Entire Screen or Record Selected Portion and frame the area." },
+        { name: "Pick a microphone in Options", text: "Click Options and choose a microphone. On macOS 27 or later, choose Include System Audio here as well." },
+        { name: "Record", text: "Click Record. A stop button appears in the menu bar." },
+        { name: "Stop and trim", text: "Click the stop button or press Command-Control-Esc. Click the thumbnail to trim, or find the .mov file on your Desktop." },
+    ],
+});
+
+const related = [
+    { label: "Screen recorder for Mac", href: "/for/mac/", blurb: "Recordio in Chrome, Edge or Brave on macOS." },
+    { label: "Recordio vs Screen Studio", href: "/compare/screen-studio/", blurb: "Mac-only desktop app versus a cross-platform extension." },
+    { label: "How to record your screen on Ubuntu", href: "/blog/how-to-record-screen-on-ubuntu/", blurb: "GNOME's recorder, OBS and Kooha, with audio fixes." },
+    { label: "How to screen record on a Chromebook", href: "/blog/how-to-screen-record-on-chromebook/", blurb: "The built-in ChromeOS tool and an extension for lessons." },
+    { label: "Best tutorial recording software in 2026", href: "/blog/best-tutorial-recording-software/", blurb: "Seven tools compared on zoom, captions, sharing and price." },
+    { label: "All posts", href: "/blog/", blurb: "Guides and comparisons from the Recordio team." },
+];
+---
+
+<BaseLayout title={title} description={description} ogType="article" faqSchema faqItems={faq}>
+    <Header client:load navLinks={[]} />
+    <main class="pt-28 md:pt-36">
+        <div class="max-w-3xl mx-auto px-6">
+            <Breadcrumbs items={[{ name: "Blog", href: "/blog/" }, { name: "Record your screen on Mac with audio" }]} />
+        </div>
+        <HowToMacArticle />
+        <FAQ client:visible items={faq} />
+        <RelatedLinks heading="Related guides" links={related} />
+    </main>
+    <Footer client:visible source="blog_how-to-record-screen-on-mac-with-audio" />
+</BaseLayout>
+
+<script type="application/ld+json" set:html={article} />
+<script type="application/ld+json" set:html={howTo} />

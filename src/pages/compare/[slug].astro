@@ -1,0 +1,112 @@
+---
+/**
+ * One template for every /compare/<slug>/ page, fed by src/data/compare/<slug>.ts.
+ * Section order is fixed by docs/plans/01-compare-template-rebuild.md.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import RelatedLinks, { type RelatedLink } from "../../components/RelatedLinks";
+import FAQ from "../../components/FAQ";
+import Pricing from "../../components/Pricing";
+import CompareHero from "../../components/compare/CompareHero";
+import CompareChoose from "../../components/compare/CompareChoose.astro";
+import CompareFeatureTable from "../../components/compare/CompareFeatureTable";
+import CompareStrengths from "../../components/compare/CompareStrengths.astro";
+import CompareDifferences from "../../components/compare/CompareDifferences.astro";
+import ComparePricingTable from "../../components/compare/ComparePricingTable.astro";
+import CompareByline from "../../components/compare/CompareByline.astro";
+import CompareCTA from "../../components/compare/CompareCTA";
+import { competitors, competitorBySlug, relatedPageLabels } from "../../data/compare";
+import type { Competitor } from "../../data/compare/types";
+
+export function getStaticPaths() {
+    return competitors.map((competitor) => ({
+        params: { slug: competitor.slug },
+        props: { competitor },
+    }));
+}
+
+interface Props {
+    competitor: Competitor;
+}
+const { competitor: c } = Astro.props;
+
+if (c.title.length > 60) throw new Error(`${c.slug}: title is ${c.title.length} chars (max 60)`);
+if (c.description.length > 155) throw new Error(`${c.slug}: description is ${c.description.length} chars (max 155)`);
+if (c.faq.length !== 5) throw new Error(`${c.slug}: FAQ must have exactly 5 questions, has ${c.faq.length}`);
+
+const navLinks = [
+    { label: "Comparison", href: "#comparison" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "FAQ", href: "#faq" },
+];
+
+const relatedLinks: RelatedLink[] = c.related.compare.map((slug) => {
+    const sibling = competitorBySlug(slug);
+    return {
+        label: `Recordio vs ${sibling.name}`,
+        href: `/compare/${sibling.slug}/`,
+        blurb: sibling.verdict.split(/(?<=\.)\s/)[0],
+    };
+});
+for (const path of [c.related.post, c.related.platform]) {
+    if (!path) continue;
+    const meta = relatedPageLabels[path];
+    if (!meta) throw new Error(`${c.slug}: no label registered for related page ${path}`);
+    relatedLinks.push({ href: path, ...meta });
+}
+---
+
+<BaseLayout
+    title={c.title}
+    description={c.description}
+    faqSchema
+    faqItems={c.faq}
+    ogImage={c.ogImage}
+>
+    <Header client:load navLinks={navLinks} />
+
+    <main>
+        <CompareHero client:load slug={c.slug} name={c.name} verdict={c.verdict} />
+
+        <div class="section-panel-white px-6 py-4">
+            <Breadcrumbs class="max-w-5xl mx-auto" items={[{ name: "Compare", href: "/compare/" }, { name: c.name }]} />
+        </div>
+
+        <CompareChoose name={c.name} chooseThem={c.chooseThem} chooseRecordio={c.chooseRecordio} />
+
+        <CompareFeatureTable client:visible competitorName={c.name} rows={c.table} variant="white" />
+
+        <CompareStrengths name={c.name} items={c.whatTheyDoWell} />
+
+        <CompareDifferences name={c.name} items={c.differences} />
+
+        <ComparePricingTable name={c.name} pricing={c.pricing} />
+
+        <FAQ client:visible items={c.faq} />
+
+        <RelatedLinks client:visible heading="Other comparisons" links={relatedLinks} variant="white" />
+
+        <CompareByline updated={c.updated} />
+
+        <Pricing client:visible />
+
+        <CompareCTA client:visible competitorName={c.name} variant="purple" />
+    </main>
+
+    <Footer client:visible source={`compare-${c.slug}`} />
+</BaseLayout>
+
+<style is:global>
+    .compare-copy a {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+    .compare-copy a:hover {
+        opacity: 0.85;
+    }
+</style>

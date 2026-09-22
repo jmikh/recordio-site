@@ -2,19 +2,164 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import PlatformHero from "../../components/platform/PlatformHero";
-import FeatureVideos from "../../components/FeatureVideos";
-import Testimonials from "../../components/Testimonials";
+import PlatformSupportGrid from "../../components/platform/PlatformSupportGrid";
+import PlatformToolTable from "../../components/platform/PlatformToolTable";
+import PlatformSteps from "../../components/platform/PlatformSteps";
 import Pricing from "../../components/Pricing";
 import FAQ from "../../components/FAQ";
+import RelatedLinks from "../../components/RelatedLinks";
+import type { FaqItem } from "../../data/faq";
+
+const navLinks = [
+    { label: "Distros", href: "#compatibility" },
+    { label: "Compare", href: "#comparison" },
+    { label: "How to record", href: "#how-to-record" },
+    { label: "Pricing", href: "#pricing" },
+];
+
+const distros = [
+    { name: "Ubuntu", note: "22.04 LTS, 24.04 LTS and newer" },
+    { name: "Fedora", note: "Workstation, GNOME on Wayland" },
+    { name: "Debian", note: "12 Bookworm and newer" },
+    { name: "Arch Linux", note: "Plus Manjaro and EndeavourOS" },
+    { name: "Pop!_OS", note: "GNOME or COSMIC" },
+    { name: "Linux Mint", note: "Cinnamon, MATE or Xfce" },
+    { name: "openSUSE", note: "Tumbleweed and Leap" },
+    { name: "Anything else", note: "If it runs a Chromium browser, it runs Recordio" },
+];
+
+const distroNotes = [
+    {
+        heading: "Requirements",
+        body: "Google Chrome, Chromium, Microsoft Edge or Brave. Install the browser the way your distro prefers, then add Recordio from the Chrome Web Store. There is nothing else to install with apt, dnf, pacman, snap or flatpak. No PPA, no kernel module, no sudo.",
+    },
+    {
+        heading: "One recorder for a mixed team",
+        body: "A Linux engineer and a Mac product manager record into the same team library, with the same auto zoom, the same captions and the same share links. Nobody converts files or picks a different tool per operating system.",
+    },
+];
+
+// Competitor facts checked 2026-09-22 against obsproject.com,
+// maartenbaert.be/simplescreenrecorder and github.com/henrywoo/kazam.
+// All three are free and open source and none offers zoom, captions,
+// share links or a shared library. VERIFY: SimpleScreenRecorder's Wayland
+// status before publishing; its site documents X11 capture only.
+const tools = ["Recordio", "OBS Studio", "SimpleScreenRecorder", "Kazam"];
+const toolRows = [
+    {
+        feature: "Capture target",
+        values: [
+            "Browser tab, window or screen",
+            "Any screen, window or source, arranged in scenes",
+            "Screen, region or OpenGL app",
+            "Screen, window or area",
+        ],
+    },
+    {
+        feature: "Setup",
+        values: [
+            "Install the extension, sign in",
+            "Install, build scenes and sources, pick an encoder",
+            "Install from your repo, pick input and codec",
+            "Install from your repo, pick a mode",
+        ],
+    },
+    {
+        feature: "Wayland",
+        values: ["Yes, through the browser", "Yes, PipeWire", "X11 only", "Yes, desktop portal"],
+    },
+    {
+        feature: "Auto zoom",
+        description: "Frames the field, card or menu you use",
+        values: ["DOM-aware, every zoom editable", false, false, false],
+    },
+    {
+        feature: "Captions",
+        values: ["AI captions, word-level, editable (Pro)", false, false, false],
+    },
+    {
+        feature: "Share link",
+        values: ["Link with view analytics (Pro)", "Saves a file", "Saves a file", "Saves a file"],
+    },
+    {
+        feature: "Team library",
+        values: ["Shared workspace with roles (Pro)", false, false, false],
+    },
+    {
+        feature: "Output",
+        values: ["1080p free, up to 4K on Pro", "Raw MKV or MP4", "Raw MKV, MP4 or WebM", "MP4 or WebM"],
+    },
+    {
+        feature: "Best for",
+        values: ["Product walkthroughs and demos", "Streaming and gaming", "Lightweight raw capture", "Quick clips"],
+    },
+    {
+        feature: "Price",
+        values: ["Free, or Pro at $12 per seat per month billed annually", "Free, open source", "Free, open source", "Free, open source"],
+    },
+];
+
+const steps = [
+    {
+        title: "Install the extension",
+        body: "Open the Chrome Web Store in Chrome, Chromium, Edge or Brave on Ubuntu and add Recordio. It installs under your user account. No package manager, no sudo, no restart.",
+    },
+    {
+        title: "Sign in with a free account",
+        body: "Click the Recordio icon in the toolbar and sign in. The free account gives you up to 5 active projects, 1080p downloads and browser rendering. No card is needed.",
+    },
+    {
+        title: "Choose the tab and record",
+        body: "Pick the tab with the product you want to walk through and hit record. Tab capture is what lets Recordio read the page and frame each input, card or menu with auto zoom and spotlight as you click.",
+    },
+    {
+        title: "Review, then share the link",
+        body: "Stop recording and the project opens in the web app. Silence is already cut, zooms are already placed and each one is an editable keyframe. Download the file, or on Pro share a link and see who watched.",
+    },
+];
+
+const linuxFaq: FaqItem[] = [
+    {
+        question: "Does Recordio work on Wayland?",
+        answer: "Yes. Recordio records through the browser's own capture, so it works in a Wayland session on GNOME or KDE as well as on X11. Tab recording, which auto zoom and spotlight rely on, never touches the compositor. Window and full-screen capture go through the desktop portal, so your desktop shows a picker when you start.",
+    },
+    {
+        question: "Can I record my microphone and system audio on Linux?",
+        answer: "Microphone, yes: Recordio uses whichever input your browser sees through PipeWire or PulseAudio. System audio, yes when you record a tab, because the browser captures that tab's sound. Full-screen recordings on Linux capture the microphone but not desktop audio.",
+    },
+    {
+        question: "Do I need root or sudo to install Recordio?",
+        answer: "No. Recordio is a browser extension, so it installs in your browser profile under your own user. There is no package, PPA, kernel module or system service, and nothing needs sudo. That also makes it usable on a managed work laptop where you cannot install packages.",
+    },
+    {
+        question: "Which Linux distributions are supported?",
+        answer: "Any distro that runs Chrome, Chromium, Edge or Brave. That covers Ubuntu, Fedora, Debian, Arch, Pop!_OS, Linux Mint, openSUSE and their derivatives. Recordio does not depend on your desktop environment, display server or package manager.",
+    },
+    {
+        question: "Does Recordio work offline?",
+        answer: "No. Recordio is cloud-based and needs an internet connection and a free account. You sign in, record in the browser, and the project saves to your workspace where you edit and share it. For an air-gapped machine, use OBS or SimpleScreenRecorder and accept that you get a raw file.",
+    },
+];
+
+const relatedLinks = [
+    { label: "All platforms", href: "/for/", blurb: "Mac, Windows, Linux and Chrome setup notes." },
+    { label: "Screen recorder for Chrome", href: "/for/chrome/", blurb: "How the extension works in any Chromium browser." },
+    { label: "Screen recorder for Windows", href: "/for/windows/", blurb: "Same recorder for the Windows half of your team." },
+    { label: "Screen recorder for Mac", href: "/for/mac/", blurb: "Same recorder for the Mac half of your team." },
+    { label: "Recordio vs OBS", href: "/compare/obs/", blurb: "A fuller comparison for product demos." },
+    { label: "Best screen recorders in 2026", href: "/blog/best-screen-recorders-2026/", blurb: "Every option we tested, on every OS." },
+];
 ---
 
 <BaseLayout
     title="Best Screen Recorder for Linux and Ubuntu | Recordio"
     description="Record your screen on Ubuntu, Fedora or any distro from Chrome, Edge or Brave. Auto zoom, captions and share links for product walkthroughs. Free plan."
     faqSchema
+    faqItems={linuxFaq}
 >
-    <Header client:load />
+    <Header client:load navLinks={navLinks} />
 
     <main>
         <PlatformHero
@@ -22,13 +167,109 @@ import FAQ from "../../components/FAQ";
             platformName="Linux"
             tagLabel="Best for Linux & Ubuntu"
             headline="The best screen recorder for <span class='underline decoration-primary decoration-4 underline-offset-4'>Linux.</span>"
-            subheadline="No PPA, no Snap, no Flatpak. Recordio runs entirely in your browser — Chrome, Edge, or Brave on any distro. Hit record, and every video comes out polished with auto-zoom, spotlight, and captions."
+            subheadline="Recordio runs in Chrome, Chromium, Edge or Brave on Ubuntu, Fedora, Debian, Arch, Pop!_OS and Linux Mint. Record a tab, get auto zoom, spotlight and captions applied for you, and share a link with your team."
         />
 
-        <FeatureVideos client:visible />
-        <Testimonials client:visible />
+        <div class="max-w-6xl mx-auto px-6 pt-8">
+            <Breadcrumbs items={[{ name: "Platforms", href: "/for/" }, { name: "Linux" }]} />
+        </div>
+
+        <PlatformSupportGrid
+            heading="Works on any distro"
+            intro="Recordio is a browser extension, so the distro underneath does not matter. If your machine runs a Chromium-based browser, it runs Recordio, whatever the desktop, display server or package manager."
+            items={distros}
+            notes={distroNotes}
+            variant="white"
+        />
+
+        <!-- VERIFY with John before publishing: exact window and full-screen capture behaviour on Wayland, and whether the extension offers those modes on Linux at all. Claims are kept to what Chromium itself does. -->
+        <section id="wayland" class="section-panel py-20 px-6">
+            <div class="max-w-3xl mx-auto">
+                <div class="section-head section-head--left mb-8">
+                    <span class="eyebrow">Display server</span>
+                    <h2 class="section-title">Wayland and X11</h2>
+                </div>
+                <div class="flex flex-col gap-5 text-lg text-text-muted leading-relaxed">
+                    <p>
+                        Most Linux screen recorders broke, or half broke, when distros moved to Wayland. Ubuntu, Fedora and Pop!_OS now run GNOME on Wayland by default, and tools that read the X11 framebuffer either capture a black screen or need XWayland workarounds. Recordio sidesteps the problem because it never talks to the display server itself. It asks the browser for the pixels, and the browser already knows how to get them on both Wayland and X11.
+                    </p>
+                    <p>
+                        <strong class="text-text-highlighted">Tab capture</strong> is the mode to use for product walkthroughs. The browser hands Recordio the rendered contents of one tab, which is identical on Wayland and X11. It is also the only mode where auto zoom and auto spotlight work, because they read the page DOM to know which input, card or menu you are interacting with. Your recording stays clean even if a notification pops up or you switch to another window.
+                    </p>
+                    <p>
+                        <strong class="text-text-highlighted">Window and full-screen capture</strong> are handled by Chromium. On a Wayland session that goes through xdg-desktop-portal with PipeWire, so GNOME or KDE shows its own picker and you choose the window or screen. On X11 the browser captures directly. Either way you lose the DOM-aware features, so keep these modes for the rare walkthrough that has to show a terminal or a native app.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <PlatformToolTable
+            heading="Recordio vs OBS vs SimpleScreenRecorder vs Kazam"
+            intro="The usual Linux recorders capture raw video to a file. That is fine for a stream or a bug clip. For a product walkthrough you then need an editor, a captions tool and somewhere to host the result. Recordio does those three steps for you."
+            tools={tools}
+            rows={toolRows}
+            variant="white"
+        />
+
+        <section class="section-panel-white pb-20 px-6 -mt-8">
+            <div class="max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold text-text-highlighted mb-4">What OBS, SimpleScreenRecorder and Kazam do better</h3>
+                <div class="flex flex-col gap-4 text-text-muted leading-relaxed">
+                    <p>
+                        All three are free forever, work with no account and no internet, and are in your distro's repositories. They capture anything on screen, not just a browser: a terminal session, a Qt or GTK app, a game. OBS also streams live, mixes several sources and has a plugin ecosystem nobody else matches. SimpleScreenRecorder is the lightest option for raw capture at high frame rates and can hook OpenGL apps directly. Kazam is a two-click tool when you just want a quick clip.
+                    </p>
+                    <p>
+                        If that is your job, use one of them. Recordio is the better choice when the thing you are recording lives in a browser tab and the result has to look finished for a customer, a teammate or a changelog. Read the fuller
+                        <a href="/compare/obs/" class="text-primary font-semibold hover:underline underline-offset-4">Recordio vs OBS comparison</a>
+                        for product demos.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASSET NEEDED: screenshot of the Recordio extension popup on GNOME (Ubuntu 24.04, light theme), 1600x1000 or similar, at /assets/platform/linux-gnome-popup.webp. Ask John. -->
+        <PlatformSteps
+            client:visible
+            heading="Record a product walkthrough on Ubuntu in four steps"
+            intro="The same steps apply on Fedora, Debian, Arch or any other distro. The only Linux-specific part is which browser you already have installed."
+            steps={steps}
+            image={{
+                src: "/assets/platform/linux-gnome-popup.webp",
+                alt: "The Recordio extension popup open in Chrome on Ubuntu with the GNOME desktop behind it",
+                caption: "The Recordio popup in Chrome on Ubuntu 24.04.",
+            }}
+            ctaLabel="Install the free extension"
+            ctaSection="for-linux-steps"
+            variant="purple"
+        />
+
+        <!-- VERIFY with John: confirm full-screen recordings on Linux do not capture desktop audio (a Chromium limit, not a Recordio one) before publishing. -->
+        <section id="audio" class="section-panel-white py-20 px-6">
+            <div class="max-w-3xl mx-auto">
+                <div class="section-head section-head--left mb-8">
+                    <span class="eyebrow">Sound</span>
+                    <h2 class="section-title">Audio on Linux</h2>
+                </div>
+                <div class="flex flex-col gap-5 text-lg text-text-muted leading-relaxed">
+                    <p>
+                        Your microphone comes in through whatever input the browser sees. On a current distro that is PipeWire; on older releases it is PulseAudio. Pick the device once in the Recordio popup, or leave it on the system default and change it in GNOME Settings or pavucontrol when you plug in a headset. There is no separate audio setup inside Recordio, and Smart AutoCut trims the silence afterwards while keeping the pauses where you were typing or clicking.
+                    </p>
+                    <p>
+                        System audio is captured when you record a tab, because the browser can hand over that tab's sound along with its video. That covers the case people usually mean, such as a video or a sound effect playing inside the product you are demoing. Window and full-screen recordings on Linux carry your microphone only, so if the walkthrough depends on desktop audio, record the tab.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <FAQ client:visible items={linuxFaq} />
         <Pricing client:visible />
-        <FAQ client:visible />
+
+        <RelatedLinks
+            client:visible
+            heading="Related"
+            links={relatedLinks}
+            variant="white"
+        />
     </main>
 
     <Footer client:visible source="for-linux" />
