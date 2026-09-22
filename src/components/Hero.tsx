@@ -67,7 +67,9 @@ const Hero = () => {
                 <div className="hero-image-wrap mt-14 lg:mt-20 hero-entrance hero-entrance-delay-4">
                     <div className="hero-image-glow" aria-hidden="true" />
                     <img
-                        src="/assets/hero-editor.png"
+                        src="/assets/hero-editor.webp"
+                        srcSet="/assets/hero-editor-1440.webp 1440w, /assets/hero-editor.webp 2872w"
+                        sizes="(max-width: 1280px) 100vw, 1152px"
                         alt="The Recordio editor: screen settings on the left, a recording framed in a MacBook Pro on a purple background on the right"
                         width={2872}
                         height={1064}

@@ -19,17 +19,17 @@ const valueProps = [
     {
         title: "No Desktop App Required",
         description:
-            "FocuSee requires downloading a desktop app for Mac or Windows. Recordio runs entirely in your browser — Chrome, Edge, or Brave. Nothing to install, nothing to update.",
+            "FocuSee requires downloading a desktop app for Mac or Windows. Recordio runs in Chrome, Edge, or Brave on any OS, so the whole team can record without a desktop app.",
     },
     {
-        title: "Truly Private, Local Processing",
+        title: "Built for Teams, Not Just One Desktop",
         description:
-            "FocuSee processes video on their servers. Recordio does everything in-browser — your recordings never leave your machine unless you choose to share them.",
+            "FocuSee is a single-user desktop app. Recordio adds share links with view analytics, a team library, and unlimited free viewer seats.",
     },
     {
-        title: "Simpler, More Transparent Pricing",
+        title: "Free Plan, Then $12 Per Seat",
         description:
-            "FocuSee charges $50–80/yr and their lifetime plan no longer includes free major updates. Recordio is free to start, $48/yr, or $89 lifetime — with all updates included, forever.",
+            "FocuSee is $199.99 one-time per computer. Recordio has a free plan, and Pro is $12 per seat per month billed annually with 4K exports and cloud rendering.",
     },
     {
         title: "DOM-Aware Zoom, Not Cursor Tracking",
@@ -80,8 +80,8 @@ const featureRows = [
         competitor: false,
     },
     {
-        feature: "Auto Captions",
-        recordio: "Local, 99 languages, word-level highlighting",
+        feature: "AI Captions",
+        recordio: "Word-level, editable (Pro)",
         competitor: "AI-generated, editable",
     },
     {
@@ -102,22 +102,16 @@ const featureRows = [
         competitor: true,
     },
     {
-        feature: "Local Processing",
-        description: "Recordings stay on your machine",
-        recordio: true,
-        competitor: false,
-    },
-    {
         feature: "Pricing",
-        recordio: "Free / $48yr / $89 lifetime",
-        competitor: "$50–80/yr / ~$100 lifetime (no major updates)",
+        recordio: "Free, or Pro $12/seat/mo (annual)",
+        competitor: "$199.99 one-time",
     },
 ];
 ---
 
 <BaseLayout
-    title="Smarter Zoom, No Desktop App Needed — FocuSee Alternative"
-    description="FocuSee follows your cursor. Recordio reads the DOM for precise zoom — and runs right in your browser. $89 lifetime, updates included forever."
+    title="FocuSee Alternative for Browser Recording | Recordio"
+    description="FocuSee is a $199.99 desktop app. Recordio records in Chrome on any OS, with DOM-aware zoom, captions and share links. Free plan, Pro from $12 per seat."
 >
     <Header client:load navLinks={compareNavLinks} />
 
@@ -126,7 +120,7 @@ const featureRows = [
             client:load
             competitorName="FocuSee"
             headline="Recordio vs FocuSee"
-            subheadline="FocuSee is a solid desktop recorder with auto zoom — but Recordio does it smarter, right in your browser. DOM-aware zoom, 3D spotlight, and transparent pricing with no app to install."
+            subheadline="FocuSee is a solid desktop recorder with auto zoom. Recordio does it in your browser on any OS: DOM-aware zoom, 3D spotlight, and share links for your team."
         />
 
         <CompareValueProps

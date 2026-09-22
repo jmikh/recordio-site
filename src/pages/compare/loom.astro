@@ -22,14 +22,14 @@ const valueProps = [
             "DOM-aware auto zoom, 3D spotlight, and a clean toolbar — applied to every recording with zero manual editing.",
     },
     {
-        title: "Flat Pricing, No Per-Seat Tax",
+        title: "Unlimited Free Viewer Seats",
         description:
-            "Loom charges $15-20/user/month. Recordio runs locally — no cloud overhead means dramatically lower pricing.",
+            "Loom charges $15-20 per user per month. Recordio Pro is $12 per seat per month billed annually, and people who only watch never need a paid seat.",
     },
     {
-        title: "Local, Private, and Secure",
+        title: "A Team Library Your Whole Product Org Can Search",
         description:
-            "Recording, editing, and transcription all happen in your browser. Nothing touches a server unless you share a link.",
+            "Every walkthrough lands in a shared library with collaboration built in, so sales, support, and product can find the right video without asking around.",
     },
     {
         title: "Smart AutoCut",
@@ -81,8 +81,8 @@ const featureRows = [
         competitor: false,
     },
     {
-        feature: "Auto Captions",
-        recordio: "Local, 99 languages, word-level highlighting",
+        feature: "AI Captions",
+        recordio: "Word-level, editable (Pro)",
         competitor: "Cloud, 50+ languages",
     },
     {
@@ -91,27 +91,21 @@ const featureRows = [
         competitor: true,
     },
     {
-        feature: "Local Processing",
-        description: "Recordings never leave your machine",
-        recordio: "Fully in-browser",
-        competitor: "Cloud-only",
-    },
-    {
         feature: "Cross-Platform",
         recordio: "Chrome, Edge, Brave (Mac, Windows, Linux, ChromeOS)",
         competitor: "Web + Desktop + Mobile",
     },
     {
         feature: "Pricing",
-        recordio: "Free tier + $48/yr or $89 lifetime",
+        recordio: "Free, or Pro $12/seat/mo (annual)",
         competitor: "$15-20 / user / month",
     },
 ];
 ---
 
 <BaseLayout
-    title="Screen Recordings That Sell Themselves — Loom Alternative"
-    description="Auto zoom, spotlight, and shareable links — without Loom's per-seat pricing. Recordio processes locally, starts free, and costs up to 80% less."
+    title="Loom Alternative for Product Walkthroughs | Recordio"
+    description="Looking for a Loom alternative? Recordio adds auto zoom, spotlight and captions to every recording, plus share links and a team library. Pro from $12."
 >
     <Header client:load navLinks={compareNavLinks} />
 
@@ -120,7 +114,7 @@ const featureRows = [
             client:load
             competitorName="Loom"
             headline="Recordio vs Loom"
-            subheadline="Studio-quality screen recordings with shareable links — at a fraction of the cost. No per-seat pricing, no cloud dependency."
+            subheadline="Studio-quality product walkthroughs with auto zoom, spotlight, and share links with view analytics. Free plan to start, Pro from $12 per seat."
         />
 
         <CompareValueProps

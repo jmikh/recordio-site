@@ -17,31 +17,31 @@ const compareNavLinks = [
 
 const valueProps = [
     {
-        title: "Your Data Stays on Your Machine",
+        title: "Auto Zoom and Spotlight on Every Recording",
         description:
-            "Clueso uploads everything to the cloud. Recordio records, edits, and processes entirely in your browser — nothing leaves unless you share a link.",
+            "Recordio reads the page DOM to zoom into the element you click and adds a 3D spotlight, so every walkthrough looks polished without editing.",
     },
     {
-        title: "No Export Limits",
+        title: "No Export Caps on Pro",
         description:
-            "Clueso caps exports to 6-12 hours/year depending on plan. Recordio has no limits on recordings or exports.",
+            "Clueso caps exports at 6-12 hours a year depending on plan. Recordio Pro has unlimited projects and exports, and the free plan gives you 5 active projects to try it.",
     },
     {
-        title: "Flat Pricing, Not Per-Seat SaaS",
+        title: "Priced for the Whole Team",
         description:
-            "Clueso starts at $120/mo for just 2 users. Recordio is free to start, $48/yr, or $89 lifetime — no seat limits.",
+            "Clueso starts at $120 a month for two users. Recordio Pro is $12 per seat per month billed annually, with unlimited free viewer seats and a free plan to start.",
     },
     {
         title: "Instant Setup, No Onboarding",
         description:
-            "Install a Chrome extension and start recording. No demos, no sales calls, no enterprise onboarding process.",
+            "Install the Chrome extension, create a free account, and start recording. No demos, no sales calls, no enterprise onboarding process.",
     },
 ];
 
 const featureRows = [
     {
         feature: "Setup",
-        recordio: "Chrome extension, instant",
+        recordio: "Chrome extension plus a free account",
         competitor: "Web app, account required",
     },
     {
@@ -79,8 +79,8 @@ const featureRows = [
         competitor: "Yes",
     },
     {
-        feature: "Auto Captions",
-        recordio: "Local, 99 languages, word-level",
+        feature: "AI Captions",
+        recordio: "Word-level, editable (Pro)",
         competitor: "AI-generated, multi-language",
     },
     {
@@ -101,14 +101,8 @@ const featureRows = [
         competitor: true,
     },
     {
-        feature: "Local Processing",
-        description: "Recordings never leave your machine",
-        recordio: true,
-        competitor: false,
-    },
-    {
         feature: "Unlimited Exports",
-        recordio: true,
+        recordio: "Unlimited on Pro",
         competitor: "Capped per plan",
     },
     {
@@ -118,15 +112,15 @@ const featureRows = [
     },
     {
         feature: "Pricing",
-        recordio: "Free / $48yr / $89 lifetime",
+        recordio: "Free, or Pro $12/seat/mo (annual)",
         competitor: "From $120/mo (2 users)",
     },
 ];
 ---
 
 <BaseLayout
-    title="Unlimited Exports, No Per-Seat Bill — Clueso Alternative"
-    description="Clueso caps exports and starts at $120/mo. Recordio has no limits, processes locally, and costs $89 lifetime. Same polish, fraction of the price."
+    title="Clueso Alternative for Product Walkthroughs | Recordio"
+    description="Clueso starts at $120 a month for two users. Recordio gives teams auto zoom, captions and share links from Chrome. Free plan, Pro from $12 per seat."
 >
     <Header client:load navLinks={compareNavLinks} />
 
@@ -135,7 +129,7 @@ const featureRows = [
             client:load
             competitorName="Clueso"
             headline="Recordio vs Clueso"
-            subheadline="Studio-quality recordings that stay on your machine. No per-seat pricing, no export limits, no cloud dependency."
+            subheadline="Studio-quality product walkthroughs from a Chrome extension. Auto zoom, captions, and share links, with a free plan and Pro from $12 per seat."
         />
 
         <CompareValueProps

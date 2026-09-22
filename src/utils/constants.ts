@@ -8,7 +8,7 @@ export const VIDEOS_BASE = '/videos';
  * All CWS links on the site should use getCWSLink() to include UTM tracking.
  */
 const CWS_BASE_URL =
-    'https://chromewebstore.google.com/detail/recordio-smart-screen-rec/bbcdpipjplklaneplfmlhhibnllhinii';
+    'https://chromewebstore.google.com/detail/recordio-beautiful-screen/bbcdpipjplklaneplfmlhhibnllhinii';
 
 /**
  * Returns the CWS listing URL with UTM parameters for source attribution.

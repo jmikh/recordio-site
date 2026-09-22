@@ -115,7 +115,7 @@ const Logo = ({ company, height }: { company: Company; height?: number }) => {
             {company.svg ? (
                 <span className="company-logo-svg" dangerouslySetInnerHTML={{ __html: company.svg }} />
             ) : (
-                <img src={company.png} alt="" className="company-logo-img" />
+                <img src={company.png} alt="" className="company-logo-img" loading="lazy" decoding="async" />
             )}
             {company.wordmark && <span className="company-logo-text">{company.name}</span>}
             {!company.wordmark && <span className="sr-only">{company.name}</span>}
@@ -125,7 +125,7 @@ const Logo = ({ company, height }: { company: Company; height?: number }) => {
 
 const Avatar = ({ review, size = 'w-9 h-9', textSize = 'text-sm' }: { review: Review; size?: string; textSize?: string }) =>
     review.photo ? (
-        <img src={review.photo} alt="" className={`${size} rounded-full object-cover shrink-0`} />
+        <img src={review.photo} alt="" className={`${size} rounded-full object-cover shrink-0`} loading="lazy" decoding="async" width={36} height={36} />
     ) : (
         <span className={`${size} rounded-full bg-linear-to-br ${review.gradient} flex items-center justify-center shrink-0 text-white font-bold ${textSize}`} aria-hidden="true">
             {review.name.charAt(0)}

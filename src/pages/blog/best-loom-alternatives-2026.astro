@@ -15,12 +15,18 @@ const jsonLd = JSON.stringify({
         "@type": "Person",
         "name": "John Mikhail",
         "jobTitle": "Founder of Recordio",
+        "url": "https://www.linkedin.com/in/john-mikhail/",
         "description": "MIT grad, previously at Google and Mixpanel, tech and AI enthusiast"
     },
+    "image": `${SITE_URL}/og-image.png`,
     "publisher": {
         "@type": "Organization",
         "name": "Recordio",
-        "url": SITE_URL
+        "url": SITE_URL,
+        "logo": {
+            "@type": "ImageObject",
+            "url": `${SITE_URL}/assets/fulllogo-light.png`
+        }
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -30,8 +36,9 @@ const jsonLd = JSON.stringify({
 ---
 
 <BaseLayout
-    title="Best Loom Alternatives in 2026: Why Teams Are Switching"
-    description="Looking for a Loom alternative? See why teams are switching to Recordio for studio-quality recordings, shareable links with view analytics, and a free plan with no credit card."
+    title="Best Loom Alternatives in 2026 for Teams | Recordio"
+    description="Loom alternatives in 2026: what Loom costs per seat, where its videos fall short, and how Recordio and Screen Studio compare on features and price."
+    ogType="article"
 >
     <main class="pt-12 md:pt-20">
         <LoomAlternativesArticle client:load />

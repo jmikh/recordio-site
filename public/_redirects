@@ -1,0 +1,2 @@
+# Legacy sitemap path -> the one referenced in robots.txt
+/sitemap.xml  /sitemap-index.xml  301

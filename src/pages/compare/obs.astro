@@ -78,8 +78,8 @@ const featureRows = [
         competitor: false,
     },
     {
-        feature: "Auto Captions",
-        recordio: "Local, 99 languages",
+        feature: "AI Captions",
+        recordio: "Word-level, editable (Pro)",
         competitor: false,
     },
     {
@@ -104,12 +104,17 @@ const featureRows = [
         recordio: "Any OS via Chrome/Edge/Brave",
         competitor: "Mac, Windows, Linux",
     },
+    {
+        feature: "Pricing",
+        recordio: "Free, or Pro $12/seat/mo (annual)",
+        competitor: "Free, open source",
+    },
 ];
 ---
 
 <BaseLayout
-    title="Record, Polish, and Share in One Click — OBS Alternative"
-    description="OBS is built for streaming. Recordio is built for product demos. Auto zoom, spotlight, clean toolbar, and shareable links — zero configuration."
+    title="OBS Alternative for Product Demos and Tutorials | Recordio"
+    description="OBS is built for streaming and saves a file. Recordio is built for product demos: auto zoom, captions and a share link. Free plan, Pro from $12 per seat."
 >
     <Header client:load navLinks={compareNavLinks} />
 

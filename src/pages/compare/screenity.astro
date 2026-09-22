@@ -22,9 +22,9 @@ const valueProps = [
             "Screenity captures your screen. Recordio captures it and auto-applies zoom, spotlight, clean toolbar, and device frames.",
     },
     {
-        title: "Shareable Links with Analytics",
+        title: "Share a Link With View Analytics",
         description:
-            "Recordio gives you shareable links with view counts and watch time — built in, no Pro upgrade required.",
+            "Recordio Pro gives you shareable links with view counts and watch time, plus a team library your whole product org can search.",
     },
     {
         title: "SmartCut Removes Dead Air",
@@ -32,9 +32,9 @@ const valueProps = [
             "Recordio's AutoCut detects silence and low-activity moments and trims them automatically. No manual editing.",
     },
     {
-        title: "Auto Captions in 99 Languages",
+        title: "AI Captions, Word by Word",
         description:
-            "Local, word-level highlighted captions — processed entirely in your browser. No cloud, no upload wait.",
+            "Recordio Pro adds OpenAI-powered captions with word-level timing you can edit before you share.",
     },
 ];
 
@@ -76,12 +76,12 @@ const featureRows = [
     },
     {
         feature: "Shareable Links",
-        recordio: "Built-in with analytics",
+        recordio: "With viewership analytics (Pro)",
         competitor: "Pro only",
     },
     {
-        feature: "Auto Captions",
-        recordio: "Local, 99 languages, word-level",
+        feature: "AI Captions",
+        recordio: "Word-level, editable (Pro)",
         competitor: "Pro only",
     },
     {
@@ -102,21 +102,16 @@ const featureRows = [
         competitor: false,
     },
     {
-        feature: "Local Processing",
-        recordio: true,
-        competitor: true,
-    },
-    {
         feature: "Pricing",
-        recordio: "Free / $48yr / $89 lifetime",
+        recordio: "Free, or Pro $12/seat/mo (annual)",
         competitor: "Free / Pro (paid)",
     },
 ];
 ---
 
 <BaseLayout
-    title="From Raw Capture to Polished Video, Automatically — Screenity Alternative"
-    description="Both live in your browser. Recordio adds what Screenity doesn't — auto zoom, 3D spotlight, shareable links, and AutoCut. No Pro paywall for core features."
+    title="Screenity Alternative for Polished Demos | Recordio"
+    description="Screenity captures your screen. Recordio adds auto zoom, spotlight, silence cutting and share links with view analytics. Free plan, Pro from $12 per seat."
 >
     <Header client:load navLinks={compareNavLinks} />
 

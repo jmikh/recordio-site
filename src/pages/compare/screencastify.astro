@@ -22,14 +22,14 @@ const valueProps = [
             "Screencastify gives you a raw screen capture. Recordio adds auto zoom, spotlight, and a clean toolbar — automatically.",
     },
     {
-        title: "No Per-Seat Pricing",
+        title: "Unlimited Free Viewer Seats",
         description:
-            "Screencastify charges $7-10/user/month. Recordio is free to start, $48/yr, or $89 lifetime — for one person or a whole team.",
+            "Screencastify charges $7-10 per user per month. Recordio Pro is $12 per seat per month billed annually, and anyone who only watches never needs a seat.",
     },
     {
-        title: "No Watermark on Free",
+        title: "Clean 1080p Downloads on the Free Plan",
         description:
-            "Screencastify's free plan brands every video with a watermark. Recordio's free tier has no watermark.",
+            "Screencastify's free plan brands every video with a watermark. Recordio's free plan gives you clean 1080p downloads, auto zoom, and silence cutting.",
     },
     {
         title: "Smarter Editing, Less Work",
@@ -80,8 +80,8 @@ const featureRows = [
         competitor: "Yes",
     },
     {
-        feature: "Auto Captions",
-        recordio: "Local, 99 languages, word-level highlighting",
+        feature: "AI Captions",
+        recordio: "Word-level, editable (Pro)",
         competitor: "AI-generated",
     },
     {
@@ -102,27 +102,16 @@ const featureRows = [
         competitor: false,
     },
     {
-        feature: "Watermark-Free on Free Tier",
-        recordio: true,
-        competitor: false,
-    },
-    {
-        feature: "Local Processing",
-        description: "Recordings stay on your machine",
-        recordio: true,
-        competitor: false,
-    },
-    {
         feature: "Pricing",
-        recordio: "Free / $48yr / $89 lifetime",
+        recordio: "Free, or Pro $12/seat/mo (annual)",
         competitor: "Free (watermark) / $7-10 per user/mo",
     },
 ];
 ---
 
 <BaseLayout
-    title="Every Recording Comes Out Polished — Screencastify Alternative"
-    description="Same Chrome extension simplicity, but with auto zoom, spotlight, device frames, and no watermark on free. Starts at $0, not $7/user/month."
+    title="Screencastify Alternative With Auto Zoom | Recordio"
+    description="Screencastify gives you a raw capture. Recordio adds auto zoom, spotlight, silence cutting and captions to every video. Free plan, Pro from $12 per seat."
 >
     <Header client:load navLinks={compareNavLinks} />
 

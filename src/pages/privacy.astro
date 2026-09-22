@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
+import { SUPPORT_EMAIL, SITE_DOMAIN, SITE_URL } from "../utils/constants";
 ---
 
 <BaseLayout
@@ -743,7 +743,7 @@ import { SUPPORT_EMAIL, SITE_DOMAIN } from "../utils/constants";
                                 {SUPPORT_EMAIL}
                             </a>
                             <a
-                                href={SITE_DOMAIN}
+                                href={SITE_URL}
                                 class="text-text-main hover:text-primary-highlighted flex items-center"
                             >
                                 <svg

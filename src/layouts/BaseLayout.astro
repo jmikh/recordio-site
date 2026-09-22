@@ -1,17 +1,27 @@
 ---
 import "../index.css";
 import { SITE_URL } from "../utils/constants";
+import { faqs } from "../data/faq";
 
 interface Props {
     title: string;
     description: string;
     ogImage?: string;
+    /** Emit FAQPage JSON-LD. Only set on pages that render the <FAQ /> section. */
+    faqSchema?: boolean;
+    /** Keep the page out of search indexes (404, thank-you pages, etc). */
+    noindex?: boolean;
+    /** Open Graph object type. Blog posts pass "article". */
+    ogType?: "website" | "article";
 }
 
 const {
     title,
     description,
     ogImage = `${SITE_URL}/og-image.png`,
+    faqSchema = false,
+    noindex = false,
+    ogType = "website",
 } = Astro.props;
 
 const siteUrl = SITE_URL;
@@ -23,44 +33,52 @@ const softwareAppJsonLd = JSON.stringify({
     "name": "Recordio",
     "url": SITE_URL,
     "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Chrome, Edge, Brave",
-    "description": "Record your screen and get auto-zoom, spotlight, and captions — polished and ready to share. A Chrome extension that turns raw recordings into professional videos in seconds.",
+    "operatingSystem": "Web browser (Chrome, Edge, Brave) on macOS, Windows, Linux, ChromeOS",
+    "description": "Cloud-based screen recorder for teams. Record product walkthroughs and demos, get auto-zoom, spotlight and captions applied automatically, and share a link with view analytics.",
     "offers": [
-        { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
-        { "@type": "Offer", "price": "72", "priceCurrency": "USD", "billingDuration": "P1Y", "name": "Pro" }
-    ]
+        {
+            "@type": "Offer",
+            "name": "Free",
+            "price": "0",
+            "priceCurrency": "USD",
+        },
+        {
+            "@type": "Offer",
+            "name": "Pro (billed annually)",
+            "price": "12",
+            "priceCurrency": "USD",
+            "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "12",
+                "priceCurrency": "USD",
+                "unitText": "per seat per month, billed annually",
+                "billingDuration": "P1M",
+            },
+        },
+        {
+            "@type": "Offer",
+            "name": "Pro (billed monthly)",
+            "price": "15",
+            "priceCurrency": "USD",
+            "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "15",
+                "priceCurrency": "USD",
+                "unitText": "per seat per month",
+                "billingDuration": "P1M",
+            },
+        },
+    ],
 });
 
 const faqJsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "Is Recordio free?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Recordio offers a generous free plan that includes auto-zoom, automatic silence cutting, and more, with no credit card required. Free users get up to 5 recordings with videos available for 7 days. Pro unlocks unlimited recordings, cloud rendering, longer video retention, and premium transcription." }
-        },
-        {
-            "@type": "Question",
-            "name": "What's the difference between Free and Pro?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The Free plan gives you up to 5 recordings with all the core smart-editing features. Videos expire after 7 days, transcription uses a lightweight local model, and rendering happens in your browser. Pro removes those limits: unlimited recordings that never expire, cloud rendering, transcription powered by a top-tier OpenAI model, and the ability to restore deleted videos for up to 30 days." }
-        },
-        {
-            "@type": "Question",
-            "name": "What does browser rendering mean?",
-            "acceptedAnswer": { "@type": "Answer", "text": "On the Free plan, your video is rendered in your browser, so the tab needs to stay open and in focus while rendering. Pro users get cloud rendering: the video is processed on our servers so you can close the tab and come back when it's ready." }
-        },
-        {
-            "@type": "Question",
-            "name": "How is Recordio different from other screen recorders?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Other screen recorders just blindly follow your mouse, often leading to jittery or incoherent zooms. Recordio actually understands your web app. It detects when you're typing, scrolling, or hovering over a card, and uses advanced algorithms to perfectly frame the important elements. It's also the only recorder that automatically spotlights cards, popovers, and other elements you interact with, giving your videos a polished, studio-quality look." }
-        },
-        {
-            "@type": "Question",
-            "name": "Does Recordio work outside of Chrome?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Right now, Recordio is a Chrome extension (also works on Edge and Brave). Native desktop apps and support for more browsers are on the way." }
-        }
-    ]
+    "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.question,
+        "acceptedAnswer": { "@type": "Answer", "text": f.answer },
+    })),
 });
 ---
 
@@ -106,7 +124,7 @@ const faqJsonLd = JSON.stringify({
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
         <meta name="theme-color" content="#7c3aed" />
 
         {/* Per-page SEO */}
@@ -115,7 +133,7 @@ const faqJsonLd = JSON.stringify({
         <link rel="canonical" href={canonicalUrl} />
 
         {/* Open Graph */}
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content={ogType} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Recordio" />
         <meta property="og:title" content={title} />
@@ -153,8 +171,8 @@ const faqJsonLd = JSON.stringify({
         {/* Structured Data: SoftwareApplication */}
         <script type="application/ld+json" set:html={softwareAppJsonLd} />
 
-        {/* Structured Data: FAQPage */}
-        <script type="application/ld+json" set:html={faqJsonLd} />
+        {/* Structured Data: FAQPage (only where the FAQ section is rendered) */}
+        {faqSchema && <script type="application/ld+json" set:html={faqJsonLd} />}
     </head>
 
     <body>

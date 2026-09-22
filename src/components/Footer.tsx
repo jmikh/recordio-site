@@ -15,6 +15,9 @@ const columns = [
             { label: 'vs Loom', href: '/compare/loom/' },
             { label: 'vs Screen Studio', href: '/compare/screen-studio/' },
             { label: 'vs Tella', href: '/compare/tella/' },
+            { label: 'vs Bandicam', href: '/compare/bandicam/' },
+            { label: 'vs OBS', href: '/compare/obs/' },
+            { label: 'vs Camtasia', href: '/compare/camtasia/' },
             { label: 'All comparisons', href: '/compare/' },
         ],
     },
@@ -25,6 +28,7 @@ const columns = [
             { label: 'Windows', href: '/for/windows/' },
             { label: 'Linux', href: '/for/linux/' },
             { label: 'Chrome', href: '/for/chrome/' },
+            { label: 'All platforms', href: '/for/' },
         ],
     },
     {

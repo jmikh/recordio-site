@@ -34,7 +34,7 @@ const valueProps = [
     {
         title: "From $0, Not $300",
         description:
-            "Camtasia starts at $180/yr or $300 perpetual. Recordio is free to start, $48/yr for Pro, or $89 lifetime.",
+            "Camtasia starts at $180 per year or $300 perpetual. Recordio has a free plan, and Pro is $12 per seat per month billed annually.",
     },
 ];
 
@@ -73,8 +73,8 @@ const featureRows = [
         competitor: false,
     },
     {
-        feature: "Auto Captions",
-        recordio: "Local, 99 languages, word-level highlighting",
+        feature: "AI Captions",
+        recordio: "Word-level, editable (Pro)",
         competitor: "AI-generated",
     },
     {
@@ -99,21 +99,16 @@ const featureRows = [
         competitor: "Mac + Windows",
     },
     {
-        feature: "Local Processing",
-        recordio: true,
-        competitor: true,
-    },
-    {
         feature: "Pricing",
-        recordio: "Free / $48yr / $89 lifetime",
+        recordio: "Free, or Pro $12/seat/mo (annual)",
         competitor: "$180/yr or $300 one-time",
     },
 ];
 ---
 
 <BaseLayout
-    title="Pro Recordings in Seconds, Not Hours — Camtasia Alternative"
-    description="Skip the $300 desktop app and the editing timeline. Recordio auto-polishes every recording with zoom, spotlight, and shareable links — from a Chrome extension."
+    title="Camtasia Alternative for Fast Product Demos | Recordio"
+    description="Camtasia means a desktop app and a timeline. Recordio auto zooms, spotlights and captions every demo from Chrome. Free plan, Pro from $12 per seat."
 >
     <Header client:load navLinks={compareNavLinks} />
 

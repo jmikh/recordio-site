@@ -15,12 +15,18 @@ const jsonLd = JSON.stringify({
         "@type": "Person",
         "name": "John Mikhail",
         "jobTitle": "Founder of Recordio",
+        "url": "https://www.linkedin.com/in/john-mikhail/",
         "description": "MIT grad, previously at Google and Mixpanel, tech and AI enthusiast"
     },
+    "image": `${SITE_URL}/og-image.png`,
     "publisher": {
         "@type": "Organization",
         "name": "Recordio",
-        "url": SITE_URL
+        "url": SITE_URL,
+        "logo": {
+            "@type": "ImageObject",
+            "url": `${SITE_URL}/assets/fulllogo-light.png`
+        }
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
@@ -30,8 +36,9 @@ const jsonLd = JSON.stringify({
 ---
 
 <BaseLayout
-    title="Best Screen Recorders in 2026: Recordio vs Screen Studio vs Focusee"
-    description="An honest comparison of the best screen recorders in 2026. See how Recordio's DOM-aware auto-zoom, 3D spotlight, and shareable links compare to Screen Studio and FocuSee on features and pricing."
+    title="Best Screen Recorders in 2026 Compared | Recordio"
+    description="Recordio, Screen Studio and FocuSee compared for product demos and tutorials: auto zoom, captions, share links, platforms and 2026 pricing. Pros and cons."
+    ogType="article"
 >
     <main class="pt-12 md:pt-20">
         <BlogArticle client:load />
