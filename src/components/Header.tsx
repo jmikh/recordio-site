@@ -4,7 +4,6 @@ import { trackInstallExtension, trackOpenApp } from '../utils/analytics';
 
 const DEFAULT_NAV_LINKS = [
     { label: 'Features', href: '#feature-videos' },
-    { label: 'How it works', href: '#how-it-works' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'FAQ', href: '#faq' },
 ];

@@ -32,7 +32,7 @@
 
   /* Font Family */
   --font-family-sans: 'Satoshi', system-ui, -apple-system, sans-serif;
-  --font-display: 'Bricolage Grotesque', 'Satoshi', system-ui, sans-serif;
+  --font-display: 'Satoshi', system-ui, -apple-system, sans-serif;
 }
 
 /* Satoshi — self-hosted */
@@ -436,7 +436,7 @@ h2,
 
 .hero-title {
   font-size: clamp(2.75rem, 6.4vw, 5rem);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.035em;
   color: var(--color-text-highlighted);
@@ -1080,136 +1080,200 @@ h2,
   }
 }
 
-/* ===== How it works ===== */
+/* ===== Testimonials ===== */
 
-.how-section {
-  padding: 5rem 0 4rem;
+.logo-cloud {
+  text-align: center;
 }
 
-.how-grid {
-  list-style: none;
-  margin: 0;
+.logo-cloud-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem 3rem;
+  margin-top: 1.5rem;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  list-style: none;
 }
 
-.how-card {
-  position: relative;
-  padding: 2rem 1.75rem 1.75rem;
-  border-radius: 1.25rem;
-  background-color: var(--color-section-white);
-  border: 1px solid var(--color-border);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.how-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-border-highlighted);
-  box-shadow: 0 16px 40px -20px color-mix(in oklch, var(--color-primary) 40%, transparent);
-}
-
-.how-number {
-  position: absolute;
-  top: -0.5rem;
-  right: 1rem;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 6rem;
-  line-height: 1;
-  letter-spacing: -0.05em;
-  color: color-mix(in oklch, var(--color-primary) 8%, transparent);
-  user-select: none;
-}
-
-.how-icon {
+.company-logo {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 0.75rem;
-  background-color: color-mix(in oklch, var(--color-primary) 12%, transparent);
-  color: var(--color-primary);
-  margin-bottom: 1.25rem;
-}
-
-.how-title {
-  font-family: var(--font-display);
-  font-size: 1.375rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  color: var(--color-text-highlighted);
-  margin-bottom: 0.5rem;
-}
-
-.how-desc {
+  gap: 0.4em;
   color: var(--color-text-muted);
-  line-height: 1.6;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
-@media (max-width: 767px) {
-  .how-grid {
-    grid-template-columns: 1fr;
-  }
+.logo-row .company-logo:hover {
+  opacity: 1;
+  color: var(--color-text-highlighted);
 }
 
-/* ===== Testimonials ===== */
+.company-logo-svg {
+  display: block;
+  height: 100%;
+}
+
+.company-logo-svg svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.company-logo-img {
+  display: block;
+  height: 100%;
+  width: auto;
+  filter: grayscale(1) contrast(0.9);
+}
+
+.company-logo-text {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: 0.9em;
+  line-height: 1;
+  white-space: nowrap;
+}
 
 .quote-hero {
   max-width: 54rem;
-  margin: 0 auto;
+  margin-inline: auto;
   text-align: center;
 }
 
 .quote-hero-text {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3.2vw, 2.375rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.02em;
   color: var(--color-text-highlighted);
   text-wrap: balance;
 }
 
-.review-wall {
-  columns: 3;
-  column-gap: 1.25rem;
+.quote-hero-caption {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.review-card {
-  break-inside: avoid;
-  margin: 0 0 1.25rem;
-  padding: 1.375rem 1.5rem;
-  border-radius: 1rem;
-  background-color: var(--color-section-white);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 1px 2px rgb(26 24 38 / 0.04);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+.quote-hero-sep {
+  width: 1px;
+  height: 2rem;
+  background-color: var(--color-border-highlighted);
 }
 
-.review-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px -14px rgb(26 24 38 / 0.25);
+.reviewer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  min-width: 0;
+}
+
+.reviewer-name {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1.3;
+  color: var(--color-text-highlighted);
+}
+
+.reviewer-role {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--color-text-muted);
+}
+
+.review-rail {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.review-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem 1.75rem;
+  border-right: 1px solid var(--color-border);
+}
+
+.review-item:nth-child(3n) {
+  border-right: 0;
+}
+
+.review-item:nth-child(-n+3) {
+  border-bottom: 1px solid var(--color-border);
 }
 
 .review-text {
+  flex: 1;
   margin: 0;
   color: var(--color-text-main);
   line-height: 1.6;
 }
 
+.review-foot {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.review-foot .company-logo {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 @media (max-width: 1023px) {
-  .review-wall {
-    columns: 2;
+  .review-rail {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .review-item:nth-child(3n) {
+    border-right: 1px solid var(--color-border);
+  }
+  .review-item:nth-child(2n) {
+    border-right: 0;
+  }
+  .review-item:nth-child(-n+3) {
+    border-bottom: 0;
+  }
+  .review-item:nth-child(-n+4) {
+    border-bottom: 1px solid var(--color-border);
   }
 }
 
 @media (max-width: 639px) {
-  .review-wall {
-    columns: 1;
+  .review-rail {
+    grid-template-columns: 1fr;
+  }
+  .review-item {
+    padding: 1.5rem 0;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--color-border) !important;
+  }
+  .review-item:last-child {
+    border-bottom: 0 !important;
+  }
+  .review-foot .company-logo {
+    display: none;
+  }
+  .logo-row {
+    gap: 1rem 2rem;
   }
 }
 
@@ -1312,7 +1376,7 @@ h2,
 .price-number {
   font-family: var(--font-display);
   font-size: 3.5rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--color-text-highlighted);
@@ -1495,7 +1559,7 @@ h2,
 
 .final-cta-title {
   font-size: clamp(2rem, 4.5vw, 3.25rem);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.05;
   color: #fff;
 }
