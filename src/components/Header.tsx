@@ -18,7 +18,7 @@ interface HeaderProps {
     navLinks?: { label: string; href: string }[];
 }
 
-const linkClass = 'text-text-main hover:text-text-highlighted transition-colors duration-200';
+const linkClass = 'text-sm font-medium whitespace-nowrap text-text-main hover:text-text-highlighted transition-colors duration-200';
 const mobileLinkClass =
     'block px-5 py-3 text-sm font-medium text-text-main hover:text-text-highlighted hover:bg-surface-overlay/40 transition-colors duration-150';
 
@@ -53,8 +53,8 @@ const Header = ({ navLinks }: HeaderProps) => {
 
     return (
         <header className="fixed top-4 left-0 right-0 z-50 px-4">
-            <nav className="max-w-5xl mx-auto px-6 py-4 rounded-2xl glass shadow-lg/20 backdrop-blur-xl" aria-label="Main">
-                <div className="flex items-center justify-between">
+            <nav className="max-w-6xl mx-auto px-5 lg:px-6 py-3.5 rounded-2xl glass shadow-lg/20 backdrop-blur-xl" aria-label="Main">
+                <div className="flex items-center justify-between gap-6">
                     {/* Logo */}
                     <a href="/" className="flex items-center shrink-0">
                         <img
@@ -64,16 +64,16 @@ const Header = ({ navLinks }: HeaderProps) => {
                         />
                     </a>
 
-                    {/* Desktop Navigation: in-page anchors (lg and up), then Product dropdown and site links (md and up) */}
-                    <div className="hidden md:flex items-center gap-5 lg:gap-6">
+                    {/* Desktop Navigation: in-page anchors (xl and up), then Product dropdown and site links (md and up) */}
+                    <div className="hidden md:flex items-center gap-4 lg:gap-5 min-w-0">
                         {anchors.length > 0 && (
                             <>
                                 {anchors.map(({ label, href }) => (
-                                    <a key={href} href={href} className={`hidden lg:inline ${linkClass}`}>
+                                    <a key={href} href={href} className={`hidden xl:inline ${linkClass}`}>
                                         {label}
                                     </a>
                                 ))}
-                                <span className="hidden lg:block h-4 w-px bg-border" aria-hidden="true" />
+                                <span className="hidden xl:block h-4 w-px bg-border" aria-hidden="true" />
                             </>
                         )}
                         <div
@@ -117,11 +117,11 @@ const Header = ({ navLinks }: HeaderProps) => {
                         ))}
                     </div>
 
-                    {/* Desktop CTA Buttons */}
-                    <div className="hidden md:flex items-center gap-2 lg:gap-3">
+                    {/* Desktop CTA Buttons: Open App only from lg (it is in the mobile menu below that) */}
+                    <div className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
                         <a
                             href={getAppLink('header')}
-                            className="btn-secondary !px-3.5 !py-2 text-sm"
+                            className="hidden! lg:inline-flex! btn-secondary !px-3.5 !py-2 text-sm whitespace-nowrap"
                             onClick={() => trackOpenApp('header')}
                         >
                             Open App
@@ -130,7 +130,7 @@ const Header = ({ navLinks }: HeaderProps) => {
                             href={getCWSLink('header')}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-primary"
+                            className="btn-primary !px-4 !py-2 text-sm whitespace-nowrap"
                             onClick={() => trackInstallExtension('header')}
                         >
                             <img src="/assets/chrome-store.svg" alt="" className="w-4 h-4" />
